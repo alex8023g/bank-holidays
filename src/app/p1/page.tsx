@@ -19,32 +19,38 @@ type Month = {
   days: (string | null)[];
 }[];
 
-const year = new Date().getFullYear();
-console.log('🚀 ~ year:', year);
-// const year = 2022; // Fixed year for testing
-const months: Month = new Array(12).fill(0).map((_, i) => {
-  const month = (i + 1).toString().padStart(2, '0'); // Format month as two digits
-  const monthName = dayjs(`${year}-${month}-01`).format('MMMM');
-  const weekday = dayjs(`${year}-${month}-01`).isoWeekday();
-  console.log('🚀 ~ weekday', weekday, monthName);
+export default async function P1Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  let { year } = await searchParams;
+  if (!year) {
+    year = new Date().getFullYear().toString();
+  }
+  console.log('🚀 ~ P1Page ~ year:', year);
+  const months: Month = new Array(12).fill(0).map((_, i) => {
+    const month = (i + 1).toString().padStart(2, '0'); // Format month as two digits
+    const monthName = dayjs(`${year}-${month}-01`).format('MMMM');
+    const weekday = dayjs(`${year}-${month}-01`).isoWeekday();
+    console.log('🚀 ~ weekday', weekday, monthName);
 
-  return {
-    monthNum: i,
-    monthName,
-    days: new Array(42)
-      .fill(null)
-      .map((_, j) =>
-        j < weekday - 1 || j > weekday + dayjs(`${year}-${month}-01`).daysInMonth() - 2
-          ? null
-          : (j - weekday + 2).toString()
-      ),
-  };
-});
-// console.log('🚀 ~ P1Page ~ months:', months, year);
+    return {
+      monthNum: i,
+      monthName,
+      days: new Array(42)
+        .fill(null)
+        .map((_, j) =>
+          j < weekday - 1 ||
+          j > weekday + dayjs(`${year}-${month}-01`).daysInMonth() - 2
+            ? null
+            : (j - weekday + 2).toString(),
+        ),
+    };
+  });
 
-export default async function P1Page() {
   return (
-    <div>
+    <div className='flex h-dvh flex-col border-2 border-red-500'>
       <header className='flex items-center justify-between border-b border-gray-200 px-6 py-4'>
         <h1 className='text-base font-semibold text-gray-900'>
           <time dateTime={'2022'}>{year}</time>
@@ -205,41 +211,48 @@ export default async function P1Page() {
           </div>
         </div>
       </header>
-      <div className='bg-white'>
-        <div className='mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-16 px-4 py-16 sm:grid-cols-2 sm:px-6 xl:max-w-none xl:grid-cols-3 xl:px-8 2xl:grid-cols-4'>
-          {months.map((month) => (
-            <section key={month.monthName} className='text-center'>
-              <h2 className='text-sm font-semibold text-gray-900'>{month.monthName}</h2>
-              <div className='mt-6 grid grid-cols-7 text-xs/6 text-gray-500'>
-                <div>ПН</div>
-                <div>ВТ</div>
-                <div>СР</div>
-                <div>ЧТ</div>
-                <div>ПТ</div>
-                <div>СБ</div>
-                <div>ВС</div>
-              </div>
-              <div className='isolate mt-2 grid grid-cols-7 gap-px rounded-lg bg-gray-200 text-sm shadow-sm ring-1 ring-gray-200'>
-                {month.days.map((day, i) => (
-                  <button
-                    key={i}
-                    type='button'
-                    // data-is-today={day.isToday ? '' : undefined}
-                    data-is-current-month={day ? '' : undefined}
-                    className='bg-gray-50 py-1.5 text-gray-400 first:rounded-tl-lg last:rounded-br-lg hover:bg-gray-100 focus:z-10 data-is-current-month:bg-white data-is-current-month:text-gray-900 data-is-current-month:hover:bg-gray-100 nth-36:rounded-bl-lg nth-7:rounded-tr-lg'
-                  >
-                    <time
-                      dateTime={day || ''}
-                      className='mx-auto flex size-7 items-center justify-center rounded-full in-data-is-today:bg-indigo-600 in-data-is-today:font-semibold in-data-is-today:text-white'
+      <div className='flex flex-col overflow-scroll border-2 border-blue-500 xl:flex-row'>
+        <div className='overflow-scroll border-2 border-orange-500 bg-white xl:flex-1'>
+          <div className='mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-16 px-4 py-16 sm:grid-cols-2 sm:px-6 xl:max-w-none xl:grid-cols-2 xl:px-8 2xl:grid-cols-3'>
+            {months.map((month) => (
+              <section key={month.monthName} className='text-center'>
+                <h2 className='text-sm font-semibold text-gray-900'>
+                  {month.monthName}
+                </h2>
+                <div className='mt-6 grid grid-cols-7 text-xs/6 text-gray-500'>
+                  <div>ПН</div>
+                  <div>ВТ</div>
+                  <div>СР</div>
+                  <div>ЧТ</div>
+                  <div>ПТ</div>
+                  <div>СБ</div>
+                  <div>ВС</div>
+                </div>
+                <div className='isolate mt-2 grid grid-cols-7 gap-px rounded-lg bg-gray-200 text-sm shadow-sm ring-1 ring-gray-200'>
+                  {month.days.map((day, i) => (
+                    <button
+                      key={i}
+                      type='button'
+                      // data-is-today={day.isToday ? '' : undefined}
+                      data-is-current-month={day ? '' : undefined}
+                      className='bg-gray-50 py-1.5 text-gray-400 first:rounded-tl-lg last:rounded-br-lg hover:bg-gray-100 focus:z-10 data-is-current-month:bg-white data-is-current-month:text-gray-900 data-is-current-month:hover:bg-gray-100 nth-36:rounded-bl-lg nth-7:rounded-tr-lg'
                     >
-                      {day}
-                    </time>
-                  </button>
-                ))}
-              </div>
-            </section>
-          ))}
+                      <time
+                        dateTime={day || ''}
+                        className='mx-auto flex size-7 items-center justify-center rounded-full in-data-is-today:bg-indigo-600 in-data-is-today:font-semibold in-data-is-today:text-white'
+                      >
+                        {day}
+                      </time>
+                    </button>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
         </div>
+        <footer className='h-full border-2 border-green-500 xl:w-1/3'>
+          footer
+        </footer>
       </div>
     </div>
   );
