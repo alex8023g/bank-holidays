@@ -1,10 +1,15 @@
 'use client';
 
 import { Month } from '@/app/page';
+import { useContext } from 'react';
+import { DateRange, ThemeContext } from './ClientContainerVH';
+import { useLocalStorage } from '@react-hooks-library/core';
 
 export default function CalendarsBlock({ months }: { months: Month }) {
+  const ctx = useContext(ThemeContext);
+
   return (
-    <div className='overflow-scroll border-2 border-orange-500 bg-white xl:flex-1'>
+    <div className='overflow-y-scroll border-2 border-orange-500 bg-white xl:flex-1'>
       <div className='mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-16 px-4 py-16 sm:grid-cols-2 sm:px-6 xl:max-w-none xl:grid-cols-2 xl:px-8 2xl:grid-cols-3'>
         {months.map((month) => (
           <section key={month.monthName} className='text-center'>
@@ -26,8 +31,40 @@ export default function CalendarsBlock({ months }: { months: Month }) {
                   key={i}
                   type='button'
                   // data-is-today={day.isToday ? '' : undefined}
-                  data-is-current-month={day ? '' : undefined}
-                  className='bg-gray-50 py-1.5 text-gray-400 first:rounded-tl-lg last:rounded-br-lg hover:bg-gray-100 focus:z-10 data-is-current-month:bg-white data-is-current-month:text-gray-900 data-is-current-month:hover:bg-gray-100 nth-36:rounded-bl-lg nth-7:rounded-tr-lg'
+                  data-is-current-month={day.monthDay ? '' : undefined}
+                  className='/hover:bg-gray-100 bg-gray-50 py-1.5 text-gray-400 first:rounded-tl-lg last:rounded-br-lg focus:z-10 data-is-current-month:bg-white data-is-current-month:text-gray-900 data-is-current-month:hover:bg-gray-100 nth-36:rounded-bl-lg nth-7:rounded-tr-lg'
+                  style={{
+                    backgroundColor: ctx?.value.some(
+                      (d) =>
+                        Date.parse(d.start) <= Date.parse(day.dateString) &&
+                        Date.parse(d.end) >= Date.parse(day.dateString),
+                    )
+                      ? 'violet'
+                      : '',
+                  }}
+                  onClick={() => {
+                    console.log(day, ctx?.value);
+                    if (ctx?.selectedDate.start) {
+                      const newDateRanges = ctx.value
+                        .concat([
+                          {
+                            start: ctx.selectedDate.start,
+                            end: day.dateString,
+                          },
+                        ])
+                        .sort((a, b) =>
+                          a.start > b.start ? 1 : a.start < b.start ? -1 : 0,
+                        );
+                      // ctx.setDateRanges(newDateRanges);
+                      ctx.setValue(newDateRanges);
+                      ctx.setSelectedDate({ start: '', end: '' });
+                    } else {
+                      ctx?.setSelectedDate((st) => ({
+                        start: day.dateString,
+                        end: '',
+                      }));
+                    }
+                  }}
                 >
                   <time
                     dateTime={day.monthDay || ''}

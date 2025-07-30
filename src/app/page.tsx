@@ -14,7 +14,7 @@ dayjs.extend(isoWeek);
 export type Month = {
   monthNum: number;
   monthName: string;
-  days: { monthDay: string | null; isSelected: boolean }[];
+  days: { monthDay: string | null; isSelected: boolean; dateString: string }[];
 }[];
 
 export default async function HomePage({
@@ -42,14 +42,22 @@ export default async function HomePage({
           j < weekday - 1 ||
           j > weekday + dayjs(`${year}-${month}-01`).daysInMonth() - 2
             ? { ...day, monthDay: null }
-            : { ...day, monthDay: (j - weekday + 2).toString() },
+            : {
+                ...day,
+                monthDay: (j - weekday + 2).toString(),
+                dateString: `${year}-${month}-${(j - weekday + 2).toString().padStart(2, '0')}`,
+              },
         ),
     };
   });
 
   return (
-    // <div className='flex h-dvh flex-col border-2 border-red-500'>
-    <ClientContainerVH year={year} months={months} />
-    // </div>
+    <ClientContainerVH>
+      <Header year={year} />
+      <div className='flex flex-col overflow-y-hidden border-2 border-blue-500 xl:flex-row'>
+        <CalendarsBlock months={months} />
+        <ResultBlock />
+      </div>
+    </ClientContainerVH>
   );
 }
