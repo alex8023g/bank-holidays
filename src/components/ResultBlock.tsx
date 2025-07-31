@@ -1,40 +1,60 @@
 'use client';
 
-import { useContext } from 'react';
-import { DateRange, ThemeContext } from './ClientContainerVH';
+import { useContext, useEffect } from 'react';
+import { ThemeContext } from './ClientContainerVH';
 import { TrashIcon } from '@heroicons/react/24/outline';
-import { useLocalStorage } from '@react-hooks-library/core';
+import dayjs from 'dayjs';
+// @ts-expect-error
+import isdayoff from 'isdayoff';
+const api = isdayoff();
 
 export default function ResultBlock() {
   const ctx = useContext(ThemeContext);
-  // const [value, setValue] = useLocalStorage<DateRange[]>(
-  //   'useLocalsStorageKey',
-  //   [],
-  // );
-  // console.log('🚀 ~ ResultBlock ~ value:', value);
+
+  useEffect(() => {
+    console.log('🚀 ~ ResultBlock ~ useEffect start!!!');
+
+    ctx?.dateRanges
+      .filter((range) => dayjs(range.start).year() === ctx.selectedYear)
+      .forEach((range) => {
+        // console.log('🚀 ~ ResultBlock ~ range:', range);
+        api
+          .period({
+            start: new Date(range.start),
+            end: new Date(range.end),
+          }) // @ts-expect-error
+          .then((res) => console.log('🚀 ~ ResultBlock ~ range:', range, res)) // @ts-expect-error
+          .catch((err) => console.log(err.message));
+      });
+  }, [ctx?.selectedYear, ctx?.dateRanges]);
+
   return (
     <div className='h-full border-2 border-green-500 xl:w-1/3'>
-      <h2>ResultBlock</h2>
+      <h2>План на {ctx?.selectedYear} год</h2>
       <ul>
-        {ctx?.value.map((range) => (
-          <li key={range.start} className='flex items-start'>
-            <span>с: </span>
-            {range.start + ' '}
-            <span>по: </span> {range.end}
-            <button
-              onClick={() => {
-                const newDateRanges = ctx.value.filter(
-                  (r) => r.start != range.start,
-                );
-                ctx.setDateRanges(newDateRanges);
-                // console.log('🚀 ~ setValue ~ value:', value);
-                ctx.setValue(newDateRanges);
-              }}
-            >
-              <TrashIcon className='size-5' />
-            </button>
-          </li>
-        ))}
+        {ctx?.dateRanges
+          .filter((range) => dayjs(range.start).year() === ctx.selectedYear)
+          .map((range) => {
+            return (
+              <li key={range.start} className='flex items-start'>
+                <span>с: </span>
+                {range.start + ' '}
+                <span>по: </span> {range.end}
+                <button
+                  onClick={() => {
+                    const newDateRanges = ctx.dateRanges.filter(
+                      (r) => r.start != range.start,
+                    );
+                    ctx.setDateRanges(newDateRanges);
+                    // console.log('🚀 ~ setValue ~ value:', value);
+                    ctx.setDateRanges(newDateRanges);
+                  }}
+                >
+                  <TrashIcon className='size-5' />
+                </button>
+              </li>
+            );
+          })}
       </ul>
     </div>
   );

@@ -1,13 +1,17 @@
 'use client';
 
-import { Month } from '@/app/page';
 import { useContext } from 'react';
-import { DateRange, ThemeContext } from './ClientContainerVH';
-import { useLocalStorage } from '@react-hooks-library/core';
+import { ThemeContext } from './ClientContainerVH';
 
-export default function CalendarsBlock({ months }: { months: Month }) {
+import { createYearCalendar } from '@/utils/createYearCalendar';
+import dayjs from 'dayjs';
+
+export default function CalendarsBlock() {
   const ctx = useContext(ThemeContext);
 
+  const months = createYearCalendar({
+    year: ctx?.selectedYear || dayjs().year(),
+  });
   return (
     <div className='overflow-y-scroll border-2 border-orange-500 bg-white xl:flex-1'>
       <div className='mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-16 px-4 py-16 sm:grid-cols-2 sm:px-6 xl:max-w-none xl:grid-cols-2 xl:px-8 2xl:grid-cols-3'>
@@ -34,7 +38,7 @@ export default function CalendarsBlock({ months }: { months: Month }) {
                   data-is-current-month={day.monthDay ? '' : undefined}
                   className='/hover:bg-gray-100 bg-gray-50 py-1.5 text-gray-400 first:rounded-tl-lg last:rounded-br-lg focus:z-10 data-is-current-month:bg-white data-is-current-month:text-gray-900 data-is-current-month:hover:bg-gray-100 nth-36:rounded-bl-lg nth-7:rounded-tr-lg'
                   style={{
-                    backgroundColor: ctx?.value.some(
+                    backgroundColor: ctx?.dateRanges.some(
                       (d) =>
                         Date.parse(d.start) <= Date.parse(day.dateString) &&
                         Date.parse(d.end) >= Date.parse(day.dateString),
@@ -43,9 +47,9 @@ export default function CalendarsBlock({ months }: { months: Month }) {
                       : '',
                   }}
                   onClick={() => {
-                    console.log(day, ctx?.value);
+                    console.log(day, ctx?.dateRanges);
                     if (ctx?.selectedDate.start) {
-                      const newDateRanges = ctx.value
+                      const newDateRanges = ctx.dateRanges
                         .concat([
                           {
                             start: ctx.selectedDate.start,
@@ -56,7 +60,7 @@ export default function CalendarsBlock({ months }: { months: Month }) {
                           a.start > b.start ? 1 : a.start < b.start ? -1 : 0,
                         );
                       // ctx.setDateRanges(newDateRanges);
-                      ctx.setValue(newDateRanges);
+                      ctx.setDateRanges(newDateRanges);
                       ctx.setSelectedDate({ start: '', end: '' });
                     } else {
                       ctx?.setSelectedDate((st) => ({

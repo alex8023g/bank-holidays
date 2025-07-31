@@ -6,16 +6,18 @@ import {
   EllipsisHorizontalIcon,
 } from '@heroicons/react/20/solid';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
-import { useRouter } from 'next/navigation';
+import { useContext } from 'react';
+import { ThemeContext } from './ClientContainerVH';
+import dayjs from 'dayjs';
 
-export default function Header({ year }: { year: string }) {
-  const router = useRouter();
+export default function Header() {
   const handlePrevYear = () => {
-    router.push(`/?year=${Number(year) - 1}`);
+    ctx?.setSelectedYear((year) => year - 1);
   };
   const handleNextYear = () => {
-    router.push(`/?year=${Number(year) + 1}`);
+    ctx?.setSelectedYear((year) => year + 1);
   };
+  const ctx = useContext(ThemeContext);
   return (
     <header className='flex items-center justify-between border-b border-gray-200 px-6 py-4'>
       <div className='flex items-center'>
@@ -23,11 +25,17 @@ export default function Header({ year }: { year: string }) {
           <ChevronLeftIcon className='size-6' />
         </button>
         <h1 className='text-base font-semibold text-gray-900'>
-          <time dateTime={'2022'}>{year}</time>
+          <time dateTime={'2022'}>{ctx?.selectedYear}</time>
         </h1>
-        <button className='cursor-pointer' onClick={handleNextYear}>
-          <ChevronRightIcon className='size-6' />
-        </button>
+        {ctx?.selectedYear && ctx.selectedYear <= dayjs().year() ? (
+          <button className='cursor-pointer' onClick={handleNextYear}>
+            <ChevronRightIcon className='size-6' />
+          </button>
+        ) : (
+          <button className='cursor-pointer'>
+            <ChevronRightIcon className='size-6 text-gray-300' />
+          </button>
+        )}
       </div>
       <div className='flex items-center'>
         <div className='relative flex items-center rounded-md bg-white shadow-xs md:items-stretch'>

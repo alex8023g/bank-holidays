@@ -8,16 +8,19 @@ import {
   useState,
 } from 'react';
 import { useLocalStorage } from '@react-hooks-library/core';
+import dayjs from 'dayjs';
 
 export type DateRange = { start: string; end: string };
 
 type SelectedDateContext = {
+  selectedYear: number;
+  setSelectedYear: Dispatch<SetStateAction<number>>;
   selectedDate: DateRange;
   setSelectedDate: Dispatch<SetStateAction<DateRange>>;
   dateRanges: DateRange[];
-  setDateRanges: Dispatch<SetStateAction<DateRange[]>>;
-  value: DateRange[];
-  setValue: (value: DateRange[]) => void;
+  setDateRanges: (value: DateRange[]) => void;
+  // value: DateRange[];
+  // setValue: (value: DateRange[]) => void;
 };
 
 export const ThemeContext = createContext<SelectedDateContext | null>(null);
@@ -27,23 +30,26 @@ export default function ClientContainerVH({
 }: {
   children: ReactNode;
 }) {
-  const [value, setValue] = useLocalStorage<DateRange[]>(
+  const [dateRanges, setDateRanges] = useLocalStorage<DateRange[]>(
     'useLocalsStorageKey',
     [],
   );
-  console.log('🚀 ~ ClientContainerVH ~ value:', value);
+  // console.log('🚀 ~ ClientContainerVH ~ value:', dateRanges);
   const [selectedDate, setSelectedDate] = useState({ start: '', end: '' });
-  const [dateRanges, setDateRanges] = useState<DateRange[]>([]);
+  const [selectedYear, setSelectedYear] = useState(dayjs().year());
+  // const [dateRanges, setDateRanges] = useState<DateRange[]>([]);
 
   return (
     <ThemeContext.Provider
       value={{
+        selectedYear,
+        setSelectedYear,
         selectedDate,
         setSelectedDate,
         dateRanges,
         setDateRanges,
-        value,
-        setValue,
+        // value,
+        // setValue,
       }}
     >
       <div className='flex h-dvh flex-col border-2 border-red-500'>
