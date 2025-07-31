@@ -1,21 +1,28 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from './ClientContainerVH';
 
-import { createYearCalendar } from '@/utils/createYearCalendar';
+import { createYearCalendar, Month } from '@/utils/createYearCalendar';
 import dayjs from 'dayjs';
 
-export default function CalendarsBlock() {
+export default function CalendarsBlock({ months }: { months: Month[] }) {
   const ctx = useContext(ThemeContext);
+  const [monthsSt, setMonthsSt] = useState(months);
 
-  const months = createYearCalendar({
-    year: ctx?.selectedYear || dayjs().year(),
-  });
+  useEffect(() => {
+    (async () => {
+      months = await createYearCalendar({
+        year: ctx?.selectedYear || dayjs().year(),
+      });
+      setMonthsSt(months);
+    })();
+  }, [ctx?.selectedYear]);
+
   return (
     <div className='overflow-y-scroll border-2 border-orange-500 bg-white xl:flex-1'>
       <div className='mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-16 px-4 py-16 sm:grid-cols-2 sm:px-6 xl:max-w-none xl:grid-cols-2 xl:px-8 2xl:grid-cols-3'>
-        {months.map((month) => (
+        {monthsSt.map((month) => (
           <section key={month.monthName} className='text-center'>
             <h2 className='text-sm font-semibold text-gray-900'>
               {month.monthName}
@@ -45,6 +52,7 @@ export default function CalendarsBlock() {
                     )
                       ? 'violet'
                       : '',
+                    color: day.isWeekend ? 'red' : '',
                   }}
                   onClick={() => {
                     console.log(day, ctx?.dateRanges);
