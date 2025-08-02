@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import 'dayjs/locale/ru'; // Importing Russian locale for dayjs
 import isLeapYear from 'dayjs/plugin/isLeapYear';
-// @ts-expect-error
+// @ts-expect-error isdayoff is not typed
 import isdayoff from 'isdayoff';
 import dayOfYear from 'dayjs/plugin/dayOfYear';
 dayjs.locale('ru');

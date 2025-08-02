@@ -52,7 +52,7 @@ export default function ClientContainerVH({
         // setValue,
       }}
     >
-      <div className='flex h-dvh flex-col border-2 border-red-500'>
+      <div className='/border-2 /border-red-500 flex h-dvh flex-col'>
         {children}
       </div>
     </ThemeContext.Provider>

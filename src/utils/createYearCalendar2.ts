@@ -1,8 +1,7 @@
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import 'dayjs/locale/ru'; // Importing Russian locale for dayjs
-// @ts-expect-error isdayoff is not typed
-import isdayoff from 'isdayoff';
+
 dayjs.locale('ru');
 dayjs.extend(isoWeek);
 
@@ -11,21 +10,32 @@ export type Month = {
   monthName: string;
   days: {
     monthDay: string | null;
-    isSelected: boolean;
-    dateString: string;
+    dateString: string | null;
     isHoliday: boolean;
     isWeekend: boolean;
+    isSelected: boolean;
   }[];
 };
 
-const api = isdayoff();
+export type DayFormJson = {
+  dateString: string;
+  isHoliday: boolean;
+  isWeekend: boolean;
+};
 
-export async function createYearCalendar({ year }: { year: number }) {
+export function createYearCalendar2({
+  year,
+  days,
+}: {
+  year: number;
+  days: DayFormJson[];
+}) {
+  console.log('🚀 ~ createYearCalendar2 ');
   const months: Month[] = new Array(12).fill(0).map((_, i) => {
     const month = (i + 1).toString().padStart(2, '0'); // Format month as two digits
     const monthName = dayjs(`${year}-${month}-01`).format('MMMM');
     const weekday = dayjs(`${year}-${month}-01`).isoWeekday();
-    console.log('🚀 ~ weekday', weekday, monthName);
+    // console.log('🚀 ~ weekday', weekday, monthName);
 
     return {
       monthNum: i,
@@ -33,6 +43,7 @@ export async function createYearCalendar({ year }: { year: number }) {
       days: new Array(42)
         .fill({
           monthDay: null,
+          dateString: '',
           isSelected: false,
           isHoliday: false,
           isWeekend: false,
@@ -43,18 +54,17 @@ export async function createYearCalendar({ year }: { year: number }) {
             ? { ...day, monthDay: null }
             : {
                 ...day,
-                monthDay: (j - weekday + 2).toString(),
-                dateString: `${year}-${month}-${(j - weekday + 2).toString().padStart(2, '0')}`,
-                isWeekend: [6, 7].includes(
-                  dayjs(
-                    `${year}-${month}-${(j - weekday + 2).toString().padStart(2, '0')}`,
-                  ).isoWeekday(),
+                ...days.find(
+                  (item) =>
+                    dayjs(item.dateString).year() === year &&
+                    dayjs(item.dateString).month() === i &&
+                    dayjs(item.dateString).date() === j - weekday + 2,
                 ),
-                // isHoliday:,
               },
         ),
     };
   });
 
+  // console.log('🚀 ~ createYearCalendar2 ~ months:', months);
   return months;
 }

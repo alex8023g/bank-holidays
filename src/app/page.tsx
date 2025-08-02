@@ -17,12 +17,14 @@ export default async function HomePage() {
     year: dayjs().year(),
   });
   return (
-    <ClientContainerVH>
-      <Header />
-      <div className='flex flex-col overflow-y-hidden border-2 border-blue-500 xl:flex-row'>
-        <CalendarsBlock months={months} />
-        <ResultBlock />
-      </div>
-    </ClientContainerVH>
+    // <ClientContainerVH>
+    //   <Header />
+    // <div className='flex flex-col overflow-y-hidden border-2 border-blue-500 xl:flex-row'>
+    <div className='/border-2 /border-blue-500 flex flex-col overflow-y-hidden xl:flex-row'>
+      <CalendarsBlock months={months} />
+      <ResultBlock />
+    </div>
+    // </div>
+    // </ClientContainerVH>
   );
 }
