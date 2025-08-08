@@ -11,7 +11,7 @@ const api = isdayoff();
 export default function ResultBlock() {
   const ctx = useContext(ThemeContext);
 
-  useEffect(() => {
+  /* useEffect(() => {
     console.log('🚀 ~ ResultBlock ~ useEffect start!!!');
 
     ctx?.dateRanges
@@ -26,7 +26,7 @@ export default function ResultBlock() {
           .then((res) => console.log('🚀 ~ ResultBlock ~ range:', range, res)) // @ts-expect-error isdayoff is not typed
           .catch((err) => console.log(err.message));
       });
-  }, [ctx?.selectedYear, ctx?.dateRanges]);
+  }, [ctx?.selectedYear, ctx?.dateRanges]); */
 
   return (
     <div className='h-full border-2 border-green-500 xl:w-1/3'>
@@ -37,9 +37,9 @@ export default function ResultBlock() {
           .map((range) => {
             return (
               <li key={range.start} className='flex items-start'>
-                <span>с: </span>
-                {range.start + ' '}
-                <span>по: </span> {range.end}
+                <span>с:&nbsp; </span>
+                {range.start}
+                <span> &nbsp;по:&nbsp; </span> {range.end}
                 <button
                   onClick={() => {
                     const newDateRanges = ctx.dateRanges.filter(

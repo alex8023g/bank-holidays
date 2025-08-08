@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import { createYearCalendar2 } from '@/lib/createYearCalendar2';
 import { Day } from '@/lib/createDaysArr2';
+import { toast } from 'sonner';
 dayjs.locale('ru');
 dayjs.extend(isoWeek);
 
@@ -88,6 +89,24 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                       onClick={() => {
                         console.log(day, ctx?.dateRanges);
                         if (ctx?.selectedDate.start) {
+                          if (
+                            day?.dayOfYear &&
+                            ctx?.selectedDayOfYear &&
+                            day?.dayOfYear < ctx?.selectedDayOfYear
+                          ) {
+                            if (day.isHoliday || day.isWeekend) {
+                              toast.error(
+                                'Отпуск не может начинаться в выходной',
+                              );
+                              return;
+                            }
+                            ctx?.setSelectedDate({
+                              start: day.dateString || '',
+                              end: '',
+                            });
+                            ctx?.setSelectedDayOfYear(day.dayOfYear);
+                            return;
+                          }
                           const newDateRanges = ctx.dateRanges
                             .concat([
                               {
@@ -107,6 +126,12 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                           ctx.setSelectedDate({ start: '', end: '' });
                           ctx?.setSelectedDayOfYear(null);
                         } else {
+                          if (day.isHoliday || day.isWeekend) {
+                            toast.error(
+                              'Отпуск не может начинаться в выходной',
+                            );
+                            return;
+                          }
                           ctx?.setSelectedDate({
                             start: day.dateString || '',
                             end: '',

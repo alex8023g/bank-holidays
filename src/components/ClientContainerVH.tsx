@@ -9,6 +9,7 @@ import {
 } from 'react';
 import { useLocalStorage } from '@react-hooks-library/core';
 import dayjs from 'dayjs';
+import { Toaster } from 'sonner';
 
 export type DateRange = { start: string; end: string };
 
@@ -67,6 +68,7 @@ export default function ClientContainerVH({
       <div className='/border-2 /border-red-500 flex h-dvh flex-col'>
         {children}
       </div>
+      <Toaster position='bottom-right' richColors />
     </ThemeContext.Provider>
   );
 }
