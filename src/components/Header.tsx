@@ -9,7 +9,9 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { useContext } from 'react';
 import { ThemeContext } from './ClientContainerVH';
 import dayjs from 'dayjs';
-import { createDaysArr } from '@/utils/createDaysArr';
+import { createDaysArr } from '@/lib/createDaysArr';
+import { createCalendarJson } from '@/lib/createCalendarJson';
+import { createDaysArr3 } from '@/lib/createDaysArr3';
 
 export default function Header() {
   const handlePrevYear = () => {
@@ -126,7 +128,31 @@ export default function Header() {
               console.log('🚀 ~ Header ~ res:', res);
             }}
           >
-            Add event
+            createDaysArr
+          </button>
+          <button
+            type='button'
+            className='ml-6 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500'
+            onClick={async () => {
+              createCalendarJson({
+                year: ctx?.selectedYear || 2025,
+              });
+              // console.log('🚀 ~ Header ~ res:', res);
+            }}
+          >
+            createCalendarJson
+          </button>
+          <button
+            type='button'
+            className='ml-6 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500'
+            onClick={async () => {
+              createDaysArr3({
+                year: ctx?.selectedYear || 2025,
+              });
+              // console.log('🚀 ~ Header ~ res:', res);
+            }}
+          >
+            createDaysArr3
           </button>
         </div>
         <div className='ml-6 md:hidden'>

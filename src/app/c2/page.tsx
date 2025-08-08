@@ -1,8 +1,8 @@
 import { CalendarsBlock2 } from '@/components/CalendarsBlock2';
 import ResultBlock from '@/components/ResultBlock';
-import { createCalendarJson } from '@/utils/createCalendarJson';
-import { createDaysArr } from '@/utils/createDaysArr';
-import { createYearCalendar } from '@/utils/createYearCalendar';
+import { createCalendarJson } from '@/lib/createCalendarJson';
+import { createDaysArr } from '@/lib/createDaysArr';
+import { createYearCalendar } from '@/lib/createYearCalendar';
 import dayjs from 'dayjs';
 import { promises as fs } from 'fs';
 
@@ -10,6 +10,7 @@ export type Day = {
   dateString: string;
   isHoliday: boolean;
   isWeekend: boolean;
+  dayOfYear: number;
 };
 
 export default async function C2Page() {

@@ -3,7 +3,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from './ClientContainerVH';
 
-import { createYearCalendar, Month } from '@/utils/createYearCalendar';
+import { createYearCalendar, Month } from '@/lib/createYearCalendar';
 import dayjs from 'dayjs';
 
 export default function CalendarsBlock({ months }: { months: Month[] }) {

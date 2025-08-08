@@ -19,6 +19,10 @@ type SelectedDateContext = {
   setSelectedDate: Dispatch<SetStateAction<DateRange>>;
   dateRanges: DateRange[];
   setDateRanges: (value: DateRange[]) => void;
+  selectedDayOfYear: number | null;
+  setSelectedDayOfYear: Dispatch<SetStateAction<number | null>>;
+  hoverDayOfYear: number | null;
+  setHoverDayOfYear: Dispatch<SetStateAction<number | null>>;
   // value: DateRange[];
   // setValue: (value: DateRange[]) => void;
 };
@@ -36,6 +40,10 @@ export default function ClientContainerVH({
   );
   // console.log('🚀 ~ ClientContainerVH ~ value:', dateRanges);
   const [selectedDate, setSelectedDate] = useState({ start: '', end: '' });
+  const [selectedDayOfYear, setSelectedDayOfYear] = useState<number | null>(
+    null,
+  );
+  const [hoverDayOfYear, setHoverDayOfYear] = useState<number | null>(null);
   const [selectedYear, setSelectedYear] = useState(dayjs().year());
   // const [dateRanges, setDateRanges] = useState<DateRange[]>([]);
 
@@ -48,6 +56,10 @@ export default function ClientContainerVH({
         setSelectedDate,
         dateRanges,
         setDateRanges,
+        selectedDayOfYear,
+        setSelectedDayOfYear,
+        hoverDayOfYear,
+        setHoverDayOfYear,
         // value,
         // setValue,
       }}

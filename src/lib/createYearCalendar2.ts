@@ -10,6 +10,7 @@ export type Month = {
   monthName: string;
   days: {
     monthDay: string | null;
+    dayOfYear: number | null;
     dateString: string | null;
     isHoliday: boolean;
     isWeekend: boolean;
@@ -21,6 +22,7 @@ export type DayFormJson = {
   dateString: string;
   isHoliday: boolean;
   isWeekend: boolean;
+  dayOfYear: number;
 };
 
 export function createYearCalendar2({
@@ -43,6 +45,7 @@ export function createYearCalendar2({
       days: new Array(42)
         .fill({
           monthDay: null,
+          dayOfYear: null,
           dateString: '',
           isSelected: false,
           isHoliday: false,

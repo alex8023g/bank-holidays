@@ -16,6 +16,7 @@ export type Month = {
 
 export type Day = {
   dateString: string;
+  dayOfYear: number;
   isHoliday: boolean;
   isWeekend: boolean;
 };
@@ -25,20 +26,28 @@ const ido = isdayoff();
 function daysInYear(year: number) {
   return (year % 4 === 0 && year % 100 > 0) || year % 400 == 0 ? 366 : 365;
 }
-export async function createDaysArr({ year }: { year: number }) {
+export async function createDaysArr2({ year }: { year: number }) {
   const daysProto: Day[] = new Array(daysInYear(year)).fill({
     dateString: '',
     isHoliday: false,
     isWeekend: false,
   });
 
-  const days = await Promise.all(
-    daysProto.map(async (_, i) => {
-      const dayNum = i + 1;
-      const dayDj = dayjs(`${year}-01-01`).dayOfYear(dayNum);
-      let isWeekend = false;
-      let isHoliday = false;
-      const isStSu = [6, 7].includes(dayDj.isoWeekday());
+  // ido
+  //   .year({ year }) // @ts-expect-error isdayoff is not typed
+  //   .then((res) => console.log(JSON.stringify(res))) // @ts-expect-error isdayoff is not typed
+  //   .catch((err) => console.log(err.message));
+
+  let i = 0;
+  const res = [];
+  for (const item of daysProto) {
+    const dayNum = i + 1;
+    const dayDj = dayjs(`${year}-01-01`).dayOfYear(dayNum);
+
+    let isWeekend = false;
+    let isHoliday = false;
+    const isStSu = [6, 7].includes(dayDj.isoWeekday());
+    try {
       if (isStSu) {
         isWeekend = (await ido.date({
           month: dayDj.month(),
@@ -54,14 +63,18 @@ export async function createDaysArr({ year }: { year: number }) {
           ? true
           : false;
       }
+    } catch (err) {
+      console.log('🚀 ~ error ~ i:', i, err);
+    }
 
-      return {
-        dateString: dayDj.format(`YYYY-MM-DD`),
-        isHoliday,
-        isWeekend,
-      };
-    }),
-  );
+    res.push({
+      dateString: dayDj.format(`YYYY-MM-DD`),
+      dayOfYear: i + 1,
+      isHoliday,
+      isWeekend,
+    });
 
-  return days;
+    i++;
+  }
+  return res;
 }

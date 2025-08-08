@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import ResultBlock from '@/components/ResultBlock';
 import CalendarsBlock from '@/components/CalendarsBlock';
 import ClientContainerVH from '@/components/ClientContainerVH';
-import { createYearCalendar } from '@/utils/createYearCalendar';
+import { createYearCalendar } from '@/lib/createYearCalendar';
 
 dayjs.locale('ru');
 dayjs.extend(isoWeek);

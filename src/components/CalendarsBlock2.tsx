@@ -1,21 +1,26 @@
 'use client';
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { ThemeContext } from './ClientContainerVH';
-import { createYearCalendar, Month } from '@/utils/createYearCalendar';
+import { createYearCalendar, Month } from '@/lib/createYearCalendar';
 import dayjs from 'dayjs';
-import { Day } from '@/utils/createDaysArr';
+
 import isoWeek from 'dayjs/plugin/isoWeek';
-import { createYearCalendar2 } from '@/utils/createYearCalendar2';
+import { createYearCalendar2 } from '@/lib/createYearCalendar2';
+import { Day } from '@/lib/createDaysArr2';
 dayjs.locale('ru');
 dayjs.extend(isoWeek);
 
 export function CalendarsBlock2({ days }: { days: Day[] }) {
-  console.log('🚀 ~ CalendarsBlock2 ');
+  // console.log('🚀 ~ CalendarsBlock2 ', days);
+  const hoverDayOfYearRef = useRef<number | null>(null);
+  const [hoverDayOfYearSt, setHoverDayOfYearSt] = useState<number | null>(null);
+
   const ctx = useContext(ThemeContext);
   const year = ctx?.selectedYear || dayjs().year();
   // const [monthsSt, setMonthsSt] = useState(createYearCalendar2({ year, days }));
-  const monthsSt = createYearCalendar2({ year, days });
+  const monthsSt = useMemo(() => createYearCalendar2({ year, days }), []);
+  // console.log('🚀 ~ CalendarsBlock2 ~ monthsSt:', monthsSt);
   // const [monthsSt, setMonthsSt] = useState(months);
 
   // createYearCalendar2({ year, days });
@@ -53,8 +58,8 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                       key={di}
                       type='button'
                       // data-is-today={day.isToday ? '' : undefined}
-                      data-is-current-month={day ? '' : undefined}
-                      className='/hover:bg-gray-100 bg-gray-50 py-1.5 text-gray-400 first:rounded-tl-lg last:rounded-br-lg focus:z-10 data-is-current-month:bg-white data-is-current-month:text-gray-900 data-is-current-month:hover:bg-gray-100 nth-36:rounded-bl-lg nth-7:rounded-tr-lg'
+                      // data-is-current-month={day ? '' : undefined}
+                      className={`bg-white py-1.5 text-gray-900 first:rounded-tl-lg last:rounded-br-lg hover:bg-gray-100 focus:z-10 nth-36:rounded-bl-lg nth-7:rounded-tr-lg`}
                       style={{
                         backgroundColor: ctx?.dateRanges.some(
                           (d) =>
@@ -69,6 +74,15 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                           ? '#ff2056'
                           : day?.isHoliday
                             ? 'red'
+                            : '',
+                        outline:
+                          ctx?.selectedDayOfYear &&
+                          hoverDayOfYearSt &&
+                          day.dayOfYear
+                            ? ctx?.selectedDayOfYear <= day.dayOfYear &&
+                              day.dayOfYear <= hoverDayOfYearSt
+                              ? '1px solid red'
+                              : ''
                             : '',
                       }}
                       onClick={() => {
@@ -91,12 +105,19 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                           // ctx.setDateRanges(newDateRanges);
                           ctx.setDateRanges(newDateRanges);
                           ctx.setSelectedDate({ start: '', end: '' });
+                          ctx?.setSelectedDayOfYear(null);
                         } else {
                           ctx?.setSelectedDate({
                             start: day.dateString || '',
                             end: '',
                           });
+                          ctx?.setSelectedDayOfYear(day.dayOfYear);
                         }
+                      }}
+                      onMouseEnter={() => {
+                        hoverDayOfYearRef.current = day.dayOfYear;
+                        setHoverDayOfYearSt(day.dayOfYear);
+                        console.log(hoverDayOfYearRef.current);
                       }}
                     >
                       <time
@@ -112,7 +133,7 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                       key={di}
                       type='button'
                       // data-is-today={day.isToday ? '' : undefined}
-                      data-is-current-month={day ? '' : undefined}
+                      data-is-current-month={day.dayOfYear ? '' : undefined}
                       className='/hover:bg-gray-100 bg-gray-50 py-1.5 text-gray-400 first:rounded-tl-lg last:rounded-br-lg focus:z-10 data-is-current-month:bg-white data-is-current-month:text-gray-900 data-is-current-month:hover:bg-gray-100 nth-36:rounded-bl-lg nth-7:rounded-tr-lg'
                     >
                       <time
