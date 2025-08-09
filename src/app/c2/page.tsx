@@ -11,6 +11,7 @@ export type Day = {
   isHoliday: boolean;
   isWeekend: boolean;
   dayOfYear: number;
+  year: number;
 };
 
 export default async function C2Page() {
@@ -29,7 +30,7 @@ export default async function C2Page() {
   return (
     <div className='/border-2 /border-blue-500 flex flex-col overflow-y-hidden xl:flex-row'>
       <CalendarsBlock2 days={days} />
-      <ResultBlock />
+      <ResultBlock days={days} />
     </div>
   );
 }

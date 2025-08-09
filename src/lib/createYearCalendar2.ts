@@ -9,9 +9,9 @@ export type Month = {
   monthNum: number;
   monthName: string;
   days: {
-    monthDay: string | null;
-    dayOfYear: number | null;
-    dateString: string | null;
+    monthDay: string;
+    dayOfYear: number;
+    dateString: string;
     isHoliday: boolean;
     isWeekend: boolean;
     isSelected: boolean;

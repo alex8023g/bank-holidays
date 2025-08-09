@@ -6,9 +6,11 @@ import { TrashIcon } from '@heroicons/react/24/outline';
 import dayjs from 'dayjs';
 // @ts-expect-error isdayoff is not typed
 import isdayoff from 'isdayoff';
+import { Day } from '@/app/c2/page';
+import { holidaysCount } from '@/lib/holidaysCount';
 const api = isdayoff();
 
-export default function ResultBlock() {
+export default function ResultBlock({ days }: { days: Day[] }) {
   const ctx = useContext(ThemeContext);
 
   /* useEffect(() => {
@@ -33,13 +35,24 @@ export default function ResultBlock() {
       <h2>План на {ctx?.selectedYear} год</h2>
       <ul>
         {ctx?.dateRanges
-          .filter((range) => dayjs(range.start).year() === ctx.selectedYear)
+          .filter((range) => range.year === ctx.selectedYear)
           .map((range) => {
             return (
               <li key={range.start} className='flex items-start'>
-                <span>с:&nbsp; </span>
-                {range.start}
-                <span> &nbsp;по:&nbsp; </span> {range.end}
+                <span>
+                  с:&nbsp;
+                  {days.find((d) => d.dayOfYear === range.start)?.dateString}
+                </span>
+                <span>
+                  &nbsp;по:&nbsp;
+                  {days.find((d) => d.dayOfYear === range.end)?.dateString}
+                </span>
+                <span>
+                  &nbsp;итого{' '}
+                  {range.end - range.start + 1 - holidaysCount({ range, days })}{' '}
+                  дн.
+                </span>
+
                 <button
                   onClick={() => {
                     const newDateRanges = ctx.dateRanges.filter(
@@ -56,6 +69,19 @@ export default function ResultBlock() {
             );
           })}
       </ul>
+      <h2>
+        Итого:{' '}
+        {ctx?.dateRanges
+          .filter((range) => range.year === ctx.selectedYear)
+          .reduce((acc, range) => {
+            return (
+              acc +
+              (range.end - range.start + 1) -
+              holidaysCount({ range, days })
+            );
+          }, 0)}{' '}
+        дн.
+      </h2>
     </div>
   );
 }

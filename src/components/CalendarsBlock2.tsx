@@ -64,10 +64,11 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                       style={{
                         backgroundColor: ctx?.dateRanges.some(
                           (d) =>
-                            Date.parse(d.start) <=
-                              Date.parse(day?.dateString || '') &&
-                            Date.parse(d.end) >=
-                              Date.parse(day.dateString || ''),
+                            d.start &&
+                            d.end &&
+                            day?.dayOfYear &&
+                            d.start <= day?.dayOfYear &&
+                            d.end >= day.dayOfYear,
                         )
                           ? 'violet'
                           : '',
@@ -101,8 +102,9 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                               return;
                             }
                             ctx?.setSelectedDate({
-                              start: day.dateString || '',
-                              end: '',
+                              start: day.dayOfYear,
+                              end: 0,
+                              year: year,
                             });
                             ctx?.setSelectedDayOfYear(day.dayOfYear);
                             return;
@@ -111,19 +113,32 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                             .concat([
                               {
                                 start: ctx.selectedDate.start,
-                                end: day.dateString || '',
+                                end: day.dayOfYear,
+                                year: year,
                               },
                             ])
                             .sort((a, b) =>
+                              a.start &&
+                              a.end &&
+                              b.start &&
+                              b.end &&
                               a.start > b.start
                                 ? 1
-                                : a.start < b.start
+                                : a.start &&
+                                    a.end &&
+                                    b.start &&
+                                    b.end &&
+                                    a.start < b.start
                                   ? -1
                                   : 0,
                             );
                           // ctx.setDateRanges(newDateRanges);
                           ctx.setDateRanges(newDateRanges);
-                          ctx.setSelectedDate({ start: '', end: '' });
+                          ctx.setSelectedDate({
+                            start: 0,
+                            end: 0,
+                            year: 0,
+                          });
                           ctx?.setSelectedDayOfYear(null);
                         } else {
                           if (day.isHoliday || day.isWeekend) {
@@ -133,8 +148,9 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                             return;
                           }
                           ctx?.setSelectedDate({
-                            start: day.dateString || '',
-                            end: '',
+                            start: day.dayOfYear,
+                            end: 0,
+                            year: year,
                           });
                           ctx?.setSelectedDayOfYear(day.dayOfYear);
                         }

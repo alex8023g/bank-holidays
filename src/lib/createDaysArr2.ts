@@ -17,6 +17,7 @@ export type Month = {
 export type Day = {
   dateString: string;
   dayOfYear: number;
+  year: number;
   isHoliday: boolean;
   isWeekend: boolean;
 };
@@ -70,6 +71,7 @@ export async function createDaysArr2({ year }: { year: number }) {
     res.push({
       dateString: dayDj.format(`YYYY-MM-DD`),
       dayOfYear: i + 1,
+      year,
       isHoliday,
       isWeekend,
     });
