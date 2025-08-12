@@ -15,15 +15,15 @@ import { Toaster } from 'sonner';
 
 export type DateRange = {
   year: number;
-  start: number;
-  end: number;
+  start: { dayOfYear: number; dateStr: string };
+  end: { dayOfYear: number; dateStr: string };
 };
 
 type SelectedDateContext = {
   selectedYear: number;
   setSelectedYear: Dispatch<SetStateAction<number>>;
-  selectedDate: DateRange;
-  setSelectedDate: Dispatch<SetStateAction<DateRange>>;
+  // selectedDate: DateRange;
+  // setSelectedDate: Dispatch<SetStateAction<DateRange>>;
   dateRanges: DateRange[];
   setDateRanges: (value: DateRange[]) => void;
   // dateRanges2: DateRange2[];
@@ -32,8 +32,8 @@ type SelectedDateContext = {
   setSelectedDayOfYear: Dispatch<SetStateAction<number | null>>;
   hoverDayOfYear: number | null;
   setHoverDayOfYear: Dispatch<SetStateAction<number | null>>;
-  // value: DateRange[];
-  // setValue: (value: DateRange[]) => void;
+  selectedRange: DateRange | null;
+  setSelectedRange: Dispatch<SetStateAction<DateRange | null>>;
 };
 
 export const ThemeContext = createContext<SelectedDateContext | null>(null);
@@ -48,33 +48,33 @@ export default function ClientContainerVH({
     [],
   );
   // console.log('🚀 ~ ClientContainerVH ~ value:', dateRanges);
-  const [selectedDate, setSelectedDate] = useState({
-    year: 0,
-    start: 0,
-    end: 0,
-  });
+  // const [selectedDate, setSelectedDate] = useState({
+  //   year: 0,
+  //   start: { dayOfYear: 0, dateStr: '' },
+  //   end: { dayOfYear: 0, dateStr: '' },
+  // });
   const [selectedDayOfYear, setSelectedDayOfYear] = useState<number | null>(
     null,
   );
   const [hoverDayOfYear, setHoverDayOfYear] = useState<number | null>(null);
   const [selectedYear, setSelectedYear] = useState(dayjs().year());
-  // const [dateRanges, setDateRanges] = useState<DateRange[]>([]);
+  const [selectedRange, setSelectedRange] = useState<DateRange | null>(null);
 
   return (
     <ThemeContext.Provider
       value={{
         selectedYear,
         setSelectedYear,
-        selectedDate,
-        setSelectedDate,
+        // selectedDate,
+        // setSelectedDate,
         dateRanges,
         setDateRanges,
         selectedDayOfYear,
         setSelectedDayOfYear,
         hoverDayOfYear,
         setHoverDayOfYear,
-        // value,
-        // setValue,
+        selectedRange,
+        setSelectedRange,
       }}
     >
       <div className='/border-2 /border-red-500 flex h-dvh flex-col'>

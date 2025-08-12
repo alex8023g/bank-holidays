@@ -1,18 +1,22 @@
-import { Day } from '@/app/c2/page';
+import { Day } from '@/app/page';
 import { DateRange } from '@/components/ClientContainerVH';
 
 export function holidaysCount({
   range,
   days,
 }: {
-  range: DateRange;
+  range: {
+    year?: number;
+    start: { dayOfYear: number; dateStr?: string };
+    end: { dayOfYear: number; dateStr?: string };
+  };
   days: Day[];
 }) {
   const res = days.filter(
     (day) =>
       day.isHoliday /* || day.isWeekend */ &&
-      day.dayOfYear >= range.start &&
-      day.dayOfYear <= range.end,
+      day.dayOfYear >= range.start.dayOfYear &&
+      day.dayOfYear <= range.end.dayOfYear,
   ).length;
   console.log('🚀 ~ daysOffCount ~ res:', res);
   return res;

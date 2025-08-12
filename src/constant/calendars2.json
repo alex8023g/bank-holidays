@@ -1,1 +1,2557 @@
-[{"dateString":"2025-01-01","dayOfYear":1,"year":2025,"isHoliday":true,"isWeekend":false},{"dateString":"2025-01-02","dayOfYear":2,"year":2025,"isHoliday":true,"isWeekend":false},{"dateString":"2025-01-03","dayOfYear":3,"year":2025,"isHoliday":true,"isWeekend":false},{"dateString":"2025-01-04","dayOfYear":4,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-01-05","dayOfYear":5,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-01-06","dayOfYear":6,"year":2025,"isHoliday":true,"isWeekend":false},{"dateString":"2025-01-07","dayOfYear":7,"year":2025,"isHoliday":true,"isWeekend":false},{"dateString":"2025-01-08","dayOfYear":8,"year":2025,"isHoliday":true,"isWeekend":false},{"dateString":"2025-01-09","dayOfYear":9,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-01-10","dayOfYear":10,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-01-11","dayOfYear":11,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-01-12","dayOfYear":12,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-01-13","dayOfYear":13,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-01-14","dayOfYear":14,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-01-15","dayOfYear":15,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-01-16","dayOfYear":16,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-01-17","dayOfYear":17,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-01-18","dayOfYear":18,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-01-19","dayOfYear":19,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-01-20","dayOfYear":20,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-01-21","dayOfYear":21,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-01-22","dayOfYear":22,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-01-23","dayOfYear":23,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-01-24","dayOfYear":24,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-01-25","dayOfYear":25,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-01-26","dayOfYear":26,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-01-27","dayOfYear":27,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-01-28","dayOfYear":28,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-01-29","dayOfYear":29,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-01-30","dayOfYear":30,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-01-31","dayOfYear":31,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-01","dayOfYear":32,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-02-02","dayOfYear":33,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-02-03","dayOfYear":34,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-04","dayOfYear":35,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-05","dayOfYear":36,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-06","dayOfYear":37,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-07","dayOfYear":38,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-08","dayOfYear":39,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-02-09","dayOfYear":40,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-02-10","dayOfYear":41,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-11","dayOfYear":42,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-12","dayOfYear":43,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-13","dayOfYear":44,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-14","dayOfYear":45,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-15","dayOfYear":46,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-02-16","dayOfYear":47,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-02-17","dayOfYear":48,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-18","dayOfYear":49,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-19","dayOfYear":50,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-20","dayOfYear":51,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-21","dayOfYear":52,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-22","dayOfYear":53,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-02-23","dayOfYear":54,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-02-24","dayOfYear":55,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-25","dayOfYear":56,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-26","dayOfYear":57,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-27","dayOfYear":58,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-02-28","dayOfYear":59,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-01","dayOfYear":60,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-03-02","dayOfYear":61,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-03-03","dayOfYear":62,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-04","dayOfYear":63,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-05","dayOfYear":64,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-06","dayOfYear":65,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-07","dayOfYear":66,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-08","dayOfYear":67,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-03-09","dayOfYear":68,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-03-10","dayOfYear":69,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-11","dayOfYear":70,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-12","dayOfYear":71,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-13","dayOfYear":72,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-14","dayOfYear":73,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-15","dayOfYear":74,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-03-16","dayOfYear":75,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-03-17","dayOfYear":76,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-18","dayOfYear":77,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-19","dayOfYear":78,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-20","dayOfYear":79,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-21","dayOfYear":80,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-22","dayOfYear":81,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-03-23","dayOfYear":82,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-03-24","dayOfYear":83,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-25","dayOfYear":84,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-26","dayOfYear":85,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-27","dayOfYear":86,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-28","dayOfYear":87,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-03-29","dayOfYear":88,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-03-30","dayOfYear":89,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-03-31","dayOfYear":90,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-01","dayOfYear":91,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-02","dayOfYear":92,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-03","dayOfYear":93,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-04","dayOfYear":94,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-05","dayOfYear":95,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-04-06","dayOfYear":96,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-04-07","dayOfYear":97,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-08","dayOfYear":98,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-09","dayOfYear":99,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-10","dayOfYear":100,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-11","dayOfYear":101,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-12","dayOfYear":102,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-04-13","dayOfYear":103,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-04-14","dayOfYear":104,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-15","dayOfYear":105,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-16","dayOfYear":106,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-17","dayOfYear":107,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-18","dayOfYear":108,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-19","dayOfYear":109,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-04-20","dayOfYear":110,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-04-21","dayOfYear":111,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-22","dayOfYear":112,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-23","dayOfYear":113,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-24","dayOfYear":114,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-25","dayOfYear":115,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-26","dayOfYear":116,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-04-27","dayOfYear":117,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-04-28","dayOfYear":118,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-29","dayOfYear":119,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-04-30","dayOfYear":120,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-01","dayOfYear":121,"year":2025,"isHoliday":true,"isWeekend":false},{"dateString":"2025-05-02","dayOfYear":122,"year":2025,"isHoliday":true,"isWeekend":false},{"dateString":"2025-05-03","dayOfYear":123,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-05-04","dayOfYear":124,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-05-05","dayOfYear":125,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-06","dayOfYear":126,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-07","dayOfYear":127,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-08","dayOfYear":128,"year":2025,"isHoliday":true,"isWeekend":false},{"dateString":"2025-05-09","dayOfYear":129,"year":2025,"isHoliday":true,"isWeekend":false},{"dateString":"2025-05-10","dayOfYear":130,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-05-11","dayOfYear":131,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-05-12","dayOfYear":132,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-13","dayOfYear":133,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-14","dayOfYear":134,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-15","dayOfYear":135,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-16","dayOfYear":136,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-17","dayOfYear":137,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-05-18","dayOfYear":138,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-05-19","dayOfYear":139,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-20","dayOfYear":140,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-21","dayOfYear":141,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-22","dayOfYear":142,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-23","dayOfYear":143,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-24","dayOfYear":144,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-05-25","dayOfYear":145,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-05-26","dayOfYear":146,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-27","dayOfYear":147,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-28","dayOfYear":148,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-29","dayOfYear":149,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-30","dayOfYear":150,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-05-31","dayOfYear":151,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-06-01","dayOfYear":152,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-06-02","dayOfYear":153,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-03","dayOfYear":154,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-04","dayOfYear":155,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-05","dayOfYear":156,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-06","dayOfYear":157,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-07","dayOfYear":158,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-06-08","dayOfYear":159,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-06-09","dayOfYear":160,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-10","dayOfYear":161,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-11","dayOfYear":162,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-12","dayOfYear":163,"year":2025,"isHoliday":true,"isWeekend":false},{"dateString":"2025-06-13","dayOfYear":164,"year":2025,"isHoliday":true,"isWeekend":false},{"dateString":"2025-06-14","dayOfYear":165,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-06-15","dayOfYear":166,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-06-16","dayOfYear":167,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-17","dayOfYear":168,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-18","dayOfYear":169,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-19","dayOfYear":170,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-20","dayOfYear":171,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-21","dayOfYear":172,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-06-22","dayOfYear":173,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-06-23","dayOfYear":174,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-24","dayOfYear":175,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-25","dayOfYear":176,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-26","dayOfYear":177,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-27","dayOfYear":178,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-06-28","dayOfYear":179,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-06-29","dayOfYear":180,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-06-30","dayOfYear":181,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-01","dayOfYear":182,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-02","dayOfYear":183,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-03","dayOfYear":184,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-04","dayOfYear":185,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-05","dayOfYear":186,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-07-06","dayOfYear":187,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-07-07","dayOfYear":188,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-08","dayOfYear":189,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-09","dayOfYear":190,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-10","dayOfYear":191,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-11","dayOfYear":192,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-12","dayOfYear":193,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-07-13","dayOfYear":194,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-07-14","dayOfYear":195,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-15","dayOfYear":196,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-16","dayOfYear":197,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-17","dayOfYear":198,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-18","dayOfYear":199,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-19","dayOfYear":200,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-07-20","dayOfYear":201,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-07-21","dayOfYear":202,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-22","dayOfYear":203,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-23","dayOfYear":204,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-24","dayOfYear":205,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-25","dayOfYear":206,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-26","dayOfYear":207,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-07-27","dayOfYear":208,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-07-28","dayOfYear":209,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-29","dayOfYear":210,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-30","dayOfYear":211,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-07-31","dayOfYear":212,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-01","dayOfYear":213,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-02","dayOfYear":214,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-08-03","dayOfYear":215,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-08-04","dayOfYear":216,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-05","dayOfYear":217,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-06","dayOfYear":218,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-07","dayOfYear":219,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-08","dayOfYear":220,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-09","dayOfYear":221,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-08-10","dayOfYear":222,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-08-11","dayOfYear":223,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-12","dayOfYear":224,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-13","dayOfYear":225,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-14","dayOfYear":226,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-15","dayOfYear":227,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-16","dayOfYear":228,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-08-17","dayOfYear":229,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-08-18","dayOfYear":230,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-19","dayOfYear":231,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-20","dayOfYear":232,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-21","dayOfYear":233,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-22","dayOfYear":234,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-23","dayOfYear":235,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-08-24","dayOfYear":236,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-08-25","dayOfYear":237,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-26","dayOfYear":238,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-27","dayOfYear":239,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-28","dayOfYear":240,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-29","dayOfYear":241,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-08-30","dayOfYear":242,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-08-31","dayOfYear":243,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-09-01","dayOfYear":244,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-02","dayOfYear":245,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-03","dayOfYear":246,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-04","dayOfYear":247,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-05","dayOfYear":248,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-06","dayOfYear":249,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-09-07","dayOfYear":250,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-09-08","dayOfYear":251,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-09","dayOfYear":252,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-10","dayOfYear":253,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-11","dayOfYear":254,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-12","dayOfYear":255,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-13","dayOfYear":256,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-09-14","dayOfYear":257,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-09-15","dayOfYear":258,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-16","dayOfYear":259,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-17","dayOfYear":260,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-18","dayOfYear":261,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-19","dayOfYear":262,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-20","dayOfYear":263,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-09-21","dayOfYear":264,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-09-22","dayOfYear":265,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-23","dayOfYear":266,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-24","dayOfYear":267,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-25","dayOfYear":268,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-26","dayOfYear":269,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-27","dayOfYear":270,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-09-28","dayOfYear":271,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-09-29","dayOfYear":272,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-09-30","dayOfYear":273,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-01","dayOfYear":274,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-02","dayOfYear":275,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-03","dayOfYear":276,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-04","dayOfYear":277,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-10-05","dayOfYear":278,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-10-06","dayOfYear":279,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-07","dayOfYear":280,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-08","dayOfYear":281,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-09","dayOfYear":282,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-10","dayOfYear":283,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-11","dayOfYear":284,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-10-12","dayOfYear":285,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-10-13","dayOfYear":286,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-14","dayOfYear":287,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-15","dayOfYear":288,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-16","dayOfYear":289,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-17","dayOfYear":290,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-18","dayOfYear":291,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-10-19","dayOfYear":292,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-10-20","dayOfYear":293,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-21","dayOfYear":294,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-22","dayOfYear":295,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-23","dayOfYear":296,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-24","dayOfYear":297,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-25","dayOfYear":298,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-10-26","dayOfYear":299,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-10-27","dayOfYear":300,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-28","dayOfYear":301,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-29","dayOfYear":302,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-30","dayOfYear":303,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-10-31","dayOfYear":304,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-01","dayOfYear":305,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-02","dayOfYear":306,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-11-03","dayOfYear":307,"year":2025,"isHoliday":true,"isWeekend":false},{"dateString":"2025-11-04","dayOfYear":308,"year":2025,"isHoliday":true,"isWeekend":false},{"dateString":"2025-11-05","dayOfYear":309,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-06","dayOfYear":310,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-07","dayOfYear":311,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-08","dayOfYear":312,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-11-09","dayOfYear":313,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-11-10","dayOfYear":314,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-11","dayOfYear":315,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-12","dayOfYear":316,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-13","dayOfYear":317,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-14","dayOfYear":318,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-15","dayOfYear":319,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-11-16","dayOfYear":320,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-11-17","dayOfYear":321,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-18","dayOfYear":322,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-19","dayOfYear":323,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-20","dayOfYear":324,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-21","dayOfYear":325,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-22","dayOfYear":326,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-11-23","dayOfYear":327,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-11-24","dayOfYear":328,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-25","dayOfYear":329,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-26","dayOfYear":330,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-27","dayOfYear":331,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-28","dayOfYear":332,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-11-29","dayOfYear":333,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-11-30","dayOfYear":334,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-12-01","dayOfYear":335,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-02","dayOfYear":336,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-03","dayOfYear":337,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-04","dayOfYear":338,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-05","dayOfYear":339,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-06","dayOfYear":340,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-12-07","dayOfYear":341,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-12-08","dayOfYear":342,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-09","dayOfYear":343,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-10","dayOfYear":344,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-11","dayOfYear":345,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-12","dayOfYear":346,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-13","dayOfYear":347,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-12-14","dayOfYear":348,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-12-15","dayOfYear":349,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-16","dayOfYear":350,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-17","dayOfYear":351,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-18","dayOfYear":352,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-19","dayOfYear":353,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-20","dayOfYear":354,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-12-21","dayOfYear":355,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-12-22","dayOfYear":356,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-23","dayOfYear":357,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-24","dayOfYear":358,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-25","dayOfYear":359,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-26","dayOfYear":360,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-27","dayOfYear":361,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-12-28","dayOfYear":362,"year":2025,"isHoliday":false,"isWeekend":true},{"dateString":"2025-12-29","dayOfYear":363,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-30","dayOfYear":364,"year":2025,"isHoliday":false,"isWeekend":false},{"dateString":"2025-12-31","dayOfYear":365,"year":2025,"isHoliday":true,"isWeekend":false}]
+[
+    {
+        "dateString": "2025-01-01",
+        "dayOfYear": 1,
+        "year": 2025,
+        "isHoliday": true,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-02",
+        "dayOfYear": 2,
+        "year": 2025,
+        "isHoliday": true,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-03",
+        "dayOfYear": 3,
+        "year": 2025,
+        "isHoliday": true,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-04",
+        "dayOfYear": 4,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-01-05",
+        "dayOfYear": 5,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-01-06",
+        "dayOfYear": 6,
+        "year": 2025,
+        "isHoliday": true,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-07",
+        "dayOfYear": 7,
+        "year": 2025,
+        "isHoliday": true,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-08",
+        "dayOfYear": 8,
+        "year": 2025,
+        "isHoliday": true,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-09",
+        "dayOfYear": 9,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-10",
+        "dayOfYear": 10,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-11",
+        "dayOfYear": 11,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-01-12",
+        "dayOfYear": 12,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-01-13",
+        "dayOfYear": 13,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-14",
+        "dayOfYear": 14,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-15",
+        "dayOfYear": 15,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-16",
+        "dayOfYear": 16,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-17",
+        "dayOfYear": 17,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-18",
+        "dayOfYear": 18,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-01-19",
+        "dayOfYear": 19,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-01-20",
+        "dayOfYear": 20,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-21",
+        "dayOfYear": 21,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-22",
+        "dayOfYear": 22,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-23",
+        "dayOfYear": 23,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-24",
+        "dayOfYear": 24,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-25",
+        "dayOfYear": 25,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-01-26",
+        "dayOfYear": 26,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-01-27",
+        "dayOfYear": 27,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-28",
+        "dayOfYear": 28,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-29",
+        "dayOfYear": 29,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-30",
+        "dayOfYear": 30,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-01-31",
+        "dayOfYear": 31,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-01",
+        "dayOfYear": 32,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-02-02",
+        "dayOfYear": 33,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-02-03",
+        "dayOfYear": 34,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-04",
+        "dayOfYear": 35,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-05",
+        "dayOfYear": 36,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-06",
+        "dayOfYear": 37,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-07",
+        "dayOfYear": 38,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-08",
+        "dayOfYear": 39,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-02-09",
+        "dayOfYear": 40,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-02-10",
+        "dayOfYear": 41,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-11",
+        "dayOfYear": 42,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-12",
+        "dayOfYear": 43,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-13",
+        "dayOfYear": 44,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-14",
+        "dayOfYear": 45,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-15",
+        "dayOfYear": 46,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-02-16",
+        "dayOfYear": 47,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-02-17",
+        "dayOfYear": 48,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-18",
+        "dayOfYear": 49,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-19",
+        "dayOfYear": 50,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-20",
+        "dayOfYear": 51,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-21",
+        "dayOfYear": 52,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-22",
+        "dayOfYear": 53,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-02-23",
+        "dayOfYear": 54,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-02-24",
+        "dayOfYear": 55,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-25",
+        "dayOfYear": 56,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-26",
+        "dayOfYear": 57,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-27",
+        "dayOfYear": 58,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-02-28",
+        "dayOfYear": 59,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-01",
+        "dayOfYear": 60,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-03-02",
+        "dayOfYear": 61,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-03-03",
+        "dayOfYear": 62,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-04",
+        "dayOfYear": 63,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-05",
+        "dayOfYear": 64,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-06",
+        "dayOfYear": 65,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-07",
+        "dayOfYear": 66,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-08",
+        "dayOfYear": 67,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-03-09",
+        "dayOfYear": 68,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-03-10",
+        "dayOfYear": 69,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-11",
+        "dayOfYear": 70,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-12",
+        "dayOfYear": 71,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-13",
+        "dayOfYear": 72,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-14",
+        "dayOfYear": 73,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-15",
+        "dayOfYear": 74,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-03-16",
+        "dayOfYear": 75,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-03-17",
+        "dayOfYear": 76,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-18",
+        "dayOfYear": 77,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-19",
+        "dayOfYear": 78,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-20",
+        "dayOfYear": 79,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-21",
+        "dayOfYear": 80,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-22",
+        "dayOfYear": 81,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-03-23",
+        "dayOfYear": 82,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-03-24",
+        "dayOfYear": 83,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-25",
+        "dayOfYear": 84,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-26",
+        "dayOfYear": 85,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-27",
+        "dayOfYear": 86,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-28",
+        "dayOfYear": 87,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-03-29",
+        "dayOfYear": 88,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-03-30",
+        "dayOfYear": 89,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-03-31",
+        "dayOfYear": 90,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-01",
+        "dayOfYear": 91,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-02",
+        "dayOfYear": 92,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-03",
+        "dayOfYear": 93,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-04",
+        "dayOfYear": 94,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-05",
+        "dayOfYear": 95,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-04-06",
+        "dayOfYear": 96,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-04-07",
+        "dayOfYear": 97,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-08",
+        "dayOfYear": 98,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-09",
+        "dayOfYear": 99,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-10",
+        "dayOfYear": 100,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-11",
+        "dayOfYear": 101,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-12",
+        "dayOfYear": 102,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-04-13",
+        "dayOfYear": 103,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-04-14",
+        "dayOfYear": 104,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-15",
+        "dayOfYear": 105,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-16",
+        "dayOfYear": 106,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-17",
+        "dayOfYear": 107,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-18",
+        "dayOfYear": 108,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-19",
+        "dayOfYear": 109,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-04-20",
+        "dayOfYear": 110,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-04-21",
+        "dayOfYear": 111,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-22",
+        "dayOfYear": 112,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-23",
+        "dayOfYear": 113,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-24",
+        "dayOfYear": 114,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-25",
+        "dayOfYear": 115,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-26",
+        "dayOfYear": 116,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-04-27",
+        "dayOfYear": 117,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-04-28",
+        "dayOfYear": 118,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-29",
+        "dayOfYear": 119,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-04-30",
+        "dayOfYear": 120,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-01",
+        "dayOfYear": 121,
+        "year": 2025,
+        "isHoliday": true,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-02",
+        "dayOfYear": 122,
+        "year": 2025,
+        "isHoliday": true,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-03",
+        "dayOfYear": 123,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-05-04",
+        "dayOfYear": 124,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-05-05",
+        "dayOfYear": 125,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-06",
+        "dayOfYear": 126,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-07",
+        "dayOfYear": 127,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-08",
+        "dayOfYear": 128,
+        "year": 2025,
+        "isHoliday": true,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-09",
+        "dayOfYear": 129,
+        "year": 2025,
+        "isHoliday": true,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-10",
+        "dayOfYear": 130,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-05-11",
+        "dayOfYear": 131,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-05-12",
+        "dayOfYear": 132,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-13",
+        "dayOfYear": 133,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-14",
+        "dayOfYear": 134,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-15",
+        "dayOfYear": 135,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-16",
+        "dayOfYear": 136,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-17",
+        "dayOfYear": 137,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-05-18",
+        "dayOfYear": 138,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-05-19",
+        "dayOfYear": 139,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-20",
+        "dayOfYear": 140,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-21",
+        "dayOfYear": 141,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-22",
+        "dayOfYear": 142,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-23",
+        "dayOfYear": 143,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-24",
+        "dayOfYear": 144,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-05-25",
+        "dayOfYear": 145,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-05-26",
+        "dayOfYear": 146,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-27",
+        "dayOfYear": 147,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-28",
+        "dayOfYear": 148,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-29",
+        "dayOfYear": 149,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-30",
+        "dayOfYear": 150,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-05-31",
+        "dayOfYear": 151,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-06-01",
+        "dayOfYear": 152,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-06-02",
+        "dayOfYear": 153,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-03",
+        "dayOfYear": 154,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-04",
+        "dayOfYear": 155,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-05",
+        "dayOfYear": 156,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-06",
+        "dayOfYear": 157,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-07",
+        "dayOfYear": 158,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-06-08",
+        "dayOfYear": 159,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-06-09",
+        "dayOfYear": 160,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-10",
+        "dayOfYear": 161,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-11",
+        "dayOfYear": 162,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-12",
+        "dayOfYear": 163,
+        "year": 2025,
+        "isHoliday": true,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-13",
+        "dayOfYear": 164,
+        "year": 2025,
+        "isHoliday": true,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-14",
+        "dayOfYear": 165,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-06-15",
+        "dayOfYear": 166,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-06-16",
+        "dayOfYear": 167,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-17",
+        "dayOfYear": 168,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-18",
+        "dayOfYear": 169,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-19",
+        "dayOfYear": 170,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-20",
+        "dayOfYear": 171,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-21",
+        "dayOfYear": 172,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-06-22",
+        "dayOfYear": 173,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-06-23",
+        "dayOfYear": 174,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-24",
+        "dayOfYear": 175,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-25",
+        "dayOfYear": 176,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-26",
+        "dayOfYear": 177,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-27",
+        "dayOfYear": 178,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-06-28",
+        "dayOfYear": 179,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-06-29",
+        "dayOfYear": 180,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-06-30",
+        "dayOfYear": 181,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-01",
+        "dayOfYear": 182,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-02",
+        "dayOfYear": 183,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-03",
+        "dayOfYear": 184,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-04",
+        "dayOfYear": 185,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-05",
+        "dayOfYear": 186,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-07-06",
+        "dayOfYear": 187,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-07-07",
+        "dayOfYear": 188,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-08",
+        "dayOfYear": 189,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-09",
+        "dayOfYear": 190,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-10",
+        "dayOfYear": 191,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-11",
+        "dayOfYear": 192,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-12",
+        "dayOfYear": 193,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-07-13",
+        "dayOfYear": 194,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-07-14",
+        "dayOfYear": 195,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-15",
+        "dayOfYear": 196,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-16",
+        "dayOfYear": 197,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-17",
+        "dayOfYear": 198,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-18",
+        "dayOfYear": 199,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-19",
+        "dayOfYear": 200,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-07-20",
+        "dayOfYear": 201,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-07-21",
+        "dayOfYear": 202,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-22",
+        "dayOfYear": 203,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-23",
+        "dayOfYear": 204,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-24",
+        "dayOfYear": 205,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-25",
+        "dayOfYear": 206,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-26",
+        "dayOfYear": 207,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-07-27",
+        "dayOfYear": 208,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-07-28",
+        "dayOfYear": 209,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-29",
+        "dayOfYear": 210,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-30",
+        "dayOfYear": 211,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-07-31",
+        "dayOfYear": 212,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-01",
+        "dayOfYear": 213,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-02",
+        "dayOfYear": 214,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-08-03",
+        "dayOfYear": 215,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-08-04",
+        "dayOfYear": 216,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-05",
+        "dayOfYear": 217,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-06",
+        "dayOfYear": 218,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-07",
+        "dayOfYear": 219,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-08",
+        "dayOfYear": 220,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-09",
+        "dayOfYear": 221,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-08-10",
+        "dayOfYear": 222,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-08-11",
+        "dayOfYear": 223,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-12",
+        "dayOfYear": 224,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-13",
+        "dayOfYear": 225,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-14",
+        "dayOfYear": 226,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-15",
+        "dayOfYear": 227,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-16",
+        "dayOfYear": 228,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-08-17",
+        "dayOfYear": 229,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-08-18",
+        "dayOfYear": 230,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-19",
+        "dayOfYear": 231,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-20",
+        "dayOfYear": 232,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-21",
+        "dayOfYear": 233,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-22",
+        "dayOfYear": 234,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-23",
+        "dayOfYear": 235,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-08-24",
+        "dayOfYear": 236,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-08-25",
+        "dayOfYear": 237,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-26",
+        "dayOfYear": 238,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-27",
+        "dayOfYear": 239,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-28",
+        "dayOfYear": 240,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-29",
+        "dayOfYear": 241,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-08-30",
+        "dayOfYear": 242,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-08-31",
+        "dayOfYear": 243,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-09-01",
+        "dayOfYear": 244,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-02",
+        "dayOfYear": 245,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-03",
+        "dayOfYear": 246,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-04",
+        "dayOfYear": 247,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-05",
+        "dayOfYear": 248,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-06",
+        "dayOfYear": 249,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-09-07",
+        "dayOfYear": 250,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-09-08",
+        "dayOfYear": 251,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-09",
+        "dayOfYear": 252,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-10",
+        "dayOfYear": 253,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-11",
+        "dayOfYear": 254,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-12",
+        "dayOfYear": 255,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-13",
+        "dayOfYear": 256,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-09-14",
+        "dayOfYear": 257,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-09-15",
+        "dayOfYear": 258,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-16",
+        "dayOfYear": 259,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-17",
+        "dayOfYear": 260,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-18",
+        "dayOfYear": 261,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-19",
+        "dayOfYear": 262,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-20",
+        "dayOfYear": 263,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-09-21",
+        "dayOfYear": 264,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-09-22",
+        "dayOfYear": 265,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-23",
+        "dayOfYear": 266,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-24",
+        "dayOfYear": 267,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-25",
+        "dayOfYear": 268,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-26",
+        "dayOfYear": 269,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-27",
+        "dayOfYear": 270,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-09-28",
+        "dayOfYear": 271,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-09-29",
+        "dayOfYear": 272,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-09-30",
+        "dayOfYear": 273,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-01",
+        "dayOfYear": 274,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-02",
+        "dayOfYear": 275,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-03",
+        "dayOfYear": 276,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-04",
+        "dayOfYear": 277,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-10-05",
+        "dayOfYear": 278,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-10-06",
+        "dayOfYear": 279,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-07",
+        "dayOfYear": 280,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-08",
+        "dayOfYear": 281,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-09",
+        "dayOfYear": 282,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-10",
+        "dayOfYear": 283,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-11",
+        "dayOfYear": 284,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-10-12",
+        "dayOfYear": 285,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-10-13",
+        "dayOfYear": 286,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-14",
+        "dayOfYear": 287,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-15",
+        "dayOfYear": 288,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-16",
+        "dayOfYear": 289,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-17",
+        "dayOfYear": 290,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-18",
+        "dayOfYear": 291,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-10-19",
+        "dayOfYear": 292,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-10-20",
+        "dayOfYear": 293,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-21",
+        "dayOfYear": 294,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-22",
+        "dayOfYear": 295,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-23",
+        "dayOfYear": 296,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-24",
+        "dayOfYear": 297,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-25",
+        "dayOfYear": 298,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-10-26",
+        "dayOfYear": 299,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-10-27",
+        "dayOfYear": 300,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-28",
+        "dayOfYear": 301,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-29",
+        "dayOfYear": 302,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-30",
+        "dayOfYear": 303,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-10-31",
+        "dayOfYear": 304,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-01",
+        "dayOfYear": 305,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-02",
+        "dayOfYear": 306,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-11-03",
+        "dayOfYear": 307,
+        "year": 2025,
+        "isHoliday": true,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-04",
+        "dayOfYear": 308,
+        "year": 2025,
+        "isHoliday": true,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-05",
+        "dayOfYear": 309,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-06",
+        "dayOfYear": 310,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-07",
+        "dayOfYear": 311,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-08",
+        "dayOfYear": 312,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-11-09",
+        "dayOfYear": 313,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-11-10",
+        "dayOfYear": 314,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-11",
+        "dayOfYear": 315,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-12",
+        "dayOfYear": 316,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-13",
+        "dayOfYear": 317,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-14",
+        "dayOfYear": 318,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-15",
+        "dayOfYear": 319,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-11-16",
+        "dayOfYear": 320,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-11-17",
+        "dayOfYear": 321,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-18",
+        "dayOfYear": 322,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-19",
+        "dayOfYear": 323,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-20",
+        "dayOfYear": 324,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-21",
+        "dayOfYear": 325,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-22",
+        "dayOfYear": 326,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-11-23",
+        "dayOfYear": 327,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-11-24",
+        "dayOfYear": 328,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-25",
+        "dayOfYear": 329,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-26",
+        "dayOfYear": 330,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-27",
+        "dayOfYear": 331,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-28",
+        "dayOfYear": 332,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-11-29",
+        "dayOfYear": 333,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-11-30",
+        "dayOfYear": 334,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-12-01",
+        "dayOfYear": 335,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-02",
+        "dayOfYear": 336,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-03",
+        "dayOfYear": 337,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-04",
+        "dayOfYear": 338,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-05",
+        "dayOfYear": 339,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-06",
+        "dayOfYear": 340,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-12-07",
+        "dayOfYear": 341,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-12-08",
+        "dayOfYear": 342,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-09",
+        "dayOfYear": 343,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-10",
+        "dayOfYear": 344,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-11",
+        "dayOfYear": 345,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-12",
+        "dayOfYear": 346,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-13",
+        "dayOfYear": 347,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-12-14",
+        "dayOfYear": 348,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-12-15",
+        "dayOfYear": 349,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-16",
+        "dayOfYear": 350,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-17",
+        "dayOfYear": 351,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-18",
+        "dayOfYear": 352,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-19",
+        "dayOfYear": 353,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-20",
+        "dayOfYear": 354,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-12-21",
+        "dayOfYear": 355,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-12-22",
+        "dayOfYear": 356,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-23",
+        "dayOfYear": 357,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-24",
+        "dayOfYear": 358,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-25",
+        "dayOfYear": 359,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-26",
+        "dayOfYear": 360,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-27",
+        "dayOfYear": 361,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-12-28",
+        "dayOfYear": 362,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": true
+    },
+    {
+        "dateString": "2025-12-29",
+        "dayOfYear": 363,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-30",
+        "dayOfYear": 364,
+        "year": 2025,
+        "isHoliday": false,
+        "isWeekend": false
+    },
+    {
+        "dateString": "2025-12-31",
+        "dayOfYear": 365,
+        "year": 2025,
+        "isHoliday": true,
+        "isWeekend": false
+    }
+]

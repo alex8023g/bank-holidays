@@ -15,7 +15,7 @@ dayjs.extend(isoWeek);
 export function CalendarsBlock2({ days }: { days: Day[] }) {
   // console.log('🚀 ~ CalendarsBlock2 ', days);
   const hoverDayOfYearRef = useRef<number | null>(null);
-  const [hoverDayOfYearSt, setHoverDayOfYearSt] = useState<number | null>(null);
+  // const [hoverDayOfYearSt, setHoverDayOfYearSt] = useState<number | null>(null);
 
   const ctx = useContext(ThemeContext);
   const year = ctx?.selectedYear || dayjs().year();
@@ -60,36 +60,40 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                       type='button'
                       // data-is-today={day.isToday ? '' : undefined}
                       // data-is-current-month={day ? '' : undefined}
-                      className={`bg-white py-1.5 text-gray-900 first:rounded-tl-lg last:rounded-br-lg hover:bg-gray-100 focus:z-10 nth-36:rounded-bl-lg nth-7:rounded-tr-lg`}
+                      className={`bg-white py-1.5 text-gray-900 first:rounded-tl-lg last:rounded-br-lg hover:bg-gray-100 focus:z-10 nth-36:rounded-bl-lg nth-7:rounded-tr-lg ${day?.isHoliday ? 'font-bold' : ''}`}
                       style={{
                         backgroundColor: ctx?.dateRanges.some(
                           (d) =>
-                            d.start &&
-                            d.end &&
                             day?.dayOfYear &&
-                            d.start <= day?.dayOfYear &&
-                            d.end >= day.dayOfYear,
+                            d.start.dayOfYear <= day?.dayOfYear &&
+                            d.end.dayOfYear >= day.dayOfYear,
                         )
-                          ? 'violet'
+                          ? '#51a2ff'
                           : '',
                         color: day?.isWeekend
-                          ? '#ff2056'
+                          ? 'red'
                           : day?.isHoliday
                             ? 'red'
                             : '',
                         outline:
                           ctx?.selectedDayOfYear &&
-                          hoverDayOfYearSt &&
+                          ctx.hoverDayOfYear &&
                           day.dayOfYear
                             ? ctx?.selectedDayOfYear <= day.dayOfYear &&
-                              day.dayOfYear <= hoverDayOfYearSt
+                              day.dayOfYear <= ctx.hoverDayOfYear
                               ? '1px solid red'
                               : ''
-                            : '',
+                            : ctx?.selectedRange
+                              ? ctx.selectedRange.start.dayOfYear <=
+                                  day.dayOfYear &&
+                                day.dayOfYear <= ctx.selectedRange.end.dayOfYear
+                                ? '1px solid red'
+                                : ''
+                              : '',
                       }}
                       onClick={() => {
                         console.log(day, ctx?.dateRanges);
-                        if (ctx?.selectedDate.start) {
+                        if (ctx?.selectedDayOfYear) {
                           if (
                             day?.dayOfYear &&
                             ctx?.selectedDayOfYear &&
@@ -101,63 +105,82 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                               );
                               return;
                             }
-                            ctx?.setSelectedDate({
-                              start: day.dayOfYear,
-                              end: 0,
-                              year: year,
-                            });
                             ctx?.setSelectedDayOfYear(day.dayOfYear);
+                            return;
+                          } else if (day.isHoliday) {
+                            toast.error(
+                              'Отпуск не может заканчиваться в праздничный день',
+                            );
+                            return;
+                          } else if (
+                            ctx.dateRanges.some(
+                              (range) =>
+                                (range.start.dayOfYear <= day.dayOfYear &&
+                                  day.dayOfYear <= range.end.dayOfYear) ||
+                                (ctx.selectedDayOfYear &&
+                                  ctx.selectedDayOfYear <
+                                    range.start.dayOfYear &&
+                                  range.end.dayOfYear < day.dayOfYear),
+                            )
+                          ) {
+                            toast.error(
+                              'Периоды отпусков не могут пересекаться',
+                            );
                             return;
                           }
                           const newDateRanges = ctx.dateRanges
                             .concat([
                               {
-                                start: ctx.selectedDate.start,
-                                end: day.dayOfYear,
+                                start: {
+                                  dayOfYear: ctx.selectedDayOfYear || 0,
+                                  dateStr:
+                                    days.find(
+                                      (item) =>
+                                        item.dayOfYear ===
+                                        ctx.selectedDayOfYear,
+                                    )?.dateString || '',
+                                },
+                                end: {
+                                  dayOfYear: day.dayOfYear,
+                                  dateStr: day.dateString,
+                                },
                                 year: year,
                               },
                             ])
                             .sort((a, b) =>
-                              a.start &&
-                              a.end &&
-                              b.start &&
-                              b.end &&
-                              a.start > b.start
+                              a.start.dayOfYear > b.start.dayOfYear
                                 ? 1
-                                : a.start &&
-                                    a.end &&
-                                    b.start &&
-                                    b.end &&
-                                    a.start < b.start
+                                : a.start.dayOfYear < b.start.dayOfYear
                                   ? -1
                                   : 0,
                             );
-                          // ctx.setDateRanges(newDateRanges);
                           ctx.setDateRanges(newDateRanges);
-                          ctx.setSelectedDate({
-                            start: 0,
-                            end: 0,
-                            year: 0,
-                          });
                           ctx?.setSelectedDayOfYear(null);
+                        } else if (
+                          ctx?.dateRanges.some(
+                            (d) =>
+                              day?.dayOfYear &&
+                              d.start.dayOfYear <= day?.dayOfYear &&
+                              d.end.dayOfYear >= day.dayOfYear,
+                          )
+                        ) {
+                          ctx.setSelectedRange(
+                            ctx.dateRanges.find(
+                              (range) =>
+                                range.start.dayOfYear <= day.dayOfYear &&
+                                day.dayOfYear <= range.end.dayOfYear,
+                            ) || null,
+                          );
+                        } else if (day.isHoliday || day.isWeekend) {
+                          toast.error('Отпуск не может начинаться в выходной');
                         } else {
-                          if (day.isHoliday || day.isWeekend) {
-                            toast.error(
-                              'Отпуск не может начинаться в выходной',
-                            );
-                            return;
-                          }
-                          ctx?.setSelectedDate({
-                            start: day.dayOfYear,
-                            end: 0,
-                            year: year,
-                          });
                           ctx?.setSelectedDayOfYear(day.dayOfYear);
+                          ctx?.setSelectedRange(null);
                         }
                       }}
                       onMouseEnter={() => {
                         hoverDayOfYearRef.current = day.dayOfYear;
-                        setHoverDayOfYearSt(day.dayOfYear);
+                        ctx?.setHoverDayOfYear(day.dayOfYear);
                         console.log(hoverDayOfYearRef.current);
                       }}
                     >
