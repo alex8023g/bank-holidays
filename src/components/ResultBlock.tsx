@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { ThemeContext } from './ClientContainerVH';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import dayjs from 'dayjs';
@@ -9,32 +9,21 @@ import isdayoff from 'isdayoff';
 import { Day } from '@/app/page';
 import { holidaysCount } from '@/lib/holidaysCount';
 import { twJoin } from 'tailwind-merge';
-const api = isdayoff();
+import { useClickOutside } from '@react-hooks-library/core';
 
 export default function ResultBlock({ days }: { days: Day[] }) {
   const ctx = useContext(ThemeContext);
 
-  /* useEffect(() => {
-    console.log('🚀 ~ ResultBlock ~ useEffect start!!!');
+  const ref1 = useRef(null);
 
-    ctx?.dateRanges
-      .filter((range) => dayjs(range.start).year() === ctx.selectedYear)
-      .forEach((range) => {
-        // console.log('🚀 ~ ResultBlock ~ range:', range);
-        api
-          .period({
-            start: new Date(range.start),
-            end: new Date(range.end),
-          }) // @ts-expect-error isdayoff is not typed
-          .then((res) => console.log('🚀 ~ ResultBlock ~ range:', range, res)) // @ts-expect-error isdayoff is not typed
-          .catch((err) => console.log(err.message));
-      });
-  }, [ctx?.selectedYear, ctx?.dateRanges]); */
+  // useClickOutside(ref1, () => {
+  //   ctx?.setSelectedRange(null);
+  // });
 
   return (
     <div className='h-full overflow-y-auto border-2 border-green-500 px-2 xl:h-auto xl:w-1/3'>
       <h2 className='sticky top-0 bg-white'>План на {ctx?.selectedYear} год</h2>
-      <ul className=''>
+      <ul ref={ref1} className=''>
         {ctx?.dateRanges
           .filter((range) => range.year === ctx.selectedYear)
           .map((range) => {
@@ -42,7 +31,7 @@ export default function ResultBlock({ days }: { days: Day[] }) {
               <li
                 key={range.start.dateStr}
                 className={twJoin(
-                  '/border mb-2 flex items-start rounded-md border border-gray-100 px-2 py-1 shadow-sm',
+                  '/border mb-2 flex items-center rounded-md border border-gray-100 px-2 py-1 shadow-sm',
                   // Boolean(
                   ctx.selectedRange &&
                     ctx.selectedRange?.start.dayOfYear ===
@@ -73,6 +62,7 @@ export default function ResultBlock({ days }: { days: Day[] }) {
                 </span>
 
                 <button
+                  className='ml-auto'
                   onClick={(e) => {
                     e.stopPropagation();
                     const newDateRanges = ctx.dateRanges.filter(

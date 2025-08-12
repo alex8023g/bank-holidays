@@ -9,6 +9,8 @@ import isoWeek from 'dayjs/plugin/isoWeek';
 import { createYearCalendar2 } from '@/lib/createYearCalendar2';
 import { Day } from '@/lib/createDaysArr2';
 import { toast } from 'sonner';
+import { DivideIcon, XCircleIcon } from '@heroicons/react/24/solid';
+import { MenuItem } from '@headlessui/react';
 dayjs.locale('ru');
 dayjs.extend(isoWeek);
 
@@ -18,7 +20,10 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
   // const [hoverDayOfYearSt, setHoverDayOfYearSt] = useState<number | null>(null);
 
   const ctx = useContext(ThemeContext);
-  const year = ctx?.selectedYear || dayjs().year();
+  if (!ctx) {
+    return <div>no context</div>;
+  }
+  const year = ctx.selectedYear || dayjs().year();
   // const [monthsSt, setMonthsSt] = useState(createYearCalendar2({ year, days }));
   const monthsSt = useMemo(() => createYearCalendar2({ year, days }), []);
   // console.log('🚀 ~ CalendarsBlock2 ~ monthsSt:', monthsSt);
@@ -60,9 +65,9 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                       type='button'
                       // data-is-today={day.isToday ? '' : undefined}
                       // data-is-current-month={day ? '' : undefined}
-                      className={`bg-white py-1.5 text-gray-900 first:rounded-tl-lg last:rounded-br-lg hover:bg-gray-100 focus:z-10 nth-36:rounded-bl-lg nth-7:rounded-tr-lg ${day?.isHoliday ? 'font-bold' : ''}`}
+                      className={`relative bg-white py-1.5 text-gray-900 first:rounded-tl-lg last:rounded-br-lg hover:bg-gray-100 focus:z-10 nth-36:rounded-bl-lg nth-7:rounded-tr-lg ${day?.isHoliday ? 'font-bold' : ''}`}
                       style={{
-                        backgroundColor: ctx?.dateRanges.some(
+                        backgroundColor: ctx.dateRanges.some(
                           (d) =>
                             day?.dayOfYear &&
                             d.start.dayOfYear <= day?.dayOfYear &&
@@ -76,14 +81,14 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                             ? 'red'
                             : '',
                         outline:
-                          ctx?.selectedDayOfYear &&
+                          ctx.selectedDayOfYear &&
                           ctx.hoverDayOfYear &&
                           day.dayOfYear
-                            ? ctx?.selectedDayOfYear <= day.dayOfYear &&
+                            ? ctx.selectedDayOfYear <= day.dayOfYear &&
                               day.dayOfYear <= ctx.hoverDayOfYear
                               ? '1px solid red'
                               : ''
-                            : ctx?.selectedRange
+                            : ctx.selectedRange
                               ? ctx.selectedRange.start.dayOfYear <=
                                   day.dayOfYear &&
                                 day.dayOfYear <= ctx.selectedRange.end.dayOfYear
@@ -92,12 +97,12 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                               : '',
                       }}
                       onClick={() => {
-                        console.log(day, ctx?.dateRanges);
-                        if (ctx?.selectedDayOfYear) {
+                        console.log(day, ctx.dateRanges);
+                        if (ctx.selectedDayOfYear) {
                           if (
                             day?.dayOfYear &&
-                            ctx?.selectedDayOfYear &&
-                            day?.dayOfYear < ctx?.selectedDayOfYear
+                            ctx.selectedDayOfYear &&
+                            day?.dayOfYear < ctx.selectedDayOfYear
                           ) {
                             if (day.isHoliday || day.isWeekend) {
                               toast.error(
@@ -105,7 +110,7 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                               );
                               return;
                             }
-                            ctx?.setSelectedDayOfYear(day.dayOfYear);
+                            ctx.setSelectedDayOfYear(day.dayOfYear);
                             return;
                           } else if (day.isHoliday) {
                             toast.error(
@@ -128,25 +133,23 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                             );
                             return;
                           }
-                          const newDateRanges = ctx.dateRanges
-                            .concat([
-                              {
-                                start: {
-                                  dayOfYear: ctx.selectedDayOfYear || 0,
-                                  dateStr:
-                                    days.find(
-                                      (item) =>
-                                        item.dayOfYear ===
-                                        ctx.selectedDayOfYear,
-                                    )?.dateString || '',
-                                },
-                                end: {
-                                  dayOfYear: day.dayOfYear,
-                                  dateStr: day.dateString,
-                                },
-                                year: year,
-                              },
-                            ])
+                          const newRange = {
+                            start: {
+                              dayOfYear: ctx.selectedDayOfYear || 0,
+                              dateStr:
+                                days.find(
+                                  (item) =>
+                                    item.dayOfYear === ctx.selectedDayOfYear,
+                                )?.dateString || '',
+                            },
+                            end: {
+                              dayOfYear: day.dayOfYear,
+                              dateStr: day.dateString,
+                            },
+                            year: year,
+                          };
+                          const updDateRanges = ctx.dateRanges
+                            .concat([newRange])
                             .sort((a, b) =>
                               a.start.dayOfYear > b.start.dayOfYear
                                 ? 1
@@ -154,14 +157,15 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                                   ? -1
                                   : 0,
                             );
-                          ctx.setDateRanges(newDateRanges);
-                          ctx?.setSelectedDayOfYear(null);
+                          ctx.setDateRanges(updDateRanges);
+                          ctx.setSelectedRange(newRange);
+                          ctx.setSelectedDayOfYear(null);
                         } else if (
-                          ctx?.dateRanges.some(
+                          ctx.dateRanges.some(
                             (d) =>
                               day?.dayOfYear &&
                               d.start.dayOfYear <= day?.dayOfYear &&
-                              d.end.dayOfYear >= day.dayOfYear,
+                              day.dayOfYear <= d.end.dayOfYear,
                           )
                         ) {
                           ctx.setSelectedRange(
@@ -174,14 +178,14 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                         } else if (day.isHoliday || day.isWeekend) {
                           toast.error('Отпуск не может начинаться в выходной');
                         } else {
-                          ctx?.setSelectedDayOfYear(day.dayOfYear);
-                          ctx?.setSelectedRange(null);
+                          ctx.setSelectedDayOfYear(day.dayOfYear);
+                          ctx.setSelectedRange(null);
                         }
                       }}
                       onMouseEnter={() => {
                         hoverDayOfYearRef.current = day.dayOfYear;
-                        ctx?.setHoverDayOfYear(day.dayOfYear);
-                        console.log(hoverDayOfYearRef.current);
+                        ctx.setHoverDayOfYear(day.dayOfYear);
+                        // console.log(hoverDayOfYearRef.current);
                       }}
                     >
                       <time
@@ -191,6 +195,22 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                         {dayjs(day?.dateString)?.format('D')}
                       </time>
                       {/* {day?.dateString} */}
+                      {ctx.selectedRange?.start.dayOfYear === day.dayOfYear && (
+                        <div
+                          className='absolute -top-2.5 -left-2.5 size-5 h-5 w-5 cursor-pointer rounded-full bg-white'
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const updRanges = ctx.dateRanges.filter(
+                              (r) => r.start.dayOfYear !== day.dayOfYear,
+                            );
+                            console.log('🚀 ~ click on XCircleIcon');
+                            ctx.setDateRanges(updRanges);
+                            ctx.setSelectedRange(null);
+                          }}
+                        >
+                          <XCircleIcon className='absolute -top-0.5 -left-0.5 size-6 text-red-600' />
+                        </div>
+                      )}
                     </button>
                   ) : (
                     <button

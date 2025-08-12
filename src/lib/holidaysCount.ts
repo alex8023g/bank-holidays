@@ -18,6 +18,6 @@ export function holidaysCount({
       day.dayOfYear >= range.start.dayOfYear &&
       day.dayOfYear <= range.end.dayOfYear,
   ).length;
-  console.log('🚀 ~ daysOffCount ~ res:', res);
+  // console.log('🚀 ~ daysOffCount ~ res:', res);
   return res;
 }
