@@ -11,6 +11,8 @@ import { Day } from '@/lib/createDaysArr2';
 import { toast } from 'sonner';
 import { DivideIcon, XCircleIcon } from '@heroicons/react/24/solid';
 import { MenuItem } from '@headlessui/react';
+import { dayOfYearInRanges } from '@/lib/dayOfYearInRanges';
+import { DM_Sans } from 'next/font/google';
 dayjs.locale('ru');
 dayjs.extend(isoWeek);
 
@@ -97,7 +99,7 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                               : '',
                       }}
                       onClick={() => {
-                        console.log(day, ctx.dateRanges);
+                        // console.log(day, ctx.dateRanges);
                         if (ctx.selectedDayOfYear) {
                           if (
                             day?.dayOfYear &&
@@ -161,20 +163,28 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                           ctx.setSelectedRange(newRange);
                           ctx.setSelectedDayOfYear(null);
                         } else if (
-                          ctx.dateRanges.some(
-                            (d) =>
-                              day?.dayOfYear &&
-                              d.start.dayOfYear <= day?.dayOfYear &&
-                              day.dayOfYear <= d.end.dayOfYear,
-                          )
+                          dayOfYearInRanges({
+                            dateRanges: ctx.dateRanges,
+                            dayOfYear: day.dayOfYear,
+                          })
                         ) {
-                          ctx.setSelectedRange(
-                            ctx.dateRanges.find(
-                              (range) =>
-                                range.start.dayOfYear <= day.dayOfYear &&
-                                day.dayOfYear <= range.end.dayOfYear,
-                            ) || null,
-                          );
+                          if (
+                            ctx.selectedRange?.start.dayOfYear &&
+                            ctx.selectedRange?.end.dayOfYear &&
+                            ctx.selectedRange?.start.dayOfYear <=
+                              day.dayOfYear &&
+                            day.dayOfYear <= ctx.selectedRange?.end.dayOfYear
+                          ) {
+                            ctx.setSelectedRange(null);
+                          } else {
+                            ctx.setSelectedRange(
+                              ctx.dateRanges.find(
+                                (range) =>
+                                  range.start.dayOfYear <= day.dayOfYear &&
+                                  day.dayOfYear <= range.end.dayOfYear,
+                              ) || null,
+                            );
+                          }
                         } else if (day.isHoliday || day.isWeekend) {
                           toast.error('Отпуск не может начинаться в выходной');
                         } else {

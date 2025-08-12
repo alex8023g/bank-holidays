@@ -1,13 +1,13 @@
 import { DateRange } from '@/components/ClientContainerVH';
 
 export function dayOfYearInRanges({
-  ranges,
+  dateRanges,
   dayOfYear,
 }: {
-  ranges: DateRange[];
+  dateRanges: DateRange[];
   dayOfYear: number;
 }) {
-  return ranges.some(
+  return dateRanges.some(
     (d) => d.start.dayOfYear <= dayOfYear && dayOfYear <= d.end.dayOfYear,
   );
 }
