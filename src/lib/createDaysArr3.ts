@@ -38,15 +38,30 @@ export async function createDaysArr3({ year }: { year: number }) {
     .then((res) => console.log(JSON.stringify(res))) // @ts-expect-error isdayoff is not typed
     .catch((err) => console.log(err.message)); */
 
-  await fetch('https://isdayoff.ru/api/getdata?year=2025&month=06', {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  })
-    .then((res) => {
-      console.log('!!!', res);
-      return res.json();
-    })
-    .then((res) => console.log('!!!', BigInt(res)));
+  // await fetch('https://isdayoff.ru/api/getdata?year=2025&month=06', {
+  //   method: 'GET',
+  //   headers: { 'Content-Type': 'application/json' },
+  // })
+  //   .then((res) => {
+  //     console.log('!!!', res);
+  //     return res.json();
+  //   })
+  //   .then((res) => console.log('!!!', BigInt(res)));
+
+  // ido
+  //   .year({ year })
+  //   .then((res: number[]) => {
+  //     console.log(JSON.stringify(res));
+  //     dayOffMatrix = res;
+  //   })
+  //   .catch((err) => console.log(err.message));
+  let dayOffMatrix: string[] = [];
+
+  await fetch(`https://isdayoff.ru/api/getdata?year=${year}`)
+    .then((res) => res.text())
+    .then((res) => (dayOffMatrix = res.split('')));
+
+  // let dayOffMatrix: number[] = await ido.year({ year });
 
   let i = 0;
   const res = [];
@@ -59,19 +74,9 @@ export async function createDaysArr3({ year }: { year: number }) {
     const isStSu = [6, 7].includes(dayDj.isoWeekday());
     try {
       if (isStSu) {
-        isWeekend = (await ido.date({
-          month: dayDj.month(),
-          date: dayDj.date(),
-        }))
-          ? true
-          : false;
+        isWeekend = dayOffMatrix[i] === '1' ? true : false;
       } else {
-        isHoliday = (await ido.date({
-          month: dayDj.month(),
-          date: dayDj.date(),
-        }))
-          ? true
-          : false;
+        isHoliday = dayOffMatrix[i] === '1' ? true : false;
       }
     } catch (err) {
       console.log('🚀 ~ error ~ i:', i, err);
@@ -79,6 +84,8 @@ export async function createDaysArr3({ year }: { year: number }) {
 
     res.push({
       dateString: dayDj.format(`YYYY-MM-DD`),
+      dayOfYear: i + 1,
+      year,
       isHoliday,
       isWeekend,
     });

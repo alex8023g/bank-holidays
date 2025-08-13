@@ -28,7 +28,11 @@ function daysInYear(year: number) {
   return (year % 4 === 0 && year % 100 > 0) || year % 400 == 0 ? 366 : 365;
 }
 export async function createDaysArr2({ year }: { year: number }) {
+  console.log('🚀 ~ createDaysArr2 ~ start', year);
   const daysProto: Day[] = new Array(daysInYear(year)).fill({
+    // const daysProto: Day[] = new Array(
+    //   dayjs(`${year}-01-01`).isLeapYear() ? 366 : 365,
+    // ).fill({
     dateString: '',
     isHoliday: false,
     isWeekend: false,
@@ -63,6 +67,14 @@ export async function createDaysArr2({ year }: { year: number }) {
         }))
           ? true
           : false;
+      }
+      if (i < 30) {
+        console.log('🚀 ~ createDaysArr2 ~ dayDj:', dayDj, {
+          isStSu,
+          dayNum,
+          month: dayDj.month(),
+          date: dayDj.date(),
+        });
       }
     } catch (err) {
       console.log('🚀 ~ error ~ i:', i, err);

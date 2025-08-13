@@ -25,10 +25,10 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
   if (!ctx) {
     return <div>no context</div>;
   }
-  const year = ctx.selectedYear || dayjs().year();
+  const year = ctx.selectedYear;
   // const [monthsSt, setMonthsSt] = useState(createYearCalendar2({ year, days }));
-  const monthsSt = useMemo(() => createYearCalendar2({ year, days }), []);
-  // console.log('🚀 ~ CalendarsBlock2 ~ monthsSt:', monthsSt);
+  const monthsSt = useMemo(() => createYearCalendar2({ year, days }), [year]);
+  console.log('🚀 ~ CalendarsBlock2 ~ monthsSt:', monthsSt);
   // const [monthsSt, setMonthsSt] = useState(months);
 
   // createYearCalendar2({ year, days });
@@ -72,6 +72,7 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                         backgroundColor: ctx.dateRanges.some(
                           (d) =>
                             day?.dayOfYear &&
+                            d.year === year &&
                             d.start.dayOfYear <= day?.dayOfYear &&
                             d.end.dayOfYear >= day.dayOfYear,
                         )
@@ -99,7 +100,7 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                               : '',
                       }}
                       onClick={() => {
-                        // console.log(day, ctx.dateRanges);
+                        console.log('🚀 ~ onClick ~ start');
                         if (ctx.selectedDayOfYear) {
                           if (
                             day?.dayOfYear &&
@@ -122,9 +123,11 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                           } else if (
                             ctx.dateRanges.some(
                               (range) =>
-                                (range.start.dayOfYear <= day.dayOfYear &&
+                                (range.year === year &&
+                                  range.start.dayOfYear <= day.dayOfYear &&
                                   day.dayOfYear <= range.end.dayOfYear) ||
-                                (ctx.selectedDayOfYear &&
+                                (range.year === year &&
+                                  ctx.selectedDayOfYear &&
                                   ctx.selectedDayOfYear <
                                     range.start.dayOfYear &&
                                   range.end.dayOfYear < day.dayOfYear),
@@ -160,7 +163,7 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                                   : 0,
                             );
                           ctx.setDateRanges(updDateRanges);
-                          ctx.setSelectedRange(newRange);
+                          // ctx.setSelectedRange(newRange);
                           ctx.setSelectedDayOfYear(null);
                         } else if (
                           dayOfYearInRanges({
@@ -188,6 +191,11 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                         } else if (day.isHoliday || day.isWeekend) {
                           toast.error('Отпуск не может начинаться в выходной');
                         } else {
+                          console.log(
+                            '🚀 ~ onClick ~ last else',
+                            ctx.selectedDayOfYear,
+                            day.dayOfYear,
+                          );
                           ctx.setSelectedDayOfYear(day.dayOfYear);
                           ctx.setSelectedRange(null);
                         }
@@ -207,7 +215,7 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                       {/* {day?.dateString} */}
                       {ctx.selectedRange?.start.dayOfYear === day.dayOfYear && (
                         <div
-                          className='absolute -top-2.5 -left-2.5 size-5 h-5 w-5 cursor-pointer rounded-full bg-white'
+                          className='absolute -top-2.5 -left-2.5 z-10 size-5 h-5 w-5 cursor-pointer rounded-full bg-white'
                           onClick={(e) => {
                             e.stopPropagation();
                             const updRanges = ctx.dateRanges.filter(
