@@ -1,11 +1,10 @@
 'use server';
 import dayjs from 'dayjs';
-import isoWeek from 'dayjs/plugin/isoWeek';
-import 'dayjs/locale/ru'; // Importing Russian locale for dayjs
-import isLeapYear from 'dayjs/plugin/isLeapYear';
-// @ts-expect-error isdayoff is not typed
-import isdayoff from 'isdayoff';
-import dayOfYear from 'dayjs/plugin/dayOfYear';
+import isoWeek from 'dayjs/plugin/isoWeek.js';
+import 'dayjs/locale/ru.js'; // Importing Russian locale for dayjs
+// import isLeapYear from 'dayjs/plugin/isLeapYear';
+// import isdayoff from 'isdayoff';
+import dayOfYear from 'dayjs/plugin/dayOfYear.js';
 dayjs.locale('ru');
 dayjs.extend(isoWeek);
 dayjs.extend(dayOfYear);
@@ -21,12 +20,13 @@ export type Day = {
   isWeekend: boolean;
 };
 
-const ido = isdayoff();
+// const ido = isdayoff();
 
 function daysInYear(year: number) {
   return (year % 4 === 0 && year % 100 > 0) || year % 400 == 0 ? 366 : 365;
 }
 export async function createDaysArr3({ year }: { year: number }) {
+  console.log('🚀 ~ createDaysArr3 ~ year:', year);
   const daysProto: Day[] = new Array(daysInYear(year)).fill({
     dateString: '',
     isHoliday: false,
@@ -60,6 +60,7 @@ export async function createDaysArr3({ year }: { year: number }) {
   await fetch(`https://isdayoff.ru/api/getdata?year=${year}`)
     .then((res) => res.text())
     .then((res) => (dayOffMatrix = res.split('')));
+  console.log('🚀 ~ createDaysArr3 ~ dayOffMatrix:', dayOffMatrix);
 
   // let dayOffMatrix: number[] = await ido.year({ year });
 

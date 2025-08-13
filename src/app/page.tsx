@@ -17,11 +17,11 @@ export type Day = {
 export default async function C2Page() {
   // createDaysArr({ year: 2025 }).then((res) => {
   //   console.log('🚀 ~ C2Page ~ res:', new Date(), res);
-  //   fs.writeFile('src/constant/calendars2.json', JSON.stringify(res));
+  //   fs.writeFile('src/constant/calendars.json', JSON.stringify(res));
   // });
 
   const file = await fs.readFile(
-    process.cwd() + '/src/constant/calendars2.json',
+    process.cwd() + '/src/constant/calendars.json',
     'utf8',
   );
   const days: Day[] = JSON.parse(file);

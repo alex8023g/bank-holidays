@@ -7,11 +7,11 @@ import { createDaysArr3 } from './createDaysArr3';
 export async function createCalendarJson({ year }: { year: number }) {
   // createDaysArr2({ year }).then((res) => {
   //   console.log('🚀 ~ C2Page ~ res:', new Date(), res.length);
-  //   fs.writeFile('src/constant/calendars2.json', JSON.stringify(res));
+  //   fs.writeFile('src/constant/calendars.json', JSON.stringify(res));
   // });
 
   try {
-    const daysJson = await fs.readFile('src/constant/calendars2.json', 'utf-8');
+    const daysJson = await fs.readFile('src/constant/calendars.json', 'utf-8');
     console.log('🚀 ~ createCalendarJson ~ start');
     const days = JSON.parse(daysJson);
     // console.log('🚀 ~ createCalendarJson ~ days:', days);
@@ -19,11 +19,11 @@ export async function createCalendarJson({ year }: { year: number }) {
     // console.log('🚀 ~ createCalendarJson ~ days2:', days2);
     if (days) {
       fs.writeFile(
-        'src/constant/calendars2.json',
+        'src/constant/calendars.json',
         JSON.stringify(days.concat(days2)),
       );
     } else {
-      fs.writeFile('src/constant/calendars2.json', JSON.stringify(days2));
+      fs.writeFile('src/constant/calendars.json', JSON.stringify(days2));
     }
   } catch (err) {}
 }
