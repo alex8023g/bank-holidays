@@ -11,14 +11,14 @@ import { Day } from '@/lib/createDaysArr2';
 import { toast } from 'sonner';
 import { DivideIcon, XCircleIcon } from '@heroicons/react/24/solid';
 import { MenuItem } from '@headlessui/react';
-import { dayOfYearInRanges } from '@/lib/dayOfYearInRanges';
+import { dayInRanges } from '@/lib/dayInRanges';
 import { DM_Sans } from 'next/font/google';
 dayjs.locale('ru');
 dayjs.extend(isoWeek);
 
 export function CalendarsBlock2({ days }: { days: Day[] }) {
   // console.log('🚀 ~ CalendarsBlock2 ', days);
-  const hoverDayOfYearRef = useRef<number | null>(null);
+  // const hoverDayOfYearRef = useRef<number | null>(null);
   // const [hoverDayOfYearSt, setHoverDayOfYearSt] = useState<number | null>(null);
 
   const ctx = useContext(ThemeContext);
@@ -28,7 +28,6 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
   const year = ctx.selectedYear;
   // const [monthsSt, setMonthsSt] = useState(createYearCalendar2({ year, days }));
   const monthsSt = useMemo(() => createYearCalendar2({ year, days }), [year]);
-  console.log('🚀 ~ CalendarsBlock2 ~ monthsSt:', monthsSt);
   // const [monthsSt, setMonthsSt] = useState(months);
 
   // createYearCalendar2({ year, days });
@@ -102,6 +101,7 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                       onClick={() => {
                         console.log('🚀 ~ onClick ~ start');
                         if (ctx.selectedDayOfYear) {
+                          /*  первый день уже выбран */
                           if (
                             day?.dayOfYear &&
                             ctx.selectedDayOfYear &&
@@ -156,54 +156,63 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                           const updDateRanges = ctx.dateRanges
                             .concat([newRange])
                             .sort((a, b) =>
-                              a.start.dayOfYear > b.start.dayOfYear
+                              a.year > b.year
                                 ? 1
-                                : a.start.dayOfYear < b.start.dayOfYear
+                                : a.year < b.year
                                   ? -1
-                                  : 0,
+                                  : a.start.dayOfYear > b.start.dayOfYear
+                                    ? 1
+                                    : a.start.dayOfYear < b.start.dayOfYear
+                                      ? -1
+                                      : 0,
                             );
                           ctx.setDateRanges(updDateRanges);
                           // ctx.setSelectedRange(newRange);
                           ctx.setSelectedDayOfYear(null);
                         } else if (
-                          dayOfYearInRanges({
+                          /* первый день периода не выбран, а клик попал в один из ranges */
+                          dayInRanges({
                             dateRanges: ctx.dateRanges,
                             dayOfYear: day.dayOfYear,
+                            year,
                           })
                         ) {
                           if (
+                            /* клик в уже выбранный range */
                             ctx.selectedRange?.start.dayOfYear &&
                             ctx.selectedRange?.end.dayOfYear &&
                             ctx.selectedRange?.start.dayOfYear <=
                               day.dayOfYear &&
-                            day.dayOfYear <= ctx.selectedRange?.end.dayOfYear
+                            day.dayOfYear <=
+                              ctx.selectedRange?.end.dayOfYear /* &&
+                            ctx.selectedRange.year === year */
                           ) {
                             ctx.setSelectedRange(null);
                           } else {
+                            /* клик в еще не выбранный range */
                             ctx.setSelectedRange(
                               ctx.dateRanges.find(
                                 (range) =>
                                   range.start.dayOfYear <= day.dayOfYear &&
-                                  day.dayOfYear <= range.end.dayOfYear,
+                                  day.dayOfYear <= range.end.dayOfYear &&
+                                  range.year === year,
                               ) || null,
                             );
                           }
                         } else if (day.isHoliday || day.isWeekend) {
+                          /* первый день периода не выбран, и клик попал в выходной или праздничный день */
                           toast.error('Отпуск не может начинаться в выходной');
                         } else {
-                          console.log(
-                            '🚀 ~ onClick ~ last else',
-                            ctx.selectedDayOfYear,
-                            day.dayOfYear,
-                          );
+                          /* первый день периода не выбран, и клик попал в белое поле */
+
                           ctx.setSelectedDayOfYear(day.dayOfYear);
                           ctx.setSelectedRange(null);
                         }
                       }}
                       onMouseEnter={() => {
-                        hoverDayOfYearRef.current = day.dayOfYear;
-                        ctx.setHoverDayOfYear(day.dayOfYear);
-                        // console.log(hoverDayOfYearRef.current);
+                        if (ctx.selectedDayOfYear) {
+                          ctx.setHoverDayOfYear(day.dayOfYear);
+                        }
                       }}
                     >
                       <time
@@ -219,7 +228,11 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                           onClick={(e) => {
                             e.stopPropagation();
                             const updRanges = ctx.dateRanges.filter(
-                              (r) => r.start.dayOfYear !== day.dayOfYear,
+                              (r) =>
+                                !(
+                                  r.start.dayOfYear === day.dayOfYear &&
+                                  r.year === year
+                                ),
                             );
                             console.log('🚀 ~ click on XCircleIcon');
                             ctx.setDateRanges(updRanges);
