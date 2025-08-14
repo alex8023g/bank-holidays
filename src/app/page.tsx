@@ -20,12 +20,23 @@ export default async function C2Page() {
   //   fs.writeFile('src/constant/calendars.json', JSON.stringify(res));
   // });
 
-  const file = await fs.readFile(
-    process.cwd() + '/src/constant/calendars.json',
-    'utf8',
-  );
-  const days: Day[] = JSON.parse(file);
-  console.log('🚀 ~ C2Page ');
+  let fileData = '';
+  try {
+    fileData = await fs.readFile(
+      process.cwd() + '/src/constant/calendars.json',
+      'utf8',
+    );
+  } catch (err) {
+    console.error(err);
+    return (
+      <div>
+        file /src/constant/calendars.json doesn`t exist, exec "npm run
+        createjsoncalendar"
+      </div>
+    );
+  }
+  const days: Day[] = JSON.parse(fileData);
+  // console.log('🚀 ~ C2Page ', days);
 
   return (
     <div className='/border-2 /border-blue-500 flex flex-col overflow-y-hidden xl:flex-row'>

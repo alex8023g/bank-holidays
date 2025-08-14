@@ -14,16 +14,33 @@ import { useClickOutside } from '@react-hooks-library/core';
 export default function ResultBlock({ days }: { days: Day[] }) {
   const ctx = useContext(ThemeContext);
 
-  const ref1 = useRef(null);
+  // const ref1 = useRef(null);
 
   // useClickOutside(ref1, () => {
   //   ctx?.setSelectedRange(null);
   // });
 
+  const weekends = days.filter(
+    (day) => day.year === ctx?.selectedYear && day.isWeekend === true,
+  );
+  console.log('🚀 ~ ResultBlock ~ res:', weekends);
+
+  if (!weekends.length) {
+    return (
+      <div className='flex h-full overflow-y-auto border-2 border-green-500 px-2 xl:h-auto xl:w-1/3'>
+        <h2 className='m-auto text-center font-semibold'>
+          Производственный календарь на {ctx?.selectedYear} еще не принят
+        </h2>
+      </div>
+    );
+  }
+
   return (
     <div className='h-full overflow-y-auto border-2 border-green-500 px-2 xl:h-auto xl:w-1/3'>
-      <h2 className='sticky top-0 bg-white'>План на {ctx?.selectedYear} год</h2>
-      <ul ref={ref1} className=''>
+      <h2 className='sticky top-0 bg-white py-2 text-center font-semibold'>
+        План на {ctx?.selectedYear} год
+      </h2>
+      <ul /* ref={ref1} */ className=''>
         {ctx?.dateRanges
           .filter((range) => range.year === ctx.selectedYear)
           .map((range) => {
@@ -31,7 +48,7 @@ export default function ResultBlock({ days }: { days: Day[] }) {
               <li
                 key={range.start.dateStr}
                 className={twJoin(
-                  '/border mb-2 flex items-center rounded-md border border-gray-100 px-2 py-1 shadow-sm',
+                  'mb-2 flex items-center rounded-md border border-gray-100 px-2 py-1 shadow-sm',
                   // Boolean(
                   ctx.selectedRange &&
                     ctx.selectedRange?.start.dayOfYear ===
@@ -58,7 +75,7 @@ export default function ResultBlock({ days }: { days: Day[] }) {
                     range.start.dayOfYear +
                     1 -
                     holidaysCount({ range, days })}{' '}
-                  дн.{')'}
+                  к.д.{')'}
                 </span>
 
                 <button
@@ -89,7 +106,7 @@ export default function ResultBlock({ days }: { days: Day[] }) {
               holidaysCount({ range, days })
             );
           }, 0)}{' '}
-        дн.
+        к.д.
       </h2>
       {ctx?.hoverDayOfYear && ctx?.selectedDayOfYear ? (
         <h3>

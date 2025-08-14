@@ -143,8 +143,9 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                               dayOfYear: ctx.selectedDayOfYear || 0,
                               dateStr:
                                 days.find(
-                                  (item) =>
-                                    item.dayOfYear === ctx.selectedDayOfYear,
+                                  (day2) =>
+                                    day2.dayOfYear === ctx.selectedDayOfYear &&
+                                    day2.year === year,
                                 )?.dateString || '',
                             },
                             end: {
