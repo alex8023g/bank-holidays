@@ -14,10 +14,18 @@ export type Month = {
   days: Day[];
 };
 
+type DayProto = {
+  dateString: string;
+  isHoliday: boolean;
+  isWeekend: boolean;
+};
+
 export type Day = {
   dateString: string;
   isHoliday: boolean;
   isWeekend: boolean;
+  dayOfYear: number;
+  year: number;
 };
 
 // const ido = isdayoff();
@@ -27,7 +35,7 @@ function daysInYear(year: number) {
 }
 export async function createDaysArr3({ year }: { year: number }) {
   console.log('🚀 ~ createDaysArr3 ~ year:', year);
-  const daysProto: Day[] = new Array(daysInYear(year)).fill({
+  const daysProto: DayProto[] = new Array(daysInYear(year)).fill({
     dateString: '',
     isHoliday: false,
     isWeekend: false,

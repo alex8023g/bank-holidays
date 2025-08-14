@@ -1,0 +1,29 @@
+import { Day } from '@/lib/createDaysArr3';
+import { DateRange } from './ClientContainerVH';
+import { holidaysCount } from '@/lib/holidaysCount';
+
+export function TotalVacationDays({
+  ranges,
+  days,
+  year,
+}: {
+  ranges: DateRange[];
+  days: Day[];
+  year: number;
+}) {
+  return (
+    <h2 className=''>
+      Итого:{' '}
+      {ranges
+        .filter((range) => range.year === year)
+        .reduce((acc, range) => {
+          return (
+            acc +
+            (range.end.dayOfYear - range.start.dayOfYear + 1) -
+            holidaysCount({ range, days })
+          );
+        }, 0)}{' '}
+      к.д.
+    </h2>
+  );
+}

@@ -2,17 +2,10 @@ import { CalendarsBlock2 } from '@/components/CalendarsBlock2';
 import ResultBlock from '@/components/ResultBlock';
 import { createCalendarJson } from '@/lib/createCalendarJson';
 import { createDaysArr } from '@/lib/createDaysArr';
+import { Day } from '@/lib/createDaysArr3';
 import { createYearCalendar } from '@/lib/createYearCalendar';
 import dayjs from 'dayjs';
 import { promises as fs } from 'fs';
-
-export type Day = {
-  dateString: string;
-  isHoliday: boolean;
-  isWeekend: boolean;
-  dayOfYear: number;
-  year: number;
-};
 
 export default async function C2Page() {
   // createDaysArr({ year: 2025 }).then((res) => {
@@ -39,7 +32,7 @@ export default async function C2Page() {
   // console.log('🚀 ~ C2Page ', days);
 
   return (
-    <div className='/border-2 /border-blue-500 flex flex-col overflow-y-hidden xl:flex-row'>
+    <div className='flex flex-col overflow-y-hidden xl:flex-row'>
       <CalendarsBlock2 days={days} />
       <ResultBlock days={days} />
     </div>

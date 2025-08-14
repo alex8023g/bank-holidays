@@ -1,8 +1,6 @@
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import 'dayjs/locale/ru'; // Importing Russian locale for dayjs
-// @ts-expect-error isdayoff is not typed
-import isdayoff from 'isdayoff';
 dayjs.locale('ru');
 dayjs.extend(isoWeek);
 
@@ -17,8 +15,6 @@ export type Month = {
     isWeekend: boolean;
   }[];
 };
-
-const api = isdayoff();
 
 export async function createYearCalendar({ year }: { year: number }) {
   const months: Month[] = new Array(12).fill(0).map((_, i) => {

@@ -77,9 +77,7 @@ export default function ClientContainerVH({
         setSelectedRange,
       }}
     >
-      <div className='/border-2 /border-red-500 flex h-dvh flex-col'>
-        {children}
-      </div>
+      <div className='flex h-dvh flex-col'>{children}</div>
       <Toaster position='bottom-right' richColors />
     </ThemeContext.Provider>
   );
