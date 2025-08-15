@@ -33,7 +33,7 @@ export default function ResultBlock({ days }: { days: Day[] }) {
   }
 
   return (
-    <div className='/border-green-500 /border h-1/3 flex-col overflow-y-hidden px-2 md:mx-auto md:flex md:min-w-3xl xl:h-auto xl:w-1/3 xl:min-w-0'>
+    <div className='/border-green-500 /border flex h-1/3 flex-col overflow-y-hidden px-2 md:mx-auto md:min-w-3xl xl:h-auto xl:w-1/3 xl:min-w-0'>
       <div className='sticky top-0 flex justify-between border-b border-gray-200 bg-white py-2'>
         <h2 className='/grow text-center font-semibold'>
           План на {ctx?.selectedYear} год
@@ -46,10 +46,10 @@ export default function ResultBlock({ days }: { days: Day[] }) {
         />
         {/* </div> */}
       </div>
-      <div className='/border /border-amber-600 overflow-y-hidden md:flex xl:relative xl:block xl:h-full'>
+      <div className='/border /border-amber-600 flex overflow-y-hidden xl:relative xl:block xl:h-full'>
         <ul
           role={'list'}
-          className='/w-1/2 /border /border-violet-500 flex min-w-[400px] flex-col divide-y divide-gray-100 overflow-y-auto xl:w-auto'
+          className='/w-1/2 /border /border-violet-500 flex min-w-[400px] grow flex-col divide-y divide-gray-100 overflow-y-auto xl:w-auto'
         >
           {ctx?.dateRanges
             .filter((range) => range.year === ctx.selectedYear)
