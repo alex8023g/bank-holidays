@@ -12,7 +12,7 @@ export function TotalVacationDays({
   year: number;
 }) {
   return (
-    <h2 className=''>
+    <h2 className='font-semibold'>
       Итого:{' '}
       {ranges
         .filter((range) => range.year === year)

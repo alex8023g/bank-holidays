@@ -4,13 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node ./src/lib/createCalendarJson3.ts && next dev --turbopack",
+    "createjsoncalendar": "node ./src/lib/createCalendarJson3.ts",
+    "dev": "next dev --turbopack",
+    "dev2": "node ./src/lib/createCalendarJson3.ts && next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "createjsoncalendar": "node ./src/lib/createCalendarJson3.ts"
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@headlessui/react": "^2.2.6",

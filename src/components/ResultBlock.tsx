@@ -33,23 +33,23 @@ export default function ResultBlock({ days }: { days: Day[] }) {
   }
 
   return (
-    <div className='h-1/3 flex-col overflow-y-hidden border-2 border-green-500 px-2 md:mx-auto md:flex md:min-w-3xl xl:h-auto xl:w-1/3 xl:min-w-0'>
-      <div className='sticky top-0 flex justify-between bg-white py-2'>
-        <h2 className='text-center font-semibold'>
+    <div className='/border-green-500 /border h-1/3 flex-col overflow-y-hidden px-2 md:mx-auto md:flex md:min-w-3xl xl:h-auto xl:w-1/3 xl:min-w-0'>
+      <div className='sticky top-0 flex justify-between border-b border-gray-200 bg-white py-2'>
+        <h2 className='/grow text-center font-semibold'>
           План на {ctx?.selectedYear} год
         </h2>
-        <div className='xl:hidden'>
-          <TotalVacationDays
-            ranges={ctx.dateRanges}
-            days={days}
-            year={ctx.selectedYear}
-          />
-        </div>
+        {/* <div className='/xl:hidden'> */}
+        <TotalVacationDays
+          ranges={ctx.dateRanges}
+          days={days}
+          year={ctx.selectedYear}
+        />
+        {/* </div> */}
       </div>
-      <div className='flex overflow-y-hidden border border-amber-600 xl:relative xl:block xl:h-full'>
+      <div className='/border /border-amber-600 overflow-y-hidden md:flex xl:relative xl:block xl:h-full'>
         <ul
           role={'list'}
-          className='/border /border-violet-500 flex w-1/2 min-w-[400px] flex-col divide-y divide-gray-100 overflow-y-auto xl:w-auto'
+          className='/w-1/2 /border /border-violet-500 flex min-w-[400px] flex-col divide-y divide-gray-100 overflow-y-auto xl:w-auto'
         >
           {ctx?.dateRanges
             .filter((range) => range.year === ctx.selectedYear)
@@ -102,14 +102,14 @@ export default function ResultBlock({ days }: { days: Day[] }) {
               );
             })}
         </ul>
-        <div className='/sticky /bottom-0 /xl:block /border /border-blue-700 flex bg-white p-3 text-center font-semibold xl:absolute xl:bottom-0'>
-          <div className='hidden xl:block'>
+        <div className='/sticky /bottom-0 /xl:block /border /border-blue-700 hidden bg-white p-3 text-center font-semibold xl:absolute xl:bottom-0 xl:flex'>
+          {/* <div className='hidden xl:block'>
             <TotalVacationDays
               ranges={ctx.dateRanges}
               days={days}
               year={ctx.selectedYear}
             />
-          </div>
+          </div> */}
           {/* <h2 className='mt-auto'>
             Итого:{' '}
             {ctx?.dateRanges
