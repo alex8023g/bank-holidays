@@ -14,6 +14,7 @@ import { dayInRanges } from '@/lib/dayInRanges';
 import { DM_Sans } from 'next/font/google';
 import { useMouse } from '@react-hooks-library/core';
 import { holidaysCount } from '@/lib/holidaysCount';
+import { MonthCalendar } from './MonthCalendar';
 
 dayjs.locale('ru');
 dayjs.extend(isoWeek);
@@ -41,6 +42,15 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
     <div className='/border-2 /border-orange-500 h-2/3 overflow-y-scroll bg-gray-100 xl:h-full xl:flex-1'>
       <div className='mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-16 px-4 py-16 sm:grid-cols-2 sm:px-6 xl:max-w-none xl:grid-cols-2 xl:px-8 2xl:grid-cols-3'>
         {monthsSt.map((_, i) => {
+          return (
+            <MonthCalendar
+              key={i}
+              i={i}
+              month={monthsSt[i]}
+              days={days}
+              isActive={i === 8}
+            />
+          );
           // const firstWeekday = dayjs().year(year).month(i).date(1).isoWeekday();
           // console.log(
           //   '🚀 ~ CalendarsBlock2 ~ firstWeekday:',
@@ -49,7 +59,8 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
           //   dayjs().year(year).month(i).format('MMMM'),
           //   firstWeekday,
           // );
-          return (
+          {
+            /* return (
             <section key={i} className='text-center'>
               <h2 className='text-sm font-semibold text-gray-900'>
                 {dayjs().year(year).month(i).format('MMMM')}
@@ -69,8 +80,6 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                     <button
                       key={di}
                       type='button'
-                      // data-is-today={day.isToday ? '' : undefined}
-                      // data-is-current-month={day ? '' : undefined}
                       className={`relative bg-white py-1.5 text-gray-900 first:rounded-tl-lg last:rounded-br-lg hover:bg-gray-100 focus:z-10 nth-36:rounded-bl-lg nth-7:rounded-tr-lg ${day?.isHoliday ? 'font-bold' : ''}`}
                       style={{
                         backgroundColor: ctx.dateRanges.some(
@@ -106,7 +115,7 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                       onClick={() => {
                         console.log('🚀 ~ onClick ~ start');
                         if (ctx.selectedDayOfYear) {
-                          /*  первый день уже выбран */
+                          //  первый день уже выбран
                           if (
                             day?.dayOfYear &&
                             ctx.selectedDayOfYear &&
@@ -176,7 +185,7 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                           // ctx.setSelectedRange(newRange);
                           ctx.setSelectedDayOfYear(null);
                         } else if (
-                          /* первый день периода не выбран, а клик попал в один из ranges */
+                          // первый день периода не выбран, а клик попал в один из ranges
                           dayInRanges({
                             dateRanges: ctx.dateRanges,
                             dayOfYear: day.dayOfYear,
@@ -184,18 +193,17 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                           })
                         ) {
                           if (
-                            /* клик в уже выбранный range */
+                            // клик в уже выбранный range
                             ctx.selectedRange?.start.dayOfYear &&
                             ctx.selectedRange?.end.dayOfYear &&
                             ctx.selectedRange?.start.dayOfYear <=
                               day.dayOfYear &&
-                            day.dayOfYear <=
-                              ctx.selectedRange?.end.dayOfYear /* &&
-                            ctx.selectedRange.year === year */
+                            day.dayOfYear <= ctx.selectedRange?.end.dayOfYear // &&
+                            //  ctx.selectedRange.year === year
                           ) {
                             ctx.setSelectedRange(null);
                           } else {
-                            /* клик в еще не выбранный range */
+                            // клик в еще не выбранный range 
                             ctx.setSelectedRange(
                               ctx.dateRanges.find(
                                 (range) =>
@@ -206,10 +214,10 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                             );
                           }
                         } else if (day.isHoliday || day.isWeekend) {
-                          /* первый день периода не выбран, и клик попал в выходной или праздничный день */
+                          // первый день периода не выбран, и клик попал в выходной или праздничный день
                           toast.error('Отпуск не может начинаться в выходной');
                         } else {
-                          /* первый день периода не выбран, и клик попал в белое поле */
+                          // первый день периода не выбран, и клик попал в белое поле
 
                           ctx.setSelectedDayOfYear(day.dayOfYear);
                           ctx.setSelectedRange(null);
@@ -227,7 +235,7 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                       >
                         {dayjs(day?.dateString)?.format('D')}
                       </time>
-                      {/* {day?.dateString} */}
+
                       {ctx.selectedRange?.start.dayOfYear === day.dayOfYear && (
                         <div
                           className='absolute -top-2.5 -left-2.5 z-10 size-5 h-5 w-5 cursor-pointer rounded-full bg-white'
@@ -266,7 +274,8 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
                 )}
               </div>
             </section>
-          );
+          );  */
+          }
         })}
       </div>
       {ctx.selectedDayOfYear &&
