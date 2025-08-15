@@ -1,12 +1,11 @@
-import { Day } from '@/app/page';
-import { DateRange } from '@/components/ClientContainerVH';
+import { Day } from './createDaysArr3';
 
 export function holidaysCount({
   range,
   days,
 }: {
   range: {
-    year?: number;
+    year: number;
     start: { dayOfYear: number; dateStr?: string };
     end: { dayOfYear: number; dateStr?: string };
   };
@@ -14,10 +13,11 @@ export function holidaysCount({
 }) {
   const res = days.filter(
     (day) =>
-      day.isHoliday /* || day.isWeekend */ &&
+      day.isHoliday &&
+      day.year === range.year &&
       day.dayOfYear >= range.start.dayOfYear &&
       day.dayOfYear <= range.end.dayOfYear,
   ).length;
-  // console.log('🚀 ~ daysOffCount ~ res:', res);
+  console.log('🚀 ~ daysOffCount ~ res:', res, range);
   return res;
 }

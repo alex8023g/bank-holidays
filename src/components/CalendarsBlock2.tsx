@@ -4,7 +4,6 @@ import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { ThemeContext } from './ClientContainerVH';
 import { createYearCalendar, Month } from '@/lib/createYearCalendar';
 import dayjs from 'dayjs';
-
 import isoWeek from 'dayjs/plugin/isoWeek';
 import { createYearCalendar2 } from '@/lib/createYearCalendar2';
 import { Day } from '@/lib/createDaysArr2';
@@ -13,6 +12,9 @@ import { DivideIcon, XCircleIcon } from '@heroicons/react/24/solid';
 import { MenuItem } from '@headlessui/react';
 import { dayInRanges } from '@/lib/dayInRanges';
 import { DM_Sans } from 'next/font/google';
+import { useMouse } from '@react-hooks-library/core';
+import { holidaysCount } from '@/lib/holidaysCount';
+
 dayjs.locale('ru');
 dayjs.extend(isoWeek);
 
@@ -31,6 +33,9 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
   // const [monthsSt, setMonthsSt] = useState(months);
 
   // createYearCalendar2({ year, days });
+  const { x, y } = useMouse();
+  console.log('🚀 ~ CalendarsBlock2 ~ y:', y);
+  console.log('🚀 ~ CalendarsBlock2 ~ x:', x);
 
   return (
     <div className='h-2/3 overflow-y-scroll border-2 border-orange-500 bg-white xl:h-full xl:flex-1'>
@@ -264,6 +269,32 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
           );
         })}
       </div>
+      {ctx.selectedDayOfYear &&
+        ctx?.hoverDayOfYear &&
+        ctx.selectedDayOfYear <= ctx.hoverDayOfYear && (
+          <div
+            className={`fixed hidden rounded-md p-2 font-semibold shadow-xl backdrop-blur-sm md:block`}
+            style={{
+              left: `${x + 30}px`,
+              top: `${y - 5}px`,
+            }}
+          >
+            {ctx?.hoverDayOfYear &&
+              ctx?.selectedDayOfYear &&
+              ctx?.hoverDayOfYear -
+                ctx?.selectedDayOfYear +
+                1 -
+                holidaysCount({
+                  range: {
+                    year: ctx.selectedYear,
+                    start: { dayOfYear: ctx?.selectedDayOfYear },
+                    end: { dayOfYear: ctx?.hoverDayOfYear },
+                  },
+                  days,
+                }) +
+                ' к.д.'}
+          </div>
+        )}
     </div>
   );
 }
