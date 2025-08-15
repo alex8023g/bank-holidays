@@ -34,11 +34,11 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
 
   // createYearCalendar2({ year, days });
   const { x, y } = useMouse();
-  console.log('🚀 ~ CalendarsBlock2 ~ y:', y);
-  console.log('🚀 ~ CalendarsBlock2 ~ x:', x);
+  // console.log('🚀 ~ CalendarsBlock2 ~ y:', y);
+  // console.log('🚀 ~ CalendarsBlock2 ~ x:', x);
 
   return (
-    <div className='h-2/3 overflow-y-scroll border-2 border-orange-500 bg-white xl:h-full xl:flex-1'>
+    <div className='/border-2 /border-orange-500 h-2/3 overflow-y-scroll bg-gray-100 xl:h-full xl:flex-1'>
       <div className='mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-16 px-4 py-16 sm:grid-cols-2 sm:px-6 xl:max-w-none xl:grid-cols-2 xl:px-8 2xl:grid-cols-3'>
         {monthsSt.map((_, i) => {
           // const firstWeekday = dayjs().year(year).month(i).date(1).isoWeekday();

@@ -11,6 +11,8 @@ import { twJoin } from 'tailwind-merge';
 import { useClickOutside } from '@react-hooks-library/core';
 import { Day } from '@/lib/createDaysArr3';
 import { TotalVacationDays } from './TotalVacationDays';
+import { EllipsisVerticalIcon } from '@heroicons/react/24/solid';
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 
 export default function ResultBlock({ days }: { days: Day[] }) {
   const ctx = useContext(ThemeContext);
@@ -34,7 +36,7 @@ export default function ResultBlock({ days }: { days: Day[] }) {
 
   return (
     <div className='/border-green-500 /border flex h-1/3 flex-col overflow-y-hidden px-2 md:mx-auto md:min-w-3xl xl:h-auto xl:w-1/3 xl:min-w-0'>
-      <div className='sticky top-0 flex justify-between border-b border-gray-200 bg-white py-2'>
+      <div className='/border-b /border-gray-200 sticky top-0 flex justify-between bg-white py-2'>
         <h2 className='/grow text-center font-semibold'>
           План на {ctx?.selectedYear} год
         </h2>
@@ -48,8 +50,8 @@ export default function ResultBlock({ days }: { days: Day[] }) {
       </div>
       <div className='/border /border-amber-600 flex overflow-y-hidden xl:relative xl:block xl:h-full'>
         <ul
-          role={'list'}
-          className='/w-1/2 /border /border-violet-500 flex min-w-[400px] grow flex-col divide-y divide-gray-100 overflow-y-auto xl:w-auto'
+          // role={'list'}
+          className='/w-1/2 /border /border-violet-500 /divide-gray-100 /divide-y flex min-w-[400px] grow flex-col overflow-y-auto py-0.5 xl:w-auto'
         >
           {ctx?.dateRanges
             .filter((range) => range.year === ctx.selectedYear)
@@ -58,35 +60,42 @@ export default function ResultBlock({ days }: { days: Day[] }) {
                 <li
                   key={range.start.dateStr}
                   className={twJoin(
-                    '/rounded-md /border /shadow-sm mb-2 flex items-center border-gray-100 px-2 py-1',
-                    /*         ctx.selectedRange &&
+                    '/rounded-md /shadow-sm /mb-2 /items-start mx-1 mb-2 flex rounded-lg border border-gray-100 bg-gray-100 px-3 py-2 shadow-sm',
+                    ctx.selectedRange &&
                       ctx.selectedRange?.start.dayOfYear ===
                         range.start.dayOfYear &&
-                      'border-red-600 shadow-xs shadow-gray-300', */
+                      '/outline-red-600 /outline /shadow border-red-200 shadow-red-200',
                   )}
                   onClick={() => {
-                    ctx.setSelectedRange(range);
+                    if (
+                      ctx.selectedRange &&
+                      ctx.selectedRange.start.dateStr === range.start.dateStr
+                    ) {
+                      ctx.setSelectedRange(null);
+                    } else {
+                      ctx.setSelectedRange(range);
+                    }
                   }}
                 >
-                  <span>с:&nbsp;</span>
+                  <span>с&nbsp;</span>
                   <span className='font-semibold'>
                     {dayjs(range.start.dateStr).format('DD.MM.YYYY')}
                   </span>
-                  <span>&nbsp;по:&nbsp;</span>
+                  <span>&nbsp;по&nbsp;</span>
                   <span className='font-semibold'>
                     {dayjs(range.end.dateStr).format('DD.MM.YYYY')}
                   </span>
-                  <span>
-                    &nbsp;{'('}
+                  <span className='ml-auto'>
+                    {/* &nbsp;{'('} */}
                     {range.end.dayOfYear -
                       range.start.dayOfYear +
                       1 -
                       holidaysCount({ range, days })}{' '}
-                    к.д.{')'}
+                    к.д. {/* {')'} */}
                   </span>
 
-                  <button
-                    className='ml-auto'
+                  {/* <button
+                    className='/ml-auto'
                     onClick={(e) => {
                       e.stopPropagation();
                       const newDateRanges = ctx.dateRanges.filter(
@@ -95,9 +104,10 @@ export default function ResultBlock({ days }: { days: Day[] }) {
                       ctx.setDateRanges(newDateRanges);
                       ctx.setSelectedRange(null);
                     }}
-                  >
-                    <TrashIcon className='size-5' />
-                  </button>
+                  > */}
+                  {/* <TrashIcon className='size-5' /> */}
+                  {/* <EllipsisVerticalIcon className='size-5' /> */}
+                  {/* </button> */}
                 </li>
               );
             })}
