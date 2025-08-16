@@ -1,7 +1,5 @@
 'use server';
-import { createDaysArr } from './createDaysArr';
 import { promises as fs } from 'fs';
-import { createDaysArr2 } from './createDaysArr2';
 import { createDaysArr3 } from './createDaysArr3';
 
 export async function createCalendarJson({ year }: { year: number }) {

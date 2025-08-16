@@ -1,5 +1,4 @@
-import { useMount } from '@react-hooks-library/core';
-import { Ref, RefObject } from 'react';
+import { RefObject } from 'react';
 
 type ScrollOptions = {
   behavior?: 'auto' | 'smooth' | 'instant';

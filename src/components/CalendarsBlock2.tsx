@@ -1,17 +1,13 @@
 'use client';
 
-import { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { useContext, useMemo } from 'react';
 import { ThemeContext } from './ClientContainerVH';
-import { createYearCalendar, Month } from '@/lib/createYearCalendar';
+
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import { createYearCalendar2 } from '@/lib/createYearCalendar2';
 import { Day } from '@/lib/createDaysArr2';
-import { toast } from 'sonner';
-import { DivideIcon, XCircleIcon } from '@heroicons/react/24/solid';
-import { MenuItem } from '@headlessui/react';
-import { dayInRanges } from '@/lib/dayInRanges';
-import { DM_Sans } from 'next/font/google';
+
 import { useMouse } from '@react-hooks-library/core';
 import { holidaysCount } from '@/lib/holidaysCount';
 import { MonthCalendar } from './MonthCalendar';

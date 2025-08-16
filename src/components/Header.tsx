@@ -1,17 +1,9 @@
 'use client';
-import {
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  EllipsisHorizontalIcon,
-} from '@heroicons/react/20/solid';
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+
 import { useContext } from 'react';
 import { ThemeContext } from './ClientContainerVH';
 import dayjs from 'dayjs';
-import { createDaysArr } from '@/lib/createDaysArr';
-import { createCalendarJson } from '@/lib/createCalendarJson';
-import { createDaysArr3 } from '@/lib/createDaysArr3';
 
 export default function Header() {
   const ctx = useContext(ThemeContext);

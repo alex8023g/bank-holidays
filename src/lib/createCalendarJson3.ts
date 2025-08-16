@@ -47,6 +47,6 @@ const years = new Array(dayjs().year() - 2022 + 1)
   .fill(null)
   .map((_, i) => ({ year: 2023 + i }));
 
-for (let item of years) {
+for (const item of years) {
   await createCalendarJson(item);
 }

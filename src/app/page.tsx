@@ -1,10 +1,8 @@
 import { CalendarsBlock2 } from '@/components/CalendarsBlock2';
 import ResultBlock from '@/components/ResultBlock';
-import { createCalendarJson } from '@/lib/createCalendarJson';
-import { createDaysArr } from '@/lib/createDaysArr';
+
 import { Day } from '@/lib/createDaysArr3';
-import { createYearCalendar } from '@/lib/createYearCalendar';
-import dayjs from 'dayjs';
+
 import { promises as fs } from 'fs';
 
 export default async function C2Page() {
@@ -23,8 +21,8 @@ export default async function C2Page() {
     console.error(err);
     return (
       <div>
-        file /src/constant/calendars.json doesn`t exist, exec "npm run
-        createjsoncalendar"
+        file /src/constant/calendars.json doesn`t exist, exec &quot;npm run
+        createjsoncalendar&quot;
       </div>
     );
   }

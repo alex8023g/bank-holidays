@@ -1,18 +1,12 @@
 'use client';
 
-import { useContext, useEffect, useRef } from 'react';
+import { useContext } from 'react';
 import { ThemeContext } from './ClientContainerVH';
-import { TrashIcon } from '@heroicons/react/24/outline';
 import dayjs from 'dayjs';
-// @ts-expect-error isdayoff is not typed
-import isdayoff from 'isdayoff';
 import { holidaysCount } from '@/lib/holidaysCount';
 import { twJoin } from 'tailwind-merge';
-import { useClickOutside } from '@react-hooks-library/core';
 import { Day } from '@/lib/createDaysArr3';
 import { TotalVacationDays } from './TotalVacationDays';
-import { EllipsisVerticalIcon } from '@heroicons/react/24/solid';
-import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 
 export default function ResultBlock({ days }: { days: Day[] }) {
   const ctx = useContext(ThemeContext);
