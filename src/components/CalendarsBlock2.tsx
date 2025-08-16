@@ -25,16 +25,20 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
   // const [hoverDayOfYearSt, setHoverDayOfYearSt] = useState<number | null>(null);
 
   const ctx = useContext(ThemeContext);
+  const year = ctx?.selectedYear || 0;
+  const monthsSt = useMemo(
+    () => createYearCalendar2({ year, days }),
+    [year, days],
+  );
+  const { x, y } = useMouse();
+
   if (!ctx) {
     return <div>no context</div>;
   }
-  const year = ctx.selectedYear;
   // const [monthsSt, setMonthsSt] = useState(createYearCalendar2({ year, days }));
-  const monthsSt = useMemo(() => createYearCalendar2({ year, days }), [year]);
   // const [monthsSt, setMonthsSt] = useState(months);
 
   // createYearCalendar2({ year, days });
-  const { x, y } = useMouse();
   // console.log('🚀 ~ CalendarsBlock2 ~ y:', y);
   // console.log('🚀 ~ CalendarsBlock2 ~ x:', x);
 
@@ -45,10 +49,14 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
           return (
             <MonthCalendar
               key={i}
+              isActive={monthsSt[i].days.some(
+                (day) =>
+                  day.dayOfYear === ctx.selectedRange?.start.dayOfYear &&
+                  dayjs(day.dateString).year() === year,
+              )}
               i={i}
               month={monthsSt[i]}
               days={days}
-              isActive={i === 8}
             />
           );
           // const firstWeekday = dayjs().year(year).month(i).date(1).isoWeekday();

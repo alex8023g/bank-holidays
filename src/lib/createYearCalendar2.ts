@@ -18,7 +18,7 @@ export type Month = {
   }[];
 };
 
-export type DayFormJson = {
+export type DayFromJson = {
   dateString: string;
   isHoliday: boolean;
   isWeekend: boolean;
@@ -30,7 +30,7 @@ export function createYearCalendar2({
   days,
 }: {
   year: number;
-  days: DayFormJson[];
+  days: DayFromJson[];
 }) {
   console.log('🚀 ~ createYearCalendar2 ');
   const months: Month[] = new Array(12).fill(0).map((_, i) => {

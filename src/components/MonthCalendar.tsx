@@ -14,6 +14,7 @@ import { DM_Sans } from 'next/font/google';
 import { useMouse, useScrollIntoView } from '@react-hooks-library/core';
 import { holidaysCount } from '@/lib/holidaysCount';
 import { twJoin } from 'tailwind-merge';
+import { useScrollOnClick } from '@/hooks/useScrollOnClick';
 
 export function MonthCalendar({
   i,
@@ -27,21 +28,30 @@ export function MonthCalendar({
   isActive: boolean;
 }) {
   const ctx = useContext(ThemeContext);
+  const activeEl = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isActive) {
+      activeEl.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+      });
+    }
+  }, [isActive]);
+
+  // useScrollOnClick(activeEl, {
+  //   scrollMargin: '8rem',
+  //   block: 'end',
+  //   behavior: 'smooth',
+  //   predicate: isActive,
+  // });
+
   if (!ctx) {
     return <div>no context</div>;
   }
   const year = ctx.selectedYear;
 
   console.log('🚀 ~ MonthCalendar ~ isActive:', isActive);
-
-  const activeEl = useRef(null);
-
-  useScrollIntoView(activeEl, {
-    scrollMargin: '8rem',
-    block: 'end',
-    behavior: 'smooth',
-    predicate: isActive,
-  });
 
   return (
     <section

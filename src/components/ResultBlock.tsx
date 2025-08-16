@@ -58,7 +58,7 @@ export default function ResultBlock({ days }: { days: Day[] }) {
             .map((range) => {
               return (
                 <li
-                  key={range.start.dateStr}
+                  key={range.start.dateStr + range.year}
                   className={twJoin(
                     '/rounded-md /shadow-sm /mb-2 /items-start mx-1 mb-2 flex rounded-lg border border-gray-100 bg-gray-100 px-3 py-2 shadow-sm',
                     ctx.selectedRange &&
