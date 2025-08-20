@@ -2,4 +2,4 @@
 
 [-] add periodic task for create next year calendar
 [-] add authorization
-[-] add possibility to see other users calendars
+[-] add possibility to share calendar with other users

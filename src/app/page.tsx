@@ -5,7 +5,7 @@ import { Day } from '@/lib/createDaysArr3';
 
 import { promises as fs } from 'fs';
 
-export default async function C2Page() {
+export default async function HomePage() {
   // createDaysArr({ year: 2025 }).then((res) => {
   //   console.log('🚀 ~ C2Page ~ res:', new Date(), res);
   //   fs.writeFile('src/constant/calendars.json', JSON.stringify(res));
