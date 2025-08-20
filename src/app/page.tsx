@@ -12,6 +12,7 @@ export default async function C2Page() {
   // });
 
   let fileData = '';
+  console.log('🚀 ~ C2Page ~ process.cwd():', process.cwd());
   try {
     fileData = await fs.readFile(
       process.cwd() + '/src/constant/calendars.json',
