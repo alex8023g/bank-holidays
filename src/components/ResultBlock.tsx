@@ -45,7 +45,7 @@ export default function ResultBlock({ days }: { days: Day[] }) {
       <div className='/border /border-amber-600 flex overflow-y-hidden xl:relative xl:block xl:h-full'>
         <ul
           // role={'list'}
-          className='/w-1/2 /border /border-violet-500 /divide-gray-100 /divide-y flex min-w-[400px] grow flex-col overflow-y-auto py-0.5 xl:w-auto'
+          className='/w-1/2 /border /border-violet-500 /divide-gray-100 /divide-y /min-w-[400px] flex grow flex-col overflow-y-auto py-0.5 xl:w-auto'
         >
           {ctx?.dateRanges
             .filter((range) => range.year === ctx.selectedYear)
