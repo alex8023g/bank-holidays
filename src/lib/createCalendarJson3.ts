@@ -3,7 +3,7 @@ import { promises as fs } from 'fs';
 import { createDaysArr3 } from './createDaysArr3.ts';
 import dayjs from 'dayjs';
 
-export async function createCalendarJson({ year }: { year: number }) {
+export async function createYearCalendarJson({ year }: { year: number }) {
   // createDaysArr2({ year }).then((res) => {
   //   console.log('🚀 ~ C2Page ~ res:', new Date(), res.length);
   //   fs.writeFile('src/constant/calendars.json', JSON.stringify(res));
@@ -43,10 +43,14 @@ export async function createCalendarJson({ year }: { year: number }) {
   }
 }
 
-const years = new Array(dayjs().year() - 2022 + 1)
-  .fill(null)
-  .map((_, i) => ({ year: 2023 + i }));
+export async function createCalendarsJson() {
+  const years = new Array(dayjs().year() - 2022 + 1)
+    .fill(null)
+    .map((_, i) => ({ year: 2023 + i }));
 
-for (const item of years) {
-  await createCalendarJson(item);
-}
+  for (const item of years) {
+    await createYearCalendarJson(item);
+  }
+};
+
+createCalendarsJson();
