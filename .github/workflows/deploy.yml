@@ -2,12 +2,14 @@ name: Deploy buy runner
 
 on:
   push:
-    branches: [ "main", "dev" ]
+    branches: ["main", "dev"]
 
 jobs:
   prepare-environment:
     runs-on: self-hosted
     steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
       - name: Stop and remove containers, networks
         run: docker-compose down
       - name: Remove unused data
