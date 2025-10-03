@@ -31,7 +31,7 @@ export default async function HomePage() {
   // console.log('🚀 ~ C2Page ', days);
 
   return (
-    <div className='flex flex-col overflow-y-hidden xl:flex-row'>
+    <div className='flex flex-col overflow-y-hidden bg-gray-100 xl:flex-row'>
       <CalendarsBlock2 days={days} />
       <ResultBlock days={days} />
     </div>

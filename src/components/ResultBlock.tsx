@@ -29,7 +29,7 @@ export default function ResultBlock({ days }: { days: Day[] }) {
   }
 
   return (
-    <div className='/border-green-500 /border flex h-1/3 flex-col overflow-y-hidden px-2 md:mx-auto md:min-w-3xl xl:h-auto xl:w-1/3 xl:min-w-0'>
+    <div className='z-10 flex h-1/3 flex-col overflow-y-hidden rounded-lg bg-white px-2 shadow-[0_0_20px_rgba(0,0,0,0.2)] md:mx-auto md:min-w-3xl xl:h-auto xl:w-1/3 xl:min-w-0'>
       <div className='/border-b /border-gray-200 sticky top-0 flex justify-between bg-white py-2'>
         <h2 className='/grow text-center font-semibold'>
           План на {ctx?.selectedYear} год

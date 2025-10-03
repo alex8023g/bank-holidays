@@ -27,7 +27,7 @@ export function MonthCalendar({
     if (isActive) {
       activeEl.current?.scrollIntoView({
         behavior: 'smooth',
-        block: 'end',
+        block: 'start',
       });
     }
   }, [isActive]);
@@ -52,10 +52,10 @@ export function MonthCalendar({
       ref={activeEl}
       className={twJoin('text-center', `${isActive ? 'active' : ''}`)}
     >
-      <h2 className='text-sm font-semibold text-gray-900'>
+      <h2 className='mb-2 text-sm font-semibold text-gray-900'>
         {dayjs().year(year).month(i).format('MMMM')}
       </h2>
-      <div className='mt-6 grid grid-cols-7 text-xs/6 text-gray-500'>
+      <div className='grid grid-cols-7 text-xs/6 text-gray-500'>
         <div>ПН</div>
         <div>ВТ</div>
         <div>СР</div>

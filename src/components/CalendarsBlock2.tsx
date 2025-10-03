@@ -40,7 +40,7 @@ export function CalendarsBlock2({ days }: { days: Day[] }) {
 
   return (
     <div className='/border-2 /border-orange-500 h-2/3 overflow-y-scroll bg-gray-100 xl:h-full xl:flex-1'>
-      <div className='mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-16 px-4 py-16 sm:grid-cols-2 sm:px-6 xl:max-w-none xl:grid-cols-2 xl:px-8 2xl:grid-cols-3'>
+      <div className='mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-8 px-4 py-16 sm:grid-cols-2 sm:px-6 xl:max-w-none xl:grid-cols-2 xl:px-8 2xl:grid-cols-3'>
         {monthsSt.map((_, i) => {
           return (
             <MonthCalendar
