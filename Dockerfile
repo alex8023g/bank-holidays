@@ -33,7 +33,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 COPY . .
 
 # Expose the port that the application listens on.
-EXPOSE 3000
+EXPOSE 3007
 
 # Run the application.
 CMD npm run dev
