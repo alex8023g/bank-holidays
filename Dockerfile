@@ -36,4 +36,5 @@ COPY . .
 # EXPOSE 3007
 
 # Run the application.
-CMD npm run dev
+# CMD npm run dev
+CMD ["sh", "-c", "npm run build && npm run start"]
