@@ -2,7 +2,7 @@ name: Deploy buy runner
 
 on:
   push:
-    branches: ["main", "dev"]
+    branches: ["main"]
 
 jobs:
   prepare-environment:
