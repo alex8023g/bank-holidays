@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import 'dayjs/locale/ru'; // Importing Russian locale for dayjs
+
 dayjs.locale('ru');
 dayjs.extend(isoWeek);
 
@@ -8,20 +9,33 @@ export type Month = {
   monthNum: number;
   monthName: string;
   days: {
-    monthDay: string | null;
-    isSelected: boolean;
+    monthDay: string;
+    dayOfYear: number;
     dateString: string;
     isHoliday: boolean;
     isWeekend: boolean;
+    isSelected: boolean;
   }[];
 };
 
-export async function createYearCalendar({ year }: { year: number }) {
+export type DayFromJson = {
+  dateString: string;
+  isHoliday: boolean;
+  isWeekend: boolean;
+  dayOfYear: number;
+};
+
+export function createYearCalendar({
+  year,
+  days,
+}: {
+  year: number;
+  days: DayFromJson[];
+}) {
   const months: Month[] = new Array(12).fill(0).map((_, i) => {
     const month = (i + 1).toString().padStart(2, '0'); // Format month as two digits
     const monthName = dayjs(`${year}-${month}-01`).format('MMMM');
     const weekday = dayjs(`${year}-${month}-01`).isoWeekday();
-    console.log('🚀 ~ weekday', weekday, monthName);
 
     return {
       monthNum: i,
@@ -29,6 +43,8 @@ export async function createYearCalendar({ year }: { year: number }) {
       days: new Array(42)
         .fill({
           monthDay: null,
+          dayOfYear: null,
+          dateString: '',
           isSelected: false,
           isHoliday: false,
           isWeekend: false,
@@ -39,14 +55,12 @@ export async function createYearCalendar({ year }: { year: number }) {
             ? { ...day, monthDay: null }
             : {
                 ...day,
-                monthDay: (j - weekday + 2).toString(),
-                dateString: `${year}-${month}-${(j - weekday + 2).toString().padStart(2, '0')}`,
-                isWeekend: [6, 7].includes(
-                  dayjs(
-                    `${year}-${month}-${(j - weekday + 2).toString().padStart(2, '0')}`,
-                  ).isoWeekday(),
+                ...days.find(
+                  (item) =>
+                    dayjs(item.dateString).year() === year &&
+                    dayjs(item.dateString).month() === i &&
+                    dayjs(item.dateString).date() === j - weekday + 2,
                 ),
-                // isHoliday:,
               },
         ),
     };

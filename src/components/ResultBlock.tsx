@@ -5,7 +5,7 @@ import { ThemeContext } from './ClientContainerVH';
 import dayjs from 'dayjs';
 import { holidaysCount } from '@/lib/holidaysCount';
 import { twJoin } from 'tailwind-merge';
-import { Day } from '@/lib/createDaysArr3';
+import { Day } from '@/lib/createDaysArr';
 import { TotalVacationDays } from './TotalVacationDays';
 
 export default function ResultBlock({ days }: { days: Day[] }) {
@@ -29,7 +29,7 @@ export default function ResultBlock({ days }: { days: Day[] }) {
   }
 
   return (
-    <div className='/border-green-500 /border flex h-1/3 flex-col overflow-y-hidden px-2 md:mx-auto md:min-w-3xl xl:h-auto xl:w-1/3 xl:min-w-0'>
+    <div className='z-10 flex h-1/3 flex-col overflow-y-hidden rounded-lg bg-white px-2 shadow-[0_0_20px_rgba(0,0,0,0.2)] md:mx-auto md:min-w-3xl xl:h-auto xl:w-1/3 xl:min-w-0'>
       <div className='/border-b /border-gray-200 sticky top-0 flex justify-between bg-white py-2'>
         <h2 className='/grow text-center font-semibold'>
           План на {ctx?.selectedYear} год
@@ -45,7 +45,7 @@ export default function ResultBlock({ days }: { days: Day[] }) {
       <div className='/border /border-amber-600 flex overflow-y-hidden xl:relative xl:block xl:h-full'>
         <ul
           // role={'list'}
-          className='/w-1/2 /border /border-violet-500 /divide-gray-100 /divide-y flex min-w-[400px] grow flex-col overflow-y-auto py-0.5 xl:w-auto'
+          className='/w-1/2 /border /border-violet-500 /divide-gray-100 /divide-y /min-w-[400px] flex grow flex-col overflow-y-auto py-0.5 xl:w-auto'
         >
           {ctx?.dateRanges
             .filter((range) => range.year === ctx.selectedYear)
@@ -87,63 +87,10 @@ export default function ResultBlock({ days }: { days: Day[] }) {
                       holidaysCount({ range, days })}{' '}
                     к.д. {/* {')'} */}
                   </span>
-
-                  {/* <button
-                    className='/ml-auto'
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      const newDateRanges = ctx.dateRanges.filter(
-                        (r) => r.start != range.start,
-                      );
-                      ctx.setDateRanges(newDateRanges);
-                      ctx.setSelectedRange(null);
-                    }}
-                  > */}
-                  {/* <TrashIcon className='size-5' /> */}
-                  {/* <EllipsisVerticalIcon className='size-5' /> */}
-                  {/* </button> */}
                 </li>
               );
             })}
         </ul>
-        <div className='/sticky /bottom-0 /xl:block /border /border-blue-700 hidden bg-white p-3 text-center font-semibold xl:absolute xl:bottom-0 xl:flex'>
-          {/* <div className='hidden xl:block'>
-            <TotalVacationDays
-              ranges={ctx.dateRanges}
-              days={days}
-              year={ctx.selectedYear}
-            />
-          </div> */}
-          {/* <h2 className='mt-auto'>
-            Итого:{' '}
-            {ctx?.dateRanges
-              .filter((range) => range.year === ctx.selectedYear)
-              .reduce((acc, range) => {
-                return (
-                  acc +
-                  (range.end.dayOfYear - range.start.dayOfYear + 1) -
-                  holidaysCount({ range, days })
-                );
-              }, 0)}{' '}
-            к.д.
-          </h2> */}
-        </div>
-        {/*  {ctx?.hoverDayOfYear && ctx?.selectedDayOfYear ? (
-          <h3>
-            {ctx?.hoverDayOfYear -
-              ctx?.selectedDayOfYear +
-              1 -
-              holidaysCount({
-                range: {
-                  start: { dayOfYear: ctx?.selectedDayOfYear },
-                  end: { dayOfYear: ctx?.hoverDayOfYear },
-                },
-                days,
-              })}
-          </h3>
-        ) : (
-          <div></div>
-        )} */}
       </div>
     </div>
   );

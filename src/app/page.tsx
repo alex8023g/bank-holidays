@@ -1,20 +1,15 @@
-import { CalendarsBlock2 } from '@/components/CalendarsBlock2';
+import { CalendarsBlock } from '@/components/CalendarsBlock';
 import ResultBlock from '@/components/ResultBlock';
 
-import { Day } from '@/lib/createDaysArr3';
+import { Day } from '@/lib/createDaysArr';
 
-import { promises as fs } from 'fs';
+import * as fs from 'fs';
 
 export default async function HomePage() {
-  // createDaysArr({ year: 2025 }).then((res) => {
-  //   console.log('🚀 ~ C2Page ~ res:', new Date(), res);
-  //   fs.writeFile('src/constant/calendars.json', JSON.stringify(res));
-  // });
-
   let fileData = '';
-  console.log('🚀 ~ C2Page ~ process.cwd():', process.cwd());
+
   try {
-    fileData = await fs.readFile(
+    fileData = await fs.promises.readFile(
       process.cwd() + '/src/constant/calendars.json',
       'utf8',
     );
@@ -27,12 +22,12 @@ export default async function HomePage() {
       </div>
     );
   }
+
   const days: Day[] = JSON.parse(fileData);
-  // console.log('🚀 ~ C2Page ', days);
 
   return (
-    <div className='flex flex-col overflow-y-hidden xl:flex-row'>
-      <CalendarsBlock2 days={days} />
+    <div className='flex flex-col overflow-y-hidden bg-gray-100 xl:flex-row'>
+      <CalendarsBlock days={days} />
       <ResultBlock days={days} />
     </div>
   );

@@ -1,4 +1,4 @@
-import { Day } from '@/lib/createDaysArr3';
+import { Day } from '@/lib/createDaysArr';
 import { DateRange } from './ClientContainerVH';
 import { holidaysCount } from '@/lib/holidaysCount';
 

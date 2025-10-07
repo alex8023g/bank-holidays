@@ -2,8 +2,8 @@
 import { useContext, useEffect, useRef } from 'react';
 import { ThemeContext } from './ClientContainerVH';
 import dayjs from 'dayjs';
-import { Month } from '@/lib/createYearCalendar2';
-import { Day } from '@/lib/createDaysArr2';
+import { Month } from '@/lib/createYearCalendar';
+import { Day } from '@/lib/createDaysArr';
 import { toast } from 'sonner';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import { dayInRanges } from '@/lib/dayInRanges';
@@ -27,24 +27,15 @@ export function MonthCalendar({
     if (isActive) {
       activeEl.current?.scrollIntoView({
         behavior: 'smooth',
-        block: 'end',
+        block: 'start',
       });
     }
   }, [isActive]);
-
-  // useScrollOnClick(activeEl, {
-  //   scrollMargin: '8rem',
-  //   block: 'end',
-  //   behavior: 'smooth',
-  //   predicate: isActive,
-  // });
 
   if (!ctx) {
     return <div>no context</div>;
   }
   const year = ctx.selectedYear;
-
-  console.log('🚀 ~ MonthCalendar ~ isActive:', isActive);
 
   return (
     <section
@@ -52,10 +43,10 @@ export function MonthCalendar({
       ref={activeEl}
       className={twJoin('text-center', `${isActive ? 'active' : ''}`)}
     >
-      <h2 className='text-sm font-semibold text-gray-900'>
+      <h2 className='mb-2 text-sm font-semibold text-gray-900'>
         {dayjs().year(year).month(i).format('MMMM')}
       </h2>
-      <div className='mt-6 grid grid-cols-7 text-xs/6 text-gray-500'>
+      <div className='grid grid-cols-7 text-xs/6 text-gray-500'>
         <div>ПН</div>
         <div>ВТ</div>
         <div>СР</div>
