@@ -11,6 +11,9 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v3
       - name: Stop and remove containers, networks
+        env:
+          # EXPOSE_PORT: ${{ secrets.EXPOSE_PORT }}
+          EXPOSE_PORT: 3004
         run: docker-compose down
       - name: Remove unused data
         run: docker system prune -a -f
@@ -21,4 +24,7 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v3
       - name: docker-compose
+        env:
+          # EXPOSE_PORT: ${{ secrets.EXPOSE_PORT }}
+          EXPOSE_PORT: 3004
         run: docker-compose up -d
