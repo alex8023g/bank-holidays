@@ -5,7 +5,7 @@ import { ThemeContext } from './ClientContainerVH';
 import dayjs from 'dayjs';
 import { holidaysCount } from '@/lib/holidaysCount';
 import { twJoin } from 'tailwind-merge';
-import { Day } from '@/lib/createDaysArr3';
+import { Day } from '@/lib/createDaysArr';
 import { TotalVacationDays } from './TotalVacationDays';
 
 export default function ResultBlock({ days }: { days: Day[] }) {
@@ -87,63 +87,10 @@ export default function ResultBlock({ days }: { days: Day[] }) {
                       holidaysCount({ range, days })}{' '}
                     к.д. {/* {')'} */}
                   </span>
-
-                  {/* <button
-                    className='/ml-auto'
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      const newDateRanges = ctx.dateRanges.filter(
-                        (r) => r.start != range.start,
-                      );
-                      ctx.setDateRanges(newDateRanges);
-                      ctx.setSelectedRange(null);
-                    }}
-                  > */}
-                  {/* <TrashIcon className='size-5' /> */}
-                  {/* <EllipsisVerticalIcon className='size-5' /> */}
-                  {/* </button> */}
                 </li>
               );
             })}
         </ul>
-        <div className='/sticky /bottom-0 /xl:block /border /border-blue-700 hidden bg-white p-3 text-center font-semibold xl:absolute xl:bottom-0 xl:flex'>
-          {/* <div className='hidden xl:block'>
-            <TotalVacationDays
-              ranges={ctx.dateRanges}
-              days={days}
-              year={ctx.selectedYear}
-            />
-          </div> */}
-          {/* <h2 className='mt-auto'>
-            Итого:{' '}
-            {ctx?.dateRanges
-              .filter((range) => range.year === ctx.selectedYear)
-              .reduce((acc, range) => {
-                return (
-                  acc +
-                  (range.end.dayOfYear - range.start.dayOfYear + 1) -
-                  holidaysCount({ range, days })
-                );
-              }, 0)}{' '}
-            к.д.
-          </h2> */}
-        </div>
-        {/*  {ctx?.hoverDayOfYear && ctx?.selectedDayOfYear ? (
-          <h3>
-            {ctx?.hoverDayOfYear -
-              ctx?.selectedDayOfYear +
-              1 -
-              holidaysCount({
-                range: {
-                  start: { dayOfYear: ctx?.selectedDayOfYear },
-                  end: { dayOfYear: ctx?.hoverDayOfYear },
-                },
-                days,
-              })}
-          </h3>
-        ) : (
-          <div></div>
-        )} */}
       </div>
     </div>
   );

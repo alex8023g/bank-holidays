@@ -1,7 +1,7 @@
-import { CalendarsBlock2 } from '@/components/CalendarsBlock2';
+import { CalendarsBlock } from '@/components/CalendarsBlock';
 import ResultBlock from '@/components/ResultBlock';
 
-import { Day } from '@/lib/createDaysArr3';
+import { Day } from '@/lib/createDaysArr';
 
 import * as fs from 'fs';
 
@@ -27,7 +27,7 @@ export default async function HomePage() {
 
   return (
     <div className='flex flex-col overflow-y-hidden bg-gray-100 xl:flex-row'>
-      <CalendarsBlock2 days={days} />
+      <CalendarsBlock days={days} />
       <ResultBlock days={days} />
     </div>
   );

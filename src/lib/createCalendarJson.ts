@@ -1,6 +1,6 @@
 'use server';
 import * as fs from 'fs';
-import { createDaysArr3 } from './createDaysArr3.ts';
+import { createDaysArr } from './createDaysArr.ts';
 import dayjs from 'dayjs';
 
 export async function createYearCalendarJson({ year }: { year: number }) {
@@ -8,7 +8,7 @@ export async function createYearCalendarJson({ year }: { year: number }) {
     const daysJson = fs.readFileSync('src/constant/calendars.json', 'utf-8');
     console.log('🚀 ~ createCalendarJson ~ start');
     const days = JSON.parse(daysJson);
-    const days2 = await createDaysArr3({ year });
+    const days2 = await createDaysArr({ year });
     if (days) {
       fs.writeFileSync(
         'src/constant/calendars.json',
@@ -25,7 +25,7 @@ export async function createYearCalendarJson({ year }: { year: number }) {
     ) {
       try {
         console.log('🚀 ~ createCalendarJson ~ else');
-        const days = await createDaysArr3({ year });
+        const days = await createDaysArr({ year });
         fs.writeFileSync('src/constant/calendars.json', JSON.stringify(days));
       } catch (err) {
         console.error(err);

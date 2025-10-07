@@ -1,4 +1,4 @@
-import { Day } from './createDaysArr3';
+import { Day } from './createDaysArr';
 
 export function holidaysCount({
   range,

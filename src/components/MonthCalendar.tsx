@@ -2,8 +2,8 @@
 import { useContext, useEffect, useRef } from 'react';
 import { ThemeContext } from './ClientContainerVH';
 import dayjs from 'dayjs';
-import { Month } from '@/lib/createYearCalendar2';
-import { Day } from '@/lib/createDaysArr2';
+import { Month } from '@/lib/createYearCalendar';
+import { Day } from '@/lib/createDaysArr';
 import { toast } from 'sonner';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import { dayInRanges } from '@/lib/dayInRanges';
@@ -32,19 +32,10 @@ export function MonthCalendar({
     }
   }, [isActive]);
 
-  // useScrollOnClick(activeEl, {
-  //   scrollMargin: '8rem',
-  //   block: 'end',
-  //   behavior: 'smooth',
-  //   predicate: isActive,
-  // });
-
   if (!ctx) {
     return <div>no context</div>;
   }
   const year = ctx.selectedYear;
-
-  // console.log('🚀 ~ MonthCalendar ~ isActive:', isActive);
 
   return (
     <section

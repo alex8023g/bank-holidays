@@ -11,8 +11,6 @@ import { useLocalStorage } from '@react-hooks-library/core';
 import dayjs from 'dayjs';
 import { Toaster } from 'sonner';
 
-// export type DateRange = { start: string; end: string };
-
 export type DateRange = {
   year: number;
   start: { dayOfYear: number; dateStr: string };
@@ -22,12 +20,8 @@ export type DateRange = {
 type SelectedDateContext = {
   selectedYear: number;
   setSelectedYear: Dispatch<SetStateAction<number>>;
-  // selectedDate: DateRange;
-  // setSelectedDate: Dispatch<SetStateAction<DateRange>>;
   dateRanges: DateRange[];
   setDateRanges: (value: DateRange[]) => void;
-  // dateRanges2: DateRange2[];
-  // setDateRanges2: (value: DateRange[]) => void;
   selectedDayOfYear: number | null;
   setSelectedDayOfYear: Dispatch<SetStateAction<number | null>>;
   hoverDayOfYear: number | null;
@@ -47,12 +41,6 @@ export default function ClientContainerVH({
     'useLocalsStorageKey',
     [],
   );
-  // console.log('🚀 ~ ClientContainerVH ~ value:', dateRanges);
-  // const [selectedDate, setSelectedDate] = useState({
-  //   year: 0,
-  //   start: { dayOfYear: 0, dateStr: '' },
-  //   end: { dayOfYear: 0, dateStr: '' },
-  // });
   const [selectedDayOfYear, setSelectedDayOfYear] = useState<number | null>(
     null,
   );
@@ -65,8 +53,6 @@ export default function ClientContainerVH({
       value={{
         selectedYear,
         setSelectedYear,
-        // selectedDate,
-        // setSelectedDate,
         dateRanges,
         setDateRanges,
         selectedDayOfYear,
