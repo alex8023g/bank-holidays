@@ -2,8 +2,6 @@
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek.js';
 import 'dayjs/locale/ru.js'; // Importing Russian locale for dayjs
-// import isLeapYear from 'dayjs/plugin/isLeapYear';
-// import isdayoff from 'isdayoff';
 import dayOfYear from 'dayjs/plugin/dayOfYear.js';
 dayjs.locale('ru');
 dayjs.extend(isoWeek);
@@ -28,8 +26,6 @@ export type Day = {
   year: number;
 };
 
-// const ido = isdayoff();
-
 function daysInYear(year: number) {
   return (year % 4 === 0 && year % 100 > 0) || year % 400 == 0 ? 366 : 365;
 }
@@ -41,36 +37,12 @@ export async function createDaysArr3({ year }: { year: number }) {
     isWeekend: false,
   });
 
-  /*   ido
-    .year({ year }) // @ts-expect-error isdayoff is not typed
-    .then((res) => console.log(JSON.stringify(res))) // @ts-expect-error isdayoff is not typed
-    .catch((err) => console.log(err.message)); */
-
-  // await fetch('https://isdayoff.ru/api/getdata?year=2025&month=06', {
-  //   method: 'GET',
-  //   headers: { 'Content-Type': 'application/json' },
-  // })
-  //   .then((res) => {
-  //     console.log('!!!', res);
-  //     return res.json();
-  //   })
-  //   .then((res) => console.log('!!!', BigInt(res)));
-
-  // ido
-  //   .year({ year })
-  //   .then((res: number[]) => {
-  //     console.log(JSON.stringify(res));
-  //     dayOffMatrix = res;
-  //   })
-  //   .catch((err) => console.log(err.message));
   let dayOffMatrix: string[] = [];
 
   await fetch(`https://isdayoff.ru/api/getdata?year=${year}`)
     .then((res) => res.text())
     .then((res) => (dayOffMatrix = res.split('')));
   console.log('🚀 ~ createDaysArr3 ~ dayOffMatrix:', dayOffMatrix);
-
-  // let dayOffMatrix: number[] = await ido.year({ year });
 
   let i = 0;
   const res = [];

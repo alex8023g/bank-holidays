@@ -4,13 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "createjsoncalendar": "node ./src/lib/createCalendarJson3.ts",
-    "dev": "next dev --turbopack",
-    "dev2": "node ./src/lib/createCalendarJson3.ts && next dev --turbopack",
-    "build": "next build",
+    "dev": "node ./src/lib/createCalendarJson.ts && next dev --turbopack",
+    "build": "node ./src/lib/createCalendarJson.ts && next build",
     "start": "next start",
-    "start:3004": "next start -p 3004",
-    "start:portfromenv": "next start -p $(grep EXPOSE_PORT .env | cut -d '=' -f2)",
+    "start:port-from-env": "next start -p $(grep EXPOSE_PORT .env | cut -d '=' -f2)",
     "lint": "next lint",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
