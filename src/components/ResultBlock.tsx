@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ThemeContext } from './ClientContainerVH';
 import dayjs from 'dayjs';
 import { holidaysCount } from '@/lib/holidaysCount';
@@ -8,10 +8,13 @@ import { twJoin } from 'tailwind-merge';
 import { Day } from '@/lib/createDaysArr';
 import { TotalVacationDays } from './TotalVacationDays';
 
+import { PeriodItemMenu } from './PeriodItemMenu';
+import { PlanResultMenu } from './PlanResultMenu';
+
 export default function ResultBlock({ days }: { days: Day[] }) {
   const ctx = useContext(ThemeContext);
   if (!ctx) {
-    return <div>no ctx</div>;
+    return <div>no ctx перезагрузите страницу</div>;
   }
 
   const weekends = days.filter(
@@ -29,18 +32,19 @@ export default function ResultBlock({ days }: { days: Day[] }) {
   }
 
   return (
-    <div className='z-10 flex h-1/3 flex-col overflow-y-hidden rounded-lg bg-white px-2 shadow-[0_0_20px_rgba(0,0,0,0.2)] md:mx-auto md:min-w-3xl xl:h-auto xl:w-1/3 xl:min-w-0'>
-      <div className='/border-b /border-gray-200 sticky top-0 flex justify-between bg-white py-2'>
+    <div className='/z-10 flex h-1/3 flex-col overflow-y-hidden rounded-lg bg-white px-2 shadow-[0_0_20px_rgba(0,0,0,0.2)] md:z-0 md:mx-auto md:min-w-3xl xl:h-auto xl:w-1/3 xl:min-w-0'>
+      <div className='/border-b /border-gray-200 sticky top-0 flex justify-between bg-white px-2 py-2'>
         <h2 className='/grow text-center font-semibold'>
           План на {ctx?.selectedYear} год
         </h2>
-        {/* <div className='/xl:hidden'> */}
-        <TotalVacationDays
-          ranges={ctx.dateRanges}
-          days={days}
-          year={ctx.selectedYear}
-        />
-        {/* </div> */}
+        <div className='flex'>
+          <TotalVacationDays
+            ranges={ctx.dateRanges}
+            days={days}
+            year={ctx.selectedYear}
+          />
+          <PlanResultMenu />
+        </div>
       </div>
       <div className='/border /border-amber-600 flex overflow-y-hidden xl:relative xl:block xl:h-full'>
         <ul
@@ -54,7 +58,7 @@ export default function ResultBlock({ days }: { days: Day[] }) {
                 <li
                   key={range.start.dateStr + range.year}
                   className={twJoin(
-                    '/rounded-md /shadow-sm /mb-2 /items-start mx-1 mb-2 flex rounded-lg border border-gray-100 bg-gray-100 px-3 py-2 shadow-sm',
+                    '/rounded-md /shadow-sm /mb-2 /items-start mx-1 mb-2 flex rounded-lg border border-gray-100 bg-gray-100 py-2 pr-1 pl-3 shadow-sm',
                     ctx.selectedRange &&
                       ctx.selectedRange?.start.dayOfYear ===
                         range.start.dayOfYear &&
@@ -87,9 +91,19 @@ export default function ResultBlock({ days }: { days: Day[] }) {
                       holidaysCount({ range, days })}{' '}
                     к.д. {/* {')'} */}
                   </span>
+                  <PeriodItemMenu
+                    anchor='left start'
+                    range={range}
+                    days={days}
+                  />
                 </li>
               );
             })}
+          {!ctx?.dateRanges.some(
+            (range) => range.year === ctx.selectedYear,
+          ) && (
+            <li className='m-auto'>Выберите периоды отпусков на календаре</li>
+          )}
         </ul>
       </div>
     </div>
