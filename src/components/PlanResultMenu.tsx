@@ -1,12 +1,7 @@
-import { ChevronUpIcon, EllipsisVerticalIcon } from '@heroicons/react/16/solid';
+import { EllipsisVerticalIcon } from '@heroicons/react/16/solid';
 import * as Headless from '@headlessui/react';
 
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownButton,
-} from './catalist/dropdown';
+import { Dropdown, DropdownItem, DropdownMenu } from './catalist/dropdown';
 
 export function PlanResultMenu({
   anchor,
