@@ -50,8 +50,6 @@ export function PeriodItemMenu({
           </DropdownItem>
           <DropdownItem
             onClick={() => {
-              // e.stopPropagation();
-              // setIsStatementVisible(true);
               setIsOpen(true);
             }}
           >

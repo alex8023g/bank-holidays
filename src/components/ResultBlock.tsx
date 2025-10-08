@@ -43,7 +43,12 @@ export default function ResultBlock({ days }: { days: Day[] }) {
             days={days}
             year={ctx.selectedYear}
           />
-          <PlanResultMenu />
+          <PlanResultMenu
+            dateRanges={ctx.dateRanges.filter(
+              (range) => range.year === ctx.selectedYear,
+            )}
+            days={days}
+          />
         </div>
       </div>
       <div className='/border /border-amber-600 flex overflow-y-hidden xl:relative xl:block xl:h-full'>
