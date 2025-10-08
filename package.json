@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node ./src/lib/createCalendarJson.ts && next dev --turbopack",
+    "dev": "node ./src/lib/createCalendarJson.ts && next dev  --experimental-https --turbopack",
     "build": "node ./src/lib/createCalendarJson.ts && next build",
     "start": "next start",
     "start:port-from-env": "next start -p $(grep EXPOSE_PORT .env | cut -d '=' -f2)",
@@ -13,12 +13,13 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@headlessui/react": "^2.2.6",
+    "@headlessui/react": "^2.2.9",
     "@heroicons/react": "^2.2.0",
     "@react-hooks-library/core": "^0.6.2",
+    "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
     "install": "^0.13.0",
-    "isdayoff": "^1.0.1",
+    "motion": "^12.23.22",
     "next": "15.4.4",
     "npm": "^11.5.1",
     "react": "19.1.0",

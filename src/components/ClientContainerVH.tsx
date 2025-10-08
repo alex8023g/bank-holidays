@@ -17,7 +17,7 @@ export type DateRange = {
   end: { dayOfYear: number; dateStr: string };
 };
 
-type SelectedDateContext = {
+export type SelectedDateContext = {
   selectedYear: number;
   setSelectedYear: Dispatch<SetStateAction<number>>;
   dateRanges: DateRange[];
