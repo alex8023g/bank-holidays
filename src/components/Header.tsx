@@ -4,6 +4,8 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { useContext } from 'react';
 import { ThemeContext } from './ClientContainerVH';
 import dayjs from 'dayjs';
+import { Button } from '@headlessui/react';
+import { signIn, signOut } from 'next-auth/react';
 
 export default function Header() {
   const ctx = useContext(ThemeContext);
@@ -46,6 +48,9 @@ export default function Header() {
             <ChevronRightIcon className='size-6 text-gray-300' />
           </button>
         )}
+
+        <Button onClick={() => signIn('github')}>Sign in</Button>
+        <Button onClick={() => signOut()}>Sign out</Button>
       </div>
     </header>
   );
