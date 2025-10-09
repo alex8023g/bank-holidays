@@ -1,7 +1,9 @@
 import { NextAuthOptions } from 'next-auth';
-import GithubProvider from 'next-auth/providers/github';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { PrismaClient } from '@/generated/prisma';
+import GithubProvider from 'next-auth/providers/github';
+import YandexProvider from 'next-auth/providers/yandex';
+import GoogleProvider from 'next-auth/providers/google';
 
 const prisma = new PrismaClient();
 
@@ -12,9 +14,19 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
     }),
+    YandexProvider({
+      clientId: process.env.YANDEX_ID as string,
+      clientSecret: process.env.YANDEX_SECRET as string,
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    }),
   ],
   callbacks: {
     async session({ session, user }) {
+      console.log('🚀 ~ session ~ user:', user);
+      console.log('🚀 ~ session ~ session:', session);
       if (session.user) {
         session.user.id = user.id;
       }
