@@ -1,6 +1,5 @@
 import { CalendarsBlock } from '@/components/CalendarsBlock';
 import ResultBlock from '@/components/ResultBlock';
-
 import { Day } from '@/lib/createDaysArr';
 
 import * as fs from 'fs';

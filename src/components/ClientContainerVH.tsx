@@ -1,15 +1,17 @@
 'use client';
-
 import {
   createContext,
   Dispatch,
   ReactNode,
   SetStateAction,
+  use,
+  useEffect,
   useState,
 } from 'react';
 import { useLocalStorage } from '@react-hooks-library/core';
 import dayjs from 'dayjs';
-import { Toaster } from 'sonner';
+import { toast, Toaster } from 'sonner';
+import { Session } from 'next-auth';
 
 export type DateRange = {
   year: number;
@@ -34,11 +36,14 @@ export const ThemeContext = createContext<SelectedDateContext | null>(null);
 
 export default function ClientContainerVH({
   children,
+  session,
 }: {
+  session: Session | null;
   children: ReactNode;
 }) {
+  console.log('🚀 ~ ClientContainerVH ~ ');
   const [dateRanges, setDateRanges] = useLocalStorage<DateRange[]>(
-    'useLocalsStorageKey',
+    'otpuskPlanRanges',
     [],
   );
   const [selectedDayOfYear, setSelectedDayOfYear] = useState<number | null>(
@@ -47,6 +52,12 @@ export default function ClientContainerVH({
   const [hoverDayOfYear, setHoverDayOfYear] = useState<number | null>(null);
   const [selectedYear, setSelectedYear] = useState(dayjs().year());
   const [selectedRange, setSelectedRange] = useState<DateRange | null>(null);
+
+  useEffect(() => {
+    if (session) {
+      toast.success('Успешная авторизация!');
+    }
+  }, [session]);
 
   return (
     <ThemeContext.Provider
