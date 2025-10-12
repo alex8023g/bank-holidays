@@ -1,5 +1,5 @@
 import { CalendarsBlock } from '@/components/CalendarsBlock';
-import ResultBlock from '@/components/ResultBlock';
+import { SharedPlansBlock } from '@/components/SharedPlansBlock';
 import { Day } from '@/lib/createDaysArr';
 
 import * as fs from 'fs';
@@ -21,7 +21,7 @@ export default async function SharedPage() {
   return (
     <div className='flex flex-col overflow-y-hidden bg-gray-100 xl:flex-row'>
       <CalendarsBlock days={days} />
-      <ResultBlock days={days} />
+      <SharedPlansBlock />
     </div>
   );
 }

@@ -5,13 +5,13 @@ import { GoogleIcon } from '@/components/icons/GoogleIcon';
 import { YandexIcon } from '@/components/icons/YandexIcon';
 import { signIn } from 'next-auth/react';
 
-export default function LoginBtnsGroup() {
+export function LoginBtnsGroup() {
   return (
     <>
-      <div className='flex flex-col items-center space-y-5'>
-        <p className='px-5 text-center'>
+      <div className='my-auto flex flex-col items-center space-y-5'>
+        <h2 className='hidden px-5 text-center text-2xl font-bold md:block'>
           Авторизуйтесь с помощью одного из сервисов
-        </p>
+        </h2>
         <button
           className='flex min-w-72 rounded-lg border bg-yellow-400 px-5 py-3 shadow-md'
           onClick={() => signIn('yandex')}

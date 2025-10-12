@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth';
-import LoginBtnsGroup from './LoginBtnsGroup';
 import { authOptions } from '@/lib/auth';
 import { redirect } from 'next/navigation';
+import { LoginBtnsGroup } from '@/components/LoginBtnsGroup';
 
 export default async function LoginPage() {
   const session = await getServerSession(authOptions);

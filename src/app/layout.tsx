@@ -44,7 +44,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ClientContainerVH session={session}>
-          <Header session={session} />
+          {/* <Header session={session} /> */}
           <Header2 session={session} />
           {children}
         </ClientContainerVH>

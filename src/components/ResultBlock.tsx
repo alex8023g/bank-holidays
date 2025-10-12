@@ -7,14 +7,27 @@ import { holidaysCount } from '@/lib/holidaysCount';
 import { twJoin } from 'tailwind-merge';
 import { Day } from '@/lib/createDaysArr';
 import { TotalVacationDays } from './TotalVacationDays';
-
 import { PeriodItemMenu } from './PeriodItemMenu';
 import { PlanResultMenu } from './PlanResultMenu';
+import { useSearchParams } from 'next/navigation';
+import { LoginBtnsGroup } from './LoginBtnsGroup';
+import { Button } from './catalist/button';
+import { getPersonalRanges, upsertPersonalRanges } from '@/lib/actions';
 
 export default function ResultBlock({ days }: { days: Day[] }) {
+  const searchParams = useSearchParams();
+  const isLogin = searchParams.has('login');
   const ctx = useContext(ThemeContext);
   if (!ctx) {
     return <div>no ctx перезагрузите страницу</div>;
+  }
+
+  if (isLogin) {
+    return (
+      <div className='flex h-1/2 flex-col overflow-y-hidden rounded-lg bg-white px-2 shadow-[0_0_20px_rgba(0,0,0,0.2)] md:z-0 md:mx-auto md:min-w-3xl xl:h-auto xl:w-1/3 xl:min-w-0'>
+        <LoginBtnsGroup />
+      </div>
+    );
   }
 
   const weekends = days.filter(
@@ -110,6 +123,30 @@ export default function ResultBlock({ days }: { days: Day[] }) {
             <li className='m-auto'>Выберите периоды отпусков на календаре</li>
           )}
         </ul>
+        <Button
+          onClick={() => {
+            upsertPersonalRanges({
+              userId: 'cmgkwn2k80007mst37ucvjgu9',
+              rangesJson: JSON.stringify(ctx?.dateRanges),
+            });
+          }}
+        >
+          upsert ranges to db
+        </Button>
+        <Button
+          onClick={() => {
+            getPersonalRanges({ userId: 'cmgkwn2k80007mst37ucvjgu9' }).then(
+              (res) =>
+                console.log(
+                  res.rangesJson,
+                  typeof res.rangesJson,
+                  JSON.parse(res.rangesJson!),
+                ),
+            );
+          }}
+        >
+          get ranges from db
+        </Button>
       </div>
     </div>
   );

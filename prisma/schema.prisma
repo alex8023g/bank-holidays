@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -42,13 +42,15 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+  id             String           @id @default(cuid())
+  name           String?
+  email          String?          @unique
+  emailVerified  DateTime?
+  image          String?
+  accounts       Account[]
+  sessions       Session[]
+  personalRanges PersonalRanges[]
+  sharedRanges   SharedRanges[]
 }
 
 model VerificationToken {
@@ -57,4 +59,27 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model PersonalRanges {
+  id           String                 @id @default(cuid())
+  userId       String                 @unique @map("user_id")
+  rangesJson   Json                   @map("ranges_json")
+  user         User                   @relation(fields: [userId], references: [id])
+  sharedRanges PersonalSharedRanges[]
+}
+
+model SharedRanges {
+  id             String                 @id @default(cuid())
+  ownerUserId    String                 @map("owner_user_id")
+  ownerUser      User                   @relation(fields: [ownerUserId], references: [id])
+  personalRanges PersonalSharedRanges[]
+}
+
+model PersonalSharedRanges {
+  id               String         @id @default(cuid())
+  personalRangesId String         @map("personal_ranges_id")
+  personalRanges   PersonalRanges @relation(fields: [personalRangesId], references: [id])
+  sharedRangesId   String         @map("shared_ranges_id")
+  sharedRanges     SharedRanges   @relation(fields: [sharedRangesId], references: [id])
 }

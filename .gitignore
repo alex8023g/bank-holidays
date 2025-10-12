@@ -42,5 +42,8 @@ next-env.d.ts
 
 src/constant/calendars.json
 
-certificates
+# certificates
 /src/generated/prisma
+
+# prisma generated
+/generated
