@@ -8,6 +8,8 @@ import { toast } from 'sonner';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import { dayInRanges } from '@/lib/dayInRanges';
 import { twJoin } from 'tailwind-merge';
+import { useSession } from 'next-auth/react';
+import { upsertPersonalRanges } from '@/lib/actions';
 
 export function MonthCalendar({
   i,
@@ -22,6 +24,8 @@ export function MonthCalendar({
 }) {
   const ctx = useContext(ThemeContext);
   const activeEl = useRef<HTMLDivElement>(null);
+  const session = useSession();
+  console.log('🚀 ~ MonthCalendar ~ session:', session);
 
   useEffect(() => {
     if (isActive) {
@@ -153,8 +157,13 @@ export function MonthCalendar({
                               : 0,
                     );
                   ctx.setDateRanges(updDateRanges);
-                  // ctx.setSelectedRange(newRange);
                   ctx.setSelectedDayOfYear(null);
+                  if (session.data?.user.id) {
+                    upsertPersonalRanges({
+                      userId: session.data?.user.id,
+                      rangesJson: JSON.stringify(updDateRanges),
+                    });
+                  }
                 } else if (
                   /* первый день периода не выбран, а клик попал в один из ranges */
                   dayInRanges({

@@ -11,6 +11,7 @@ import { useSearchParams } from 'next/navigation';
 import { Button } from './catalist/button';
 import { createSharedRanges } from '@/lib/actions';
 import { toast } from 'sonner';
+import { span } from 'motion/react-client';
 
 const navigation = [
   { name: 'Персональный', href: '/' },
@@ -74,12 +75,15 @@ export default function Header2({ session }: { session: Session | null }) {
         </Button>
         <div className='hidden md:flex md:flex-1 md:justify-end'>
           {session?.user.id ? (
-            <span
-              className='rounded-md border px-4 py-2 text-sm/6 font-semibold text-gray-900'
-              onClick={() => signOut()}
-            >
-              Sign out
-            </span>
+            <>
+              <span>{session.user.email}</span>
+              <span
+                className='rounded-md border px-4 py-2 text-sm/6 font-semibold text-gray-900'
+                onClick={() => signOut()}
+              >
+                Sign out
+              </span>
+            </>
           ) : isLogin ? (
             <Link
               href='/'

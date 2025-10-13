@@ -13,6 +13,7 @@ import { toast, Toaster } from 'sonner';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
 import { getPersonalRanges, upsertPersonalRanges } from '@/lib/actions';
+import { SessionProvider } from 'next-auth/react';
 
 export type DateRange = {
   year: number;
@@ -81,22 +82,24 @@ export default function ClientContainerVH({
   }, [session]);
 
   return (
-    <ThemeContext.Provider
-      value={{
-        selectedYear,
-        setSelectedYear,
-        dateRanges,
-        setDateRanges,
-        selectedDayOfYear,
-        setSelectedDayOfYear,
-        hoverDayOfYear,
-        setHoverDayOfYear,
-        selectedRange,
-        setSelectedRange,
-      }}
-    >
-      <div className='flex h-dvh flex-col'>{children}</div>
-      <Toaster position='bottom-right' richColors />
-    </ThemeContext.Provider>
+    <SessionProvider session={session}>
+      <ThemeContext.Provider
+        value={{
+          selectedYear,
+          setSelectedYear,
+          dateRanges,
+          setDateRanges,
+          selectedDayOfYear,
+          setSelectedDayOfYear,
+          hoverDayOfYear,
+          setHoverDayOfYear,
+          selectedRange,
+          setSelectedRange,
+        }}
+      >
+        <div className='flex h-dvh flex-col'>{children}</div>
+        <Toaster position='bottom-right' richColors />
+      </ThemeContext.Provider>
+    </SessionProvider>
   );
 }

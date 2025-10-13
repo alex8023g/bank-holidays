@@ -11,8 +11,6 @@ import { PeriodItemMenu } from './PeriodItemMenu';
 import { PlanResultMenu } from './PlanResultMenu';
 import { useSearchParams } from 'next/navigation';
 import { LoginBtnsGroup } from './LoginBtnsGroup';
-import { Button } from './catalist/button';
-import { getPersonalRanges, upsertPersonalRanges } from '@/lib/actions';
 
 export default function ResultBlock({ days }: { days: Day[] }) {
   const searchParams = useSearchParams();
@@ -123,30 +121,6 @@ export default function ResultBlock({ days }: { days: Day[] }) {
             <li className='m-auto'>Выберите периоды отпусков на календаре</li>
           )}
         </ul>
-        <Button
-          onClick={() => {
-            upsertPersonalRanges({
-              userId: 'cmgkwn2k80007mst37ucvjgu9',
-              rangesJson: JSON.stringify(ctx?.dateRanges),
-            });
-          }}
-        >
-          upsert ranges to db
-        </Button>
-        <Button
-          onClick={() => {
-            getPersonalRanges({ userId: 'cmgkwn2k80007mst37ucvjgu9' }).then(
-              (res) =>
-                console.log(
-                  res.rangesJson,
-                  typeof res.rangesJson,
-                  JSON.parse(res.rangesJson!),
-                ),
-            );
-          }}
-        >
-          get ranges from db
-        </Button>
       </div>
     </div>
   );

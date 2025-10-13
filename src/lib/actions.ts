@@ -1,5 +1,7 @@
 'use server';
 
+import * as fs from 'fs';
+import { Day } from './createDaysArr';
 import { prisma } from './prisma';
 
 export async function upsertPersonalRanges({
@@ -59,21 +61,41 @@ export async function createSharedRanges({ userId }: { userId: string }) {
   }
 }
 
-export async function getSharedRanges({ id }: { id: string }) {
+export async function getSharedRanges({ id }: { id: string | null }) {
+  if (!id) {
+    return { ok: true, sharedRanges: null };
+  }
   try {
     const sharedRanges = await prisma.sharedRanges.findFirst({
       where: { id },
       include: {
         personalRanges: {
           include: {
-            personalRanges: true,
+            personalRanges: { include: { user: true } },
           },
         },
       },
     });
+    console.log('🚀 ~ getSharedRanges ~ sharedRanges:', sharedRanges);
     return { ok: true, sharedRanges };
   } catch (error) {
     console.error(error);
     return { ok: false, sharedRanges: null, error: error as Error };
   }
+}
+
+export async function getDays() {
+  let fileData = '';
+
+  try {
+    fileData = await fs.promises.readFile(
+      process.cwd() + '/src/constant/calendars.json',
+      'utf8',
+    );
+  } catch (err) {
+    console.error(err);
+  }
+
+  const days: Day[] = JSON.parse(fileData);
+  return days;
 }
