@@ -3,6 +3,7 @@
 import * as fs from 'fs';
 import { Day } from './createDaysArr';
 import { prisma } from './prisma';
+import { revalidatePath } from 'next/cache';
 
 export async function upsertPersonalRanges({
   userId,
@@ -49,11 +50,29 @@ export async function getPersonalRanges({
   }
 }
 
-export async function createSharedRanges({ userId }: { userId: string }) {
+export async function createSharedRanges({
+  userId,
+  name,
+  year,
+}: {
+  userId: string;
+  name: string;
+  year: number;
+}) {
+  console.log('🚀 ~ createSharedRanges ~ name:', name);
+  console.log('🚀 ~ createSharedRanges ~ year:', year);
+  if (!userId) {
+    return {
+      ok: false,
+      sharedRanges: null,
+      error: new Error('userId and planName are required'),
+    };
+  }
   try {
     const sharedRanges = await prisma.sharedRanges.create({
-      data: { ownerUserId: userId },
+      data: { ownerUserId: userId, name, year },
     });
+    revalidatePath('/shared');
     return { ok: true, sharedRanges };
   } catch (error) {
     console.error(error);
@@ -68,6 +87,32 @@ export async function getSharedRanges({ id }: { id: string | null }) {
   try {
     const sharedRanges = await prisma.sharedRanges.findFirst({
       where: { id },
+      include: {
+        personalRanges: {
+          include: {
+            personalRanges: { include: { user: true } },
+          },
+        },
+      },
+    });
+    console.log('🚀 ~ getSharedRanges ~ sharedRanges:', sharedRanges);
+    return { ok: true, sharedRanges };
+  } catch (error) {
+    console.error(error);
+    return { ok: false, sharedRanges: null, error: error as Error };
+  }
+}
+export async function getSharedRangesListByUserId({
+  userId,
+}: {
+  userId: string | null;
+}) {
+  if (!userId) {
+    return { ok: true, sharedRanges: [] };
+  }
+  try {
+    const sharedRanges = await prisma.sharedRanges.findMany({
+      where: { ownerUserId: userId },
       include: {
         personalRanges: {
           include: {
@@ -98,4 +143,34 @@ export async function getDays() {
 
   const days: Day[] = JSON.parse(fileData);
   return days;
+}
+
+export async function sharePersonalRanges({
+  userId,
+  sharedRangesId,
+}: {
+  userId: string;
+  sharedRangesId: string;
+}) {
+  const personalRanges = await prisma.personalRanges.findUnique({
+    where: { userId },
+  });
+  if (!personalRanges) {
+    return { ok: false, error: new Error('Personal ranges not found') };
+  }
+  const sharedRanges = await prisma.sharedRanges.findUnique({
+    where: { id: sharedRangesId },
+  });
+  if (!sharedRanges) {
+    return { ok: false, error: new Error('Shared ranges not found') };
+  }
+  const personalSharedRanges = await prisma.personalSharedRanges.create({
+    data: {
+      personalRangesId: personalRanges.id,
+      sharedRangesId: sharedRanges.id,
+    },
+  });
+  revalidatePath('/shared');
+  revalidatePath('/rowcalendar');
+  return { ok: true, personalSharedRanges };
 }

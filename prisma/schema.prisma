@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -20,15 +14,14 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -42,14 +35,14 @@ model Session {
 }
 
 model User {
-  id             String           @id @default(cuid())
+  id             String          @id @default(cuid())
   name           String?
-  email          String?          @unique
+  email          String?         @unique
   emailVerified  DateTime?
   image          String?
   accounts       Account[]
+  personalRanges PersonalRanges?
   sessions       Session[]
-  personalRanges PersonalRanges[]
   sharedRanges   SharedRanges[]
 }
 
@@ -72,14 +65,16 @@ model PersonalRanges {
 model SharedRanges {
   id             String                 @id @default(cuid())
   ownerUserId    String                 @map("owner_user_id")
-  ownerUser      User                   @relation(fields: [ownerUserId], references: [id])
+  name           String                 @default("Общий график отпусков №1")
+  year           Int                    @default(2025)
   personalRanges PersonalSharedRanges[]
+  ownerUser      User                   @relation(fields: [ownerUserId], references: [id])
 }
 
 model PersonalSharedRanges {
   id               String         @id @default(cuid())
   personalRangesId String         @map("personal_ranges_id")
-  personalRanges   PersonalRanges @relation(fields: [personalRangesId], references: [id])
   sharedRangesId   String         @map("shared_ranges_id")
+  personalRanges   PersonalRanges @relation(fields: [personalRangesId], references: [id])
   sharedRanges     SharedRanges   @relation(fields: [sharedRangesId], references: [id])
 }

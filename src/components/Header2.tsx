@@ -59,20 +59,6 @@ export default function Header2({ session }: { session: Session | null }) {
             </Link>
           ))}
         </div>
-        <Button
-          className='cursor-pointer'
-          onClick={() => {
-            if (session?.user.id) {
-              createSharedRanges({ userId: session?.user.id });
-            } else {
-              toast.error(
-                'Пожалуйста, авторизуйтесь для создания общего графика отпусков',
-              );
-            }
-          }}
-        >
-          Создать общий график отпусков
-        </Button>
         <div className='hidden md:flex md:flex-1 md:justify-end'>
           {session?.user.id ? (
             <>

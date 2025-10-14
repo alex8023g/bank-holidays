@@ -13,7 +13,7 @@ export function VerticalYear({
   personalRanges,
 }: {
   days: Day[];
-  year: string;
+  year: number;
   personalRanges: ({
     user: {
       name: string | null;
