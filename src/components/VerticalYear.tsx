@@ -21,10 +21,10 @@ export function VerticalYear({
       email: string | null;
       emailVerified: Date | null;
       image: string | null;
-    };
+    } | null;
   } & {
     id: string;
-    userId: string;
+    userId: string | null;
     rangesJson: JsonValue;
   })[];
 }) {
@@ -45,7 +45,7 @@ export function VerticalYear({
             <th className='w-20 border'>Мой план</th>
             {personalRanges.map((range) => (
               <th key={range.id} className='w-20 border'>
-                {range.user.email}
+                {range.user?.email || 'неавторизованный пользователь'}
               </th>
             ))}
           </tr>

@@ -26,6 +26,8 @@ export type SelectedDateContext = {
   setSelectedYear: Dispatch<SetStateAction<number>>;
   dateRanges: DateRange[];
   setDateRanges: (value: DateRange[]) => void;
+  dateRangesId: string;
+  setDateRangesId: (value: string) => void;
   selectedDayOfYear: number | null;
   setSelectedDayOfYear: Dispatch<SetStateAction<number | null>>;
   hoverDayOfYear: number | null;
@@ -54,7 +56,11 @@ export default function ClientContainerVH({
   const [hoverDayOfYear, setHoverDayOfYear] = useState<number | null>(null);
   const [selectedYear, setSelectedYear] = useState(dayjs().year());
   const [selectedRange, setSelectedRange] = useState<DateRange | null>(null);
-  const router = useRouter();
+  const [dateRangesId, setDateRangesId] = useLocalStorage<string>(
+    'dateRangesId',
+    '',
+  );
+
   console.log('🚀 ~ ClientContainerVH ~ dateRanges-1:', dateRanges);
   useEffect(() => {
     console.log('🚀 ~ ClientContainerVH ~ dateRanges-2:', dateRanges);
@@ -89,6 +95,8 @@ export default function ClientContainerVH({
           setSelectedYear,
           dateRanges,
           setDateRanges,
+          dateRangesId,
+          setDateRangesId,
           selectedDayOfYear,
           setSelectedDayOfYear,
           hoverDayOfYear,

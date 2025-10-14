@@ -56,9 +56,9 @@ model VerificationToken {
 
 model PersonalRanges {
   id           String                 @id @default(cuid())
-  userId       String                 @unique @map("user_id")
+  userId       String?                @unique @map("user_id")
   rangesJson   Json                   @map("ranges_json")
-  user         User                   @relation(fields: [userId], references: [id])
+  user         User?                  @relation(fields: [userId], references: [id])
   sharedRanges PersonalSharedRanges[]
 }
 
@@ -68,7 +68,7 @@ model SharedRanges {
   name           String                 @default("Общий график отпусков №1")
   year           Int                    @default(2025)
   personalRanges PersonalSharedRanges[]
-  ownerUser      User                   @relation(fields: [ownerUserId], references: [id])
+  ownerUser      User?                  @relation(fields: [ownerUserId], references: [id])
 }
 
 model PersonalSharedRanges {

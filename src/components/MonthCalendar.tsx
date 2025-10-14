@@ -9,7 +9,10 @@ import { XCircleIcon } from '@heroicons/react/24/solid';
 import { dayInRanges } from '@/lib/dayInRanges';
 import { twJoin } from 'tailwind-merge';
 import { useSession } from 'next-auth/react';
-import { upsertPersonalRanges } from '@/lib/actions';
+import {
+  upsertPersonalRanges,
+  upsertPersonalRangesNoUser,
+} from '@/lib/actions';
 
 export function MonthCalendar({
   i,
@@ -162,6 +165,11 @@ export function MonthCalendar({
                     upsertPersonalRanges({
                       userId: session.data?.user.id,
                       rangesJson: JSON.stringify(updDateRanges),
+                    });
+                  } else if (ctx.dateRangesId) {
+                    upsertPersonalRangesNoUser({
+                      rangesJson: JSON.stringify(updDateRanges),
+                      personalRangesId: ctx.dateRangesId,
                     });
                   }
                 } else if (

@@ -9,8 +9,12 @@ import {
 } from '@/components/catalist/dialog';
 import { ErrorMessage, Field, Label } from '@/components/catalist/fieldset';
 import { Input } from '@/components/catalist/input';
-import { sharePersonalRanges } from '@/lib/actions';
-import { useState } from 'react';
+import {
+  createSharePersonalRangesNoUser,
+  sharePersonalRanges,
+} from '@/lib/actions';
+import { ThemeContext } from '@/components/ClientContainerVH';
+import { useContext, useState } from 'react';
 import { toast } from 'sonner';
 export function SharePersonPlanBtn({
   userId,
@@ -19,14 +23,12 @@ export function SharePersonPlanBtn({
   userId: string | undefined;
   sharedRangesId: string;
 }) {
-  // const [isOpen, setIsOpen] = useState(false);
-  // const [isError, setIsError] = useState(false);
-  // const [name, setName] = useState('');
   const [state, setState] = useState({
     isOpen: false,
     name: '',
     isError: false,
   });
+  const ctx = useContext(ThemeContext);
   return (
     <>
       <Button
@@ -71,13 +73,26 @@ export function SharePersonPlanBtn({
             Отмена
           </Button>
           <Button
-            onClick={() => {
+            onClick={async () => {
               if (state.name.trim() === '') {
                 setState((st) => ({ ...st, isError: true }));
               } else {
                 setState((st) => ({ ...st, isOpen: false, isError: false }));
                 if (!userId) {
-                  toast.error('UserID is not defined');
+                  const res = await createSharePersonalRangesNoUser({
+                    rangesJson: JSON.stringify(ctx?.dateRanges || []),
+                    sharedRangesId,
+                  });
+                  if (res.personalSharedRanges) {
+                    toast.success(
+                      'График отпусков успешно добавлен в общий график',
+                    );
+                    ctx?.setDateRangesId(res.personalRanges.id);
+                  } else {
+                    toast.error(
+                      'Не удалось добавить график отпусков в общий график',
+                    );
+                  }
                 } else {
                   sharePersonalRanges({
                     userId,

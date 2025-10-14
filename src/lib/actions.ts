@@ -26,6 +26,61 @@ export async function upsertPersonalRanges({
   }
 }
 
+export async function upsertPersonalRangesNoUser({
+  rangesJson,
+  personalRangesId,
+}: {
+  rangesJson: string;
+  personalRangesId: string;
+}) {
+  console.log(
+    '🚀 ~ upsertPersonalRangesNoUser ~ personalRangesId:',
+    personalRangesId,
+  );
+  console.log('🚀 ~ upsertPersonalRangesNoUser ~ rangesJson:', rangesJson);
+  try {
+    const personalRanges = await prisma.personalRanges.upsert({
+      where: { id: personalRangesId },
+      update: { rangesJson },
+      create: { id: personalRangesId, rangesJson },
+    });
+    return { ok: true, personalRanges };
+  } catch (error) {
+    console.error(error);
+    return { ok: false, error: error as Error };
+  }
+}
+
+export async function createSharePersonalRangesNoUser({
+  rangesJson,
+  sharedRangesId,
+}: {
+  rangesJson: string;
+  sharedRangesId: string;
+}) {
+  try {
+    const personalRanges = await prisma.personalRanges.create({
+      data: { rangesJson },
+    });
+    const sharedRanges = await prisma.sharedRanges.findUnique({
+      where: { id: sharedRangesId },
+    });
+    if (!sharedRanges) {
+      return { ok: false, error: new Error('Shared ranges not found') };
+    }
+    const personalSharedRanges = await prisma.personalSharedRanges.create({
+      data: {
+        personalRangesId: personalRanges.id,
+        sharedRangesId: sharedRanges.id,
+      },
+    });
+    return { ok: true, personalRanges, personalSharedRanges };
+  } catch (error) {
+    console.error(error);
+    return { ok: false, error: error as Error };
+  }
+}
+
 export async function getPersonalRanges({
   userId,
 }: {
