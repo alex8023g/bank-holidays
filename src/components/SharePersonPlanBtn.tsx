@@ -92,7 +92,10 @@ export function SharePersonPlanBtn({
                       ...ctx?.lsRangesData,
                       id: res.personalRanges.id,
                     });
-                    ctx?.setSharedRangesName(state.name);
+                    ctx?.setSharedRangesData({
+                      ...ctx?.sharedRangesData,
+                      name: res.sharedRanges.name,
+                    });
                   } else {
                     toast.error(
                       'Не удалось добавить график отпусков в общий график',

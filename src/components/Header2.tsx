@@ -50,7 +50,9 @@ export default function Header2({ session }: { session: Session | null }) {
             <Bars3Icon aria-hidden='true' className='size-6' />
           </button>
         </div>
-        {ctx?.sharedRangesName && <span>{ctx?.sharedRangesName}</span>}
+        {ctx?.sharedRangesData.name && (
+          <span>{ctx?.sharedRangesData.name}</span>
+        )}
         {ctx?.lsRangesData.userName && (
           <span>{ctx?.lsRangesData.userName}</span>
         )}

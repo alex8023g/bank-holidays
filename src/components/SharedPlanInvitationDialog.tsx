@@ -34,12 +34,12 @@ export function SharedPlanInvitationDialog({
   const userId = session?.user.id;
   const router = useRouter();
   useEffect(() => {
-    if (sharedRangesId === ctx?.sharedRangesId) {
+    if (sharedRangesId === ctx?.sharedRangesData.id) {
       router.push('/');
     } else {
       setState((st) => ({ ...st, isOpen: true }));
     }
-  }, [ctx?.sharedRangesId, sharedRangesId]);
+  }, [ctx?.sharedRangesData.id, sharedRangesId]);
   // useEffect(() => {
   //   setState((st) => ({ ...st, isOpen: true }));
   // }, []);
@@ -87,7 +87,8 @@ export function SharedPlanInvitationDialog({
                 setState((st) => ({ ...st, isError: true }));
               } else {
                 setState((st) => ({ ...st, isOpen: false, isError: false }));
-                ctx?.setSharedRangesId(sharedRangesId);
+                // ctx?.setSharedRangesId(sharedRangesId);
+
                 // ctx?.setLsRangesData({
                 //   ...ctx?.lsRangesData,
                 //   userName: state.name,
@@ -106,7 +107,10 @@ export function SharedPlanInvitationDialog({
                       userName: state.name,
                       id: res.personalRanges.id,
                     });
-                    ctx?.setSharedRangesName(res.sharedRanges.name);
+                    ctx?.setSharedRangesData({
+                      id: res.sharedRanges.id,
+                      name: res.sharedRanges.name,
+                    });
                   } else {
                     toast.error(
                       'Не удалось добавить график отпусков в общий график',
@@ -116,6 +120,10 @@ export function SharedPlanInvitationDialog({
                   sharePersonalRanges({
                     userId,
                     sharedRangesId,
+                  });
+                  ctx?.setSharedRangesData({
+                    id: sharedRangesId,
+                    name: state.name,
                   });
                 }
               }

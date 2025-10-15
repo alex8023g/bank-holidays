@@ -35,10 +35,11 @@ export type SelectedDateContext = {
     userName: string;
   };
   setLsRangesData: (value: { id: string; userName: string }) => void;
-  sharedRangesId: string;
-  setSharedRangesId: (value: string) => void;
-  sharedRangesName: string;
-  setSharedRangesName: (value: string) => void;
+  sharedRangesData: {
+    id: string;
+    name: string;
+  };
+  setSharedRangesData: (value: { id: string; name: string }) => void;
   selectedDayOfYear: number | null;
   setSelectedDayOfYear: Dispatch<SetStateAction<number | null>>;
   hoverDayOfYear: number | null;
@@ -71,14 +72,14 @@ export default function ClientContainerVH({
     userName: '',
   });
 
-  const [sharedRangesId, setSharedRangesId] = useLocalStorage<string>(
-    'otpuskPlanSharedRangesId',
-    '',
-  );
-  const [sharedRangesName, setSharedRangesName] = useLocalStorage<string>(
-    'otpuskPlanSharedRangesName',
-    '',
-  );
+  const [sharedRangesData, setSharedRangesData] = useLocalStorage<{
+    id: string;
+    name: string;
+  }>('otpuskPlanSharedRangesData', {
+    id: '',
+    name: '',
+  });
+
   const [selectedDayOfYear, setSelectedDayOfYear] = useState<number | null>(
     null,
   );
@@ -137,10 +138,6 @@ export default function ClientContainerVH({
     })();
   }, [session]);
 
-  useEffect(() => {
-    // в случае изменения id общего графика отпусков выполняем:
-  }, [sharedRangesId]);
-
   return (
     <SessionProvider session={session}>
       <ThemeContext.Provider
@@ -151,10 +148,8 @@ export default function ClientContainerVH({
           setDateRanges,
           lsRangesData,
           setLsRangesData,
-          sharedRangesId,
-          setSharedRangesId,
-          sharedRangesName,
-          setSharedRangesName,
+          sharedRangesData,
+          setSharedRangesData,
           selectedDayOfYear,
           setSelectedDayOfYear,
           hoverDayOfYear,
