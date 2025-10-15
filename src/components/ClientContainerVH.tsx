@@ -16,6 +16,8 @@ import {
   deletePersonalRangesById,
   getPersonalRangesByUserId,
   upsertPersonalRangesByUserIdOrLsRangesId,
+  getSharedRanges,
+  SharedWithPersonalRangesRes,
 } from '@/lib/actions';
 import { SessionProvider } from 'next-auth/react';
 
@@ -35,17 +37,26 @@ export type SelectedDateContext = {
     userName: string;
   };
   setLsRangesData: (value: { id: string; userName: string }) => void;
-  sharedRangesData: {
+  lsSharedRangesData: {
     id: string;
     name: string;
+    year: number;
   };
-  setSharedRangesData: (value: { id: string; name: string }) => void;
+  setLsSharedRangesData: (value: {
+    id: string;
+    name: string;
+    year: number;
+  }) => void;
   selectedDayOfYear: number | null;
   setSelectedDayOfYear: Dispatch<SetStateAction<number | null>>;
   hoverDayOfYear: number | null;
   setHoverDayOfYear: Dispatch<SetStateAction<number | null>>;
   selectedRange: DateRange | null;
   setSelectedRange: Dispatch<SetStateAction<DateRange | null>>;
+  sharedRangesData: SharedWithPersonalRangesRes | null;
+  setSharedRangesData: Dispatch<
+    SetStateAction<SharedWithPersonalRangesRes | null>
+  >;
 };
 
 export const ThemeContext = createContext<SelectedDateContext | null>(null);
@@ -72,12 +83,14 @@ export default function ClientContainerVH({
     userName: '',
   });
 
-  const [sharedRangesData, setSharedRangesData] = useLocalStorage<{
+  const [lsSharedRangesData, setLsSharedRangesData] = useLocalStorage<{
     id: string;
     name: string;
+    year: number;
   }>('otpuskPlanSharedRangesData', {
     id: '',
     name: '',
+    year: 0,
   });
 
   const [selectedDayOfYear, setSelectedDayOfYear] = useState<number | null>(
@@ -86,6 +99,8 @@ export default function ClientContainerVH({
   const [hoverDayOfYear, setHoverDayOfYear] = useState<number | null>(null);
   const [selectedYear, setSelectedYear] = useState(dayjs().year());
   const [selectedRange, setSelectedRange] = useState<DateRange | null>(null);
+  const [sharedRangesData, setSharedRangesData] =
+    useState<SharedWithPersonalRangesRes | null>(null);
 
   useEffect(() => {
     // в случае авторизации пользователя выполняем:
@@ -138,6 +153,17 @@ export default function ClientContainerVH({
     })();
   }, [session]);
 
+  useEffect(() => {
+    (async () => {
+      const sharedRangesRes = await getSharedRanges({
+        id: lsSharedRangesData.id || null,
+      });
+      if (sharedRangesRes.sharedRangesWithPersonal) {
+        setSharedRangesData(sharedRangesRes.sharedRangesWithPersonal);
+      }
+    })();
+  }, [lsSharedRangesData.id]);
+
   return (
     <SessionProvider session={session}>
       <ThemeContext.Provider
@@ -148,14 +174,16 @@ export default function ClientContainerVH({
           setDateRanges,
           lsRangesData,
           setLsRangesData,
-          sharedRangesData,
-          setSharedRangesData,
+          lsSharedRangesData,
+          setLsSharedRangesData,
           selectedDayOfYear,
           setSelectedDayOfYear,
           hoverDayOfYear,
           setHoverDayOfYear,
           selectedRange,
           setSelectedRange,
+          sharedRangesData,
+          setSharedRangesData,
         }}
       >
         <div className='flex h-dvh flex-col'>{children}</div>

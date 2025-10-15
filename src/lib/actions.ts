@@ -4,6 +4,12 @@ import * as fs from 'fs';
 import { Day } from './createDaysArr';
 import { prisma } from './prisma';
 import { revalidatePath } from 'next/cache';
+import {
+  PersonalRanges,
+  PersonalSharedRanges,
+  SharedRanges,
+  User,
+} from '../../generated/prisma';
 
 export async function upsertPersonalRanges({
   userId,
@@ -197,12 +203,26 @@ export async function createSharedRanges({
   }
 }
 
-export async function getSharedRanges({ id }: { id: string | null }) {
+export type SharedWithPersonalRangesRes =
+  | (SharedRanges & {
+      personalRanges: ({
+        personalRanges: PersonalRanges & {
+          user: User | null;
+        };
+      } & PersonalSharedRanges)[];
+    })
+  | null;
+
+export async function getSharedRanges({ id }: { id: string | null }): Promise<{
+  ok: boolean;
+  sharedRangesWithPersonal: SharedWithPersonalRangesRes | null;
+  error?: Error;
+}> {
   if (!id) {
-    return { ok: true, sharedRanges: null };
+    return { ok: true, sharedRangesWithPersonal: null };
   }
   try {
-    const sharedRanges = await prisma.sharedRanges.findFirst({
+    const sharedRangesWithPersonal = await prisma.sharedRanges.findFirst({
       where: { id },
       include: {
         personalRanges: {
@@ -212,11 +232,14 @@ export async function getSharedRanges({ id }: { id: string | null }) {
         },
       },
     });
-    console.log('🚀 ~ getSharedRanges ~ sharedRanges:', sharedRanges);
-    return { ok: true, sharedRanges };
+    console.log(
+      '🚀 ~ getSharedRanges ~ sharedRanges:',
+      sharedRangesWithPersonal,
+    );
+    return { ok: true, sharedRangesWithPersonal };
   } catch (error) {
     console.error(error);
-    return { ok: false, sharedRanges: null, error: error as Error };
+    return { ok: false, sharedRangesWithPersonal: null, error: error as Error };
   }
 }
 export async function getSharedRangesListByUserId({

@@ -50,11 +50,14 @@ export default function Header2({ session }: { session: Session | null }) {
             <Bars3Icon aria-hidden='true' className='size-6' />
           </button>
         </div>
-        {ctx?.sharedRangesData.name && (
-          <span>{ctx?.sharedRangesData.name}</span>
+        {ctx?.lsSharedRangesData.name && (
+          <span>{ctx?.lsSharedRangesData.name}</span>
+        )}
+        {ctx?.lsSharedRangesData.year && (
+          <span>на {ctx?.lsSharedRangesData.year} год </span>
         )}
         {ctx?.lsRangesData.userName && (
-          <span>{ctx?.lsRangesData.userName}</span>
+          <span> {ctx?.lsRangesData.userName}</span>
         )}
         {/* <div className='hidden md:flex md:gap-x-12'>
           {navigation.map((item) => (

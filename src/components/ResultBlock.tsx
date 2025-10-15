@@ -16,6 +16,7 @@ export default function ResultBlock({ days }: { days: Day[] }) {
   const searchParams = useSearchParams();
   const isLogin = searchParams.has('login');
   const ctx = useContext(ThemeContext);
+
   if (!ctx) {
     return <div>no ctx перезагрузите страницу</div>;
   }
@@ -122,6 +123,17 @@ export default function ResultBlock({ days }: { days: Day[] }) {
           )}
         </ul>
       </div>
+      <h2 className='text-center font-semibold'>Все участники:</h2>
+      <ul>
+        {ctx?.sharedRangesData?.personalRanges.map((personalRange) => (
+          <li key={personalRange.id}>
+            {personalRange.personalRanges.userName}
+          </li>
+        ))}
+        {ctx?.sharedRangesData?.personalRanges.length === 0 && (
+          <li>Никто не делится этим графиком отпусков</li>
+        )}
+      </ul>
     </div>
   );
 }
