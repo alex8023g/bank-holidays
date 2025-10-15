@@ -11,7 +11,6 @@ import { useLocalStorage } from '@react-hooks-library/core';
 import dayjs from 'dayjs';
 import { toast, Toaster } from 'sonner';
 import { Session } from 'next-auth';
-import { useRouter } from 'next/navigation';
 import {
   deletePersonalSharedRangesByPersonalRangesId,
   deletePersonalRangesById,
@@ -31,8 +30,15 @@ export type SelectedDateContext = {
   setSelectedYear: Dispatch<SetStateAction<number>>;
   dateRanges: DateRange[];
   setDateRanges: (value: DateRange[]) => void;
-  lsRangesId: string;
-  setLsRangesId: (value: string) => void;
+  lsRangesData: {
+    id: string;
+    userName: string;
+  };
+  setLsRangesData: (value: { id: string; userName: string }) => void;
+  sharedRangesId: string;
+  setSharedRangesId: (value: string) => void;
+  sharedRangesName: string;
+  setSharedRangesName: (value: string) => void;
   selectedDayOfYear: number | null;
   setSelectedDayOfYear: Dispatch<SetStateAction<number | null>>;
   hoverDayOfYear: number | null;
@@ -51,12 +57,26 @@ export default function ClientContainerVH({
   children: ReactNode;
 }) {
   console.log('🚀 ~ ClientContainerVH start ');
+
   const [dateRanges, setDateRanges] = useLocalStorage<DateRange[]>(
     'otpuskPlanRanges',
     [],
   );
-  const [lsRangesId, setLsRangesId] = useLocalStorage<string>(
-    'otpuskPlanLsRangesId',
+
+  const [lsRangesData, setLsRangesData] = useLocalStorage<{
+    id: string;
+    userName: string;
+  }>('otpuskPlanLsRangesData', {
+    id: '',
+    userName: '',
+  });
+
+  const [sharedRangesId, setSharedRangesId] = useLocalStorage<string>(
+    'otpuskPlanSharedRangesId',
+    '',
+  );
+  const [sharedRangesName, setSharedRangesName] = useLocalStorage<string>(
+    'otpuskPlanSharedRangesName',
     '',
   );
   const [selectedDayOfYear, setSelectedDayOfYear] = useState<number | null>(
@@ -82,29 +102,33 @@ export default function ClientContainerVH({
             JSON.parse(personalRangesDBRes.rangesJson) as DateRange[],
           );
           // проверка на совпадение id персонального плана в локальном хранилище и в бд
-          if (personalRangesDBRes.id !== lsRangesId && lsRangesId) {
+          if (personalRangesDBRes.id !== lsRangesData.id && lsRangesData.id) {
             // и если не совпадает, то
             // 1a) удаляем из бд таблицы PersonalSharedPlan все записи с personalRangesId = id персонального плана в локальном хранилище
             deletePersonalSharedRangesByPersonalRangesId({
-              personalRangesId: lsRangesId,
+              personalRangesId: lsRangesData.id,
             });
             // 1b) удаляем из бд таблицы PersonalRanges все записи с id = id персонального плана в локальном хранилище
-            deletePersonalRangesById({ id: lsRangesId });
+            deletePersonalRangesById({ id: lsRangesData.id });
           }
 
           // 2) копируем его (personalRangesDBRes.id) в локальное хранилище
           // копируем id персонального плана в локальное хранилище
-          setLsRangesId(personalRangesDBRes?.id || '');
+          setLsRangesData({
+            id: personalRangesDBRes?.id || '',
+            userName: session.user.name || 'Пользователь X',
+          });
         } else {
           // если нет персонального плана в бд
           const lsRangesJson = localStorage.getItem('otpuskPlanRanges');
-          const lsRangesId2 = localStorage.getItem('otpuskPlanLsRangesId');
+          // const lsRangesData2 = localStorage.getItem('otpuskPlanLsRangesId');
 
           if (lsRangesJson) {
             const res = await upsertPersonalRangesByUserIdOrLsRangesId({
               userId: session.user.id,
               rangesJson: lsRangesJson,
-              lsRangesId: JSON.parse(lsRangesId2 || ''),
+              lsRangesId: JSON.parse(lsRangesData.id || ''),
+              userName: session.user.name || 'Пользователь X',
             });
             console.log('🚀 ~ ClientContainerVH ~ res-2:', res);
           }
@@ -112,6 +136,10 @@ export default function ClientContainerVH({
       }
     })();
   }, [session]);
+
+  useEffect(() => {
+    // в случае изменения id общего графика отпусков выполняем:
+  }, [sharedRangesId]);
 
   return (
     <SessionProvider session={session}>
@@ -121,8 +149,12 @@ export default function ClientContainerVH({
           setSelectedYear,
           dateRanges,
           setDateRanges,
-          lsRangesId,
-          setLsRangesId,
+          lsRangesData,
+          setLsRangesData,
+          sharedRangesId,
+          setSharedRangesId,
+          sharedRangesName,
+          setSharedRangesName,
           selectedDayOfYear,
           setSelectedDayOfYear,
           hoverDayOfYear,

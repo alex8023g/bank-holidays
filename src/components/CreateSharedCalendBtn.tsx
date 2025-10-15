@@ -32,7 +32,7 @@ export function CreateSharedCalendBtn({
   return (
     <>
       <Button
-        className='m-auto'
+        className='/m-auto'
         onClick={() => {
           setIsOpen(true);
         }}

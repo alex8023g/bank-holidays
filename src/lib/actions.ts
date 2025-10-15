@@ -50,10 +50,12 @@ export async function upsertPersonalRangesByUserIdOrLsRangesId({
   userId,
   rangesJson,
   lsRangesId,
+  userName,
 }: {
   userId: string;
   rangesJson: string;
   lsRangesId: string;
+  userName: string;
 }) {
   try {
     const personalRanges = await prisma.personalRanges.findUnique({
@@ -63,7 +65,7 @@ export async function upsertPersonalRangesByUserIdOrLsRangesId({
     if (personalRanges) {
       const res = await prisma.personalRanges.update({
         where: { id: personalRanges.id },
-        data: { rangesJson },
+        data: { rangesJson, userName },
       });
       return { ok: true, personalRanges: res };
     } else {
@@ -74,12 +76,12 @@ export async function upsertPersonalRangesByUserIdOrLsRangesId({
       if (personalRanges2) {
         const res2 = await prisma.personalRanges.update({
           where: { id: personalRanges2.id },
-          data: { rangesJson, userId },
+          data: { rangesJson, userId, userName },
         });
         return { ok: true, personalRanges: res2 };
       } else {
         const res3 = await prisma.personalRanges.create({
-          data: { userId, rangesJson },
+          data: { userId, rangesJson, userName },
         });
         return { ok: true, personalRanges: res3 };
       }
@@ -90,16 +92,18 @@ export async function upsertPersonalRangesByUserIdOrLsRangesId({
   }
 }
 
-export async function createSharePersonalRangesNoUser({
+export async function createSharedPersonalRangesNoUser({
   rangesJson,
   sharedRangesId,
+  userName,
 }: {
   rangesJson: string;
   sharedRangesId: string;
+  userName: string;
 }) {
   try {
     const personalRanges = await prisma.personalRanges.create({
-      data: { rangesJson },
+      data: { rangesJson, userName },
     });
     const sharedRanges = await prisma.sharedRanges.findUnique({
       where: { id: sharedRangesId },
@@ -113,7 +117,7 @@ export async function createSharePersonalRangesNoUser({
         sharedRangesId: sharedRanges.id,
       },
     });
-    return { ok: true, personalRanges, personalSharedRanges };
+    return { ok: true, personalRanges, sharedRanges, personalSharedRanges };
   } catch (error) {
     console.error(error);
     return { ok: false, error: error as Error };

@@ -29,7 +29,7 @@ export default async function SharedPage() {
     <div className='flex h-full flex-col overflow-y-hidden bg-gray-100 xl:flex-row'>
       <main className='h-2/3 overflow-y-scroll bg-gray-100 xl:flex xl:h-full xl:flex-1'>
         {session?.user.id ? (
-          <>
+          <div>
             <div>
               {sharedRangesRes.sharedRanges?.map((sharedPagesItem) => (
                 <div
@@ -50,7 +50,7 @@ export default async function SharedPage() {
               lastYearInDays={lastYearInDays}
               calendarsAmount={calendarsAmount}
             />
-          </>
+          </div>
         ) : (
           <h2 className='m-auto max-w-lg text-center text-2xl font-semibold'>
             Для создания и редактирования общих графиков отпусков необходимо

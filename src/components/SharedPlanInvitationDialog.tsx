@@ -14,13 +14,15 @@ import {
   sharePersonalRanges,
 } from '@/lib/actions';
 import { ThemeContext } from '@/components/ClientContainerVH';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { toast } from 'sonner';
-export function SharePersonPlanBtn({
-  userId,
+import { Session } from 'next-auth';
+import { useRouter } from 'next/navigation';
+export function SharedPlanInvitationDialog({
+  session,
   sharedRangesId,
 }: {
-  userId: string | undefined;
+  session: Session | null;
   sharedRangesId: string;
 }) {
   const [state, setState] = useState({
@@ -29,19 +31,25 @@ export function SharePersonPlanBtn({
     isError: false,
   });
   const ctx = useContext(ThemeContext);
+  const userId = session?.user.id;
+  const router = useRouter();
+  useEffect(() => {
+    if (sharedRangesId === ctx?.sharedRangesId) {
+      router.push('/');
+    } else {
+      setState((st) => ({ ...st, isOpen: true }));
+    }
+  }, [ctx?.sharedRangesId, sharedRangesId]);
+  // useEffect(() => {
+  //   setState((st) => ({ ...st, isOpen: true }));
+  // }, []);
   return (
     <>
-      <Button
-        type='button'
-        onClick={() => setState({ isOpen: true, name: '', isError: false })}
-      >
-        Добавить свой график отпусков в общий график
-      </Button>
       <Dialog
         open={state.isOpen}
         onClose={() => setState((st) => ({ ...st, isOpen: false }))}
       >
-        <DialogTitle>Поделиться своим графиком отпусков</DialogTitle>
+        <DialogTitle>Присоединиться к общему графиком отпусков?</DialogTitle>
         <DialogDescription>
           Все у кого будет ссылка на этот график отпусков смогут видеть ваш
           график отпусков.
@@ -68,6 +76,7 @@ export function SharePersonPlanBtn({
             plain
             onClick={() => {
               setState((st) => ({ ...st, isOpen: false, name: '' }));
+              router.push('/');
             }}
           >
             Отмена
@@ -78,21 +87,26 @@ export function SharePersonPlanBtn({
                 setState((st) => ({ ...st, isError: true }));
               } else {
                 setState((st) => ({ ...st, isOpen: false, isError: false }));
+                ctx?.setSharedRangesId(sharedRangesId);
+                // ctx?.setLsRangesData({
+                //   ...ctx?.lsRangesData,
+                //   userName: state.name,
+                // });
                 if (!userId) {
                   const res = await createSharedPersonalRangesNoUser({
                     rangesJson: JSON.stringify(ctx?.dateRanges || []),
-                    sharedRangesId,
+                    sharedRangesId: sharedRangesId,
                     userName: state.name,
                   });
-                  if (res.personalSharedRanges) {
+                  if (res.personalSharedRanges && res.sharedRanges) {
                     toast.success(
                       'График отпусков успешно добавлен в общий график',
                     );
                     ctx?.setLsRangesData({
-                      ...ctx?.lsRangesData,
+                      userName: state.name,
                       id: res.personalRanges.id,
                     });
-                    ctx?.setSharedRangesName(state.name);
+                    ctx?.setSharedRangesName(res.sharedRanges.name);
                   } else {
                     toast.error(
                       'Не удалось добавить график отпусков в общий график',
@@ -107,7 +121,7 @@ export function SharePersonPlanBtn({
               }
             }}
           >
-            Поделиться
+            Присоединиться
           </Button>
         </DialogActions>
       </Dialog>

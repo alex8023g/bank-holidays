@@ -58,6 +58,7 @@ model PersonalRanges {
   id           String                 @id @default(cuid())
   userId       String?                @unique @map("user_id")
   rangesJson   Json                   @map("ranges_json")
+  userName     String                 @default("") @map("user_name")
   user         User?                  @relation(fields: [userId], references: [id])
   sharedRanges PersonalSharedRanges[]
 }

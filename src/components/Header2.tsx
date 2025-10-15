@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Dialog, DialogPanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { SelectYear } from './SelectYear';
@@ -12,6 +12,7 @@ import { Button } from './catalist/button';
 import { createSharedRanges } from '@/lib/actions';
 import { toast } from 'sonner';
 import { span } from 'motion/react-client';
+import { ThemeContext } from './ClientContainerVH';
 
 const navigation = [
   { name: 'Персональный', href: '/' },
@@ -24,6 +25,7 @@ export default function Header2({ session }: { session: Session | null }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const searchParams = useSearchParams();
   const isLogin = searchParams.has('login');
+  const ctx = useContext(ThemeContext);
 
   return (
     <header className='border-b border-gray-200 bg-white'>
@@ -32,10 +34,10 @@ export default function Header2({ session }: { session: Session | null }) {
         className='flex items-center justify-between p-3 md:px-8'
       >
         <div className='flex md:flex-1'>
-          <a href='#' className='-m-1.5 p-1.5'>
+          <Link href='#' className='-m-1.5 p-1.5'>
             <span className='sr-only'>Your Company</span>
             <img alt='' src='/calendar.svg' className='h-8 w-auto' />
-          </a>
+          </Link>
           <SelectYear />
         </div>
         <div className='flex md:hidden'>
@@ -48,7 +50,11 @@ export default function Header2({ session }: { session: Session | null }) {
             <Bars3Icon aria-hidden='true' className='size-6' />
           </button>
         </div>
-        <div className='hidden md:flex md:gap-x-12'>
+        {ctx?.sharedRangesName && <span>{ctx?.sharedRangesName}</span>}
+        {ctx?.lsRangesData.userName && (
+          <span>{ctx?.lsRangesData.userName}</span>
+        )}
+        {/* <div className='hidden md:flex md:gap-x-12'>
           {navigation.map((item) => (
             <Link
               key={item.name}
@@ -58,7 +64,7 @@ export default function Header2({ session }: { session: Session | null }) {
               {item.name}
             </Link>
           ))}
-        </div>
+        </div> */}
         <div className='hidden md:flex md:flex-1 md:justify-end'>
           {session?.user.id ? (
             <>
