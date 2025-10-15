@@ -28,7 +28,7 @@ export function MonthCalendar({
   const ctx = useContext(ThemeContext);
   const activeEl = useRef<HTMLDivElement>(null);
   const session = useSession();
-  console.log('🚀 ~ MonthCalendar ~ session:', session);
+  // console.log('🚀 ~ MonthCalendar ~ session:', session);
 
   useEffect(() => {
     if (isActive) {
@@ -166,10 +166,10 @@ export function MonthCalendar({
                       userId: session.data?.user.id,
                       rangesJson: JSON.stringify(updDateRanges),
                     });
-                  } else if (ctx.dateRangesId) {
+                  } else if (ctx.lsRangesId) {
                     upsertPersonalRangesNoUser({
                       rangesJson: JSON.stringify(updDateRanges),
-                      personalRangesId: ctx.dateRangesId,
+                      personalRangesId: ctx.lsRangesId,
                     });
                   }
                 } else if (

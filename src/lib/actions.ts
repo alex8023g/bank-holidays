@@ -33,11 +33,6 @@ export async function upsertPersonalRangesNoUser({
   rangesJson: string;
   personalRangesId: string;
 }) {
-  console.log(
-    '🚀 ~ upsertPersonalRangesNoUser ~ personalRangesId:',
-    personalRangesId,
-  );
-  console.log('🚀 ~ upsertPersonalRangesNoUser ~ rangesJson:', rangesJson);
   try {
     const personalRanges = await prisma.personalRanges.upsert({
       where: { id: personalRangesId },
@@ -45,6 +40,50 @@ export async function upsertPersonalRangesNoUser({
       create: { id: personalRangesId, rangesJson },
     });
     return { ok: true, personalRanges };
+  } catch (error) {
+    console.error(error);
+    return { ok: false, error: error as Error };
+  }
+}
+
+export async function upsertPersonalRangesByUserIdOrLsRangesId({
+  userId,
+  rangesJson,
+  lsRangesId,
+}: {
+  userId: string;
+  rangesJson: string;
+  lsRangesId: string;
+}) {
+  try {
+    const personalRanges = await prisma.personalRanges.findUnique({
+      where: { userId },
+    });
+
+    if (personalRanges) {
+      const res = await prisma.personalRanges.update({
+        where: { id: personalRanges.id },
+        data: { rangesJson },
+      });
+      return { ok: true, personalRanges: res };
+    } else {
+      const personalRanges2 = await prisma.personalRanges.findUnique({
+        where: { id: lsRangesId },
+      });
+
+      if (personalRanges2) {
+        const res2 = await prisma.personalRanges.update({
+          where: { id: personalRanges2.id },
+          data: { rangesJson, userId },
+        });
+        return { ok: true, personalRanges: res2 };
+      } else {
+        const res3 = await prisma.personalRanges.create({
+          data: { userId, rangesJson },
+        });
+        return { ok: true, personalRanges: res3 };
+      }
+    }
   } catch (error) {
     console.error(error);
     return { ok: false, error: error as Error };
@@ -81,27 +120,46 @@ export async function createSharePersonalRangesNoUser({
   }
 }
 
-export async function getPersonalRanges({
+export type GetPersonalRangesByUserIdRes = {
+  ok: boolean;
+  rangesJson: string | null;
+  id: string;
+  errorType?:
+    | 'No personal ranges by userId found'
+    | 'Error getting personal ranges by userId';
+  errorMsg?: string;
+};
+export async function getPersonalRangesByUserId({
   userId,
 }: {
   userId: string;
-}): Promise<{
-  ok: boolean;
-  rangesJson: string | null;
-  error: Error | null;
-}> {
+}): Promise<GetPersonalRangesByUserIdRes> {
   try {
-    const personalRanges = await prisma.personalRanges.findFirst({
+    const personalRanges = await prisma.personalRanges.findUnique({
       where: { userId },
     });
+    if (!personalRanges) {
+      return {
+        ok: false,
+        rangesJson: null,
+        id: '',
+        errorType: 'No personal ranges by userId found',
+      };
+    }
     return {
       ok: true,
-      rangesJson: personalRanges?.rangesJson as string | null,
-      error: null,
+      rangesJson: personalRanges.rangesJson as string | null,
+      id: personalRanges.id,
     };
   } catch (error) {
     console.error(error);
-    return { ok: false, rangesJson: null, error: error as Error };
+    return {
+      ok: false,
+      rangesJson: null,
+      id: '',
+      errorType: 'Error getting personal ranges by userId',
+      errorMsg: (error as Error).message,
+    };
   }
 }
 
@@ -228,4 +286,30 @@ export async function sharePersonalRanges({
   revalidatePath('/shared');
   revalidatePath('/rowcalendar');
   return { ok: true, personalSharedRanges };
+}
+
+export async function deletePersonalSharedRangesByPersonalRangesId({
+  personalRangesId,
+}: {
+  personalRangesId: string;
+}) {
+  try {
+    await prisma.personalSharedRanges.deleteMany({
+      where: { personalRangesId },
+    });
+    return { ok: true };
+  } catch (error) {
+    console.error(error);
+    return { ok: false, error: error as Error };
+  }
+}
+
+export async function deletePersonalRangesById({ id }: { id: string }) {
+  try {
+    await prisma.personalRanges.delete({ where: { id } });
+    return { ok: true };
+  } catch (error) {
+    console.error(error);
+    return { ok: false, error: error as Error };
+  }
 }

@@ -87,7 +87,7 @@ export function SharePersonPlanBtn({
                     toast.success(
                       'График отпусков успешно добавлен в общий график',
                     );
-                    ctx?.setDateRangesId(res.personalRanges.id);
+                    ctx?.setLsRangesId(res.personalRanges.id);
                   } else {
                     toast.error(
                       'Не удалось добавить график отпусков в общий график',

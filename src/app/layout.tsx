@@ -2,11 +2,9 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import ClientContainerVH from '@/components/ClientContainerVH';
-import Header from '@/components/Header';
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth/next';
 import Header2 from '@/components/Header2';
-import { prisma } from '@/lib/prisma';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,22 +27,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(authOptions);
-  console.log('🚀 ~ RootLayout ~ session:', session);
-  if (session) {
-    const user = await prisma.user.findUnique({
-      where: {
-        id: session.user.id,
-      },
-    });
-    console.log('🚀 ~ RootLayout ~ user!!!:', user);
-  }
+
   return (
     <html lang='en'>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ClientContainerVH session={session}>
-          {/* <Header session={session} /> */}
           <Header2 session={session} />
           {children}
         </ClientContainerVH>

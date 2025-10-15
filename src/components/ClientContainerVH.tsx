@@ -12,7 +12,12 @@ import dayjs from 'dayjs';
 import { toast, Toaster } from 'sonner';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
-import { getPersonalRanges, upsertPersonalRanges } from '@/lib/actions';
+import {
+  deletePersonalSharedRangesByPersonalRangesId,
+  deletePersonalRangesById,
+  getPersonalRangesByUserId,
+  upsertPersonalRangesByUserIdOrLsRangesId,
+} from '@/lib/actions';
 import { SessionProvider } from 'next-auth/react';
 
 export type DateRange = {
@@ -26,8 +31,8 @@ export type SelectedDateContext = {
   setSelectedYear: Dispatch<SetStateAction<number>>;
   dateRanges: DateRange[];
   setDateRanges: (value: DateRange[]) => void;
-  dateRangesId: string;
-  setDateRangesId: (value: string) => void;
+  lsRangesId: string;
+  setLsRangesId: (value: string) => void;
   selectedDayOfYear: number | null;
   setSelectedDayOfYear: Dispatch<SetStateAction<number | null>>;
   hoverDayOfYear: number | null;
@@ -45,10 +50,14 @@ export default function ClientContainerVH({
   session: Session | null;
   children: ReactNode;
 }) {
-  console.log('🚀 ~ ClientContainerVH ~ ');
+  console.log('🚀 ~ ClientContainerVH start ');
   const [dateRanges, setDateRanges] = useLocalStorage<DateRange[]>(
     'otpuskPlanRanges',
     [],
+  );
+  const [lsRangesId, setLsRangesId] = useLocalStorage<string>(
+    'otpuskPlanLsRangesId',
+    '',
   );
   const [selectedDayOfYear, setSelectedDayOfYear] = useState<number | null>(
     null,
@@ -56,29 +65,46 @@ export default function ClientContainerVH({
   const [hoverDayOfYear, setHoverDayOfYear] = useState<number | null>(null);
   const [selectedYear, setSelectedYear] = useState(dayjs().year());
   const [selectedRange, setSelectedRange] = useState<DateRange | null>(null);
-  const [dateRangesId, setDateRangesId] = useLocalStorage<string>(
-    'dateRangesId',
-    '',
-  );
 
-  console.log('🚀 ~ ClientContainerVH ~ dateRanges-1:', dateRanges);
   useEffect(() => {
-    console.log('🚀 ~ ClientContainerVH ~ dateRanges-2:', dateRanges);
+    // в случае авторизации пользователя выполняем:
     (async () => {
       if (session) {
         toast.success('Успешная авторизация!');
         // router.push('/');
-        const res = await getPersonalRanges({ userId: session.user.id });
-        console.log('🚀 ~ ClientContainerVH ~ res-1:', res);
-        if (res?.rangesJson) {
-          setDateRanges(JSON.parse(res.rangesJson) as unknown as DateRange[]);
+        const personalRangesDBRes = await getPersonalRangesByUserId({
+          userId: session.user.id,
+        });
+
+        if (personalRangesDBRes?.rangesJson) {
+          // если есть персональный план в бд, то копируем его в локальное хранилище
+          setDateRanges(
+            JSON.parse(personalRangesDBRes.rangesJson) as DateRange[],
+          );
+          // проверка на совпадение id персонального плана в локальном хранилище и в бд
+          if (personalRangesDBRes.id !== lsRangesId && lsRangesId) {
+            // и если не совпадает, то
+            // 1a) удаляем из бд таблицы PersonalSharedPlan все записи с personalRangesId = id персонального плана в локальном хранилище
+            deletePersonalSharedRangesByPersonalRangesId({
+              personalRangesId: lsRangesId,
+            });
+            // 1b) удаляем из бд таблицы PersonalRanges все записи с id = id персонального плана в локальном хранилище
+            deletePersonalRangesById({ id: lsRangesId });
+          }
+
+          // 2) копируем его (personalRangesDBRes.id) в локальное хранилище
+          // копируем id персонального плана в локальное хранилище
+          setLsRangesId(personalRangesDBRes?.id || '');
         } else {
+          // если нет персонального плана в бд
           const lsRangesJson = localStorage.getItem('otpuskPlanRanges');
+          const lsRangesId2 = localStorage.getItem('otpuskPlanLsRangesId');
+
           if (lsRangesJson) {
-            console.log('🚀 ~ ClientContainerVH ~ dateRanges-3:', lsRangesJson);
-            const res = await upsertPersonalRanges({
+            const res = await upsertPersonalRangesByUserIdOrLsRangesId({
               userId: session.user.id,
               rangesJson: lsRangesJson,
+              lsRangesId: JSON.parse(lsRangesId2 || ''),
             });
             console.log('🚀 ~ ClientContainerVH ~ res-2:', res);
           }
@@ -95,8 +121,8 @@ export default function ClientContainerVH({
           setSelectedYear,
           dateRanges,
           setDateRanges,
-          dateRangesId,
-          setDateRangesId,
+          lsRangesId,
+          setLsRangesId,
           selectedDayOfYear,
           setSelectedDayOfYear,
           hoverDayOfYear,
