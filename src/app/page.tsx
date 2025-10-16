@@ -20,7 +20,7 @@ export default async function HomePage({
 
   return (
     <div className='flex flex-col overflow-y-hidden bg-gray-100 xl:flex-row'>
-      <CalendarsBlock days={days} />
+      <CalendarsBlock days={days} session={session} />
       <ResultBlock days={days} />
       {sharedplaninvitation && (
         <SharedPlanInvitationDialog

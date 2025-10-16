@@ -1,6 +1,6 @@
 'use client';
 import { useContext, useEffect, useRef } from 'react';
-import { ThemeContext } from './ClientContainerVH';
+import { DateRange, ThemeContext } from './ClientContainerVH';
 import dayjs from 'dayjs';
 import { Month } from '@/lib/createYearCalendar';
 import { Day } from '@/lib/createDaysArr';
@@ -8,26 +8,29 @@ import { toast } from 'sonner';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import { dayInRanges } from '@/lib/dayInRanges';
 import { twJoin } from 'tailwind-merge';
-import { useSession } from 'next-auth/react';
+import { Session } from 'next-auth';
 import {
   upsertPersonalRanges,
   upsertPersonalRangesNoUser,
 } from '@/lib/actions';
+import { onDateCellClick } from '@/lib/onDateCellClick';
+import { DeleteXCircleIcon } from './DeleteXCircle';
 
 export function MonthCalendar({
   i,
   month,
   days,
   isActive,
+  session,
 }: {
   i: number;
   month: Month;
   days: Day[];
   isActive: boolean;
+  session: Session | null;
 }) {
   const ctx = useContext(ThemeContext);
   const activeEl = useRef<HTMLDivElement>(null);
-  const session = useSession();
   // console.log('🚀 ~ MonthCalendar ~ session:', session);
 
   useEffect(() => {
@@ -96,119 +99,7 @@ export function MonthCalendar({
                       : '',
               }}
               onClick={() => {
-                console.log('🚀 ~ onClick ~ start');
-                if (ctx.selectedDayOfYear) {
-                  /*  первый день уже выбран */
-                  if (
-                    day?.dayOfYear &&
-                    ctx.selectedDayOfYear &&
-                    day?.dayOfYear < ctx.selectedDayOfYear
-                  ) {
-                    if (day.isHoliday || day.isWeekend) {
-                      toast.error('Отпуск не может начинаться в выходной');
-                      return;
-                    }
-                    ctx.setSelectedDayOfYear(day.dayOfYear);
-                    return;
-                  } else if (day.isHoliday) {
-                    toast.error(
-                      'Отпуск не может заканчиваться в праздничный день',
-                    );
-                    return;
-                  } else if (
-                    ctx.dateRanges.some(
-                      (range) =>
-                        (range.year === year &&
-                          range.start.dayOfYear <= day.dayOfYear &&
-                          day.dayOfYear <= range.end.dayOfYear) ||
-                        (range.year === year &&
-                          ctx.selectedDayOfYear &&
-                          ctx.selectedDayOfYear < range.start.dayOfYear &&
-                          range.end.dayOfYear < day.dayOfYear),
-                    )
-                  ) {
-                    toast.error('Периоды отпусков не могут пересекаться');
-                    return;
-                  }
-                  const newRange = {
-                    start: {
-                      dayOfYear: ctx.selectedDayOfYear || 0,
-                      dateStr:
-                        days.find(
-                          (day2) =>
-                            day2.dayOfYear === ctx.selectedDayOfYear &&
-                            day2.year === year,
-                        )?.dateString || '',
-                    },
-                    end: {
-                      dayOfYear: day.dayOfYear,
-                      dateStr: day.dateString,
-                    },
-                    year: year,
-                  };
-                  const updDateRanges = ctx.dateRanges
-                    .concat([newRange])
-                    .sort((a, b) =>
-                      a.year > b.year
-                        ? 1
-                        : a.year < b.year
-                          ? -1
-                          : a.start.dayOfYear > b.start.dayOfYear
-                            ? 1
-                            : a.start.dayOfYear < b.start.dayOfYear
-                              ? -1
-                              : 0,
-                    );
-                  ctx.setDateRanges(updDateRanges);
-                  ctx.setSelectedDayOfYear(null);
-                  if (session.data?.user.id) {
-                    upsertPersonalRanges({
-                      userId: session.data?.user.id,
-                      rangesJson: JSON.stringify(updDateRanges),
-                    });
-                  } else if (ctx.lsRangesId) {
-                    upsertPersonalRangesNoUser({
-                      rangesJson: JSON.stringify(updDateRanges),
-                      personalRangesId: ctx.lsRangesId,
-                    });
-                  }
-                } else if (
-                  /* первый день периода не выбран, а клик попал в один из ranges */
-                  dayInRanges({
-                    dateRanges: ctx.dateRanges,
-                    dayOfYear: day.dayOfYear,
-                    year,
-                  })
-                ) {
-                  if (
-                    /* клик в уже выбранный range */
-                    ctx.selectedRange?.start.dayOfYear &&
-                    ctx.selectedRange?.end.dayOfYear &&
-                    ctx.selectedRange?.start.dayOfYear <= day.dayOfYear &&
-                    day.dayOfYear <= ctx.selectedRange?.end.dayOfYear /* &&
-                            ctx.selectedRange.year === year */
-                  ) {
-                    ctx.setSelectedRange(null);
-                  } else {
-                    /* клик в еще не выбранный range */
-                    ctx.setSelectedRange(
-                      ctx.dateRanges.find(
-                        (range) =>
-                          range.start.dayOfYear <= day.dayOfYear &&
-                          day.dayOfYear <= range.end.dayOfYear &&
-                          range.year === year,
-                      ) || null,
-                    );
-                  }
-                } else if (day.isHoliday || day.isWeekend) {
-                  /* первый день периода не выбран, и клик попал в выходной или праздничный день */
-                  toast.error('Отпуск не может начинаться в выходной');
-                } else {
-                  /* первый день периода не выбран, и клик попал в белое поле */
-
-                  ctx.setSelectedDayOfYear(day.dayOfYear);
-                  ctx.setSelectedRange(null);
-                }
+                onDateCellClick({ ctx, day, year, session, days });
               }}
               onMouseEnter={() => {
                 // if (ctx.selectedDayOfYear) {
@@ -224,22 +115,26 @@ export function MonthCalendar({
               </time>
               {/* {day?.dateString} */}
               {ctx.selectedRange?.start.dayOfYear === day.dayOfYear && (
-                <div
-                  className='absolute -top-2.5 -left-2.5 z-10 size-5 h-5 w-5 cursor-pointer rounded-full bg-white'
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    const updRanges = ctx.dateRanges.filter(
-                      (r) =>
-                        !(
-                          r.start.dayOfYear === day.dayOfYear && r.year === year
-                        ),
-                    );
-                    console.log('🚀 ~ click on XCircleIcon');
-                    ctx.setDateRanges(updRanges);
-                    ctx.setSelectedRange(null);
-                  }}
-                >
-                  <XCircleIcon className='absolute -top-0.5 -left-0.5 size-6 text-red-600' />
+                <DeleteXCircleIcon
+                  ctx={ctx}
+                  day={day}
+                  year={year}
+                  session={session}
+                />
+              )}
+              {ctx.sharedRangesData?.personalRanges.some((personalRange) => {
+                return JSON.parse(
+                  (personalRange.personalRanges.rangesJson as string) || '[]',
+                ).some(
+                  (range: DateRange) =>
+                    range.year === year &&
+                    range.start.dayOfYear <= day.dayOfYear &&
+                    range.end.dayOfYear >= day.dayOfYear &&
+                    personalRange.personalRanges.id !== ctx.lsRangesData.id,
+                );
+              }) && (
+                <div className='absolute bottom-1 z-20 flex h-3 w-full font-bold text-red-500'>
+                  <span className='mx-auto w-5 border-b-2 border-red-600'></span>
                 </div>
               )}
             </button>

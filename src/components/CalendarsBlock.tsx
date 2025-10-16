@@ -6,21 +6,26 @@ import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import { createYearCalendar } from '@/lib/createYearCalendar';
 import { Day } from '@/lib/createDaysArr';
-import { useMouse } from '@react-hooks-library/core';
-import { holidaysCount } from '@/lib/holidaysCount';
 import { MonthCalendar } from './MonthCalendar';
+import { HoverCountDays } from './HoverCountDays';
+import { Session } from 'next-auth';
 
 dayjs.locale('ru');
 dayjs.extend(isoWeek);
 
-export function CalendarsBlock({ days }: { days: Day[] }) {
+export function CalendarsBlock({
+  days,
+  session,
+}: {
+  days: Day[];
+  session: Session | null;
+}) {
   const ctx = useContext(ThemeContext);
   const year = ctx?.selectedYear || 0;
   const monthsSt = useMemo(
     () => createYearCalendar({ year, days }),
     [year, days],
   );
-  const { x, y } = useMouse();
 
   if (!ctx) {
     return <div>no context</div>;
@@ -41,36 +46,12 @@ export function CalendarsBlock({ days }: { days: Day[] }) {
               i={i}
               month={monthsSt[i]}
               days={days}
+              session={session}
             />
           );
         })}
       </div>
-      {ctx.selectedDayOfYear &&
-        ctx?.hoverDayOfYear &&
-        ctx.selectedDayOfYear <= ctx.hoverDayOfYear && (
-          <div
-            className={`fixed hidden rounded-md p-2 font-semibold shadow-xl backdrop-blur-sm md:block`}
-            style={{
-              left: `${x + 30}px`,
-              top: `${y - 5}px`,
-            }}
-          >
-            {ctx?.hoverDayOfYear &&
-              ctx?.selectedDayOfYear &&
-              ctx?.hoverDayOfYear -
-                ctx?.selectedDayOfYear +
-                1 -
-                holidaysCount({
-                  range: {
-                    year: ctx.selectedYear,
-                    start: { dayOfYear: ctx?.selectedDayOfYear },
-                    end: { dayOfYear: ctx?.hoverDayOfYear },
-                  },
-                  days,
-                }) +
-                ' к.д.'}
-          </div>
-        )}
+      <HoverCountDays days={days} />
     </div>
   );
 }
