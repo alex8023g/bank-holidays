@@ -4,15 +4,8 @@ import { DateRange, ThemeContext } from './ClientContainerVH';
 import dayjs from 'dayjs';
 import { Month } from '@/lib/createYearCalendar';
 import { Day } from '@/lib/createDaysArr';
-import { toast } from 'sonner';
-import { XCircleIcon } from '@heroicons/react/24/solid';
-import { dayInRanges } from '@/lib/dayInRanges';
 import { twJoin } from 'tailwind-merge';
 import { Session } from 'next-auth';
-import {
-  upsertPersonalRanges,
-  upsertPersonalRangesNoUser,
-} from '@/lib/actions';
 import { onDateCellClick } from '@/lib/onDateCellClick';
 import { DeleteXCircleIcon } from './DeleteXCircle';
 
@@ -20,27 +13,26 @@ export function MonthCalendar({
   i,
   month,
   days,
-  isActive,
+  // isActive,
   session,
 }: {
   i: number;
   month: Month;
   days: Day[];
-  isActive: boolean;
+  // isActive: boolean;
   session: Session | null;
 }) {
   const ctx = useContext(ThemeContext);
-  const activeEl = useRef<HTMLDivElement>(null);
-  // console.log('🚀 ~ MonthCalendar ~ session:', session);
+  // const activeEl = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (isActive) {
-      activeEl.current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-    }
-  }, [isActive]);
+  // useEffect(() => {
+  //   if (isActive && ctx?.clickPlace === 'resultBlock') {
+  //     activeEl.current?.scrollIntoView({
+  //       behavior: 'smooth',
+  //       block: 'start',
+  //     });
+  //   }
+  // }, [isActive, ctx?.clickPlace]);
 
   if (!ctx) {
     return <div>no context</div>;
@@ -50,8 +42,9 @@ export function MonthCalendar({
   return (
     <section
       key={i}
-      ref={activeEl}
-      className={twJoin('text-center', `${isActive ? 'active' : ''}`)}
+      // ref={activeEl}
+      // className={twJoin('text-center', `${isActive ? 'active' : ''}`)}
+      className={twJoin('text-center')}
     >
       <h2 className='mb-2 text-sm font-semibold text-gray-900'>
         {dayjs().year(year).month(i).format('MMMM')}
@@ -120,6 +113,7 @@ export function MonthCalendar({
                   day={day}
                   year={year}
                   session={session}
+                  position='left'
                 />
               )}
               {ctx.sharedRangesData?.personalRanges.some((personalRange) => {

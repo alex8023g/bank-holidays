@@ -38,11 +38,11 @@ export function CalendarsBlock({
           return (
             <MonthCalendar
               key={i}
-              isActive={monthsSt[i].days.some(
-                (day) =>
-                  day.dayOfYear === ctx.selectedRange?.start.dayOfYear &&
-                  dayjs(day.dateString).year() === year,
-              )}
+              // isActive={monthsSt[i].days.some(
+              //   (day) =>
+              //     day.dayOfYear === ctx.selectedRange?.start.dayOfYear &&
+              //     dayjs(day.dateString).year() === year,
+              // )}
               i={i}
               month={monthsSt[i]}
               days={days}

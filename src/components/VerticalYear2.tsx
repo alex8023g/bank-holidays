@@ -6,16 +6,9 @@ import { twJoin } from 'tailwind-merge';
 import { ThemeContext } from './ClientContainerVH';
 import { DateRange } from './ClientContainerVH';
 import dayjs from 'dayjs';
-import { toast } from 'sonner';
-import {
-  upsertPersonalRanges,
-  upsertPersonalRangesNoUser,
-} from '@/lib/actions';
-import { dayInRanges } from '@/lib/dayInRanges';
 import { Session } from 'next-auth';
 import { onDateCellClick } from '@/lib/onDateCellClick';
 import { HoverCountDays } from './HoverCountDays';
-import { XCircleIcon } from '@heroicons/react/20/solid';
 import { DeleteXCircleIcon } from './DeleteXCircle';
 
 export function VerticalYear2({
@@ -118,6 +111,7 @@ export function VerticalYear2({
                             ? '1px solid red'
                             : ''
                           : '',
+                    outlineOffset: '-1px',
                   }}
                   onClick={() => {
                     onDateCellClick({ ctx, day, year, session, days });
@@ -128,14 +122,16 @@ export function VerticalYear2({
                     // }
                   }}
                 >
-                  {ctx.selectedRange?.start.dayOfYear === day.dayOfYear && (
-                    <DeleteXCircleIcon
-                      ctx={ctx}
-                      day={day}
-                      year={year}
-                      session={session}
-                    />
-                  )}
+                  {ctx.selectedRange?.start.dayOfYear === day.dayOfYear &&
+                    ctx.selectedRange?.year === year && (
+                      <DeleteXCircleIcon
+                        ctx={ctx}
+                        day={day}
+                        year={year}
+                        session={session}
+                        position='right'
+                      />
+                    )}
                 </td>
                 {/* {ctx?.sharedRangesData?.personalRanges.map((ranges) => ( */}
                 {ctx?.sharedRangesData?.personalRanges

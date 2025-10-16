@@ -90,6 +90,7 @@ export default function ResultBlock({ days }: { days: Day[] }) {
                       ctx.setSelectedRange(null);
                     } else {
                       ctx.setSelectedRange(range);
+                      ctx.setClickPlace('resultBlock');
                     }
                   }}
                 >
@@ -125,17 +126,6 @@ export default function ResultBlock({ days }: { days: Day[] }) {
         </ul>
       </div>
       <MembersList />
-      {/* <h2 className='text-center font-semibold'>Все участники:</h2>
-      <ul>
-        {ctx?.sharedRangesData?.personalRanges.map((personalRange) => (
-          <li key={personalRange.id}>
-            {personalRange.personalRanges.userName}
-          </li>
-        ))}
-        {ctx?.sharedRangesData?.personalRanges.length === 0 && (
-          <li>Никто не делится этим графиком отпусков</li>
-        )}
-      </ul> */}
     </div>
   );
 }

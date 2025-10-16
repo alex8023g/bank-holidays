@@ -17,7 +17,7 @@ export function HoverCountDays({ days }: { days: Day[] }) {
         ctx?.hoverDayOfYear &&
         ctx.selectedDayOfYear <= ctx.hoverDayOfYear && (
           <div
-            className={`fixed hidden rounded-md p-2 font-semibold shadow-xl backdrop-blur-sm md:block`}
+            className={`fixed z-50 hidden rounded-md p-2 font-semibold shadow-xl backdrop-blur-sm md:block`}
             style={{
               left: `${x + 30}px`,
               top: `${y - 5}px`,

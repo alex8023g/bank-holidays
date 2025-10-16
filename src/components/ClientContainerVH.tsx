@@ -59,6 +59,8 @@ export type SelectedDateContext = {
   >;
   hiddenRangesIds: string[];
   setHiddenRangesIds: Dispatch<SetStateAction<string[]>>;
+  clickPlace: 'calendarCell' | 'resultBlock';
+  setClickPlace: Dispatch<SetStateAction<'calendarCell' | 'resultBlock'>>;
 };
 
 export const ThemeContext = createContext<SelectedDateContext | null>(null);
@@ -104,6 +106,9 @@ export default function ClientContainerVH({
   const [sharedRangesData, setSharedRangesData] =
     useState<SharedWithPersonalRangesRes | null>(null);
   const [hiddenRangesIds, setHiddenRangesIds] = useState<string[]>([]);
+  const [clickPlace, setClickPlace] = useState<'calendarCell' | 'resultBlock'>(
+    'calendarCell',
+  );
 
   useEffect(() => {
     // в случае авторизации пользователя выполняем:
@@ -189,6 +194,8 @@ export default function ClientContainerVH({
           setSharedRangesData,
           hiddenRangesIds,
           setHiddenRangesIds,
+          clickPlace,
+          setClickPlace,
         }}
       >
         <div className='flex h-dvh flex-col'>{children}</div>

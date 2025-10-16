@@ -26,6 +26,7 @@ export function onDateCellClick({
   days: Day[];
 }) {
   console.log('🚀 ~ onClick ~ start');
+  ctx.setClickPlace('calendarCell');
   if (ctx.selectedDayOfYear) {
     /*  первый день уже выбран */
     if (day.isHoliday) {
