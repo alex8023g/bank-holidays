@@ -130,7 +130,8 @@ export function MonthCalendar({
                     range.year === year &&
                     range.start.dayOfYear <= day.dayOfYear &&
                     range.end.dayOfYear >= day.dayOfYear &&
-                    personalRange.personalRanges.id !== ctx.lsRangesData.id,
+                    personalRange.personalRanges.id !== ctx.lsRangesData.id &&
+                    !ctx.hiddenRangesIds.includes(personalRange.id),
                 );
               }) && (
                 <div className='absolute bottom-1 z-20 flex h-3 w-full font-bold text-red-500'>

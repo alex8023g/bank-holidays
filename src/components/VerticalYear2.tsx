@@ -35,23 +35,37 @@ export function VerticalYear2({
 
   return (
     <>
-      <div>VerticalYear</div>
-      <table className='border-collapse border border-gray-300'>
-        <thead>
-          <tr>
-            <th className='/border w-30'>Дата</th>
+      <table
+        id='vertical-year-table'
+        className='border-collapse rounded-xl bg-white shadow-lg'
+      >
+        <thead className='rounded-xl bg-white shadow'>
+          <tr className='sticky top-0 z-30 bg-white'>
+            <th className='/border sticky top-0 left-0 z-30 w-28 bg-white py-1'>
+              Дата
+            </th>
             {/* <th className='w-20 border'>Holiday</th> */}
-            <th className='/border w-20'>Мой план</th>
-            {/* {ctx?.sharedRangesData?.personalRanges.map((range) => ( */}
-            {ctx?.sharedRangesData?.personalRanges
+            <th className='sticky top-0 left-28 z-20 w-32 bg-white px-5'>
+              Мой&nbsp;план
+            </th>
+            {/* {ctx?.sharedRangesData?.personalRanges
               .filter(
                 (range) => range.personalRanges.id !== ctx?.lsRangesData.id,
-              )
-              .map((range) => (
-                <th key={range.id} className='/border w-20'>
-                  {range.personalRanges.userName || 'неизвестный пользователь'}
-                </th>
-              ))}
+                )
+                .map((range) => ( */}
+            {ctx?.sharedRangesData?.personalRanges.map((range) => (
+              <th
+                key={range.id}
+                className={twJoin(
+                  'px-3',
+                  (range.personalRanges.id === ctx?.lsRangesData.id ||
+                    ctx?.hiddenRangesIds.includes(range.id)) &&
+                    'hidden',
+                )}
+              >
+                {range.personalRanges.userName || 'неизвестный пользователь'}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
@@ -61,7 +75,7 @@ export function VerticalYear2({
               <tr key={day.dateString} className=''>
                 <td
                   className={twJoin(
-                    'w-30 border-collapse border border-gray-300 text-center',
+                    'sticky left-0 z-20 w-28 border-collapse border border-gray-300 bg-white px-3 text-center',
                     day.isWeekend && 'text-red-500',
                     day.isHoliday && 'font-bold text-red-500',
                   )}
@@ -70,7 +84,7 @@ export function VerticalYear2({
                 </td>
                 <td
                   className={twJoin(
-                    'relative w-20 cursor-pointer border border-gray-300',
+                    'sticky left-28 z-10 w-32 cursor-pointer border border-gray-300 bg-white',
                     ctx.dateRanges.some(
                       (d) =>
                         d.year === Number(year) &&
@@ -133,7 +147,7 @@ export function VerticalYear2({
                     <td
                       key={ranges.personalRanges.id}
                       className={twJoin(
-                        'w-20 border-collapse border border-gray-300',
+                        'border-collapse border border-gray-300',
                         JSON.parse(
                           ranges.personalRanges.rangesJson as string,
                         ).some(
@@ -141,7 +155,9 @@ export function VerticalYear2({
                             d.year === Number(year) &&
                             d.start.dayOfYear <= day.dayOfYear &&
                             d.end.dayOfYear >= day.dayOfYear,
-                        ) && 'bg-blue-500',
+                        )
+                          ? 'bg-blue-500'
+                          : 'bg-gray-100',
                       )}
                     ></td>
                   ))}
