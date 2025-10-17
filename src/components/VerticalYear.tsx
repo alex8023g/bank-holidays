@@ -3,8 +3,8 @@
 import { Day } from '@/lib/createDaysArr';
 import { useContext } from 'react';
 import { twJoin } from 'tailwind-merge';
-import { ThemeContext } from './ClientContainerVH';
-import { DateRange } from './ClientContainerVH';
+import { ThemeContext } from './ContainerClientProviderVH';
+import { DateRange } from './ContainerClientProviderVH';
 import { JsonValue } from '@prisma/client/runtime/edge';
 
 export function VerticalYear({

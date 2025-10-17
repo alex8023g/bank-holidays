@@ -14,7 +14,7 @@ import {
   getSharedRanges,
   sharePersonalRanges,
 } from '@/lib/actions';
-import { ThemeContext } from '@/components/ClientContainerVH';
+import { ThemeContext } from '@/components/ContainerClientProviderVH';
 import { useContext, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { Session } from 'next-auth';

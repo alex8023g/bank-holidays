@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import ClientContainerVH from '@/components/ClientContainerVH';
+import { ContainerClientProviderVH } from '@/components/ContainerClientProviderVH';
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth/next';
 import Header2 from '@/components/Header2';
@@ -33,10 +33,10 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ClientContainerVH session={session}>
+        <ContainerClientProviderVH session={session}>
           <Header2 session={session} />
           {children}
-        </ClientContainerVH>
+        </ContainerClientProviderVH>
       </body>
     </html>
   );

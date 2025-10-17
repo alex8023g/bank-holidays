@@ -12,7 +12,7 @@ import { Button } from './catalist/button';
 import { createSharedRanges } from '@/lib/actions';
 import { toast } from 'sonner';
 import { span } from 'motion/react-client';
-import { ThemeContext } from './ClientContainerVH';
+import { ThemeContext } from './ContainerClientProviderVH';
 
 const navigation = [
   { name: 'Персональный', href: '/' },

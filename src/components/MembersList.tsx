@@ -1,12 +1,20 @@
 'use client';
 import { useContext } from 'react';
-import { ThemeContext } from './ClientContainerVH';
+import { ThemeContext } from './ContainerClientProviderVH';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/20/solid';
-export function MembersList() {
+import { twJoin } from 'tailwind-merge';
+import { RangesUsersBtn } from './ContainerRangesUsers';
+
+export function MembersList({ activeBtn }: { activeBtn: RangesUsersBtn }) {
   const ctx = useContext(ThemeContext);
 
   return (
-    <div className='border-1 border-red-500'>
+    <div
+      className={twJoin(
+        'w-full overflow-y-hidden rounded-lg border-gray-400 md:flex md:w-1/2 md:flex-col md:border xl:h-1/2 xl:w-full',
+        activeBtn === 'users' ? 'flex flex-col' : 'hidden',
+      )}
+    >
       <div className='/relative flex items-center justify-center'>
         <button
           className='/absolute top-2 left-2'
@@ -30,7 +38,7 @@ export function MembersList() {
         </button>
         <h2 className='pl-2 text-center font-semibold'>Все участники:</h2>
       </div>
-      <ul className='p-2'>
+      <ul className='h-full overflow-y-scroll p-2'>
         {ctx?.sharedRangesData?.personalRanges
           .filter(
             (personalRange) =>
@@ -64,24 +72,3 @@ export function MembersList() {
     </div>
   );
 }
-
-// function MemberItem({
-//   personalRange,
-// }: {
-//   personalRange: {
-//     personalRanges: PersonalRanges;
-//   } & {
-//     id: string;
-//     personalRangesId: string;
-//     sharedRangesId: string;
-//   };
-// }) {
-//   return (
-//     <li className='flex cursor-pointer items-center gap-2'>
-//       <EyeIcon className='h-4 w-4 text-gray-400' />
-//       <span className='text-gray-500'>
-//         {personalRange.personalRanges.userName}
-//       </span>
-//     </li>
-//   );
-// }

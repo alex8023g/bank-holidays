@@ -4,8 +4,9 @@ import {
   upsertPersonalRangesNoUser,
 } from '@/lib/actions';
 import { Session } from 'next-auth';
-import { SelectedDateContext } from './ClientContainerVH';
+import { SelectedDateContext } from './ContainerClientProviderVH';
 import { useEffect, useRef } from 'react';
+import { twJoin } from 'tailwind-merge';
 
 export function DeleteXCircleIcon({
   ctx,
@@ -37,7 +38,10 @@ export function DeleteXCircleIcon({
   return (
     <div
       ref={activeEl}
-      className={`absolute -top-2.5 -${position}-2.5 z-10 size-5 h-5 w-5 cursor-pointer rounded-full bg-white`}
+      className={twJoin(
+        'absolute -top-2.5 z-10 size-5 h-5 w-5 cursor-pointer rounded-full bg-white',
+        position === 'left' ? '-left-2.5' : '-right-2.5',
+      )}
       onClick={(e) => {
         e.stopPropagation();
         const updRanges = ctx.dateRanges.filter(

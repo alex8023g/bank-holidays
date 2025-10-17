@@ -1,4 +1,4 @@
-import { DateRange } from '@/components/ClientContainerVH';
+import { DateRange } from '@/components/ContainerClientProviderVH';
 import { holidaysCount } from './holidaysCount';
 import { Day } from './createDaysArr';
 import dayjs from 'dayjs';

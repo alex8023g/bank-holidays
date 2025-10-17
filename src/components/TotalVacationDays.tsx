@@ -1,5 +1,5 @@
 import { Day } from '@/lib/createDaysArr';
-import { DateRange } from './ClientContainerVH';
+import { DateRange } from './ContainerClientProviderVH';
 import { holidaysCount } from '@/lib/holidaysCount';
 
 export function TotalVacationDays({

@@ -13,7 +13,7 @@ import {
   createSharedPersonalRangesNoUser,
   sharePersonalRanges,
 } from '@/lib/actions';
-import { ThemeContext } from '@/components/ClientContainerVH';
+import { ThemeContext } from '@/components/ContainerClientProviderVH';
 import { useContext, useState } from 'react';
 import { toast } from 'sonner';
 export function SharePersonPlanBtn({

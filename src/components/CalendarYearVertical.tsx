@@ -3,15 +3,15 @@
 import { Day } from '@/lib/createDaysArr';
 import { useContext } from 'react';
 import { twJoin } from 'tailwind-merge';
-import { ThemeContext } from './ClientContainerVH';
-import { DateRange } from './ClientContainerVH';
+import { ThemeContext } from './ContainerClientProviderVH';
+import { DateRange } from './ContainerClientProviderVH';
 import dayjs from 'dayjs';
 import { Session } from 'next-auth';
 import { onDateCellClick } from '@/lib/onDateCellClick';
 import { HoverCountDays } from './HoverCountDays';
 import { DeleteXCircleIcon } from './DeleteXCircle';
 
-export function VerticalYear2({
+export function CalendarYearVertical({
   days,
   year,
   session,

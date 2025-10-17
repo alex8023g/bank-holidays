@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
-import { ThemeContext } from './ClientContainerVH';
+import { ThemeContext } from './ContainerClientProviderVH';
 import { useContext } from 'react';
 import dayjs from 'dayjs';
 

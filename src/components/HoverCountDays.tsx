@@ -1,6 +1,6 @@
 'use client';
 import { useContext } from 'react';
-import { ThemeContext } from './ClientContainerVH';
+import { ThemeContext } from './ContainerClientProviderVH';
 import { useMouse } from '@react-hooks-library/core';
 import { holidaysCount } from '@/lib/holidaysCount';
 import { Day } from '@/lib/createDaysArr';

@@ -3,7 +3,7 @@ import { toast } from 'sonner';
 import { Session } from 'next-auth';
 import { upsertPersonalRanges, upsertPersonalRangesNoUser } from './actions';
 import { dayInRanges } from './dayInRanges';
-import { SelectedDateContext } from '@/components/ClientContainerVH';
+import { SelectedDateContext } from '@/components/ContainerClientProviderVH';
 
 export function onDateCellClick({
   ctx,

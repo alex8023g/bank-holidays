@@ -65,14 +65,14 @@ export type SelectedDateContext = {
 
 export const ThemeContext = createContext<SelectedDateContext | null>(null);
 
-export default function ClientContainerVH({
+export function ContainerClientProviderVH({
   children,
   session,
 }: {
   session: Session | null;
   children: ReactNode;
 }) {
-  console.log('🚀 ~ ClientContainerVH start ');
+  console.log('🚀 ~ ContainerClientProviderVH start ');
 
   const [dateRanges, setDateRanges] = useLocalStorage<DateRange[]>(
     'otpuskPlanRanges',
@@ -151,10 +151,10 @@ export default function ClientContainerVH({
             const res = await upsertPersonalRangesByUserIdOrLsRangesId({
               userId: session.user.id,
               rangesJson: lsRangesJson,
-              lsRangesId: JSON.parse(lsRangesData.id || ''),
+              lsRangesId: JSON.parse(lsRangesData.id || '""'),
               userName: session.user.name || 'Пользователь X',
             });
-            console.log('🚀 ~ ClientContainerVH ~ res-2:', res);
+            console.log('🚀 ~ ContainerClientProviderVH ~ res-2:', res);
           }
         }
       }

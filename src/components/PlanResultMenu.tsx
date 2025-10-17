@@ -12,7 +12,7 @@ import { copyTextToClipboard } from '@/lib/copyToClipboard';
 import { requestForLeaveText } from '@/lib/requestForLeaveText';
 import { useState } from 'react';
 import { vocationScheduleText } from '@/lib/vocationScheduleText';
-import { DateRange } from './ClientContainerVH';
+import { DateRange } from './ContainerClientProviderVH';
 import { Day } from '@/lib/createDaysArr';
 
 export function PlanResultMenu({

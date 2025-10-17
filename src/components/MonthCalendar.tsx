@@ -1,6 +1,6 @@
 'use client';
 import { useContext, useEffect, useRef } from 'react';
-import { DateRange, ThemeContext } from './ClientContainerVH';
+import { DateRange, ThemeContext } from './ContainerClientProviderVH';
 import dayjs from 'dayjs';
 import { Month } from '@/lib/createYearCalendar';
 import { Day } from '@/lib/createDaysArr';
