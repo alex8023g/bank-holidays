@@ -7,6 +7,7 @@ import { ContainerMainAside } from '@/components/ContainerMainAside';
 import { ContainerMain1 } from '@/components/ContainerMain1';
 import { ContainerAside } from '@/components/ContainerAside';
 import ContainerRangesUsers from '@/components/ContainerRangesUsers';
+import { ContainerCalendarsView } from '@/components/ContainerCalendarsView';
 
 export default async function HomePage({
   searchParams,
@@ -22,16 +23,12 @@ export default async function HomePage({
   const session = await getServerSession(authOptions);
 
   return (
-    // <div className='flex flex-col overflow-y-hidden bg-gray-100 xl:flex-row'> //
     <ContainerMainAside>
       <ContainerMain1>
-        <CalendarYearClassic days={days} session={session} />
+        <ContainerCalendarsView days={days} session={session} />
       </ContainerMain1>
       <ContainerAside>
         <ContainerRangesUsers days={days} />
-        {/* <div className='h-full border border-red-500'>
-          <h2>ResultBlock</h2>
-        </div> */}
       </ContainerAside>
       {sharedplaninvitation && (
         <SharedPlanInvitationDialog
@@ -40,6 +37,5 @@ export default async function HomePage({
         />
       )}
     </ContainerMainAside>
-    // </div> //
   );
 }

@@ -21,8 +21,8 @@ export function DateRangesList({
   activeBtn: RangesUsersBtn;
 }) {
   const searchParams = useSearchParams();
-  const isLogin = searchParams.has('login');
   const ctx = useContext(ThemeContext);
+  const isLogin = searchParams.has('login');
 
   if (!ctx) {
     return <div>no ctx перезагрузите страницу</div>;
@@ -53,17 +53,17 @@ export function DateRangesList({
   return (
     <div
       className={twJoin(
-        'h-full w-full flex-col overflow-y-hidden border-gray-400 md:flex md:w-1/2 md:rounded-lg md:border xl:h-1/2 xl:w-full',
+        '/border-gray-400 /md:border h-full w-full flex-col overflow-y-hidden md:flex md:w-1/2 md:rounded-lg xl:h-1/2 xl:w-full',
         activeBtn === 'total' ? 'flex' : 'hidden',
       )}
     >
       <div
         className={twJoin(
-          'sticky top-0 flex h-full flex-col justify-between bg-white px-2 py-2 md:h-auto md:flex-row',
+          'sticky top-0 z-20 flex h-full flex-col justify-between bg-white px-2 py-2 shadow-sm md:h-auto md:flex-row',
           activeBtn !== 'total' && 'hidden',
         )}
       >
-        <h2 className='/grow text-center font-semibold'>
+        <h2 className='text-center font-semibold'>
           План на {ctx?.selectedYear} год
         </h2>
         <div className='my-auto flex justify-between'>
@@ -83,7 +83,7 @@ export function DateRangesList({
       <div className='/border-2 /border-green-600 hidden h-full flex-col overflow-y-hidden md:flex xl:relative xl:flex xl:h-full'>
         <ul
           // role={'list'}
-          className='/w-1/2 /border /border-violet-500 /divide-gray-100 /divide-y /min-w-[400px] flex grow flex-col overflow-y-scroll py-0.5 xl:w-auto'
+          className='/w-1/2 /border /border-violet-500 /divide-gray-100 /divide-y /min-w-[400px] flex grow flex-col overflow-y-scroll pt-0.5 xl:w-auto'
         >
           {ctx?.dateRanges
             .filter((range) => range.year === ctx.selectedYear)

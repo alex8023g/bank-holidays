@@ -39,7 +39,7 @@ export function PlanResultMenu({
         <Headless.MenuButton as='button' className='outline-none'>
           <EllipsisVerticalIcon className='size-6 cursor-pointer text-zinc-500' />
         </Headless.MenuButton>
-        <DropdownMenu anchor={anchor || 'bottom end'} className=''>
+        <DropdownMenu anchor={anchor || 'bottom end'} className='z-20'>
           <DropdownItem
             onClick={() =>
               copyTextToClipboard(vocationScheduleText({ dateRanges, days }))

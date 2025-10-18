@@ -61,6 +61,8 @@ export type SelectedDateContext = {
   setHiddenRangesIds: Dispatch<SetStateAction<string[]>>;
   clickPlace: 'calendarCell' | 'resultBlock';
   setClickPlace: Dispatch<SetStateAction<'calendarCell' | 'resultBlock'>>;
+  calendarView: 'calendar' | 'list';
+  setCalendarView: Dispatch<SetStateAction<'calendar' | 'list'>>;
 };
 
 export const ThemeContext = createContext<SelectedDateContext | null>(null);
@@ -108,6 +110,9 @@ export function ContainerClientProviderVH({
   const [hiddenRangesIds, setHiddenRangesIds] = useState<string[]>([]);
   const [clickPlace, setClickPlace] = useState<'calendarCell' | 'resultBlock'>(
     'calendarCell',
+  );
+  const [calendarView, setCalendarView] = useState<'calendar' | 'list'>(
+    'calendar',
   );
 
   useEffect(() => {
@@ -196,6 +201,8 @@ export function ContainerClientProviderVH({
           setHiddenRangesIds,
           clickPlace,
           setClickPlace,
+          calendarView,
+          setCalendarView,
         }}
       >
         <div className='flex h-dvh flex-col'>{children}</div>

@@ -11,11 +11,11 @@ export function MembersList({ activeBtn }: { activeBtn: RangesUsersBtn }) {
   return (
     <div
       className={twJoin(
-        'w-full overflow-y-hidden rounded-lg border-gray-400 md:flex md:w-1/2 md:flex-col md:border xl:h-1/2 xl:w-full',
+        '/border-gray-400 /md:border w-full overflow-y-hidden rounded-lg md:flex md:w-1/2 md:flex-col xl:h-1/2 xl:w-full',
         activeBtn === 'users' ? 'flex flex-col' : 'hidden',
       )}
     >
-      <div className='/relative flex items-center justify-center'>
+      <div className='flex items-center justify-center pt-1 md:py-2 md:pb-2 md:shadow-sm'>
         <button
           className='/absolute top-2 left-2'
           onClick={() => {
@@ -38,7 +38,7 @@ export function MembersList({ activeBtn }: { activeBtn: RangesUsersBtn }) {
         </button>
         <h2 className='pl-2 text-center font-semibold'>Все участники:</h2>
       </div>
-      <ul className='h-full overflow-y-scroll p-2'>
+      <ul className='h-full overflow-y-scroll p-2 pt-0.5 md:p-2'>
         {ctx?.sharedRangesData?.personalRanges
           .filter(
             (personalRange) =>

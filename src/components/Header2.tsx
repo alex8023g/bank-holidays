@@ -8,11 +8,8 @@ import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { Button } from './catalist/button';
-import { createSharedRanges } from '@/lib/actions';
-import { toast } from 'sonner';
-import { span } from 'motion/react-client';
 import { ThemeContext } from './ContainerClientProviderVH';
+import { SwitchCalendarView } from './SwitchCalendarView';
 
 const navigation = [
   { name: 'Персональный', href: '/' },
@@ -50,6 +47,7 @@ export default function Header2({ session }: { session: Session | null }) {
             <Bars3Icon aria-hidden='true' className='size-6' />
           </button>
         </div>
+        <SwitchCalendarView />
         {ctx?.lsSharedRangesData.name && (
           <span>{ctx?.lsSharedRangesData.name}</span>
         )}
