@@ -46,6 +46,9 @@ export function onDateCellClick({
     ) {
       toast.error('Периоды отпусков не могут пересекаться');
       return;
+    } else if (day.dayOfYear < ctx.selectedDayOfYear) {
+      ctx.setSelectedDayOfYear(day.dayOfYear);
+      return;
     }
     const newRange = {
       start: {
