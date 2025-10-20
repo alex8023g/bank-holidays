@@ -44,7 +44,7 @@ export function CalendarYearVertical2({
 
             {sharedRangesData.personalRanges.map((range) => (
               <th
-                key={range.id}
+                key={range.personalRangesId}
                 className={twJoin(
                   'px-3',
                   // (range.personalRanges.id === ctx?.lsRangesData.id ||

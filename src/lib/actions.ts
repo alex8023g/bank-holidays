@@ -10,6 +10,7 @@ import {
   SharedRanges,
   User,
 } from '../../generated/prisma';
+import { cookies } from 'next/headers';
 
 export async function upsertPersonalRanges({
   userId,
@@ -130,44 +131,90 @@ export async function createSharedPersonalRangesNoUser({
   }
 }
 
-export type GetPersonalRangesByUserIdRes = {
+export type GetPersonalRangesRes = {
   ok: boolean;
   rangesJson: string | null;
   id: string;
-  errorType?:
-    | 'No personal ranges by userId found'
-    | 'Error getting personal ranges by userId';
+  userName: string;
+  // errorType?:
+  //   | 'No personal ranges by userId found'
+  //   | 'Error getting personal ranges by userId';
   errorMsg?: string;
 };
 export async function getPersonalRangesByUserId({
   userId,
 }: {
   userId: string;
-}): Promise<GetPersonalRangesByUserIdRes> {
+}): Promise<GetPersonalRangesRes> {
   try {
     const personalRanges = await prisma.personalRanges.findUnique({
       where: { userId },
     });
-    if (!personalRanges) {
+    if (personalRanges) {
+      return {
+        ok: true,
+        rangesJson: personalRanges.rangesJson as string | null,
+        id: personalRanges.id,
+        userName: personalRanges.userName,
+      };
+    } else {
       return {
         ok: false,
         rangesJson: null,
         id: '',
-        errorType: 'No personal ranges by userId found',
+        userName: '',
+        // errorType: 'No personal ranges by userId found',
+        errorMsg: 'No personal ranges by userId found',
       };
     }
-    return {
-      ok: true,
-      rangesJson: personalRanges.rangesJson as string | null,
-      id: personalRanges.id,
-    };
   } catch (error) {
     console.error(error);
     return {
       ok: false,
       rangesJson: null,
       id: '',
-      errorType: 'Error getting personal ranges by userId',
+      userName: '',
+      // errorType: 'Error getting personal ranges by userId',
+      errorMsg: (error as Error).message,
+    };
+  }
+}
+
+export async function getPersonalRangesById({
+  id,
+}: {
+  id: string;
+}): Promise<GetPersonalRangesRes> {
+  try {
+    const personalRanges = await prisma.personalRanges.findUnique({
+      where: { id },
+    });
+    if (personalRanges) {
+      return {
+        ok: true,
+        rangesJson: personalRanges.rangesJson as string | null,
+        id: personalRanges.id,
+        userName: personalRanges.userName,
+      };
+    } else {
+      return {
+        ok: false,
+        rangesJson: null,
+        id: '',
+        userName: '',
+        // errorType: 'No personal ranges by userId found',
+        errorMsg: 'No personal ranges by userId found',
+      };
+    }
+  } catch (error) {
+    console.error(error);
+    return {
+      ok: false,
+      rangesJson: null,
+      id: '',
+      userName: '',
+      // errorType: 'Error getting personal ranges by userId',
+      // errorMsg: 'Error getting personal ranges by userId',
       errorMsg: (error as Error).message,
     };
   }
@@ -222,7 +269,7 @@ export async function getSharedRanges({ id }: { id: string | null }): Promise<{
     return { ok: true, sharedRangesWithPersonal: null };
   }
   try {
-    const sharedRangesWithPersonal = await prisma.sharedRanges.findFirst({
+    const sharedRangesWithPersonal = await prisma.sharedRanges.findUnique({
       where: { id },
       include: {
         personalRanges: {
@@ -285,7 +332,7 @@ export async function getDays() {
   return days;
 }
 
-export async function sharePersonalRanges({
+export async function sharePersonalRangesByUserId({
   userId,
   sharedRangesId,
 }: {
@@ -311,8 +358,43 @@ export async function sharePersonalRanges({
     },
   });
   revalidatePath('/shared');
-  revalidatePath('/rowcalendar');
   return { ok: true, personalSharedRanges };
+}
+
+export async function sharePersonalRangesByPersonalRangesId({
+  personalRangesId,
+  sharedRangesId,
+}: {
+  personalRangesId: string;
+  sharedRangesId: string;
+}) {
+  const personalRanges = await prisma.personalRanges.findUnique({
+    where: { id: personalRangesId },
+  });
+  if (!personalRanges) {
+    return { ok: false, error: new Error('Personal ranges not found') };
+  }
+  const sharedRanges = await prisma.sharedRanges.findUnique({
+    where: { id: sharedRangesId },
+  });
+  if (!sharedRanges) {
+    return { ok: false, error: new Error('Shared ranges not found') };
+  }
+
+  if (!personalRanges) {
+    return { ok: false, error: new Error('Shared ranges not found') };
+  }
+
+  const res = await prisma.personalSharedRanges.upsert({
+    where: {
+      personalRangesId_sharedRangesId: { personalRangesId, sharedRangesId },
+    },
+    update: { sharedRangesId },
+    create: { personalRangesId, sharedRangesId },
+  });
+
+  revalidatePath('/shared');
+  return { ok: true, res };
 }
 
 export async function deletePersonalSharedRangesByPersonalRangesId({
@@ -339,4 +421,76 @@ export async function deletePersonalRangesById({ id }: { id: string }) {
     console.error(error);
     return { ok: false, error: error as Error };
   }
+}
+
+export async function createPersonalRangesAndSetCookiePersonalRangesId() {
+  const personalRanges = await prisma.personalRanges.create({
+    data: {
+      userId: null,
+      rangesJson: JSON.stringify([]),
+      userName: '',
+    },
+  });
+  const cookieStore = await cookies();
+  cookieStore.set('personalRangesId', personalRanges.id, {
+    // httpOnly: true,
+    // secure: process.env.NODE_ENV === 'production',
+    // maxAge: 60 * 60 * 24 * 30, // 30 days
+    // path: '/',
+  });
+  revalidatePath('/');
+}
+
+export type SharedRangesByPersonalRangesId = {
+  sharedRanges: SharedRanges;
+  personalRanges: PersonalRanges;
+  personalRangesId: string;
+  sharedRangesId: string;
+};
+
+export async function getSharedRangesByPersonalRangesId({
+  personalRangesId,
+}: {
+  personalRangesId: string;
+}): Promise<{
+  ok: boolean;
+  sharedRanges: SharedRangesByPersonalRangesId[];
+}> {
+  const sharedRanges = await prisma.personalSharedRanges.findMany({
+    where: { personalRangesId },
+    include: {
+      sharedRanges: true,
+      personalRanges: true,
+    },
+  });
+  return { ok: true, sharedRanges };
+}
+
+export async function createPersonalSharedRangesByTwoIds({
+  personalRangesId,
+  sharedRangesId,
+}: {
+  personalRangesId: string;
+  sharedRangesId: string;
+}) {
+  const personalRanges = await prisma.personalRanges.findUnique({
+    where: { id: personalRangesId },
+  });
+  if (!personalRanges) {
+    return { ok: false, error: new Error('Personal ranges not found') };
+  }
+  const sharedRanges = await prisma.sharedRanges.findUnique({
+    where: { id: sharedRangesId },
+  });
+  if (!sharedRanges) {
+    return { ok: false, error: new Error('Shared ranges not found') };
+  }
+  const personalSharedRanges = await prisma.personalSharedRanges.create({
+    data: {
+      personalRangesId: personalRanges.id,
+      sharedRangesId: sharedRanges.id,
+    },
+  });
+  revalidatePath('/shared');
+  return { ok: true, personalSharedRanges };
 }

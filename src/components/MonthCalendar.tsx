@@ -125,7 +125,9 @@ export function MonthCalendar({
                     range.start.dayOfYear <= day.dayOfYear &&
                     range.end.dayOfYear >= day.dayOfYear &&
                     personalRange.personalRanges.id !== ctx.lsRangesData.id &&
-                    !ctx.hiddenRangesIds.includes(personalRange.id),
+                    !ctx.hiddenRangesIds.includes(
+                      personalRange.personalRangesId,
+                    ),
                 );
               }) && (
                 <div className='absolute bottom-1 z-20 flex h-3 w-full font-bold text-red-500'>

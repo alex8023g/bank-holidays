@@ -11,14 +11,17 @@ import { ErrorMessage, Field, Label } from '@/components/catalist/fieldset';
 import { Input } from '@/components/catalist/input';
 import {
   createSharedPersonalRangesNoUser,
+  getPersonalRangesById,
   getSharedRanges,
-  sharePersonalRanges,
+  sharePersonalRangesByPersonalRangesId,
+  sharePersonalRangesByUserId,
 } from '@/lib/actions';
 import { ThemeContext } from '@/components/ContainerClientProviderVH';
 import { useContext, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
+
 export function SharedPlanInvitationDialog({
   session,
   sharedRangesId,
@@ -30,16 +33,29 @@ export function SharedPlanInvitationDialog({
     isOpen: false,
     name: '',
     isError: false,
+    personPlanId: '',
   });
   const ctx = useContext(ThemeContext);
   const userId = session?.user.id;
   const router = useRouter();
   useEffect(() => {
-    if (sharedRangesId === ctx?.lsSharedRangesData.id) {
-      router.push('/');
-    } else {
-      setState((st) => ({ ...st, isOpen: true }));
-    }
+    (async () => {
+      if (sharedRangesId === ctx?.lsSharedRangesData.id) {
+        router.push('/');
+      } else {
+        setState((st) => ({ ...st, isOpen: true }));
+        const res = await getPersonalRangesById({
+          id: ctx?.lsRangesData.id || '',
+        });
+        if (res.ok) {
+          setState((st) => ({
+            ...st,
+            name: res.userName,
+            personPlanId: res.id,
+          }));
+        }
+      }
+    })();
   }, [ctx?.lsSharedRangesData.id, sharedRangesId]);
 
   return (
@@ -60,6 +76,7 @@ export function SharedPlanInvitationDialog({
             placeholder='Введите ваше имя'
             autoFocus
             invalid={state.isError}
+            defaultValue={state.name}
             onChange={(e) =>
               setState((st) => ({ ...st, name: e.target.value }))
             }
@@ -85,8 +102,35 @@ export function SharedPlanInvitationDialog({
               setState((st) => ({ ...st, isError: true }));
             } else {
               setState((st) => ({ ...st, isOpen: false, isError: false }));
-              if (!userId) {
-                // Если пользователь НЕ авторизован
+              if (userId) {
+                // Если пользователь авторизован
+                const res = await getSharedRanges({ id: sharedRangesId });
+                if (res.sharedRangesWithPersonal) {
+                  sharePersonalRangesByUserId({
+                    userId,
+                    sharedRangesId,
+                  });
+                  ctx?.setLsSharedRangesData({
+                    id: sharedRangesId,
+                    name: state.name,
+                    year: res.sharedRangesWithPersonal?.year || 0,
+                  });
+                } else {
+                  toast.error(
+                    'Не удалось добавить график отпусков в общий график',
+                  );
+                }
+                // end Если пользователь авторизован
+              } else if (state.personPlanId) {
+                // если в бд есть персональный план
+                console.log('🚀 ~ sharedRangesId:', state.personPlanId);
+                sharePersonalRangesByPersonalRangesId({
+                  personalRangesId: state.personPlanId,
+                  sharedRangesId,
+                });
+                // end если в бд есть персональный план
+              } else {
+                // Если пользователь НЕ авторизован и в бд нет персонального плана
                 const res = await createSharedPersonalRangesNoUser({
                   rangesJson: JSON.stringify(ctx?.dateRanges || []),
                   sharedRangesId: sharedRangesId,
@@ -110,24 +154,7 @@ export function SharedPlanInvitationDialog({
                     'Не удалось добавить график отпусков в общий график',
                   );
                 }
-              } else {
-                // Если пользователь авторизован
-                const res = await getSharedRanges({ id: sharedRangesId });
-                if (res.sharedRangesWithPersonal) {
-                  sharePersonalRanges({
-                    userId,
-                    sharedRangesId,
-                  });
-                  ctx?.setLsSharedRangesData({
-                    id: sharedRangesId,
-                    name: state.name,
-                    year: res.sharedRangesWithPersonal?.year || 0,
-                  });
-                } else {
-                  toast.error(
-                    'Не удалось добавить график отпусков в общий график',
-                  );
-                }
+                // end Если пользователь НЕ авторизован
               }
             }
           }}

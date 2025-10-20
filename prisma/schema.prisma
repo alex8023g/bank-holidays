@@ -73,9 +73,11 @@ model SharedRanges {
 }
 
 model PersonalSharedRanges {
-  id               String         @id @default(cuid())
+  // id               String         @id @default(cuid())
   personalRangesId String         @map("personal_ranges_id")
   sharedRangesId   String         @map("shared_ranges_id")
   personalRanges   PersonalRanges @relation(fields: [personalRangesId], references: [id])
   sharedRanges     SharedRanges   @relation(fields: [sharedRangesId], references: [id])
+
+  @@id([personalRangesId, sharedRangesId])
 }

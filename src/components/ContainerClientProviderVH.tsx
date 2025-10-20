@@ -18,6 +18,7 @@ import {
   upsertPersonalRangesByUserIdOrLsRangesId,
   getSharedRanges,
   SharedWithPersonalRangesRes,
+  createPersonalRangesAndSetCookiePersonalRangesId,
 } from '@/lib/actions';
 import { SessionProvider } from 'next-auth/react';
 
@@ -70,9 +71,11 @@ export const ThemeContext = createContext<SelectedDateContext | null>(null);
 export function ContainerClientProviderVH({
   children,
   session,
+  personalRangesId,
 }: {
   session: Session | null;
   children: ReactNode;
+  personalRangesId: string | undefined;
 }) {
   console.log('🚀 ~ ContainerClientProviderVH start ');
 
@@ -176,6 +179,14 @@ export function ContainerClientProviderVH({
       }
     })();
   }, [lsSharedRangesData.id]);
+
+  useEffect(() => {
+    (async () => {
+      if (!personalRangesId) {
+        await createPersonalRangesAndSetCookiePersonalRangesId();
+      }
+    })();
+  }, []);
 
   return (
     <SessionProvider session={session}>

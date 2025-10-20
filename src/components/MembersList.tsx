@@ -23,7 +23,7 @@ export function MembersList({ activeBtn }: { activeBtn: RangesUsersBtn }) {
               prev.length > 0
                 ? []
                 : ctx?.sharedRangesData?.personalRanges.map(
-                    (personalRange) => personalRange.id,
+                    (personalRange) => personalRange.personalRanges.id,
                   ) || [],
             );
           }}
@@ -46,19 +46,25 @@ export function MembersList({ activeBtn }: { activeBtn: RangesUsersBtn }) {
           )
           .map((personalRange) => (
             <li
-              key={personalRange.id}
+              key={personalRange.personalRanges.id}
               className='flex cursor-pointer items-center gap-2'
               onClick={() => {
                 ctx?.setHiddenRangesIds((prev) => {
-                  if (prev.includes(personalRange.id)) {
-                    return prev.filter((id) => id !== personalRange.id) || [];
+                  if (prev.includes(personalRange.personalRanges.id)) {
+                    return (
+                      prev.filter(
+                        (id) => id !== personalRange.personalRanges.id,
+                      ) || []
+                    );
                   } else {
-                    return [...prev, personalRange.id];
+                    return [...prev, personalRange.personalRanges.id];
                   }
                 });
               }}
             >
-              {ctx?.hiddenRangesIds.includes(personalRange.id) ? (
+              {ctx?.hiddenRangesIds.includes(
+                personalRange.personalRanges.id,
+              ) ? (
                 <EyeSlashIcon className='h-4 w-4 text-gray-400' />
               ) : (
                 <EyeIcon className='h-4 w-4 text-gray-400' />

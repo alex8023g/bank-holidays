@@ -5,6 +5,8 @@ import { ContainerClientProviderVH } from '@/components/ContainerClientProviderV
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth/next';
 import Header2 from '@/components/Header2';
+import { cookies } from 'next/headers';
+import { getSharedRangesByPersonalRangesId } from '@/lib/actions';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -27,13 +29,24 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(authOptions);
+  console.log('🚀 ~ RootLayout ~ session:', session);
 
+  const cookieStore = await cookies();
+  const personalRangesId = cookieStore.get('personalRangesId')?.value;
+  console.log('🚀 ~ RootLayout ~ personalRangesId:', personalRangesId);
+  const sharedRangesRes = await getSharedRangesByPersonalRangesId({
+    personalRangesId: personalRangesId || '',
+  });
+  console.log('🚀 ~ RootLayout ~ sharedRangesRes:', sharedRangesRes);
   return (
     <html lang='en'>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ContainerClientProviderVH session={session}>
+        <ContainerClientProviderVH
+          session={session}
+          personalRangesId={personalRangesId}
+        >
           <Header2 session={session} />
           {children}
         </ContainerClientProviderVH>

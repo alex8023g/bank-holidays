@@ -1,4 +1,3 @@
-import { CalendarYearClassic } from '@/components/CalendarYearClassic';
 import { getDays } from '@/lib/actions';
 import { SharedPlanInvitationDialog } from '@/components/SharedPlanInvitationDialog';
 import { authOptions } from '@/lib/auth';
@@ -8,6 +7,7 @@ import { ContainerMain1 } from '@/components/ContainerMain1';
 import { ContainerAside } from '@/components/ContainerAside';
 import ContainerRangesUsers from '@/components/ContainerRangesUsers';
 import { ContainerCalendarsView } from '@/components/ContainerCalendarsView';
+import { cookies } from 'next/headers';
 
 export default async function HomePage({
   searchParams,
@@ -17,10 +17,12 @@ export default async function HomePage({
   }>;
 }) {
   const { sharedplaninvitation } = await searchParams;
-  console.log('🚀 ~ HomePage ~ sharedplaninvitation:', sharedplaninvitation);
 
   const days = await getDays();
   const session = await getServerSession(authOptions);
+
+  const cookieStore = await cookies();
+  const personalRangesId = cookieStore.get('personalRangesId')?.value;
 
   return (
     <ContainerMainAside>
