@@ -43,104 +43,98 @@ export function SharedPlanInvitationDialog({
   }, [ctx?.lsSharedRangesData.id, sharedRangesId]);
 
   return (
-    <>
-      <Dialog
-        open={state.isOpen}
-        onClose={() => setState((st) => ({ ...st, isOpen: false }))}
-      >
-        <DialogTitle>Присоединиться к общему графиком отпусков?</DialogTitle>
-        <DialogDescription>
-          Все у кого будет ссылка на этот график отпусков смогут видеть ваш
-          график отпусков.
-        </DialogDescription>
-        <DialogBody>
-          <Field>
-            <Label>Ваше имя</Label>
-            <Input
-              name='name'
-              placeholder='Введите ваше имя'
-              autoFocus
-              invalid={state.isError}
-              onChange={(e) =>
-                setState((st) => ({ ...st, name: e.target.value }))
-              }
-            />
-            {state.isError && (
-              <ErrorMessage>Это поле обязательно для заполнения</ErrorMessage>
-            )}
-          </Field>
-        </DialogBody>
-        <DialogActions>
-          <Button
-            plain
-            onClick={() => {
-              setState((st) => ({ ...st, isOpen: false, name: '' }));
-              router.push('/');
-            }}
-          >
-            Отмена
-          </Button>
-          <Button
-            onClick={async () => {
-              if (state.name.trim() === '') {
-                setState((st) => ({ ...st, isError: true }));
-              } else {
-                setState((st) => ({ ...st, isOpen: false, isError: false }));
-                // ctx?.setSharedRangesId(sharedRangesId);
-
-                // ctx?.setLsRangesData({
-                //   ...ctx?.lsRangesData,
-                //   userName: state.name,
-                // });
-                if (!userId) {
-                  const res = await createSharedPersonalRangesNoUser({
-                    rangesJson: JSON.stringify(ctx?.dateRanges || []),
-                    sharedRangesId: sharedRangesId,
+    <Dialog
+      open={state.isOpen}
+      onClose={() => setState((st) => ({ ...st, isOpen: false }))}
+    >
+      <DialogTitle>Присоединиться к общему графиком отпусков?</DialogTitle>
+      <DialogDescription>
+        Все у кого будет ссылка на этот график отпусков смогут видеть ваш график
+        отпусков.
+      </DialogDescription>
+      <DialogBody>
+        <Field>
+          <Label>Ваше имя</Label>
+          <Input
+            name='name'
+            placeholder='Введите ваше имя'
+            autoFocus
+            invalid={state.isError}
+            onChange={(e) =>
+              setState((st) => ({ ...st, name: e.target.value }))
+            }
+          />
+          {state.isError && (
+            <ErrorMessage>Это поле обязательно для заполнения</ErrorMessage>
+          )}
+        </Field>
+      </DialogBody>
+      <DialogActions>
+        <Button
+          plain
+          onClick={() => {
+            setState((st) => ({ ...st, isOpen: false, name: '' }));
+            router.push('/');
+          }}
+        >
+          Отмена
+        </Button>
+        <Button
+          onClick={async () => {
+            if (state.name.trim() === '') {
+              setState((st) => ({ ...st, isError: true }));
+            } else {
+              setState((st) => ({ ...st, isOpen: false, isError: false }));
+              if (!userId) {
+                // Если пользователь НЕ авторизован
+                const res = await createSharedPersonalRangesNoUser({
+                  rangesJson: JSON.stringify(ctx?.dateRanges || []),
+                  sharedRangesId: sharedRangesId,
+                  userName: state.name,
+                });
+                if (res.personalSharedRanges && res.sharedRanges) {
+                  toast.success(
+                    'График отпусков успешно добавлен в общий график',
+                  );
+                  ctx?.setLsRangesData({
                     userName: state.name,
+                    id: res.personalRanges.id,
                   });
-                  if (res.personalSharedRanges && res.sharedRanges) {
-                    toast.success(
-                      'График отпусков успешно добавлен в общий график',
-                    );
-                    ctx?.setLsRangesData({
-                      userName: state.name,
-                      id: res.personalRanges.id,
-                    });
-                    ctx?.setLsSharedRangesData({
-                      id: res.sharedRanges.id,
-                      name: res.sharedRanges.name,
-                      year: res.sharedRanges.year,
-                    });
-                  } else {
-                    toast.error(
-                      'Не удалось добавить график отпусков в общий график',
-                    );
-                  }
+                  ctx?.setLsSharedRangesData({
+                    id: res.sharedRanges.id,
+                    name: res.sharedRanges.name,
+                    year: res.sharedRanges.year,
+                  });
                 } else {
-                  const res = await getSharedRanges({ id: sharedRangesId });
-                  if (res.sharedRangesWithPersonal) {
-                    sharePersonalRanges({
-                      userId,
-                      sharedRangesId,
-                    });
-                    ctx?.setLsSharedRangesData({
-                      id: sharedRangesId,
-                      name: state.name,
-                      year: res.sharedRangesWithPersonal?.year || 0,
-                    });
-                  } else {
-                    toast.error(
-                      'Не удалось добавить график отпусков в общий график',
-                    );
-                  }
+                  toast.error(
+                    'Не удалось добавить график отпусков в общий график',
+                  );
+                }
+              } else {
+                // Если пользователь авторизован
+                const res = await getSharedRanges({ id: sharedRangesId });
+                if (res.sharedRangesWithPersonal) {
+                  sharePersonalRanges({
+                    userId,
+                    sharedRangesId,
+                  });
+                  ctx?.setLsSharedRangesData({
+                    id: sharedRangesId,
+                    name: state.name,
+                    year: res.sharedRangesWithPersonal?.year || 0,
+                  });
+                } else {
+                  toast.error(
+                    'Не удалось добавить график отпусков в общий график',
+                  );
                 }
               }
-            }}
-          >
-            Присоединиться
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </>
+            }
+          }}
+        >
+          Присоединиться
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 }
