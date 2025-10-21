@@ -76,6 +76,25 @@ export async function updatePersonalRangesById({
   }
 }
 
+export async function updatePersonalRangesUserNameById({
+  id,
+  userName,
+}: {
+  id: string;
+  userName: string;
+}) {
+  try {
+    await prisma.personalRanges.update({
+      where: { id },
+      data: { userName },
+    });
+    return { ok: true };
+  } catch (error) {
+    console.error(error);
+    return { ok: false, error: error as Error };
+  }
+}
+
 export async function upsertPersonalRangesNoUser({
   rangesJson,
   personalRangesId,
@@ -394,6 +413,35 @@ export async function getSharedRanges({ id }: { id: string | null }): Promise<{
     return { ok: false, sharedRangesWithPersonal: null, error: error as Error };
   }
 }
+
+export async function getSharedRangesById({ id }: { id: string }): Promise<
+  | {
+      status: 'success';
+      sharedRanges: SharedRanges;
+    }
+  | {
+      status: 'not found';
+    }
+  | {
+      status: 'error';
+      error: Error;
+    }
+> {
+  try {
+    const sharedRanges = await prisma.sharedRanges.findUnique({
+      where: { id },
+    });
+    if (sharedRanges) {
+      return { status: 'success', sharedRanges };
+    } else {
+      return { status: 'not found' };
+    }
+  } catch (error) {
+    console.error(error);
+    return { status: 'error', error: error as Error };
+  }
+}
+
 export async function getSharedRangesListByUserId({
   userId,
 }: {
@@ -595,6 +643,42 @@ export async function getSharedRangesByPersonalRangesId({
   return { ok: true, sharedRanges };
 }
 
+export async function getPersonalSharedRangesByPersonalSharedIds({
+  personalRangesId,
+  sharedRangesId,
+}: {
+  personalRangesId: string;
+  sharedRangesId: string;
+}): Promise<
+  | {
+      status: 'success';
+      personalSharedRanges: PersonalSharedRanges;
+    }
+  | {
+      status: 'not found';
+    }
+  | {
+      status: 'error';
+      error: Error;
+    }
+> {
+  try {
+    const personalSharedRanges = await prisma.personalSharedRanges.findUnique({
+      where: {
+        personalRangesId_sharedRangesId: { personalRangesId, sharedRangesId },
+      },
+    });
+    if (personalSharedRanges) {
+      return { status: 'success', personalSharedRanges };
+    } else {
+      return { status: 'not found' };
+    }
+  } catch (error) {
+    console.error(error);
+    return { status: 'error', error: error as Error };
+  }
+}
+
 export async function createPersonalSharedRangesByTwoIds({
   personalRangesId,
   sharedRangesId,
@@ -620,6 +704,6 @@ export async function createPersonalSharedRangesByTwoIds({
       sharedRangesId: sharedRanges.id,
     },
   });
-  revalidatePath('/shared');
+  // revalidatePath('/shared');
   return { ok: true, personalSharedRanges };
 }

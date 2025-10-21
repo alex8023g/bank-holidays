@@ -13,6 +13,7 @@ import {
   getPersonalRangesByUserId2,
 } from '@/lib/actions';
 import { PersonalRanges } from '../../generated/prisma';
+import { findOrCreatePersonalRanges } from '@/lib/findOrCreatePersonalRanges';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -34,100 +35,24 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let personalRangesId: string | undefined = undefined;
-  let personalRanges: PersonalRanges | undefined = undefined;
-
-  const cookieStore = await cookies();
-
-  const personalRangesIdFromCookie = cookieStore.get('personalRangesId')?.value;
-  console.log('🚀 ~ personalRangesIdFromCookie:', personalRangesIdFromCookie);
-
-  const session = await getServerSession(authOptions);
-
-  let personalRangesIdFromSession: string | undefined = undefined;
-
-  if (session?.user.id) {
-    console.log('🚀 ~ 1');
-    const personalRangesRes = await getPersonalRangesByUserId2({
-      userId: session.user.id,
-    });
-
-    if (personalRangesRes.status === 'success') {
-      console.log('🚀 ~ 2');
-      personalRangesIdFromSession = personalRangesRes.personalRanges.id;
-      personalRanges = personalRangesRes.personalRanges;
-    } else if (personalRangesRes.status === 'not found') {
-      console.log('🚀 ~ 3');
-      personalRangesIdFromSession = undefined;
-    } else if (personalRangesRes.status === 'error') {
-      console.log('🚀 ~ 4');
-      console.error(personalRangesRes.error);
-      return <div>Сервис временно недоступен</div>;
-    }
+  const res = await findOrCreatePersonalRanges();
+  if (!res.ok) {
+    return <div>Error: {res.errorMsg}</div>;
   }
-
-  if (personalRangesIdFromSession) {
-    console.log('🚀 ~ 5');
-    personalRangesId = personalRangesIdFromSession;
-  } else if (personalRangesIdFromCookie) {
-    console.log('🚀 ~ 6');
-    personalRangesId = personalRangesIdFromCookie;
-    const personalRangesRes = await getPersonalRangesById2({
-      id: personalRangesIdFromCookie,
-    });
-    if (personalRangesRes.status === 'success') {
-      console.log('🚀 ~ 7');
-      personalRanges = personalRangesRes.personalRanges;
-    } else if (personalRangesRes.status === 'not found') {
-      console.log('🚀 ~ 8');
-      const res = await createPersonalRangesEmpty();
-      if (res.ok) {
-        console.log('🚀 ~ 9');
-        personalRangesId = res.personalRanges.id;
-        personalRanges = res.personalRanges;
-      } else {
-        return <div>Сервис временно недоступен</div>;
-      }
-    } else if (personalRangesRes.status === 'error') {
-      console.error(personalRangesRes.error);
-      return <div>Сервис временно недоступен</div>;
-    }
-  } else {
-    console.log('🚀 ~ 10');
-    const res = await createPersonalRangesEmpty();
-    if (res.ok) {
-      console.log('🚀 ~ 11');
-      personalRangesId = res.personalRanges.id;
-      personalRanges = res.personalRanges;
-    } else {
-      return <div>Сервис временно недоступен</div>;
-    }
-  }
-
-  if (!personalRanges) {
-    console.log('🚀 ~ 12');
-    return (
-      <div>
-        !personalRanges: TO DO отловить ситуацию, когда персональный план не
-        создан
-      </div>
-    );
-  }
-
-  console.log('🚀 ~ RootLayout ~ personalRangesId:', personalRangesId);
-  console.log('🚀 ~ RootLayout ~ personalRanges:', personalRanges);
+  console.log('🚀 ~ RootLayout ~ personalRangesId:', res.personalRangesId);
+  console.log('🚀 ~ RootLayout ~ personalRanges:', res.personalRanges);
   return (
     <html lang='en'>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ContainerClientProviderVH
-          session={session}
-          personalRangesId={personalRangesId}
-          personalRangesIdFromCookie={personalRangesIdFromCookie}
-          personalRanges={personalRanges}
+          session={res.session}
+          personalRangesId={res.personalRangesId}
+          personalRangesIdFromCookie={res.personalRangesIdFromCookie}
+          personalRanges={res.personalRanges}
         >
-          <Header2 session={session} />
+          <Header2 session={res.session} />
           {children}
         </ContainerClientProviderVH>
       </body>

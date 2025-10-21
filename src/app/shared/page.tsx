@@ -58,6 +58,14 @@ export default async function SharedPage() {
                   </div>
                   <div className='flex gap-2'>
                     <span className='font-semibold'>
+                      ссылка для приглашения v2:
+                    </span>
+                    <BtnCopyInvitationLink
+                      link={`${process.env.NEXT_PUBLIC_APP_URL}/invitation?sharedRangesId=${sharedPagesItem.id}`}
+                    />
+                  </div>
+                  <div className='flex gap-2'>
+                    <span className='font-semibold'>
                       показать мой план отпусков участникам:
                     </span>
                     <div className='group relative inline-flex w-11 shrink-0 rounded-full bg-gray-200 p-0.5 inset-ring inset-ring-gray-900/5 outline-offset-2 outline-indigo-600 transition-colors duration-200 ease-in-out has-checked:bg-indigo-600 has-focus-visible:outline-2 dark:bg-white/5 dark:inset-ring-white/10 dark:outline-indigo-500 dark:has-checked:bg-indigo-500'>
