@@ -19,6 +19,7 @@ import {
   getSharedRanges,
   SharedWithPersonalRangesRes,
   createPersonalRangesAndSetCookiePersonalRangesId,
+  setCookiePersonalRangesId,
 } from '@/lib/actions';
 import { SessionProvider } from 'next-auth/react';
 
@@ -72,10 +73,12 @@ export function ContainerClientProviderVH({
   children,
   session,
   personalRangesId,
+  personalRangesIdFromCookie,
 }: {
   session: Session | null;
   children: ReactNode;
-  personalRangesId: string | undefined;
+  personalRangesId: string;
+  personalRangesIdFromCookie: string | undefined;
 }) {
   console.log('🚀 ~ ContainerClientProviderVH start ');
 
@@ -171,6 +174,9 @@ export function ContainerClientProviderVH({
 
   useEffect(() => {
     (async () => {
+      console.log(
+        '🚀 ~ ContainerClientProviderVH ~ useEffect ~ await getSharedRanges',
+      );
       const sharedRangesRes = await getSharedRanges({
         id: lsSharedRangesData.id || null,
       });
@@ -187,6 +193,12 @@ export function ContainerClientProviderVH({
       }
     })();
   }, []);
+
+  useEffect(() => {
+    if (personalRangesIdFromCookie !== personalRangesId) {
+      setCookiePersonalRangesId({ personalRangesId });
+    }
+  }, [personalRangesIdFromCookie, personalRangesId]);
 
   return (
     <SessionProvider session={session}>

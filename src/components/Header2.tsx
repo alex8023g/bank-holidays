@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { ThemeContext } from './ContainerClientProviderVH';
 import { SwitchCalendarView } from './SwitchCalendarView';
+import { deleteCookiePersonalRangesId } from '@/lib/actions';
 
 const navigation = [
   { name: 'Персональный', href: '/' },
@@ -74,7 +75,10 @@ export default function Header2({ session }: { session: Session | null }) {
               <span>{session.user.email}</span>
               <span
                 className='rounded-md border px-4 py-2 text-sm/6 font-semibold text-gray-900'
-                onClick={() => signOut()}
+                onClick={() => {
+                  signOut();
+                  deleteCookiePersonalRangesId();
+                }}
               >
                 Sign out
               </span>

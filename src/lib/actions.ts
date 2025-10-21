@@ -12,6 +12,31 @@ import {
 } from '../../generated/prisma';
 import { cookies } from 'next/headers';
 
+export async function createPersonalRangesEmpty(): Promise<
+  | {
+      ok: true;
+      personalRanges: PersonalRanges;
+    }
+  | {
+      ok: false;
+      error: Error;
+    }
+> {
+  try {
+    const personalRanges = await prisma.personalRanges.create({
+      data: {
+        userId: null,
+        rangesJson: JSON.stringify([]),
+        userName: '',
+      },
+    });
+    return { ok: true, personalRanges };
+  } catch (error) {
+    console.error(error);
+    return { ok: false, error: error as Error };
+  }
+}
+
 export async function upsertPersonalRanges({
   userId,
   rangesJson,
@@ -179,6 +204,37 @@ export async function getPersonalRangesByUserId({
     };
   }
 }
+export async function getPersonalRangesByUserId2({
+  userId,
+}: {
+  userId: string;
+}): Promise<
+  | { status: 'success'; personalRanges: PersonalRanges }
+  | { status: 'not found' }
+  | { status: 'error'; error: Error }
+> {
+  try {
+    const personalRanges = await prisma.personalRanges.findUnique({
+      where: { userId },
+    });
+    if (personalRanges) {
+      return {
+        status: 'success',
+        personalRanges,
+      };
+    } else {
+      return {
+        status: 'not found',
+      };
+    }
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 'error',
+      error: error as Error,
+    };
+  }
+}
 
 export async function getPersonalRangesById({
   id,
@@ -280,7 +336,7 @@ export async function getSharedRanges({ id }: { id: string | null }): Promise<{
       },
     });
     console.log(
-      '🚀 ~ getSharedRanges ~ sharedRanges:',
+      '🚀 ~ getSharedRanges!! ~ sharedRanges:',
       sharedRangesWithPersonal,
     );
     return { ok: true, sharedRangesWithPersonal };
@@ -308,7 +364,10 @@ export async function getSharedRangesListByUserId({
         },
       },
     });
-    console.log('🚀 ~ getSharedRanges ~ sharedRanges:', sharedRanges);
+    console.log(
+      '🚀 ~ getSharedRangesListByUserId ~ sharedRanges:',
+      sharedRanges,
+    );
     return { ok: true, sharedRanges };
   } catch (error) {
     console.error(error);
@@ -439,6 +498,25 @@ export async function createPersonalRangesAndSetCookiePersonalRangesId() {
     // path: '/',
   });
   revalidatePath('/');
+  return personalRanges.id;
+}
+
+export async function setCookiePersonalRangesId({
+  personalRangesId,
+}: {
+  personalRangesId: string;
+}) {
+  const cookieStore = await cookies();
+  cookieStore.set('personalRangesId', personalRangesId, {});
+  // revalidatePath('/');
+  return { ok: true };
+}
+
+export async function deleteCookiePersonalRangesId() {
+  const cookieStore = await cookies();
+  cookieStore.delete('personalRangesId');
+  revalidatePath('/');
+  return { ok: true };
 }
 
 export type SharedRangesByPersonalRangesId = {

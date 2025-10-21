@@ -6,7 +6,10 @@ import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth/next';
 import Header2 from '@/components/Header2';
 import { cookies } from 'next/headers';
-import { getSharedRangesByPersonalRangesId } from '@/lib/actions';
+import {
+  createPersonalRangesEmpty,
+  getPersonalRangesByUserId2,
+} from '@/lib/actions';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -28,16 +31,44 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession(authOptions);
-  console.log('🚀 ~ RootLayout ~ session:', session);
+  let personalRangesId: string | undefined = undefined;
 
   const cookieStore = await cookies();
-  const personalRangesId = cookieStore.get('personalRangesId')?.value;
-  console.log('🚀 ~ RootLayout ~ personalRangesId:', personalRangesId);
-  const sharedRangesRes = await getSharedRangesByPersonalRangesId({
-    personalRangesId: personalRangesId || '',
-  });
-  console.log('🚀 ~ RootLayout ~ sharedRangesRes:', sharedRangesRes);
+
+  const personalRangesIdFromCookie = cookieStore.get('personalRangesId')?.value;
+
+  const session = await getServerSession(authOptions);
+
+  let personalRangesIdFromSession: string | undefined = undefined;
+
+  if (session?.user.id) {
+    const personalRangesRes = await getPersonalRangesByUserId2({
+      userId: session.user.id,
+    });
+
+    if (personalRangesRes.status === 'success') {
+      personalRangesIdFromSession = personalRangesRes.personalRanges.id;
+    } else if (personalRangesRes.status === 'not found') {
+      personalRangesIdFromSession = undefined;
+    } else if (personalRangesRes.status === 'error') {
+      console.error(personalRangesRes.error);
+      return <div>Сервис временно недоступен</div>;
+    }
+  }
+
+  if (personalRangesIdFromSession) {
+    personalRangesId = personalRangesIdFromSession;
+  } else if (personalRangesIdFromCookie) {
+    personalRangesId = personalRangesIdFromCookie;
+  } else {
+    const res = await createPersonalRangesEmpty();
+    if (res.ok) {
+      personalRangesId = res.personalRanges.id;
+    } else {
+      return <div>Сервис временно недоступен</div>;
+    }
+  }
+
   return (
     <html lang='en'>
       <body
@@ -46,6 +77,7 @@ export default async function RootLayout({
         <ContainerClientProviderVH
           session={session}
           personalRangesId={personalRangesId}
+          personalRangesIdFromCookie={personalRangesIdFromCookie}
         >
           <Header2 session={session} />
           {children}

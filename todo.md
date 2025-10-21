@@ -33,7 +33,28 @@
     - в бд есть персональный план
     - в лс есть другой персональный план
     - в план из лс расшарен ни с одним или несколькими общими планами
-    - в этом случае копируем данные из бд в лс, при этом удаляем план из лс из всех общих планов
+    - в этом случае копируем данные из бд в лс, при этом удаляем план к. был в лс из всех общих планов
+
+При загрузке /
+
+- если есть session, то:
+  - находим:
+    - personalRanges (userId)
+    - personalSharedRanges (personal_ranges_id)
+    - sharedRanges (owner_user_id)
+  - проверяем
+    если personal_ranges_id !== cookieStore.get('personalRangesId') то в useEffect cookieStore.set('personalRangesId', personalRanges.id)
+
+- если нет session, но есть cookieStore.get('personalRangesId'), то:
+  - находим
+    - personalRanges (id)
+    - personalSharedRanges (personal_ranges_id)
+    - sharedRanges не ищем т.к. это доступно только авторизованным пользователям
+
+- если нет session и нет cookieStore.get('personalRangesId'), то
+  через useEffect
+  - создаем personalRanges
+  - устанавливаем куки cookieStore.set('personalRangesId', personalRanges.id)
 
 планы отпусков:
 
@@ -52,3 +73,8 @@
 [-] возможность для админа зафиксировать график отпусков чтобы другие пользователи не могли его изменить
 [-] просмотр списка общих планов с которыми пользователь поделился своим планом отпусков
 [-] возможность отвязать свой план от общего плана отпусков
+
+для отрисовки нужно получить:
+
+- personalRanges
+- sharedRanges
