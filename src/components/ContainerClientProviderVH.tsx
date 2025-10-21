@@ -22,6 +22,7 @@ import {
   setCookiePersonalRangesId,
 } from '@/lib/actions';
 import { SessionProvider } from 'next-auth/react';
+import { PersonalRanges } from '../../generated/prisma';
 
 export type DateRange = {
   year: number;
@@ -33,7 +34,12 @@ export type SelectedDateContext = {
   selectedYear: number;
   setSelectedYear: Dispatch<SetStateAction<number>>;
   dateRanges: DateRange[];
-  setDateRanges: (value: DateRange[]) => void;
+  // setDateRanges: (value: DateRange[]) => void;
+  // lsRangesData: {
+  //   id: string;
+  //   userName: string;
+  // };
+  setDateRanges: Dispatch<SetStateAction<DateRange[]>>;
   lsRangesData: {
     id: string;
     userName: string;
@@ -65,6 +71,7 @@ export type SelectedDateContext = {
   setClickPlace: Dispatch<SetStateAction<'calendarCell' | 'resultBlock'>>;
   calendarView: 'calendar' | 'list';
   setCalendarView: Dispatch<SetStateAction<'calendar' | 'list'>>;
+  personalRangesId: string;
 };
 
 export const ThemeContext = createContext<SelectedDateContext | null>(null);
@@ -74,17 +81,24 @@ export function ContainerClientProviderVH({
   session,
   personalRangesId,
   personalRangesIdFromCookie,
+  personalRanges,
 }: {
   session: Session | null;
   children: ReactNode;
   personalRangesId: string;
   personalRangesIdFromCookie: string | undefined;
+  personalRanges: PersonalRanges;
 }) {
   console.log('🚀 ~ ContainerClientProviderVH start ');
 
-  const [dateRanges, setDateRanges] = useLocalStorage<DateRange[]>(
-    'otpuskPlanRanges',
-    [],
+  // const [dateRanges, setDateRanges] = useLocalStorage<DateRange[]>(
+  //   'otpuskPlanRanges',
+  //   [],
+  // );
+  const [dateRanges, setDateRanges] = useState<DateRange[]>(
+    personalRanges.rangesJson
+      ? JSON.parse(personalRanges.rangesJson as string)
+      : [],
   );
 
   const [lsRangesData, setLsRangesData] = useLocalStorage<{
@@ -226,6 +240,7 @@ export function ContainerClientProviderVH({
           setClickPlace,
           calendarView,
           setCalendarView,
+          personalRangesId,
         }}
       >
         <div className='flex h-dvh flex-col'>{children}</div>

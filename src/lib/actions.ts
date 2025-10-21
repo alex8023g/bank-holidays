@@ -57,6 +57,24 @@ export async function upsertPersonalRanges({
     return { ok: false, error: error as Error };
   }
 }
+export async function updatePersonalRangesById({
+  id,
+  rangesJson,
+}: {
+  id: string;
+  rangesJson: string;
+}) {
+  try {
+    await prisma.personalRanges.update({
+      where: { id },
+      data: { rangesJson },
+    });
+    return { ok: true };
+  } catch (error) {
+    console.error(error);
+    return { ok: false, error: error as Error };
+  }
+}
 
 export async function upsertPersonalRangesNoUser({
   rangesJson,
@@ -272,6 +290,37 @@ export async function getPersonalRangesById({
       // errorType: 'Error getting personal ranges by userId',
       // errorMsg: 'Error getting personal ranges by userId',
       errorMsg: (error as Error).message,
+    };
+  }
+}
+export async function getPersonalRangesById2({
+  id,
+}: {
+  id: string;
+}): Promise<
+  | { status: 'success'; personalRanges: PersonalRanges }
+  | { status: 'not found' }
+  | { status: 'error'; error: Error }
+> {
+  try {
+    const personalRanges = await prisma.personalRanges.findUnique({
+      where: { id },
+    });
+    if (personalRanges) {
+      return {
+        status: 'success',
+        personalRanges,
+      };
+    } else {
+      return {
+        status: 'not found',
+      };
+    }
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 'error',
+      error: error as Error,
     };
   }
 }
@@ -507,7 +556,9 @@ export async function setCookiePersonalRangesId({
   personalRangesId: string;
 }) {
   const cookieStore = await cookies();
-  cookieStore.set('personalRangesId', personalRangesId, {});
+  cookieStore.set('personalRangesId', personalRangesId, {
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 36500), // 36500 days
+  });
   // revalidatePath('/');
   return { ok: true };
 }

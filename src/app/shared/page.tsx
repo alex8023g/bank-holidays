@@ -14,11 +14,6 @@ export default async function SharedPage() {
     userId: session?.user.id || null,
   });
   const days = await getDays();
-  console.log(
-    '🚀 ~ SharedPage ~ days:',
-    days.at(-1)?.year,
-    new Date().getFullYear(),
-  );
 
   const currentYear = new Date().getFullYear();
   const lastYearInDays = days.at(-1)?.year || currentYear;

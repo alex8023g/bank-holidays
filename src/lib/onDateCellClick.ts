@@ -1,7 +1,11 @@
 import { Day } from './createDaysArr';
 import { toast } from 'sonner';
 import { Session } from 'next-auth';
-import { upsertPersonalRanges, upsertPersonalRangesNoUser } from './actions';
+import {
+  updatePersonalRangesById,
+  upsertPersonalRanges,
+  upsertPersonalRangesNoUser,
+} from './actions';
 import { dayInRanges } from './dayInRanges';
 import { SelectedDateContext } from '@/components/ContainerClientProviderVH';
 
@@ -80,17 +84,21 @@ export function onDateCellClick({
       );
     ctx.setDateRanges(updDateRanges);
     ctx.setSelectedDayOfYear(null);
-    if (session?.user?.id) {
-      upsertPersonalRanges({
-        userId: session?.user?.id,
-        rangesJson: JSON.stringify(updDateRanges),
-      });
-    } else if (ctx.lsRangesData.id) {
-      upsertPersonalRangesNoUser({
-        rangesJson: JSON.stringify(updDateRanges),
-        personalRangesId: ctx.lsRangesData.id,
-      });
-    }
+    updatePersonalRangesById({
+      id: ctx.personalRangesId,
+      rangesJson: JSON.stringify(updDateRanges),
+    });
+    // if (session?.user?.id) {
+    //   upsertPersonalRanges({
+    //     userId: session?.user?.id,
+    //     rangesJson: JSON.stringify(updDateRanges),
+    //   });
+    // } else if (ctx.lsRangesData.id) {
+    //   upsertPersonalRangesNoUser({
+    //     rangesJson: JSON.stringify(updDateRanges),
+    //     personalRangesId: ctx.lsRangesData.id,
+    //   });
+    // }
   } else if (
     /* первый день периода не выбран, а клик попал в один из ranges */
     dayInRanges({
