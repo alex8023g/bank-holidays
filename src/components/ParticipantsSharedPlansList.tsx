@@ -4,8 +4,15 @@ import { ThemeContext } from './ContainerClientProviderVH';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/20/solid';
 import { twJoin } from 'tailwind-merge';
 import { RangesUsersBtn } from './ContainerRangesUsers';
+import { SharedPlansListByPersPlanId } from '@/lib/actions';
 
-export function MembersList({ activeBtn }: { activeBtn: RangesUsersBtn }) {
+export function ParticipantsSharedPlansList({
+  activeBtn,
+  sharedPlansList,
+}: {
+  activeBtn: RangesUsersBtn;
+  sharedPlansList: SharedPlansListByPersPlanId[];
+}) {
   const ctx = useContext(ThemeContext);
 
   return (
@@ -16,7 +23,7 @@ export function MembersList({ activeBtn }: { activeBtn: RangesUsersBtn }) {
       )}
     >
       <div className='flex items-center justify-center pt-1 md:py-2 md:pb-2 md:shadow-sm'>
-        <button
+        {/* <button
           className='/absolute top-2 left-2'
           onClick={() => {
             ctx?.setHiddenRangesIds((prev) =>
@@ -35,10 +42,74 @@ export function MembersList({ activeBtn }: { activeBtn: RangesUsersBtn }) {
           ) : (
             <EyeIcon className='h-4 w-4 text-gray-400' />
           )}
-        </button>
+        </button> */}
         <h2 className='pl-2 text-center font-semibold'>Общие планы:</h2>
       </div>
       <ul className='h-full overflow-y-scroll p-2 pt-0.5 md:p-2'>
+        {sharedPlansList.map((sharedPlan) => (
+          <li key={sharedPlan.sharedRanges.id} className=''>
+            <button
+              className='flex cursor-pointer items-center gap-2'
+              onClick={() => {
+                ctx?.setHiddenSharedPlansIds((prev) => {
+                  if (prev.includes(sharedPlan.sharedRanges.id)) {
+                    return prev.filter(
+                      (id) => id !== sharedPlan.sharedRanges.id,
+                    );
+                  }
+                  return [...prev, sharedPlan.sharedRanges.id];
+                });
+              }}
+            >
+              {ctx?.hiddenSharedPlansIds.includes(
+                sharedPlan.sharedRanges.id,
+              ) ? (
+                <EyeSlashIcon className='h-4 w-4 text-gray-400' />
+              ) : (
+                <EyeIcon className='h-4 w-4 text-gray-400' />
+              )}
+
+              <span className='font-semibold'>
+                {sharedPlan.sharedRanges.name}
+              </span>
+            </button>
+
+            <ul className='pl-5'>
+              {sharedPlan.personalRangesList.map((personalRange) => (
+                <li
+                  key={personalRange.personalRanges.id}
+                  className='flex cursor-pointer items-center gap-2'
+                  onClick={() => {
+                    ctx?.setHiddenRangesIds((prev) => {
+                      if (prev.includes(personalRange.personalRanges.id)) {
+                        return (
+                          prev.filter(
+                            (id) => id !== personalRange.personalRanges.id,
+                          ) || []
+                        );
+                      } else {
+                        return [...prev, personalRange.personalRanges.id];
+                      }
+                    });
+                  }}
+                >
+                  {ctx?.hiddenRangesIds.includes(
+                    personalRange.personalRanges.id,
+                  ) ? (
+                    <EyeSlashIcon className='h-4 w-4 text-gray-400' />
+                  ) : (
+                    <EyeIcon className='h-4 w-4 text-gray-400' />
+                  )}
+                  <span className='text-gray-500'>
+                    {personalRange.personalRanges.userName}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+      {/* <ul className='h-full overflow-y-scroll p-2 pt-0.5 md:p-2'>
         {ctx?.sharedRangesData?.personalRanges
           .filter(
             (personalRange) =>
@@ -74,7 +145,7 @@ export function MembersList({ activeBtn }: { activeBtn: RangesUsersBtn }) {
               </span>
             </li>
           ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }

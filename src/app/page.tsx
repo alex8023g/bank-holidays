@@ -1,4 +1,4 @@
-import { getDays } from '@/lib/actions';
+import { getDays, getSharedPlansListByPersPlanId } from '@/lib/actions';
 import { SharedPlanInvitationDialog } from '@/components/SharedPlanInvitationDialog';
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
@@ -8,6 +8,7 @@ import { ContainerAside } from '@/components/ContainerAside';
 import ContainerRangesUsers from '@/components/ContainerRangesUsers';
 import { ContainerCalendarsView } from '@/components/ContainerCalendarsView';
 import { cookies } from 'next/headers';
+import { findOrCreatePersonalRanges } from '@/lib/findOrCreatePersonalRanges';
 
 export default async function HomePage({
   searchParams,
@@ -19,18 +20,38 @@ export default async function HomePage({
   const { sharedplaninvitation } = await searchParams;
 
   const days = await getDays();
-  const session = await getServerSession(authOptions);
 
-  const cookieStore = await cookies();
-  const personalRangesId = cookieStore.get('personalRangesId')?.value;
+  const res = await findOrCreatePersonalRanges();
+  if (!res.ok) {
+    return <div>Error: {res.errorMsg}</div>;
+  }
+  const { personalRangesId, session, personalRanges } = res;
+
+  const sharedPlansListRes = await getSharedPlansListByPersPlanId({
+    personalRangesId: personalRangesId,
+  });
+
+  if (sharedPlansListRes.ok) {
+    console.log('🚀 ~ sharedPlansListRes:', sharedPlansListRes.sharedRanges);
+  } else {
+    console.error(sharedPlansListRes.error);
+    return <div>Сервис временно недоступен, попробуйте позже</div>;
+  }
 
   return (
     <ContainerMainAside>
       <ContainerMain1>
-        <ContainerCalendarsView days={days} session={session} />
+        <ContainerCalendarsView
+          days={days}
+          session={session}
+          sharedPlansList={sharedPlansListRes.sharedRanges}
+        />
       </ContainerMain1>
       <ContainerAside>
-        <ContainerRangesUsers days={days} />
+        <ContainerRangesUsers
+          days={days}
+          sharedPlansList={sharedPlansListRes.sharedRanges}
+        />
       </ContainerAside>
       {sharedplaninvitation && (
         <SharedPlanInvitationDialog

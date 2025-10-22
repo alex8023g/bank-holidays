@@ -96,11 +96,11 @@ export async function updatePersonalRangesUserNameById({
 }
 
 export async function upsertPersonalRangesNoUser({
-  rangesJson,
   personalRangesId,
+  rangesJson,
 }: {
-  rangesJson: string;
   personalRangesId: string;
+  rangesJson: string;
 }) {
   try {
     const personalRanges = await prisma.personalRanges.upsert({
@@ -241,6 +241,7 @@ export async function getPersonalRangesByUserId({
     };
   }
 }
+
 export async function getPersonalRangesByUserId2({
   userId,
 }: {
@@ -641,6 +642,61 @@ export async function getSharedRangesByPersonalRangesId({
     },
   });
   return { ok: true, sharedRanges };
+}
+
+export type SharedPlansListByPersPlanId = {
+  sharedRanges: SharedRanges;
+  personalRangesList: ({
+    personalRanges: PersonalRanges;
+  } & PersonalSharedRanges)[];
+};
+
+export async function getSharedPlansListByPersPlanId({
+  personalRangesId,
+}: {
+  personalRangesId: string;
+}): Promise<
+  | {
+      ok: true;
+      sharedRanges: SharedPlansListByPersPlanId[];
+    }
+  | {
+      ok: false;
+      error: Error;
+    }
+> {
+  try {
+    const sharedRanges = await prisma.personalSharedRanges.findMany({
+      where: { personalRangesId },
+      include: {
+        sharedRanges: true,
+      },
+    });
+
+    const res = await Promise.all(
+      sharedRanges.map(async (sharedRange) => {
+        const personalRangesList = await prisma.personalSharedRanges.findMany({
+          where: { sharedRangesId: sharedRange.sharedRangesId },
+          include: {
+            personalRanges: true,
+          },
+        });
+        return {
+          sharedRanges: sharedRange.sharedRanges,
+          personalRangesList: personalRangesList.filter(
+            (personalRange) =>
+              personalRange.personalRangesId !== personalRangesId,
+          ),
+        };
+      }),
+    );
+
+    console.dir(res, { depth: 9 });
+    return { ok: true, sharedRanges: res };
+  } catch (error) {
+    console.error(error);
+    return { ok: false, error: error as Error };
+  }
 }
 
 export async function getPersonalSharedRangesByPersonalSharedIds({
