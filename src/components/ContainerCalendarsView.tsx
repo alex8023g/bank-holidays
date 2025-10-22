@@ -24,7 +24,11 @@ export function ContainerCalendarsView({
   }
 
   return ctx.calendarView === 'calendar' ? (
-    <CalendarYearClassic days={days} session={session} />
+    <CalendarYearClassic
+      days={days}
+      session={session}
+      sharedPlansList={sharedPlansList}
+    />
   ) : (
     <CalendarYearVertical3
       days={days}

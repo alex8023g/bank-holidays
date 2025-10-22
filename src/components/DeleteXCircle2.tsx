@@ -53,7 +53,7 @@ export function DeleteXCircle2({
         (async () => {
           await upsertPersonalRangesNoUser({
             rangesJson: JSON.stringify(updRanges),
-            personalRangesId: ctx.lsRangesData.id,
+            personalRangesId: ctx.personalRangesId,
           });
         })();
         // if (session?.user?.id) {
