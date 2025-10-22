@@ -50,7 +50,27 @@ export function ParticipantsSharedPlansList({
           <li key={sharedPlan.sharedRanges.id} className=''>
             <button
               className='flex cursor-pointer items-center gap-2'
-              onClick={() => {
+              onClick={
+                () =>
+                  ctx?.setHiddenRangesIds((prev) =>
+                    sharedPlan.personalRangesList.every((personalRange) =>
+                      prev.includes(personalRange.personalRanges.id),
+                    )
+                      ? prev.filter(
+                          (id) =>
+                            !sharedPlan.personalRangesList.some(
+                              (personalRange) =>
+                                personalRange.personalRanges.id === id,
+                            ),
+                        )
+                      : [
+                          ...prev,
+                          ...sharedPlan.personalRangesList.map(
+                            (personalRange) => personalRange.personalRanges.id,
+                          ),
+                        ],
+                  )
+                /*                {
                 ctx?.setHiddenSharedPlansIds((prev) => {
                   if (prev.includes(sharedPlan.sharedRanges.id)) {
                     return prev.filter(
@@ -59,15 +79,22 @@ export function ParticipantsSharedPlansList({
                   }
                   return [...prev, sharedPlan.sharedRanges.id];
                 });
-              }}
+              } */
+              }
             >
-              {ctx?.hiddenSharedPlansIds.includes(
-                sharedPlan.sharedRanges.id,
-              ) ? (
-                <EyeSlashIcon className='h-4 w-4 text-gray-400' />
-              ) : (
-                <EyeIcon className='h-4 w-4 text-gray-400' />
-              )}
+              {
+                // ctx?.hiddenSharedPlansIds.includes(
+                //   sharedPlan.sharedRanges.id,
+                sharedPlan.personalRangesList.every((personalRange) =>
+                  ctx?.hiddenRangesIds.includes(
+                    personalRange.personalRanges.id,
+                  ),
+                ) ? (
+                  <EyeSlashIcon className='h-4 w-4 text-gray-400' />
+                ) : (
+                  <EyeIcon className='h-4 w-4 text-gray-400' />
+                )
+              }
 
               <span className='font-semibold'>
                 {sharedPlan.sharedRanges.name}

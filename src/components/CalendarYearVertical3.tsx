@@ -51,103 +51,81 @@ export function CalendarYearVertical3({
             >
               Мой&nbsp;план
             </th>
-            {/* {ctx?.sharedRangesData?.personalRanges
+            {sharedPlansList
               .filter(
-                (range) => range.personalRanges.id !== ctx?.lsRangesData.id,
-                )
-                .map((range) => ( */}
-            {/*             {ctx?.sharedRangesData?.personalRanges.map((range) => (
-              <th
-                key={range.personalRanges.id}
-                className={twJoin(
-                  'px-3',
-                  ctx?.hiddenRangesIds.includes(range.personalRanges.id) &&
-                    'hidden',
-                )}
-              >
-                {range.personalRanges.userName || 'неизвестный пользователь'}
-              </th>
-            ))} */}
-            {
-              // sharedPlansListRes.ok ? (
-              sharedPlansList
-                .filter(
-                  (sharedPlan) =>
-                    !ctx?.hiddenSharedPlansIds.includes(
-                      sharedPlan.sharedRanges.id,
-                    ),
-                )
-                .map((sharedPlan) => (
-                  <th
-                    key={sharedPlan.sharedRanges.id}
-                    colSpan={
-                      sharedPlan.personalRangesList.length -
-                      sharedPlan.personalRangesList.filter((personalRange) =>
-                        ctx?.hiddenRangesIds.includes(
-                          personalRange.personalRanges.id,
-                        ),
-                      ).length
-                    }
-                    className='border-collapse border border-gray-300 px-3 shadow'
-                  >
-                    {sharedPlan.sharedRanges.name}
-                  </th>
-                ))
-              // ) : (
-              //   <div>Error: {sharedPlansListRes.error.message}</div>
+                (sharedPlan) =>
+                  sharedPlan.personalRangesList.length > 0 &&
+                  sharedPlan.personalRangesList.length !==
+                    ctx?.hiddenRangesIds.filter((id) =>
+                      sharedPlan.personalRangesList.some(
+                        (personalRange) =>
+                          personalRange.personalRanges.id === id,
+                      ),
+                    ).length,
+              )
+              // .filter(
+              //   (sharedPlan) =>
+              //     !ctx?.hiddenSharedPlansIds.includes(
+              //       sharedPlan.sharedRanges.id,
+              //     ),
               // )
-            }
+              .map((sharedPlan) => (
+                <th
+                  key={sharedPlan.sharedRanges.id}
+                  colSpan={
+                    sharedPlan.personalRangesList.length -
+                    sharedPlan.personalRangesList.filter((personalRange) =>
+                      ctx?.hiddenRangesIds.includes(
+                        personalRange.personalRanges.id,
+                      ),
+                    ).length
+                  }
+                  className='border-collapse border border-gray-300 px-3 shadow'
+                >
+                  {sharedPlan.sharedRanges.name}
+                </th>
+              ))}
           </tr>
           <tr>
-            {
-              // sharedPlansListRes.ok ? (
-              sharedPlansList
-                .filter(
-                  (sharedPlan) =>
-                    !ctx?.hiddenSharedPlansIds.includes(
-                      sharedPlan.sharedRanges.id,
-                    ),
-                )
-                .map((sharedPlan, i) => {
-                  const personalRanges =
-                    sharedPlan.personalRangesList; /* .filter(
-                  (personalRange) =>
-                    personalRange.personalRanges.id !== ctx?.personalRangesId,
-                ) */
-                  if (
-                    personalRanges.length === 0 ||
-                    personalRanges.length ===
-                      personalRanges.filter((personalRange) =>
-                        ctx?.hiddenRangesIds.includes(
-                          personalRange.personalRanges.id,
-                        ),
-                      ).length
-                  ) {
-                    return (
-                      <th key={'no users' + i} className='font-medium'>
-                        нет участников
-                      </th>
-                    );
-                  } else {
-                    return personalRanges.map((personalRange) => (
-                      <th
-                        key={personalRange.personalRanges.id}
-                        className={twJoin(
-                          'border-collapse border border-gray-300 px-3 font-medium shadow',
-                          ctx?.hiddenRangesIds.includes(
-                            personalRange.personalRanges.id,
-                          ) && 'hidden',
-                        )}
-                      >
-                        {personalRange.personalRanges.userName}
-                      </th>
-                    ));
-                  }
-                })
-              // ) : (
-              //   <div>Error: {sharedPlansListRes.error.message}</div>
-              // )
-            }
+            {sharedPlansList
+              .filter(
+                (sharedPlan) =>
+                  !ctx?.hiddenSharedPlansIds.includes(
+                    sharedPlan.sharedRanges.id,
+                  ),
+              )
+              .map((sharedPlan, i) => {
+                const personalRanges = sharedPlan.personalRangesList;
+                /*                 if (
+                  personalRanges.length === 0 ||
+                  personalRanges.length ===
+                    personalRanges.filter((personalRange) =>
+                      ctx?.hiddenRangesIds.includes(
+                        personalRange.personalRanges.id,
+                      ),
+                    ).length
+                ) {
+                  return (
+                    <th key={'no users' + i} className='font-medium'>
+                      нет участников
+                    </th>
+                  );
+                } else { */
+                return personalRanges.map((personalRange) => (
+                  <th
+                    key={personalRange.personalRanges.id}
+                    className={twJoin(
+                      'border-collapse border border-gray-300 px-3 font-medium shadow',
+                      ctx?.hiddenRangesIds.includes(
+                        personalRange.personalRanges.id,
+                      ) && 'hidden',
+                    )}
+                  >
+                    {personalRange.personalRanges.userName}
+                  </th>
+                ));
+                // }
+              })}
           </tr>
         </thead>
         <tbody>
