@@ -20,7 +20,7 @@ export function CreateSharedCalendBtn({
   lastYearInDays,
   calendarsAmount,
 }: {
-  userId: string;
+  userId: string | undefined;
   currentYear: number;
   lastYearInDays: number;
   calendarsAmount: number;
@@ -31,70 +31,77 @@ export function CreateSharedCalendBtn({
 
   return (
     <>
-      <Button
-        className='/m-auto'
-        onClick={() => {
-          setIsOpen(true);
-        }}
-      >
-        Создать общий график отпусков
-      </Button>
-      <Dialog open={isOpen} onClose={setIsOpen}>
-        <DialogTitle>Создание общего графика отпусков</DialogTitle>
-        <DialogDescription>
-          После создания общего графика отпусков,поделитесь ссылкой для
-          добавления сотрудников .
-        </DialogDescription>
-        <DialogBody>
-          <Field className='mb-4'>
-            <Label>Название</Label>
-            <Input
-              name='name'
-              defaultValue={`Общий график отпусков №${calendarsAmount + 1}`}
-              placeholder={`Общий график отпусков №${calendarsAmount + 1}`}
-              autoFocus
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Field>
-
-          <Field>
-            <Label>на </Label>
-            {currentYear === lastYearInDays ? (
-              <Label>{currentYear}</Label>
-            ) : (
-              <Select
-                name='status cursor-pointer'
-                defaultValue={lastYearInDays}
-                onChange={(e) => {
-                  console.log(e.target.value);
-                  setSelectedYear(Number(e.target.value));
-                }}
-              >
-                <option value={currentYear}>{currentYear}</option>
-                <option value={lastYearInDays}>{lastYearInDays}</option>
-              </Select>
-            )}
-            <Label> год</Label>
-          </Field>
-        </DialogBody>
-        <DialogActions>
-          <Button plain onClick={() => setIsOpen(false)}>
-            Отмена
-          </Button>
+      {userId ? (
+        <>
           <Button
+            className='/mу-auto'
             onClick={() => {
-              setIsOpen(false);
-              createSharedRanges({
-                userId,
-                year: selectedYear || lastYearInDays,
-                name: name || `Общий график отпусков №${calendarsAmount + 1}`,
-              });
+              setIsOpen(true);
             }}
           >
-            Создать
+            <div className='px-4 py-10'>Создать общий график отпусков</div>
           </Button>
-        </DialogActions>
-      </Dialog>
+          <Dialog open={isOpen} onClose={setIsOpen}>
+            <DialogTitle>Создание общего графика отпусков</DialogTitle>
+            <DialogDescription>
+              После создания общего графика отпусков,поделитесь ссылкой для
+              добавления сотрудников .
+            </DialogDescription>
+            <DialogBody>
+              <Field className='mb-4'>
+                <Label>Название</Label>
+                <Input
+                  name='name'
+                  defaultValue={`Общий график отпусков №${calendarsAmount + 1}`}
+                  placeholder={`Общий график отпусков №${calendarsAmount + 1}`}
+                  autoFocus
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </Field>
+
+              <Field>
+                <Label>на </Label>
+                {currentYear === lastYearInDays ? (
+                  <Label>{currentYear}</Label>
+                ) : (
+                  <Select
+                    name='status cursor-pointer'
+                    defaultValue={lastYearInDays}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      setSelectedYear(Number(e.target.value));
+                    }}
+                  >
+                    <option value={currentYear}>{currentYear}</option>
+                    <option value={lastYearInDays}>{lastYearInDays}</option>
+                  </Select>
+                )}
+                <Label> год</Label>
+              </Field>
+            </DialogBody>
+            <DialogActions>
+              <Button plain onClick={() => setIsOpen(false)}>
+                Отмена
+              </Button>
+              <Button
+                onClick={() => {
+                  setIsOpen(false);
+                  createSharedRanges({
+                    userId,
+                    year: selectedYear || lastYearInDays,
+                    name:
+                      name || `Общий график отпусков №${calendarsAmount + 1}`,
+                  });
+                }}
+              >
+                Создать
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </>
+      ) : (
+        <Button disabled>Создать общий график отпусков</Button>
+      )}
     </>
   );
 }

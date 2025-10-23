@@ -443,7 +443,7 @@ export async function getSharedRangesById({ id }: { id: string }): Promise<
   }
 }
 
-export async function getSharedRangesListByUserId({
+export async function getSharedRangesListByOwnerId({
   userId,
 }: {
   userId: string | null;
@@ -570,9 +570,33 @@ export async function deletePersonalSharedRangesByPersonalRangesId({
   }
 }
 
-export async function deletePersonalRangesById({ id }: { id: string }) {
+export async function deletePersSharRangByPersSharRangIds({
+  personalRangesId,
+  sharedRangesId,
+}: {
+  personalRangesId: string;
+  sharedRangesId: string;
+}) {
   try {
-    await prisma.personalRanges.delete({ where: { id } });
+    await prisma.personalSharedRanges.delete({
+      where: {
+        personalRangesId_sharedRangesId: { personalRangesId, sharedRangesId },
+      },
+    });
+    revalidatePath('/shared');
+    return { ok: true };
+  } catch (error) {
+    console.error(error);
+    return { ok: false, error: error as Error };
+  }
+}
+
+export async function deleteSharedRangesById({ id }: { id: string }) {
+  try {
+    await prisma.personalSharedRanges.deleteMany({
+      where: { sharedRangesId: id },
+    });
+    await prisma.sharedRanges.delete({ where: { id } });
     return { ok: true };
   } catch (error) {
     console.error(error);
@@ -617,31 +641,6 @@ export async function deleteCookiePersonalRangesId() {
   cookieStore.delete('personalRangesId');
   revalidatePath('/');
   return { ok: true };
-}
-
-export type SharedRangesByPersonalRangesId = {
-  sharedRanges: SharedRanges;
-  personalRanges: PersonalRanges;
-  personalRangesId: string;
-  sharedRangesId: string;
-};
-
-export async function getSharedRangesByPersonalRangesId({
-  personalRangesId,
-}: {
-  personalRangesId: string;
-}): Promise<{
-  ok: boolean;
-  sharedRanges: SharedRangesByPersonalRangesId[];
-}> {
-  const sharedRanges = await prisma.personalSharedRanges.findMany({
-    where: { personalRangesId },
-    include: {
-      sharedRanges: true,
-      personalRanges: true,
-    },
-  });
-  return { ok: true, sharedRanges };
 }
 
 export type SharedPlansListByPersPlanId = {

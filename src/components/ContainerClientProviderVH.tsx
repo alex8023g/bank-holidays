@@ -13,7 +13,7 @@ import { toast, Toaster } from 'sonner';
 import { Session } from 'next-auth';
 import {
   deletePersonalSharedRangesByPersonalRangesId,
-  deletePersonalRangesById,
+  // deletePersonalRangesById,
   getPersonalRangesByUserId,
   upsertPersonalRangesByUserIdOrLsRangesId,
   getSharedRanges,
@@ -162,7 +162,7 @@ export function ContainerClientProviderVH({
               personalRangesId: lsRangesData.id,
             });
             // 1b) удаляем из бд таблицы PersonalRanges все записи с id = id персонального плана в локальном хранилище
-            deletePersonalRangesById({ id: lsRangesData.id });
+            // deletePersonalRangesById({ id: lsRangesData.id });
           }
 
           // 2) копируем его (personalRangesDBRes.id) в локальное хранилище

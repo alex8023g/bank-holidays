@@ -2,7 +2,7 @@ import { CalendarYearVertical2 } from '@/components/CalendarYearVertical2';
 import {
   getDays,
   getSharedRanges,
-  getSharedRangesListByUserId,
+  getSharedRangesListByOwnerId,
 } from '@/lib/actions';
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
@@ -19,7 +19,7 @@ export default async function SharedPage({
   if (!session?.user.id) {
     return <div>You are not authorized to view this page</div>;
   }
-  const sharedRangesRes = await getSharedRangesListByUserId({
+  const sharedRangesRes = await getSharedRangesListByOwnerId({
     userId: session?.user.id || null,
   });
   const sharedRangesData = sharedRangesRes.sharedRanges?.find(
