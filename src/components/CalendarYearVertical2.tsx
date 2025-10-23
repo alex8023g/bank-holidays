@@ -1,26 +1,19 @@
 'use client';
 
 import { Day } from '@/lib/createDaysArr';
-import { useContext } from 'react';
 import { twJoin } from 'tailwind-merge';
-import { ThemeContext } from './ContainerClientProviderVH';
 import { DateRange } from './ContainerClientProviderVH';
 import dayjs from 'dayjs';
-import { Session } from 'next-auth';
-import { onDateCellClick } from '@/lib/onDateCellClick';
 import { HoverCountDays } from './HoverCountDays';
-import { DeleteXCircleIcon } from './DeleteXCircle';
 import { SharedWithPersonalRangesRes } from '@/lib/actions';
 
 export function CalendarYearVertical2({
   days,
   year,
-  session,
   sharedRangesData,
 }: {
   days: Day[];
   year: number;
-  session: Session | null;
   sharedRangesData: SharedWithPersonalRangesRes;
 }) {
   if (!sharedRangesData) {

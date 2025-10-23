@@ -2,17 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ContainerClientProviderVH } from '@/components/ContainerClientProviderVH';
-import { authOptions } from '@/lib/auth';
-import { getServerSession } from 'next-auth/next';
 import Header2 from '@/components/Header2';
-import { cookies } from 'next/headers';
-import {
-  createPersonalRangesEmpty,
-  getPersonalRangesById,
-  getPersonalRangesById2,
-  getPersonalRangesByUserId2,
-} from '@/lib/actions';
-import { PersonalRanges } from '../../generated/prisma';
 import { findOrCreatePersonalRanges } from '@/lib/findOrCreatePersonalRanges';
 
 const geistSans = Geist({
@@ -35,6 +25,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log('🚀 ~ RootLayout ~ start');
   const res = await findOrCreatePersonalRanges();
   if (!res.ok) {
     return <div>Error: {res.errorMsg}</div>;

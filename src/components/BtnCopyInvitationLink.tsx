@@ -1,6 +1,5 @@
 'use client';
 
-import { copyTextToClipboard } from '@/lib/copyToClipboard';
 import { toast } from 'sonner';
 
 export function BtnCopyInvitationLink({ link }: { link: string }) {

@@ -1,13 +1,10 @@
 import { getDays, getSharedPlansListByPersPlanId } from '@/lib/actions';
 import { SharedPlanInvitationDialog } from '@/components/SharedPlanInvitationDialog';
-import { authOptions } from '@/lib/auth';
-import { getServerSession } from 'next-auth';
 import { ContainerMainAside } from '@/components/ContainerMainAside';
 import { ContainerMain1 } from '@/components/ContainerMain1';
 import { ContainerAside } from '@/components/ContainerAside';
 import ContainerRangesUsers from '@/components/ContainerRangesUsers';
 import { ContainerCalendarsView } from '@/components/ContainerCalendarsView';
-import { cookies } from 'next/headers';
 import { findOrCreatePersonalRanges } from '@/lib/findOrCreatePersonalRanges';
 
 export default async function HomePage({
@@ -17,6 +14,7 @@ export default async function HomePage({
     sharedplaninvitation: string | undefined;
   }>;
 }) {
+  console.log('🚀 ~ HomePage ~ start');
   const { sharedplaninvitation } = await searchParams;
 
   const days = await getDays();
@@ -25,7 +23,7 @@ export default async function HomePage({
   if (!res.ok) {
     return <div>Error: {res.errorMsg}</div>;
   }
-  const { personalRangesId, session, personalRanges } = res;
+  const { personalRangesId, session } = res;
 
   const sharedPlansListRes = await getSharedPlansListByPersPlanId({
     personalRangesId: personalRangesId,

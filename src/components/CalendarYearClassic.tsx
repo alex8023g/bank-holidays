@@ -6,7 +6,6 @@ import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import { createYearCalendar } from '@/lib/createYearCalendar';
 import { Day } from '@/lib/createDaysArr';
-import { MonthCalendar } from './MonthCalendar';
 import { HoverCountDays } from './HoverCountDays';
 import { Session } from 'next-auth';
 import { CalendarMonth } from './CalendarMonth';
@@ -57,7 +56,6 @@ export function CalendarYearClassic({
             i={i}
             month={monthsSt[i]}
             days={days}
-            session={session}
             sharedPlansList={sharedPlansList}
           />
         );

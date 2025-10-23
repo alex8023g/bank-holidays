@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useEffect, useRef } from 'react';
+import { useContext } from 'react';
 import { DateRange, ThemeContext } from './ContainerClientProviderVH';
 import dayjs from 'dayjs';
 import { Month } from '@/lib/createYearCalendar';
@@ -92,7 +92,7 @@ export function MonthCalendar({
                       : '',
               }}
               onClick={() => {
-                onDateCellClick({ ctx, day, year, session, days });
+                onDateCellClick({ ctx, day, year, days });
               }}
               onMouseEnter={() => {
                 // if (ctx.selectedDayOfYear) {

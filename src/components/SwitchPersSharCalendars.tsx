@@ -1,11 +1,5 @@
-import {
-  CalendarDaysIcon,
-  UserCircleIcon,
-  ViewColumnsIcon,
-  ShareIcon,
-} from '@heroicons/react/24/outline';
-import { useContext, useEffect, useState } from 'react';
-import { ThemeContext } from './ContainerClientProviderVH';
+import { UserCircleIcon, ShareIcon } from '@heroicons/react/24/outline';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export function SwitchPersSharCalendars() {

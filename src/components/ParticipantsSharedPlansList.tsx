@@ -50,36 +50,25 @@ export function ParticipantsSharedPlansList({
           <li key={sharedPlan.sharedRanges.id} className=''>
             <button
               className='flex cursor-pointer items-center gap-2'
-              onClick={
-                () =>
-                  ctx?.setHiddenRangesIds((prev) =>
-                    sharedPlan.personalRangesList.every((personalRange) =>
-                      prev.includes(personalRange.personalRanges.id),
-                    )
-                      ? prev.filter(
-                          (id) =>
-                            !sharedPlan.personalRangesList.some(
-                              (personalRange) =>
-                                personalRange.personalRanges.id === id,
-                            ),
-                        )
-                      : [
-                          ...prev,
-                          ...sharedPlan.personalRangesList.map(
-                            (personalRange) => personalRange.personalRanges.id,
-                          ),
-                        ],
+              onClick={() =>
+                ctx?.setHiddenRangesIds((prev) =>
+                  sharedPlan.personalRangesList.every((personalRange) =>
+                    prev.includes(personalRange.personalRanges.id),
                   )
-                /*                {
-                ctx?.setHiddenSharedPlansIds((prev) => {
-                  if (prev.includes(sharedPlan.sharedRanges.id)) {
-                    return prev.filter(
-                      (id) => id !== sharedPlan.sharedRanges.id,
-                    );
-                  }
-                  return [...prev, sharedPlan.sharedRanges.id];
-                });
-              } */
+                    ? prev.filter(
+                        (id) =>
+                          !sharedPlan.personalRangesList.some(
+                            (personalRange) =>
+                              personalRange.personalRanges.id === id,
+                          ),
+                      )
+                    : [
+                        ...prev,
+                        ...sharedPlan.personalRangesList.map(
+                          (personalRange) => personalRange.personalRanges.id,
+                        ),
+                      ],
+                )
               }
             >
               {

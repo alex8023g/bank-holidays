@@ -1,11 +1,6 @@
 import { Day } from './createDaysArr';
 import { toast } from 'sonner';
-import { Session } from 'next-auth';
-import {
-  updatePersonalRangesById,
-  upsertPersonalRanges,
-  upsertPersonalRangesNoUser,
-} from './actions';
+import { updatePersonalRangesById } from './actions';
 import { dayInRanges } from './dayInRanges';
 import { SelectedDateContext } from '@/components/ContainerClientProviderVH';
 
@@ -13,7 +8,6 @@ export function onDateCellClick({
   ctx,
   day,
   year,
-  session,
   days,
 }: {
   ctx: SelectedDateContext;
@@ -26,7 +20,6 @@ export function onDateCellClick({
     isSelected?: boolean;
   };
   year: number;
-  session: Session | null;
   days: Day[];
 }) {
   console.log('🚀 ~ onClick ~ start');

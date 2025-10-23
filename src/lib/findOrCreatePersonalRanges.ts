@@ -23,6 +23,8 @@ export async function findOrCreatePersonalRanges(): Promise<
       errorMsg: string;
     }
 > {
+  console.log('🚀 ~ findOrCreatePersonalRanges ~ start');
+
   let personalRangesId: string | undefined = undefined;
   let personalRanges: PersonalRanges | undefined = undefined;
 

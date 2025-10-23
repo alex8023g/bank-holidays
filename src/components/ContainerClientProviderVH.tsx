@@ -34,12 +34,12 @@ export type SelectedDateContext = {
   selectedYear: number;
   setSelectedYear: Dispatch<SetStateAction<number>>;
   dateRanges: DateRange[];
+  setDateRanges: Dispatch<SetStateAction<DateRange[]>>;
   // setDateRanges: (value: DateRange[]) => void;
   // lsRangesData: {
   //   id: string;
   //   userName: string;
   // };
-  setDateRanges: Dispatch<SetStateAction<DateRange[]>>;
   lsRangesData: {
     id: string;
     userName: string;
@@ -67,8 +67,6 @@ export type SelectedDateContext = {
   >;
   hiddenRangesIds: string[];
   setHiddenRangesIds: Dispatch<SetStateAction<string[]>>;
-  hiddenSharedPlansIds: string[];
-  setHiddenSharedPlansIds: Dispatch<SetStateAction<string[]>>;
   clickPlace: 'calendarCell' | 'resultBlock';
   setClickPlace: Dispatch<SetStateAction<'calendarCell' | 'resultBlock'>>;
   calendarView: 'calendar' | 'list';
@@ -93,10 +91,6 @@ export function ContainerClientProviderVH({
 }) {
   console.log('🚀 ~ ContainerClientProviderVH start ');
 
-  // const [dateRanges, setDateRanges] = useLocalStorage<DateRange[]>(
-  //   'otpuskPlanRanges',
-  //   [],
-  // );
   const [dateRanges, setDateRanges] = useState<DateRange[]>(
     personalRanges.rangesJson
       ? JSON.parse(personalRanges.rangesJson as string)
@@ -135,9 +129,6 @@ export function ContainerClientProviderVH({
   );
   const [calendarView, setCalendarView] = useState<'calendar' | 'list'>(
     'calendar',
-  );
-  const [hiddenSharedPlansIds, setHiddenSharedPlansIds] = useState<string[]>(
-    [],
   );
   useEffect(() => {
     // в случае авторизации пользователя выполняем:
@@ -245,8 +236,6 @@ export function ContainerClientProviderVH({
           calendarView,
           setCalendarView,
           personalRangesId,
-          hiddenSharedPlansIds,
-          setHiddenSharedPlansIds,
         }}
       >
         <div className='flex h-dvh flex-col'>{children}</div>

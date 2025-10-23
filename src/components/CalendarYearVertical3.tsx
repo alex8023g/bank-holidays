@@ -6,22 +6,18 @@ import { twJoin } from 'tailwind-merge';
 import { ThemeContext } from './ContainerClientProviderVH';
 import { DateRange } from './ContainerClientProviderVH';
 import dayjs from 'dayjs';
-import { Session } from 'next-auth';
 import { onDateCellClick } from '@/lib/onDateCellClick';
 import { HoverCountDays } from './HoverCountDays';
-import { DeleteXCircleIcon } from './DeleteXCircle';
 import { SharedPlansListByPersPlanId } from '@/lib/actions';
 import { DeleteXCircle2 } from './DeleteXCircle2';
 
 export function CalendarYearVertical3({
   days,
   year,
-  session,
   sharedPlansList,
 }: {
   days: Day[];
   year: number;
-  session: Session | null;
   sharedPlansList: SharedPlansListByPersPlanId[];
 }) {
   const ctx = useContext(ThemeContext);
@@ -88,13 +84,13 @@ export function CalendarYearVertical3({
           </tr>
           <tr>
             {sharedPlansList
-              .filter(
-                (sharedPlan) =>
-                  !ctx?.hiddenSharedPlansIds.includes(
-                    sharedPlan.sharedRanges.id,
-                  ),
-              )
-              .map((sharedPlan, i) => {
+              // .filter(
+              //   (sharedPlan) =>
+              //     !ctx?.hiddenSharedPlansIds.includes(
+              //       sharedPlan.sharedRanges.id,
+              //     ),
+              // )
+              .map((sharedPlan) => {
                 const personalRanges = sharedPlan.personalRangesList;
                 /*                 if (
                   personalRanges.length === 0 ||
@@ -181,7 +177,7 @@ export function CalendarYearVertical3({
                     outlineOffset: '-1px',
                   }}
                   onClick={() => {
-                    onDateCellClick({ ctx, day, year, session, days });
+                    onDateCellClick({ ctx, day, year, days });
                   }}
                   onMouseEnter={() => {
                     // if (ctx.selectedDayOfYear) {
@@ -195,7 +191,6 @@ export function CalendarYearVertical3({
                         ctx={ctx}
                         day={day}
                         year={year}
-                        session={session}
                         position='right'
                       />
                     )}
@@ -227,12 +222,12 @@ export function CalendarYearVertical3({
                 {
                   // sharedPlansListRes.ok ? (
                   sharedPlansList
-                    .filter(
-                      (sharedPlan) =>
-                        !ctx?.hiddenSharedPlansIds.includes(
-                          sharedPlan.sharedRanges.id,
-                        ),
-                    )
+                    // .filter(
+                    //   (sharedPlan) =>
+                    //     !ctx?.hiddenSharedPlansIds.includes(
+                    //       sharedPlan.sharedRanges.id,
+                    //     ),
+                    // )
                     .map((sharedPlan, i) => {
                       const personalRanges =
                         sharedPlan.personalRangesList; /* .filter(

@@ -1,9 +1,5 @@
 import { XCircleIcon } from '@heroicons/react/20/solid';
-import {
-  upsertPersonalRanges,
-  upsertPersonalRangesNoUser,
-} from '@/lib/actions';
-import { Session } from 'next-auth';
+import { upsertPersonalRangesNoUser } from '@/lib/actions';
 import { SelectedDateContext } from './ContainerClientProviderVH';
 import { useEffect, useRef } from 'react';
 import { twJoin } from 'tailwind-merge';
@@ -12,7 +8,6 @@ export function DeleteXCircle2({
   ctx,
   day,
   year,
-  session,
   position,
 }: {
   ctx: SelectedDateContext;
@@ -24,7 +19,6 @@ export function DeleteXCircle2({
     isWeekend: boolean;
   };
   year: number;
-  session: Session | null;
   position: 'left' | 'right';
 }) {
   const activeEl = useRef<HTMLDivElement>(null);

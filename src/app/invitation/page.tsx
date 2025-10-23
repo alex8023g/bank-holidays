@@ -1,11 +1,8 @@
 import { SharedPlanInvitationDialog2 } from '@/components/SharedPlanInvitationDialog2';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
 import {
   getPersonalSharedRangesByPersonalSharedIds,
   getSharedRangesById,
 } from '@/lib/actions';
-import { toast } from 'sonner';
 import { redirect } from 'next/navigation';
 import { findOrCreatePersonalRanges } from '@/lib/findOrCreatePersonalRanges';
 

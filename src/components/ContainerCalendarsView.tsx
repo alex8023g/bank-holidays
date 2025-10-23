@@ -33,7 +33,6 @@ export function ContainerCalendarsView({
     <CalendarYearVertical3
       days={days}
       year={ctx.selectedYear}
-      session={session}
       sharedPlansList={sharedPlansList}
     />
   );

@@ -8,12 +8,10 @@ import {
   getSharedPlansListByPersPlanId,
 } from '@/lib/actions';
 import Link from 'next/link';
-import { copyTextToClipboard } from '@/lib/copyToClipboard';
 import { BtnCopyInvitationLink } from '@/components/BtnCopyInvitationLink';
 import { findOrCreatePersonalRanges } from '@/lib/findOrCreatePersonalRanges';
 import { BtnLeaveSharedPlan } from '@/components/BtnLeaveSharedPlan';
 import { BtnDeleteSharedPlan } from '@/components/BtnDeleteSharedPlan';
-import { div } from 'motion/react-client';
 
 export default async function SharedPage() {
   const session = await getServerSession(authOptions);

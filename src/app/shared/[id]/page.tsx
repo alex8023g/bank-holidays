@@ -10,7 +10,7 @@ import { getServerSession } from 'next-auth';
 export default async function SharedPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
   const sharedRanges = await getSharedRanges({ id });
@@ -32,7 +32,6 @@ export default async function SharedPage({
         <CalendarYearVertical2
           days={days}
           year={sharedRanges.sharedRangesWithPersonal?.year || 0}
-          session={session}
           sharedRangesData={sharedRangesData}
         />
       )}

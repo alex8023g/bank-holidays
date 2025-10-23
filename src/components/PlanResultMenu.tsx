@@ -9,7 +9,6 @@ import {
 } from './catalist/dialog';
 import { Button } from './catalist/button';
 import { copyTextToClipboard } from '@/lib/copyToClipboard';
-import { requestForLeaveText } from '@/lib/requestForLeaveText';
 import { useState } from 'react';
 import { vocationScheduleText } from '@/lib/vocationScheduleText';
 import { DateRange } from './ContainerClientProviderVH';

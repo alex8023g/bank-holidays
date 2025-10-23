@@ -1,13 +1,11 @@
 'use client';
-import { useContext, useEffect, useRef } from 'react';
+import { useContext } from 'react';
 import { DateRange, ThemeContext } from './ContainerClientProviderVH';
 import dayjs from 'dayjs';
 import { Month } from '@/lib/createYearCalendar';
 import { Day } from '@/lib/createDaysArr';
 import { twJoin } from 'tailwind-merge';
-import { Session } from 'next-auth';
 import { onDateCellClick } from '@/lib/onDateCellClick';
-import { DeleteXCircleIcon } from './DeleteXCircle';
 import { SharedPlansListByPersPlanId } from '@/lib/actions';
 import { DeleteXCircle2 } from './DeleteXCircle2';
 
@@ -16,14 +14,12 @@ export function CalendarMonth({
   month,
   days,
   // isActive,
-  session,
   sharedPlansList,
 }: {
   i: number;
   month: Month;
   days: Day[];
   // isActive: boolean;
-  session: Session | null;
   sharedPlansList: SharedPlansListByPersPlanId[];
 }) {
   const ctx = useContext(ThemeContext);
@@ -96,7 +92,7 @@ export function CalendarMonth({
                       : '',
               }}
               onClick={() => {
-                onDateCellClick({ ctx, day, year, session, days });
+                onDateCellClick({ ctx, day, year, days });
               }}
               onMouseEnter={() => {
                 // if (ctx.selectedDayOfYear) {
@@ -116,7 +112,6 @@ export function CalendarMonth({
                   ctx={ctx}
                   day={day}
                   year={year}
-                  session={session}
                   position='left'
                 />
               )}
@@ -129,7 +124,8 @@ export function CalendarMonth({
                       range.year === year &&
                       range.start.dayOfYear <= day.dayOfYear &&
                       range.end.dayOfYear >= day.dayOfYear &&
-                      personalRange.personalRanges.id !== ctx.lsRangesData.id &&
+                      personalRange.personalRanges.id !==
+                        ctx.personalRangesId &&
                       !ctx.hiddenRangesIds.includes(
                         personalRange.personalRangesId,
                       ),

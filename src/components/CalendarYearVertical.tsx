@@ -114,7 +114,7 @@ export function CalendarYearVertical({
                     outlineOffset: '-1px',
                   }}
                   onClick={() => {
-                    onDateCellClick({ ctx, day, year, session, days });
+                    onDateCellClick({ ctx, day, year, days });
                   }}
                   onMouseEnter={() => {
                     // if (ctx.selectedDayOfYear) {

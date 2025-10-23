@@ -1,30 +1,17 @@
 'use client';
 
-import { useContext, useEffect, useState } from 'react';
-import { Dialog, DialogPanel } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { SelectYear } from './SelectYear';
 import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { ThemeContext } from './ContainerClientProviderVH';
 import { SwitchCalendarView } from './SwitchCalendarView';
 import { deleteCookiePersonalRangesId } from '@/lib/actions';
 import { SwitchPersSharCalendars } from './SwitchPersSharCalendars';
 
-const navigation = [
-  { name: 'Персональный', href: '/' },
-  { name: 'Общие графики отпусков', href: '/shared' },
-  // { name: 'Мои отпуска', href: '#' },
-  // { name: 'Управление', href: '#' },
-];
-
 export default function Header2({ session }: { session: Session | null }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const searchParams = useSearchParams();
   const isLogin = searchParams.has('login');
-  const ctx = useContext(ThemeContext);
 
   return (
     <header className='border-b border-gray-200 bg-white'>
@@ -39,7 +26,11 @@ export default function Header2({ session }: { session: Session | null }) {
           </Link>
           <SelectYear />
         </div>
-        <div className='flex md:hidden'>
+        <div className='mr-5 flex items-center gap-3 text-sm/6 font-semibold text-gray-900'>
+          <SwitchPersSharCalendars />
+          <SwitchCalendarView />
+        </div>
+        {/*         <div className='flex md:hidden'>
           <button
             type='button'
             onClick={() => setMobileMenuOpen(true)}
@@ -48,32 +39,9 @@ export default function Header2({ session }: { session: Session | null }) {
             <span className='sr-only'>Open main menu</span>
             <Bars3Icon aria-hidden='true' className='size-6' />
           </button>
-        </div>
-        <div className='mr-5 flex items-center gap-3 text-sm/6 font-semibold text-gray-900'>
-          <SwitchPersSharCalendars />
-          <SwitchCalendarView />
-          {/* {ctx?.lsSharedRangesData.name && (
-            <span>{ctx?.lsSharedRangesData.name}</span>
-          )} */}
-        </div>
-        {/* {ctx?.lsSharedRangesData.year && (
-          <span>на {ctx?.lsSharedRangesData.year} год </span>
-        )}
-        {ctx?.lsRangesData.userName && (
-          <span> {ctx?.lsRangesData.userName}</span>
-        )} */}
-        {/* <div className='hidden md:flex md:gap-x-12'>
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className='text-sm/6 font-semibold text-gray-900'
-            >
-              {item.name}
-            </Link>
-          ))}
         </div> */}
-        <div className='hidden md:flex md:flex-1 md:justify-end'>
+
+        <div className='/hidden /md:flex /md:flex-1 /md:justify-end'>
           {session?.user.id ? (
             <>
               <span>{session.user.email}</span>
@@ -105,7 +73,7 @@ export default function Header2({ session }: { session: Session | null }) {
           )}
         </div>
       </nav>
-      <Dialog
+      {/* <Dialog
         open={mobileMenuOpen}
         onClose={setMobileMenuOpen}
         className='md:hidden'
@@ -150,7 +118,7 @@ export default function Header2({ session }: { session: Session | null }) {
             </div>
           </div>
         </DialogPanel>
-      </Dialog>
+      </Dialog> */}
     </header>
   );
 }
