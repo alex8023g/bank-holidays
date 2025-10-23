@@ -11,6 +11,7 @@ import { useSearchParams } from 'next/navigation';
 import { ThemeContext } from './ContainerClientProviderVH';
 import { SwitchCalendarView } from './SwitchCalendarView';
 import { deleteCookiePersonalRangesId } from '@/lib/actions';
+import { SwitchPersSharCalendars } from './SwitchPersSharCalendars';
 
 const navigation = [
   { name: 'Персональный', href: '/' },
@@ -48,16 +49,19 @@ export default function Header2({ session }: { session: Session | null }) {
             <Bars3Icon aria-hidden='true' className='size-6' />
           </button>
         </div>
-        <SwitchCalendarView />
-        {ctx?.lsSharedRangesData.name && (
-          <span>{ctx?.lsSharedRangesData.name}</span>
-        )}
-        {ctx?.lsSharedRangesData.year && (
+        <div className='mr-5 flex items-center gap-3 text-sm/6 font-semibold text-gray-900'>
+          <SwitchPersSharCalendars />
+          <SwitchCalendarView />
+          {/* {ctx?.lsSharedRangesData.name && (
+            <span>{ctx?.lsSharedRangesData.name}</span>
+          )} */}
+        </div>
+        {/* {ctx?.lsSharedRangesData.year && (
           <span>на {ctx?.lsSharedRangesData.year} год </span>
         )}
         {ctx?.lsRangesData.userName && (
           <span> {ctx?.lsRangesData.userName}</span>
-        )}
+        )} */}
         {/* <div className='hidden md:flex md:gap-x-12'>
           {navigation.map((item) => (
             <Link

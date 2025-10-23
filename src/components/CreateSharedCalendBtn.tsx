@@ -13,6 +13,7 @@ import { Field, Label } from '@/components/catalist/fieldset';
 import { Input } from '@/components/catalist/input';
 import { useState } from 'react';
 import { Select } from '@headlessui/react';
+import { PlusIcon } from '@heroicons/react/20/solid';
 
 export function CreateSharedCalendBtn({
   userId,
@@ -34,12 +35,17 @@ export function CreateSharedCalendBtn({
       {userId ? (
         <>
           <Button
-            className='/mу-auto'
+            className='/mу-auto cursor-pointer'
             onClick={() => {
               setIsOpen(true);
             }}
           >
-            <div className='px-4 py-10'>Создать общий график отпусков</div>
+            <div className='flex items-center gap-2 px-4 py-10'>
+              <PlusIcon className='size-10' />
+              <span className='text-lg font-semibold'>
+                создать общий график отпусков
+              </span>
+            </div>
           </Button>
           <Dialog open={isOpen} onClose={setIsOpen}>
             <DialogTitle>Создание общего графика отпусков</DialogTitle>
@@ -80,10 +86,15 @@ export function CreateSharedCalendBtn({
               </Field>
             </DialogBody>
             <DialogActions>
-              <Button plain onClick={() => setIsOpen(false)}>
+              <Button
+                plain
+                className='cursor-pointer'
+                onClick={() => setIsOpen(false)}
+              >
                 Отмена
               </Button>
               <Button
+                className='cursor-pointer'
                 onClick={() => {
                   setIsOpen(false);
                   createSharedRanges({
