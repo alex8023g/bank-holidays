@@ -125,43 +125,6 @@ export function ParticipantsSharedPlansList({
           </li>
         ))}
       </ul>
-      {/* <ul className='h-full overflow-y-scroll p-2 pt-0.5 md:p-2'>
-        {ctx?.sharedRangesData?.personalRanges
-          .filter(
-            (personalRange) =>
-              personalRange.personalRanges.id !== ctx?.lsRangesData?.id,
-          )
-          .map((personalRange) => (
-            <li
-              key={personalRange.personalRanges.id}
-              className='flex cursor-pointer items-center gap-2'
-              onClick={() => {
-                ctx?.setHiddenRangesIds((prev) => {
-                  if (prev.includes(personalRange.personalRanges.id)) {
-                    return (
-                      prev.filter(
-                        (id) => id !== personalRange.personalRanges.id,
-                      ) || []
-                    );
-                  } else {
-                    return [...prev, personalRange.personalRanges.id];
-                  }
-                });
-              }}
-            >
-              {ctx?.hiddenRangesIds.includes(
-                personalRange.personalRanges.id,
-              ) ? (
-                <EyeSlashIcon className='h-4 w-4 text-gray-400' />
-              ) : (
-                <EyeIcon className='h-4 w-4 text-gray-400' />
-              )}
-              <span className='text-gray-500'>
-                {personalRange.personalRanges.userName}
-              </span>
-            </li>
-          ))}
-      </ul> */}
     </div>
   );
 }

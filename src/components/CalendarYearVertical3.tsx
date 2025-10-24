@@ -196,29 +196,7 @@ export function CalendarYearVertical3({
                     )}
                 </td>
                 {/* {ctx?.sharedRangesData?.personalRanges.map((ranges) => ( */}
-                {/* {ctx?.sharedRangesData?.personalRanges
-                  .filter(
-                    (ranges) =>
-                      ranges.personalRanges.id !== ctx?.lsRangesData.id,
-                  )
-                  .map((ranges) => (
-                    <td
-                      key={ranges.personalRanges.id}
-                      className={twJoin(
-                        'border-collapse border border-gray-300',
-                        JSON.parse(
-                          ranges.personalRanges.rangesJson as string,
-                        ).some(
-                          (d: DateRange) =>
-                            d.year === Number(year) &&
-                            d.start.dayOfYear <= day.dayOfYear &&
-                            d.end.dayOfYear >= day.dayOfYear,
-                        )
-                          ? 'bg-blue-500'
-                          : 'bg-gray-100',
-                      )}
-                    ></td>
-                  ))} */}
+
                 {
                   // sharedPlansListRes.ok ? (
                   sharedPlansList

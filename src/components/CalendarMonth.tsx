@@ -136,24 +136,6 @@ export function CalendarMonth({
                   <span className='mx-auto w-5 border-b-2 border-red-600'></span>
                 </div>
               )}
-              {/*               {ctx.sharedRangesData?.personalRanges.some((personalRange) => {
-                return JSON.parse(
-                  (personalRange.personalRanges.rangesJson as string) || '[]',
-                ).some(
-                  (range: DateRange) =>
-                    range.year === year &&
-                    range.start.dayOfYear <= day.dayOfYear &&
-                    range.end.dayOfYear >= day.dayOfYear &&
-                    personalRange.personalRanges.id !== ctx.lsRangesData.id &&
-                    !ctx.hiddenRangesIds.includes(
-                      personalRange.personalRangesId,
-                    ),
-                );
-              }) && (
-                <div className='absolute bottom-1 z-20 flex h-3 w-full font-bold text-red-500'>
-                  <span className='mx-auto w-5 border-b-2 border-red-600'></span>
-                </div>
-              )} */}
             </button>
           ) : (
             <button

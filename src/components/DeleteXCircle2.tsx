@@ -50,17 +50,6 @@ export function DeleteXCircle2({
             personalRangesId: ctx.personalRangesId,
           });
         })();
-        // if (session?.user?.id) {
-        //   upsertPersonalRanges({
-        //     userId: session?.user?.id,
-        //     rangesJson: JSON.stringify(updRanges),
-        //   });
-        // } else if (ctx.lsRangesData.id) {
-        //   upsertPersonalRangesNoUser({
-        //     rangesJson: JSON.stringify(updRanges),
-        //     personalRangesId: ctx.lsRangesData.id,
-        //   });
-        // }
       }}
     >
       <XCircleIcon className='absolute -top-0.5 -left-0.5 size-6 text-red-600' />

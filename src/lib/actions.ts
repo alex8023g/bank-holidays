@@ -604,25 +604,6 @@ export async function deleteSharedRangesById({ id }: { id: string }) {
   }
 }
 
-export async function createPersonalRangesAndSetCookiePersonalRangesId() {
-  const personalRanges = await prisma.personalRanges.create({
-    data: {
-      userId: null,
-      rangesJson: JSON.stringify([]),
-      userName: '',
-    },
-  });
-  const cookieStore = await cookies();
-  cookieStore.set('personalRangesId', personalRanges.id, {
-    // httpOnly: true,
-    // secure: process.env.NODE_ENV === 'production',
-    // maxAge: 60 * 60 * 24 * 30, // 30 days
-    // path: '/',
-  });
-  revalidatePath('/');
-  return personalRanges.id;
-}
-
 export async function setCookiePersonalRangesId({
   personalRangesId,
 }: {
