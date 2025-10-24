@@ -70,10 +70,10 @@ export default async function SharedPage() {
                       </span>
                       <span>{sharedRange.personalRangesList.length + 1}</span>
                     </div>
-                    <div className='flex gap-2'>
+                    {/* <div className='flex gap-2'>
                       <span className='font-semibold'>год:</span>
                       <span>{sharedRange.sharedRanges.year}</span>
-                    </div>
+                    </div> */}
                     <div className='flex justify-end'>
                       <BtnLeaveSharedPlan
                         sharedRanges={sharedRange.sharedRanges}
@@ -101,12 +101,12 @@ export default async function SharedPage() {
                     <span className='font-semibold'>название:</span>
                     <span>{sharedPagesItem.name}</span>
                   </div>
-                  <div className='flex gap-2'>
+                  {/* <div className='flex gap-2'>
                     <span className='font-semibold'>
                       год: лучше убрать из параметров общих календарей
                     </span>
                     <span>{sharedPagesItem.year}</span>
-                  </div>
+                  </div> */}
                   <div className='flex gap-2'>
                     <span className='font-semibold'>
                       количество участников:

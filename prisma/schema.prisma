@@ -69,7 +69,7 @@ model SharedRanges {
   id             String                 @id @default(cuid())
   ownerUserId    String                 @map("owner_user_id")
   name           String                 @default("Общий график отпусков №1")
-  year           Int                    @default(2025)
+  // year           Int                    @default(2025)
   personalRanges PersonalSharedRanges[]
   ownerUser      User?                  @relation(fields: [ownerUserId], references: [id])
 }

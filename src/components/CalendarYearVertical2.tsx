@@ -2,20 +2,27 @@
 
 import { Day } from '@/lib/createDaysArr';
 import { twJoin } from 'tailwind-merge';
-import { DateRange } from './ContainerClientProviderVH';
+import { DateRange, ThemeContext } from './ContainerClientProviderVH';
 import dayjs from 'dayjs';
 import { HoverCountDays } from './HoverCountDays';
 import { SharedWithPersonalRangesRes } from '@/lib/actions';
+import { useContext } from 'react';
 
 export function CalendarYearVertical2({
   days,
-  year,
+  // year,
   sharedRangesData,
 }: {
   days: Day[];
-  year: number;
+  // year: number;
   sharedRangesData: SharedWithPersonalRangesRes;
 }) {
+  const ctx = useContext(ThemeContext);
+
+  if (!ctx) {
+    return <div>no context please reload page</div>;
+  }
+
   if (!sharedRangesData) {
     return <div>нет общего графика отпусков</div>;
   }
@@ -44,7 +51,7 @@ export function CalendarYearVertical2({
         </thead>
         <tbody>
           {days
-            .filter((day) => day.year === Number(year))
+            .filter((day) => day.year === Number(ctx.selectedYear))
             .map((day) => (
               <tr key={day.dateString} className=''>
                 <td
@@ -66,7 +73,7 @@ export function CalendarYearVertical2({
                         ranges.personalRanges.rangesJson as string,
                       ).some(
                         (d: DateRange) =>
-                          d.year === Number(year) &&
+                          d.year === Number(ctx.selectedYear) &&
                           d.start.dayOfYear <= day.dayOfYear &&
                           d.end.dayOfYear >= day.dayOfYear,
                       )

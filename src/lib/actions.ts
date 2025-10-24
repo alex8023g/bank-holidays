@@ -365,7 +365,7 @@ export async function createSharedRanges({
   }
   try {
     const sharedRanges = await prisma.sharedRanges.create({
-      data: { ownerUserId: userId, name, year },
+      data: { ownerUserId: userId, name },
     });
     revalidatePath('/shared');
     return { ok: true, sharedRanges };

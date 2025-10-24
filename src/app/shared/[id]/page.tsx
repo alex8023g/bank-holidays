@@ -31,7 +31,7 @@ export default async function SharedPage({
       {sharedRangesData && (
         <CalendarYearVertical2
           days={days}
-          year={sharedRanges.sharedRangesWithPersonal?.year || 0}
+          // year={sharedRanges.sharedRangesWithPersonal?.year || 0}
           sharedRangesData={sharedRangesData}
         />
       )}
