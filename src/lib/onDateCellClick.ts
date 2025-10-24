@@ -81,6 +81,17 @@ export function onDateCellClick({
       id: ctx.personalRangesId,
       rangesJson: JSON.stringify(updDateRanges),
     });
+    // if (session?.user?.id) {
+    //   upsertPersonalRanges({
+    //     userId: session?.user?.id,
+    //     rangesJson: JSON.stringify(updDateRanges),
+    //   });
+    // } else if (ctx.lsRangesData.id) {
+    //   upsertPersonalRangesNoUser({
+    //     rangesJson: JSON.stringify(updDateRanges),
+    //     personalRangesId: ctx.lsRangesData.id,
+    //   });
+    // }
   } else if (
     /* первый день периода не выбран, а клик попал в один из ranges */
     dayInRanges({
