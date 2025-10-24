@@ -64,64 +64,7 @@ export function CalendarYearVertical2({
                 >
                   {dayjs(day.dateString).format('DD.MM.YYYY')}
                 </td>
-                {/* <td
-                  className={twJoin(
-                    'sticky left-28 z-10 w-32 cursor-pointer border border-gray-300 bg-white',
-                    ctx.dateRanges.some(
-                      (d) =>
-                        d.year === Number(year) &&
-                        d.start.dayOfYear <= day.dayOfYear &&
-                        d.end.dayOfYear >= day.dayOfYear,
-                    ) && 'bg-blue-500',
-                  )}
-                  style={{
-                    backgroundColor: ctx.dateRanges.some(
-                      (d) =>
-                        day?.dayOfYear &&
-                        d.year === year &&
-                        d.start.dayOfYear <= day?.dayOfYear &&
-                        d.end.dayOfYear >= day.dayOfYear,
-                    )
-                      ? '#51a2ff'
-                      : '',
-                    color: day?.isWeekend ? 'red' : day?.isHoliday ? 'red' : '',
-                    outline:
-                      ctx.selectedDayOfYear &&
-                      ctx.hoverDayOfYear &&
-                      day.dayOfYear
-                        ? ctx.selectedDayOfYear <= day.dayOfYear &&
-                          day.dayOfYear <= ctx.hoverDayOfYear
-                          ? '1px solid red'
-                          : ''
-                        : ctx.selectedRange
-                          ? ctx.selectedRange.start.dayOfYear <=
-                              day.dayOfYear &&
-                            day.dayOfYear <= ctx.selectedRange.end.dayOfYear
-                            ? '1px solid red'
-                            : ''
-                          : '',
-                    outlineOffset: '-1px',
-                  }}
-                  onClick={() => {
-                    onDateCellClick({ ctx, day, year, session, days });
-                  }}
-                  onMouseEnter={() => {
-                    // if (ctx.selectedDayOfYear) {
-                    ctx.setHoverDayOfYear(day.dayOfYear);
-                    // }
-                  }}
-                >
-                  {ctx.selectedRange?.start.dayOfYear === day.dayOfYear &&
-                    ctx.selectedRange?.year === year && (
-                      <DeleteXCircleIcon
-                        ctx={ctx}
-                        day={day}
-                        year={year}
-                        session={session}
-                        position='right'
-                      />
-                    )}
-                </td> */}
+
                 {sharedRangesData?.personalRanges.map((ranges) => (
                   <td
                     key={ranges.personalRanges.id}

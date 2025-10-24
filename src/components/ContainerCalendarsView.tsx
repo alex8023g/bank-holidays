@@ -4,17 +4,14 @@ import { useContext } from 'react';
 import { ThemeContext } from './ContainerClientProviderVH';
 import { CalendarYearClassic } from './CalendarYearClassic';
 import { Day } from '@/lib/createDaysArr';
-import { Session } from 'next-auth';
 import { CalendarYearVertical3 } from './CalendarYearVertical3';
 import { SharedPlansListByPersPlanId } from '@/lib/actions';
 
 export function ContainerCalendarsView({
   days,
-  session,
   sharedPlansList,
 }: {
   days: Day[];
-  session: Session | null;
   sharedPlansList: SharedPlansListByPersPlanId[];
 }) {
   const ctx = useContext(ThemeContext);
@@ -24,11 +21,7 @@ export function ContainerCalendarsView({
   }
 
   return ctx.calendarView === 'calendar' ? (
-    <CalendarYearClassic
-      days={days}
-      session={session}
-      sharedPlansList={sharedPlansList}
-    />
+    <CalendarYearClassic days={days} sharedPlansList={sharedPlansList} />
   ) : (
     <CalendarYearVertical3
       days={days}

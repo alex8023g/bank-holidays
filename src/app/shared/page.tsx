@@ -113,17 +113,10 @@ export default async function SharedPage() {
                     </span>
                     <span>{sharedPagesItem.personalRanges.length}</span>
                   </div>
+
                   <div className='flex gap-2'>
                     <span className='font-semibold'>
                       ссылка для приглашения:
-                    </span>
-                    <BtnCopyInvitationLink
-                      link={`${process.env.NEXT_PUBLIC_APP_URL}/?sharedplaninvitation=${sharedPagesItem.id}`}
-                    />
-                  </div>
-                  <div className='flex gap-2'>
-                    <span className='font-semibold'>
-                      ссылка для приглашения v2:
                     </span>
                     <BtnCopyInvitationLink
                       link={`${process.env.NEXT_PUBLIC_APP_URL}/invitation?sharedRangesId=${sharedPagesItem.id}`}

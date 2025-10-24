@@ -1,5 +1,4 @@
 import { getDays, getSharedPlansListByPersPlanId } from '@/lib/actions';
-import { SharedPlanInvitationDialog } from '@/components/SharedPlanInvitationDialog';
 import { ContainerMainAside } from '@/components/ContainerMainAside';
 import { ContainerMain1 } from '@/components/ContainerMain1';
 import { ContainerAside } from '@/components/ContainerAside';
@@ -7,15 +6,8 @@ import ContainerRangesUsers from '@/components/ContainerRangesUsers';
 import { ContainerCalendarsView } from '@/components/ContainerCalendarsView';
 import { findOrCreatePersonalRanges } from '@/lib/findOrCreatePersonalRanges';
 
-export default async function HomePage({
-  searchParams,
-}: {
-  searchParams: Promise<{
-    sharedplaninvitation: string | undefined;
-  }>;
-}) {
+export default async function HomePage() {
   console.log('🚀 ~ HomePage ~ start');
-  const { sharedplaninvitation } = await searchParams;
 
   const days = await getDays();
 
@@ -41,7 +33,6 @@ export default async function HomePage({
       <ContainerMain1>
         <ContainerCalendarsView
           days={days}
-          session={session}
           sharedPlansList={sharedPlansListRes.sharedRanges}
         />
       </ContainerMain1>
@@ -51,12 +42,6 @@ export default async function HomePage({
           sharedPlansList={sharedPlansListRes.sharedRanges}
         />
       </ContainerAside>
-      {sharedplaninvitation && (
-        <SharedPlanInvitationDialog
-          session={session}
-          sharedRangesId={sharedplaninvitation}
-        />
-      )}
     </ContainerMainAside>
   );
 }

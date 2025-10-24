@@ -7,7 +7,6 @@ import isoWeek from 'dayjs/plugin/isoWeek';
 import { createYearCalendar } from '@/lib/createYearCalendar';
 import { Day } from '@/lib/createDaysArr';
 import { HoverCountDays } from './HoverCountDays';
-import { Session } from 'next-auth';
 import { CalendarMonth } from './CalendarMonth';
 import { SharedPlansListByPersPlanId } from '@/lib/actions';
 
@@ -16,11 +15,10 @@ dayjs.extend(isoWeek);
 
 export function CalendarYearClassic({
   days,
-  session,
+
   sharedPlansList,
 }: {
   days: Day[];
-  session: Session | null;
   sharedPlansList: SharedPlansListByPersPlanId[];
 }) {
   const ctx = useContext(ThemeContext);
@@ -39,18 +37,6 @@ export function CalendarYearClassic({
     <div className='mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-8 px-4 py-16 sm:grid-cols-2 sm:px-6 xl:max-w-none xl:grid-cols-2 xl:px-8 2xl:grid-cols-3'>
       {monthsSt.map((_, i) => {
         return (
-          // <MonthCalendar
-          //   key={i}
-          //   // isActive={monthsSt[i].days.some(
-          //   //   (day) =>
-          //   //     day.dayOfYear === ctx.selectedRange?.start.dayOfYear &&
-          //   //     dayjs(day.dateString).year() === year,
-          //   // )}
-          //   i={i}
-          //   month={monthsSt[i]}
-          //   days={days}
-          //   session={session}
-          // />
           <CalendarMonth
             key={i}
             i={i}
