@@ -40,6 +40,7 @@ export default async function RootLayout({
         <ContainerClientProviderVH
           session={res.session}
           personalRangesId={res.personalRangesId}
+          personalRangesName={res.personalRanges.userName}
           personalRangesIdFromCookie={res.personalRangesIdFromCookie}
           personalRanges={res.personalRanges}
         >

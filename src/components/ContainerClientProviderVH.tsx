@@ -46,6 +46,7 @@ export type SelectedDateContext = {
   calendarView: 'calendar' | 'list';
   setCalendarView: Dispatch<SetStateAction<'calendar' | 'list'>>;
   personalRangesId: string;
+  personalRangesName: string;
 };
 
 export const ThemeContext = createContext<SelectedDateContext | null>(null);
@@ -54,12 +55,14 @@ export function ContainerClientProviderVH({
   children,
   session,
   personalRangesId,
+  personalRangesName,
   personalRangesIdFromCookie,
   personalRanges,
 }: {
   session: Session | null;
   children: ReactNode;
   personalRangesId: string;
+  personalRangesName: string;
   personalRangesIdFromCookie: string | undefined;
   personalRanges: PersonalRanges;
 }) {
@@ -116,6 +119,7 @@ export function ContainerClientProviderVH({
           calendarView,
           setCalendarView,
           personalRangesId,
+          personalRangesName,
         }}
       >
         <div className='flex h-dvh flex-col'>{children}</div>
