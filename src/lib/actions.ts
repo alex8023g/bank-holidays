@@ -348,14 +348,13 @@ export async function getPersonalRangesById2({
 export async function createSharedRanges({
   userId,
   name,
-  year,
+  personalRangesId,
 }: {
   userId: string;
   name: string;
-  year: number;
+  personalRangesId: string | undefined;
 }) {
-  console.log('🚀 ~ createSharedRanges ~ name:', name);
-  console.log('🚀 ~ createSharedRanges ~ year:', year);
+  console.log('🚀 ~ createSharedRanges ~ personalRangesId:', personalRangesId);
   if (!userId) {
     return {
       ok: false,
@@ -367,6 +366,14 @@ export async function createSharedRanges({
     const sharedRanges = await prisma.sharedRanges.create({
       data: { ownerUserId: userId, name },
     });
+    if (personalRangesId) {
+      await prisma.personalSharedRanges.create({
+        data: {
+          personalRangesId: personalRangesId,
+          sharedRangesId: sharedRanges.id,
+        },
+      });
+    }
     revalidatePath('/shared');
     return { ok: true, sharedRanges };
   } catch (error) {
@@ -597,6 +604,7 @@ export async function deleteSharedRangesById({ id }: { id: string }) {
       where: { sharedRangesId: id },
     });
     await prisma.sharedRanges.delete({ where: { id } });
+    revalidatePath('/shared');
     return { ok: true };
   } catch (error) {
     console.error(error);

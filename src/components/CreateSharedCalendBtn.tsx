@@ -11,24 +11,22 @@ import {
 } from '@/components/catalist/dialog';
 import { Field, Label } from '@/components/catalist/fieldset';
 import { Input } from '@/components/catalist/input';
-import { useState } from 'react';
-import { Select } from '@headlessui/react';
+import { useContext, useState } from 'react';
 import { PlusIcon } from '@heroicons/react/20/solid';
+import { Switch } from './catalist/switch';
+import { ThemeContext } from './ContainerClientProviderVH';
 
 export function CreateSharedCalendBtn({
   userId,
-  currentYear,
-  lastYearInDays,
   calendarsAmount,
 }: {
   userId: string | undefined;
-  currentYear: number;
-  lastYearInDays: number;
   calendarsAmount: number;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState('');
-  const [selectedYear, setSelectedYear] = useState(0);
+  const [sharePersonalRanges, setSharePersonalRanges] = useState(true);
+  const ctx = useContext(ThemeContext);
 
   return (
     <>
@@ -65,24 +63,13 @@ export function CreateSharedCalendBtn({
                 />
               </Field>
 
-              <Field>
-                <Label>на </Label>
-                {currentYear === lastYearInDays ? (
-                  <Label>{currentYear}</Label>
-                ) : (
-                  <Select
-                    name='status cursor-pointer'
-                    defaultValue={lastYearInDays}
-                    onChange={(e) => {
-                      console.log(e.target.value);
-                      setSelectedYear(Number(e.target.value));
-                    }}
-                  >
-                    <option value={currentYear}>{currentYear}</option>
-                    <option value={lastYearInDays}>{lastYearInDays}</option>
-                  </Select>
-                )}
-                <Label> год</Label>
+              <Field className='mb-4 flex items-center gap-2'>
+                <Switch
+                  name='allow_embedding'
+                  checked={sharePersonalRanges}
+                  onChange={setSharePersonalRanges}
+                />
+                <Label>Добавить свой график отпусков в общий график</Label>
               </Field>
             </DialogBody>
             <DialogActions>
@@ -99,9 +86,11 @@ export function CreateSharedCalendBtn({
                   setIsOpen(false);
                   createSharedRanges({
                     userId,
-                    year: selectedYear || lastYearInDays,
                     name:
                       name || `Общий график отпусков №${calendarsAmount + 1}`,
+                    personalRangesId: sharePersonalRanges
+                      ? ctx?.personalRangesId
+                      : undefined,
                   });
                 }}
               >

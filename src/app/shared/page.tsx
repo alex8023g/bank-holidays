@@ -3,7 +3,6 @@ import { authOptions } from '@/lib/auth';
 import { CreateSharedCalendBtn } from '@/components/CreateSharedCalendBtn';
 import { LoginBtnsGroup } from '@/components/LoginBtnsGroup';
 import {
-  getDays,
   getSharedRangesListByOwnerId,
   getSharedPlansListByPersPlanId,
 } from '@/lib/actions';
@@ -23,10 +22,6 @@ export default async function SharedPage() {
   const sharedRangesByOwnerRes = await getSharedRangesListByOwnerId({
     userId: session?.user.id || null,
   });
-  const days = await getDays();
-
-  const currentYear = new Date().getFullYear();
-  const lastYearInDays = days.at(-1)?.year || currentYear;
 
   const calendarsAmount = sharedRangesByOwnerRes.sharedRanges?.length || 0;
   console.log('🚀 ~ SharedPage ~ calendarsAmount:', calendarsAmount);
@@ -190,8 +185,6 @@ export default async function SharedPage() {
                 </span>
                 <CreateSharedCalendBtn
                   userId={session?.user.id}
-                  currentYear={currentYear}
-                  lastYearInDays={lastYearInDays}
                   calendarsAmount={calendarsAmount}
                 />
               </div>
