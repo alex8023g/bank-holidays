@@ -50,6 +50,7 @@ import { Link } from './link';
   );
 } */
 
+// text-zinc-960 was removed from Text styles
 export function DropdownItemCustom({
   className,
   ...props

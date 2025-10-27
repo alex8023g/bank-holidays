@@ -66,9 +66,9 @@ export default async function HomePage() {
       <ContainerMain1>
         <ContainerCalendarsView days={days} sharedPlansList={sharedPlansList} />
       </ContainerMain1>
-      <ContainerAside>
-        <ContainerRangesUsers days={days} sharedPlansList={sharedPlansList} />
-      </ContainerAside>
+      {/* <ContainerAside> */}
+      <ContainerRangesUsers days={days} sharedPlansList={sharedPlansList} />
+      {/* </ContainerAside> */}
     </ContainerMainAside>
   );
 }

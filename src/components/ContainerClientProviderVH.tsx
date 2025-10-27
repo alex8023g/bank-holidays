@@ -45,6 +45,9 @@ export type SelectedDateContext = {
   setClickPlace: Dispatch<SetStateAction<'calendarCell' | 'resultBlock'>>;
   calendarView: 'calendar' | 'list';
   setCalendarView: Dispatch<SetStateAction<'calendar' | 'list'>>;
+  isLoginBlockOpen: boolean;
+  setIsLoginBlockOpen: Dispatch<SetStateAction<boolean>>;
+
   personalRangesId: string;
   personalRangesName: string;
 };
@@ -89,7 +92,7 @@ export function ContainerClientProviderVH({
   const [calendarView, setCalendarView] = useState<'calendar' | 'list'>(
     'calendar',
   );
-
+  const [isLoginBlockOpen, setIsLoginBlockOpen] = useState(false);
   useEffect(() => {
     if (personalRangesIdFromCookie !== personalRangesId) {
       setCookiePersonalRangesId({ personalRangesId });
@@ -120,6 +123,8 @@ export function ContainerClientProviderVH({
           setCalendarView,
           personalRangesId,
           personalRangesName,
+          isLoginBlockOpen,
+          setIsLoginBlockOpen,
         }}
       >
         <div className='flex h-dvh flex-col'>{children}</div>

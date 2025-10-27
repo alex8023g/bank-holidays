@@ -9,10 +9,15 @@ import { SwitchCalendarView } from './SwitchCalendarView';
 import { deleteCookiePersonalRangesId } from '@/lib/actions';
 import { SwitchPersSharCalendars } from './SwitchPersSharCalendars';
 import { twJoin } from 'tailwind-merge';
+import { Button } from './catalist/button';
+import { useContext } from 'react';
+import { ThemeContext } from './ContainerClientProviderVH';
+import { AvatarDropDown } from './AvatarDropDown';
+import { ArrowRightEndOnRectangleIcon } from '@heroicons/react/24/outline';
 
 export default function Header2({ session }: { session: Session | null }) {
   const pathname = usePathname();
-
+  const ctx = useContext(ThemeContext);
   const searchParams = useSearchParams();
   const isLogin = searchParams.has('login');
 
@@ -53,35 +58,31 @@ export default function Header2({ session }: { session: Session | null }) {
           </button>
         </div> */}
 
-        <div className='/hidden /md:flex /md:flex-1 /md:justify-end'>
+        <div
+          className={twJoin(
+            'flex items-center gap-3 py-2 transition-transform duration-200 ease-in-out',
+            pathname !== '/' && 'scale-0',
+          )}
+        >
           {session?.user.id ? (
-            <>
-              {/* <span>{session.user.email}</span> */}
-              <span
-                className='rounded-md border px-4 py-2 text-sm/6 font-semibold text-gray-900'
-                onClick={() => {
-                  signOut();
-                  deleteCookiePersonalRangesId();
-                }}
-              >
-                Sign out
-              </span>
-            </>
-          ) : isLogin ? (
-            <Link
-              href='/'
-              className='cursor-pointer rounded-md border px-4 py-2 text-sm/6 font-semibold text-gray-900'
+            <AvatarDropDown user={session.user} />
+          ) : ctx?.isLoginBlockOpen ? (
+            <Button
+              plain
+              className='cursor-pointer text-sm/6'
+              onClick={() => ctx?.setIsLoginBlockOpen(false)}
             >
-              close
-            </Link>
+              Закрыть
+            </Button>
           ) : (
-            <Link
-              href='/?login'
-              className='cursor-pointer rounded-md border px-4 py-2 text-sm/6 font-semibold text-gray-900'
+            <Button
+              plain
+              className='cursor-pointer text-sm/6'
+              onClick={() => ctx?.setIsLoginBlockOpen(true)}
             >
-              Log in
-              {/* <span aria-hidden='true'>&rarr;</span> */}
-            </Link>
+              <ArrowRightEndOnRectangleIcon className='size-5' />
+              Войти
+            </Button>
           )}
         </div>
       </nav>
