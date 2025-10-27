@@ -468,6 +468,9 @@ export async function getSharedRangesListByOwnerId({
           },
         },
       },
+      orderBy: {
+        name: 'asc',
+      },
     });
     console.log(
       '🚀 ~ getSharedRangesListByUserId ~ sharedRanges:',
@@ -525,7 +528,7 @@ export async function sharePersonalRangesByUserId({
   return { ok: true, personalSharedRanges };
 }
 
-export async function sharePersonalRangesByPersonalRangesId({
+export async function sharePersonalRangesByPersRangId({
   personalRangesId,
   sharedRangesId,
 }: {
@@ -545,10 +548,6 @@ export async function sharePersonalRangesByPersonalRangesId({
     return { ok: false, error: new Error('Shared ranges not found') };
   }
 
-  if (!personalRanges) {
-    return { ok: false, error: new Error('Shared ranges not found') };
-  }
-
   const res = await prisma.personalSharedRanges.upsert({
     where: {
       personalRangesId_sharedRangesId: { personalRangesId, sharedRangesId },
@@ -556,8 +555,7 @@ export async function sharePersonalRangesByPersonalRangesId({
     update: { sharedRangesId },
     create: { personalRangesId, sharedRangesId },
   });
-
-  revalidatePath('/shared');
+  // revalidatePath('/shared');
   return { ok: true, res };
 }
 
@@ -634,9 +632,11 @@ export async function deleteCookiePersonalRangesId() {
 
 export type SharedPlansListByPersPlanId = {
   sharedRanges: SharedRanges;
-  personalRangesList: ({
+  personalRangesList: {
     personalRanges: PersonalRanges;
-  } & PersonalSharedRanges)[];
+    personalRangesId: string;
+    sharedRangesId: string;
+  }[];
 };
 
 export async function getSharedPlansListByPersPlanId({
@@ -679,7 +679,7 @@ export async function getSharedPlansListByPersPlanId({
       }),
     );
 
-    console.dir(res, { depth: 9 });
+    // console.dir(res, { depth: 9 });
     return { ok: true, sharedRanges: res };
   } catch (error) {
     console.error(error);
@@ -750,4 +750,21 @@ export async function createPersonalSharedRangesByTwoIds({
   });
   // revalidatePath('/shared');
   return { ok: true, personalSharedRanges };
+}
+
+export async function updateSharedRangesNameById({
+  id,
+  name,
+}: {
+  id: string;
+  name: string;
+}) {
+  try {
+    await prisma.sharedRanges.update({ where: { id }, data: { name } });
+    revalidatePath('/shared');
+    return { ok: true };
+  } catch (error) {
+    console.error(error);
+    return { ok: false, error: error as Error };
+  }
 }

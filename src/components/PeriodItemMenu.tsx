@@ -55,13 +55,13 @@ export function PeriodItemMenu({
           >
             Показать текст заявления на отпуск
           </DropdownItem>
-          <DropdownItem
+          {/*           <DropdownItem
             onClick={() => {
               requestForLeaveWord(requestForLeaveText({ range, days }));
             }}
           >
             Экспортировать в Word
-          </DropdownItem>
+          </DropdownItem> */}
         </DropdownMenu>
       </Dropdown>
 

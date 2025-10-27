@@ -1,10 +1,11 @@
 import { UserCircleIcon, ShareIcon } from '@heroicons/react/24/outline';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export function SwitchPersSharCalendars() {
+  const pathname = usePathname();
   const router = useRouter();
-  const [page, setPage] = useState<'/' | '/shared'>('/');
+  const [page, setPage] = useState(pathname);
 
   useEffect(() => {
     router.push(page);
@@ -41,7 +42,7 @@ export function SwitchPersSharCalendars() {
         type='checkbox'
         aria-label='Use setting'
         className='absolute inset-0 appearance-none focus:outline-hidden'
-        // checked={ctx?.calendarView === 'calendar'}
+        checked={pathname === '/shared'}
         onChange={handleChange}
       />
     </div>

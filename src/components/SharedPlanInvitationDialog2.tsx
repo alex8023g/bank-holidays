@@ -11,28 +11,34 @@ import { ErrorMessage, Field, Label } from '@/components/catalist/fieldset';
 import { Input } from '@/components/catalist/input';
 import {
   createPersonalSharedRangesByTwoIds,
+  sharePersonalRangesByPersRangId,
   updatePersonalRangesUserNameById,
 } from '@/lib/actions';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { PersonalRanges } from '../../generated/prisma';
 
 export function SharedPlanInvitationDialog2({
   sharedRangesId,
-  personalRanges,
+  sharedRangesName,
+  personalRangesId,
+  personalRangesUserName,
   errorMsg,
 }: {
   sharedRangesId: string;
-  personalRanges: PersonalRanges;
+  sharedRangesName: string;
+  personalRangesId: string;
+  personalRangesUserName: string | null;
   errorMsg: 'shared ranges not found' | 'error' | null;
 }) {
   const [state, setState] = useState({
     isOpen: false,
-    name: personalRanges.userName || '',
+    name: personalRangesUserName || '',
     isError: false,
-    personPlanId: personalRanges.id,
+    personPlanId: personalRangesId,
   });
+  const pathname = usePathname();
 
   const router = useRouter();
   useEffect(() => {
@@ -45,63 +51,73 @@ export function SharedPlanInvitationDialog2({
         open={state.isOpen}
         onClose={() => setState((st) => ({ ...st, isOpen: false }))}
       >
-        <DialogTitle>Присоединиться к общему графиком отпусков?</DialogTitle>
+        <DialogTitle>
+          Присоединиться к общему графиком отпусков &quot;{sharedRangesName}
+          &quot;?
+        </DialogTitle>
         <DialogDescription>
           Все у кого будет ссылка на этот график отпусков смогут видеть ваш
           график отпусков.
         </DialogDescription>
-        <DialogBody>
-          <Field>
-            <Label>Ваше имя</Label>
-            <Input
-              name='name'
-              placeholder='Введите ваше имя'
-              autoFocus
-              invalid={state.isError}
-              defaultValue={state.name}
-              onChange={(e) =>
-                setState((st) => ({ ...st, name: e.target.value }))
-              }
-            />
-            {state.isError && (
-              <ErrorMessage>Это поле обязательно для заполнения</ErrorMessage>
-            )}
-          </Field>
-        </DialogBody>
+        {personalRangesUserName && (
+          <DialogBody>
+            <Field>
+              <Label>Имя</Label>
+              <Input
+                name='name'
+                value={state.name}
+                onChange={(e) =>
+                  setState((st) => ({ ...st, name: e.target.value }))
+                }
+              />
+            </Field>
+          </DialogBody>
+        )}
         <DialogActions>
           <Button
             plain
             onClick={() => {
               setState((st) => ({ ...st, isOpen: false, name: '' }));
-              router.push('/');
+              if (pathname === '/invitation') {
+                router.push('/');
+              } else {
+                router.push('/shared');
+              }
             }}
           >
             Отмена
           </Button>
           <Button
             onClick={async () => {
-              if (state.name.trim() === '') {
+              if (state.name.trim() === '' && personalRangesUserName !== null) {
                 setState((st) => ({ ...st, isError: true }));
               } else {
                 setState((st) => ({ ...st, isOpen: false, isError: false }));
-                const res = await createPersonalSharedRangesByTwoIds({
-                  personalRangesId: personalRanges.id,
+                // const res = await createPersonalSharedRangesByTwoIds({
+                const res = await sharePersonalRangesByPersRangId({
+                  personalRangesId: personalRangesId,
                   sharedRangesId: sharedRangesId,
                 });
                 if (res.ok) {
                   toast.success(
                     'График отпусков успешно добавлен в общий график',
                   );
-                  await updatePersonalRangesUserNameById({
-                    id: personalRanges.id,
-                    userName: state.name,
-                  });
+                  if (personalRangesUserName) {
+                    await updatePersonalRangesUserNameById({
+                      id: personalRangesId,
+                      userName: state.name,
+                    });
+                  }
                 } else {
                   toast.error(
                     'Не удалось добавить график отпусков в общий график',
                   );
                 }
-                router.push('/');
+                if (pathname === '/invitation') {
+                  router.push('/');
+                } else {
+                  router.push('/shared');
+                }
               }
             }}
           >

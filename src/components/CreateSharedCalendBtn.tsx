@@ -15,6 +15,7 @@ import { useContext, useState } from 'react';
 import { PlusIcon } from '@heroicons/react/20/solid';
 import { Switch } from './catalist/switch';
 import { ThemeContext } from './ContainerClientProviderVH';
+import { Divider } from './catalist/divider';
 
 export function CreateSharedCalendBtn({
   userId,

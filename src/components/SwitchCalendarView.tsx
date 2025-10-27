@@ -11,7 +11,7 @@ export function SwitchCalendarView() {
     'calendar',
   );
 
-  const pathname = usePathname();
+  // const pathname = usePathname();
 
   useEffect(() => {
     if (ctx) {
@@ -28,7 +28,7 @@ export function SwitchCalendarView() {
     <div
       className={twJoin(
         'group /outline-indigo-600 /has-checked:bg-indigo-600 /dark:outline-indigo-500 /dark:has-checked:bg-indigo-500 /dark:bg-white/5 /dark:inset-ring-white/10 relative z-50 inline-flex w-15 shrink-0 rounded-lg bg-gray-200 p-0.5 inset-ring inset-ring-gray-900/5 outline-offset-2 transition-colors duration-200 ease-in-out has-focus-visible:outline-2',
-        pathname === '/' ? 'visible' : 'invisible',
+        // pathname === '/' ? 'visible' : 'invisible',
       )}
     >
       <span className='absolute top-1 left-1'>

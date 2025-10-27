@@ -4,12 +4,15 @@ import { SelectYear } from './SelectYear';
 import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { SwitchCalendarView } from './SwitchCalendarView';
 import { deleteCookiePersonalRangesId } from '@/lib/actions';
 import { SwitchPersSharCalendars } from './SwitchPersSharCalendars';
+import { twJoin } from 'tailwind-merge';
 
 export default function Header2({ session }: { session: Session | null }) {
+  const pathname = usePathname();
+
   const searchParams = useSearchParams();
   const isLogin = searchParams.has('login');
 
@@ -24,11 +27,20 @@ export default function Header2({ session }: { session: Session | null }) {
             <span className='sr-only'>Your Company</span>
             <img alt='' src='/calendar.svg' className='h-8 w-auto' />
           </Link>
-          <SelectYear />
+          <div
+            className={twJoin(
+              'flex items-center gap-3 transition-transform duration-200 ease-in-out',
+              pathname === '/' ? 'scale-100' : 'scale-0',
+            )}
+          >
+            <SelectYear />
+            <SwitchCalendarView />
+          </div>
         </div>
         <div className='mr-5 flex items-center gap-3 text-sm/6 font-semibold text-gray-900'>
-          <SwitchPersSharCalendars />
-          <SwitchCalendarView />
+          {(pathname === '/' || pathname === '/shared') && (
+            <SwitchPersSharCalendars />
+          )}
         </div>
         {/*         <div className='flex md:hidden'>
           <button
@@ -44,7 +56,7 @@ export default function Header2({ session }: { session: Session | null }) {
         <div className='/hidden /md:flex /md:flex-1 /md:justify-end'>
           {session?.user.id ? (
             <>
-              <span>{session.user.email}</span>
+              {/* <span>{session.user.email}</span> */}
               <span
                 className='rounded-md border px-4 py-2 text-sm/6 font-semibold text-gray-900'
                 onClick={() => {

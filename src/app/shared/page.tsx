@@ -10,15 +10,23 @@ import Link from 'next/link';
 import { BtnCopyInvitationLink } from '@/components/BtnCopyInvitationLink';
 import { findOrCreatePersonalRanges } from '@/lib/findOrCreatePersonalRanges';
 import { BtnLeaveSharedPlan } from '@/components/BtnLeaveSharedPlan';
-import { BtnDeleteSharedPlan } from '@/components/BtnDeleteSharedPlan';
+import { Divider } from '@/components/catalist/divider';
+import { SharedPlanItemMenu } from '@/components/SharedPlanItemMenu';
+import {
+  ClipboardDocumentIcon,
+  DocumentDuplicateIcon,
+} from '@heroicons/react/24/outline';
+import { getPersonalRangesId } from '@/lib/getPersonalRangesId';
+import { SharedPlanOwnerItem } from '@/components/SharedPlanOwnerItem';
+import { Suspense } from 'react';
 
 export default async function SharedPage() {
   const session = await getServerSession(authOptions);
-  const res = await findOrCreatePersonalRanges();
+  /*   const res = await findOrCreatePersonalRanges();
   if (!res.ok) {
     return <div>Error: {res.errorMsg}</div>;
   }
-  const { personalRangesId } = res;
+  const { personalRangesId } = res; */
   const sharedRangesByOwnerRes = await getSharedRangesListByOwnerId({
     userId: session?.user.id || null,
   });
@@ -26,6 +34,7 @@ export default async function SharedPage() {
   const calendarsAmount = sharedRangesByOwnerRes.sharedRanges?.length || 0;
   console.log('🚀 ~ SharedPage ~ calendarsAmount:', calendarsAmount);
 
+  const personalRangesId = await getPersonalRangesId();
   const sharedPlansByPersPlanIdListRes = await getSharedPlansListByPersPlanId({
     personalRangesId,
   });
@@ -42,73 +51,58 @@ export default async function SharedPage() {
   return (
     <div className='flex h-full flex-col overflow-y-hidden bg-gray-100 xl:flex-row'>
       <main className='h-2/3 overflow-y-scroll bg-gray-100 p-5 xl:flex xl:h-full xl:flex-1'>
-        {/* {session?.user.id ? ( */}
-        <div>
-          <h3 className='mb-2 text-xl font-semibold'>
-            Общие графики отпусков, в которых вы участвуете:
-          </h3>
-          {sharedPlansByPersPlanIdListRes.sharedRanges?.length ? (
-            <ul>
-              {sharedPlansByPersPlanIdListRes.sharedRanges.map(
-                (sharedRange) => (
-                  <li
-                    key={sharedRange.sharedRanges.id}
-                    className='mb-2 rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-shadow duration-300 ease-in-out hover:shadow-md'
-                  >
-                    <div className='flex gap-2'>
-                      <span className='font-semibold'>Название:</span>
-                      <span>{sharedRange.sharedRanges.name}</span>
-                    </div>
-                    <div className='flex gap-2'>
-                      <span className='font-semibold'>
-                        Количество участников:
-                      </span>
-                      <span>{sharedRange.personalRangesList.length + 1}</span>
-                    </div>
-                    {/* <div className='flex gap-2'>
-                      <span className='font-semibold'>год:</span>
-                      <span>{sharedRange.sharedRanges.year}</span>
-                    </div> */}
-                    <div className='flex justify-end'>
-                      <BtnLeaveSharedPlan
-                        sharedRanges={sharedRange.sharedRanges}
-                        personalRangesId={personalRangesId}
-                      />
-                    </div>
-                  </li>
-                ),
-              )}
-            </ul>
-          ) : (
-            <div>Нет общих графиков отпусков, в которых вы участвуете</div>
-          )}
-          <h3 className='mb-2 text-xl font-semibold'>
-            Общие графики отпусков, в которых вы являетесь администратором:
-          </h3>
-          {sharedRangesByOwnerRes.sharedRanges?.length ? (
-            <ul>
-              {sharedRangesByOwnerRes.sharedRanges?.map((sharedPagesItem) => (
-                <li
-                  key={sharedPagesItem.id}
-                  className='mb-2 rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-shadow duration-300 ease-in-out hover:shadow-md'
-                >
-                  <div className='flex gap-2'>
-                    <span className='font-semibold'>название:</span>
-                    <span>{sharedPagesItem.name}</span>
-                  </div>
-                  {/* <div className='flex gap-2'>
-                    <span className='font-semibold'>
-                      год: лучше убрать из параметров общих календарей
-                    </span>
-                    <span>{sharedPagesItem.year}</span>
-                  </div> */}
-                  <div className='flex gap-2'>
-                    <span className='font-semibold'>
-                      количество участников:
-                    </span>
-                    <span>{sharedPagesItem.personalRanges.length}</span>
-                  </div>
-
+        <Suspense>
+          <div>
+            <h3 className='mb-2 text-xl font-semibold'>
+              Общие графики отпусков, в которых вы участвуете:
+            </h3>
+            {sharedPlansByPersPlanIdListRes.sharedRanges?.length ? (
+              <ul>
+                {sharedPlansByPersPlanIdListRes.sharedRanges.map(
+                  (sharedRange) => (
+                    <li
+                      key={sharedRange.sharedRanges.id}
+                      className='mb-2 rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-shadow duration-300 ease-in-out hover:shadow-md'
+                    >
+                      <div className='flex gap-2'>
+                        {/* <span className='font-semibold'>Название:</span> */}
+                        <span className='text-lg font-semibold'>
+                          {sharedRange.sharedRanges.name}
+                        </span>
+                      </div>
+                      <Divider className='my-2' />
+                      <div className='flex gap-2'>
+                        <span className='font-semibold'>
+                          Количество участников:
+                        </span>
+                        <span>{sharedRange.personalRangesList.length + 1}</span>
+                      </div>
+                      <div className='flex justify-end'>
+                        <BtnLeaveSharedPlan
+                          sharedRanges={sharedRange.sharedRanges}
+                          personalRangesId={personalRangesId}
+                        />
+                      </div>
+                    </li>
+                  ),
+                )}
+              </ul>
+            ) : (
+              <div>Нет общих графиков отпусков, в которых вы участвуете</div>
+            )}
+            <h3 className='mb-2 text-xl font-semibold'>
+              Общие графики отпусков, в которых вы являетесь администратором:
+            </h3>
+            {sharedRangesByOwnerRes.sharedRanges?.length ? (
+              <ul>
+                {sharedRangesByOwnerRes.sharedRanges?.map((sharedPagesItem) => (
+                  <SharedPlanOwnerItem
+                    key={sharedPagesItem.id}
+                    sharedPlanItem={sharedPagesItem}
+                    personalRangesId={personalRangesId}
+                  />
+                  /* 
+                <li>
                   <div className='flex gap-2'>
                     <span className='font-semibold'>
                       ссылка для приглашения:
@@ -136,27 +130,22 @@ export default async function SharedPage() {
                       {'перейти ->'}
                     </Link>
                   </div>
-                  {/* <Link href={`/shared/ids=[${sharedPagesItem.id}]`}>
-                    {'перейти ->'}
-                  </Link> */}
-                  <div className='flex justify-end'>
-                    <BtnDeleteSharedPlan sharedRanges={sharedPagesItem} />
-                  </div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <div>
-              Нет общих графиков отпусков, в которых вы являетесь владельцем
-            </div>
-          )}
-          {/* <CreateSharedCalendBtn
+                </li> */
+                ))}
+              </ul>
+            ) : (
+              <div>
+                Нет общих графиков отпусков, в которых вы являетесь владельцем
+              </div>
+            )}
+            {/* <CreateSharedCalendBtn
             userId={session?.user.id}
             currentYear={currentYear}
             lastYearInDays={lastYearInDays}
             calendarsAmount={calendarsAmount}
           /> */}
-        </div>
+          </div>
+        </Suspense>
         {/*         ) : (
           <h2 className='m-auto max-w-lg text-center text-2xl font-semibold'>
             Для создания и редактирования общих графиков отпусков необходимо

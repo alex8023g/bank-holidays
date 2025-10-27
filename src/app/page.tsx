@@ -13,6 +13,7 @@ import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
 import { prisma } from '@/lib/prisma';
 import { cookies } from 'next/headers';
+import { getPersonalRangesId } from '@/lib/getPersonalRangesId';
 
 export default async function HomePage() {
   console.log('🚀 ~ HomePage ~ start');
@@ -25,7 +26,7 @@ export default async function HomePage() {
   // }
   // const { personalRangesId, session } = res;
 
-  let personalRangesId: string = '';
+  /*   let personalRangesId: string = '';
 
   const session = await getServerSession(authOptions);
   if (session?.user.id) {
@@ -42,7 +43,9 @@ export default async function HomePage() {
     if (personalRangesIdFromCookie) {
       personalRangesId = personalRangesIdFromCookie;
     }
-  }
+  } */
+
+  const personalRangesId = await getPersonalRangesId();
 
   const sharedPlansList: SharedPlansListByPersPlanId[] = [];
 
