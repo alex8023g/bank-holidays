@@ -28,10 +28,13 @@ export default function Header2({ session }: { session: Session | null }) {
         className='flex items-center justify-between p-3 md:px-8'
       >
         <div className='flex md:flex-1'>
-          <Link href='#' className='-m-1.5 p-1.5'>
+          <Link href='/' className='-m-1.5 p-1.5'>
             <span className='sr-only'>Your Company</span>
             <img alt='' src='/calendar.svg' className='h-8 w-auto' />
           </Link>
+          <h1 className='hidden px-4 text-2xl font-medium md:block'>
+            OtpuskPlan.ru
+          </h1>
           <div
             className={twJoin(
               'flex items-center gap-3 transition-transform duration-200 ease-in-out',
