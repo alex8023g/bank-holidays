@@ -1,20 +1,39 @@
 'use client';
 
 import { useContext } from 'react';
-import { ThemeContext } from './ClientContainerVH';
+import { ThemeContext } from './ContainerClientProviderVH';
 import dayjs from 'dayjs';
 import { holidaysCount } from '@/lib/holidaysCount';
 import { twJoin } from 'tailwind-merge';
 import { Day } from '@/lib/createDaysArr';
 import { TotalVacationDays } from './TotalVacationDays';
-
 import { PeriodItemMenu } from './PeriodItemMenu';
 import { PlanResultMenu } from './PlanResultMenu';
+import { useSearchParams } from 'next/navigation';
+import { LoginBtnsGroup } from './LoginBtnsGroup';
+import { RangesUsersBtn } from './ContainerRangesUsers';
 
-export default function ResultBlock({ days }: { days: Day[] }) {
+export function DateRangesList({
+  days,
+  activeBtn,
+}: {
+  days: Day[];
+  activeBtn: RangesUsersBtn;
+}) {
+  const searchParams = useSearchParams();
   const ctx = useContext(ThemeContext);
+  const isLogin = searchParams.has('login');
+
   if (!ctx) {
     return <div>no ctx перезагрузите страницу</div>;
+  }
+
+  if (isLogin) {
+    return (
+      <div className='flex h-1/2 flex-col overflow-y-hidden rounded-lg bg-white px-2 shadow-[0_0_20px_rgba(0,0,0,0.2)] md:z-0 md:mx-auto md:min-w-3xl xl:h-auto xl:w-1/3 xl:min-w-0'>
+        <LoginBtnsGroup />
+      </div>
+    );
   }
 
   const weekends = days.filter(
@@ -32,12 +51,22 @@ export default function ResultBlock({ days }: { days: Day[] }) {
   }
 
   return (
-    <div className='/z-10 flex h-1/3 flex-col overflow-y-hidden rounded-lg bg-white px-2 shadow-[0_0_20px_rgba(0,0,0,0.2)] md:z-0 md:mx-auto md:min-w-3xl xl:h-auto xl:w-1/3 xl:min-w-0'>
-      <div className='/border-b /border-gray-200 sticky top-0 flex justify-between bg-white px-2 py-2'>
-        <h2 className='/grow text-center font-semibold'>
+    <div
+      className={twJoin(
+        '/border-gray-400 /md:border h-full w-full flex-col overflow-y-hidden md:flex md:w-1/2 md:rounded-lg xl:h-1/2 xl:w-full',
+        activeBtn === 'total' ? 'flex' : 'hidden',
+      )}
+    >
+      <div
+        className={twJoin(
+          'sticky top-0 z-20 flex h-full flex-col justify-between bg-white px-2 py-2 shadow-sm md:h-auto md:flex-row',
+          activeBtn !== 'total' && 'hidden',
+        )}
+      >
+        <h2 className='text-center font-semibold'>
           План на {ctx?.selectedYear} год
         </h2>
-        <div className='flex'>
+        <div className='my-auto flex justify-between'>
           <TotalVacationDays
             ranges={ctx.dateRanges}
             days={days}
@@ -51,10 +80,10 @@ export default function ResultBlock({ days }: { days: Day[] }) {
           />
         </div>
       </div>
-      <div className='/border /border-amber-600 flex overflow-y-hidden xl:relative xl:block xl:h-full'>
+      <div className='/border-2 /border-green-600 hidden h-full flex-col overflow-y-hidden md:flex xl:relative xl:flex xl:h-full'>
         <ul
           // role={'list'}
-          className='/w-1/2 /border /border-violet-500 /divide-gray-100 /divide-y /min-w-[400px] flex grow flex-col overflow-y-auto py-0.5 xl:w-auto'
+          className='/w-1/2 /border /border-violet-500 /divide-gray-100 /divide-y /min-w-[400px] flex grow flex-col overflow-y-scroll pt-0.5 xl:w-auto'
         >
           {ctx?.dateRanges
             .filter((range) => range.year === ctx.selectedYear)
@@ -77,6 +106,7 @@ export default function ResultBlock({ days }: { days: Day[] }) {
                       ctx.setSelectedRange(null);
                     } else {
                       ctx.setSelectedRange(range);
+                      ctx.setClickPlace('resultBlock');
                     }
                   }}
                 >

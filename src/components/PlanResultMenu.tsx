@@ -9,10 +9,9 @@ import {
 } from './catalist/dialog';
 import { Button } from './catalist/button';
 import { copyTextToClipboard } from '@/lib/copyToClipboard';
-import { requestForLeaveText } from '@/lib/requestForLeaveText';
 import { useState } from 'react';
 import { vocationScheduleText } from '@/lib/vocationScheduleText';
-import { DateRange } from './ClientContainerVH';
+import { DateRange } from './ContainerClientProviderVH';
 import { Day } from '@/lib/createDaysArr';
 
 export function PlanResultMenu({
@@ -39,7 +38,7 @@ export function PlanResultMenu({
         <Headless.MenuButton as='button' className='outline-none'>
           <EllipsisVerticalIcon className='size-6 cursor-pointer text-zinc-500' />
         </Headless.MenuButton>
-        <DropdownMenu anchor={anchor || 'bottom end'} className=''>
+        <DropdownMenu anchor={anchor || 'bottom end'} className='z-20'>
           <DropdownItem
             onClick={() =>
               copyTextToClipboard(vocationScheduleText({ dateRanges, days }))

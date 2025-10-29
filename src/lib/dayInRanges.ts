@@ -1,4 +1,4 @@
-import { DateRange } from '@/components/ClientContainerVH';
+import { DateRange } from '@/components/ContainerClientProviderVH';
 
 export function dayInRanges({
   dateRanges,

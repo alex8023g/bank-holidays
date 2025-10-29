@@ -3,7 +3,7 @@ import * as Headless from '@headlessui/react';
 
 import { Dropdown, DropdownItem, DropdownMenu } from './catalist/dropdown';
 import { copyTextToClipboard } from '@/lib/copyToClipboard';
-import { DateRange } from './ClientContainerVH';
+import { DateRange } from './ContainerClientProviderVH';
 import { Day } from '@/lib/createDaysArr';
 import { requestForLeaveText } from '@/lib/requestForLeaveText';
 import {
@@ -55,13 +55,13 @@ export function PeriodItemMenu({
           >
             Показать текст заявления на отпуск
           </DropdownItem>
-          <DropdownItem
+          {/*           <DropdownItem
             onClick={() => {
               requestForLeaveWord(requestForLeaveText({ range, days }));
             }}
           >
             Экспортировать в Word
-          </DropdownItem>
+          </DropdownItem> */}
         </DropdownMenu>
       </Dropdown>
 
