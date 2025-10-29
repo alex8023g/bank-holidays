@@ -4,6 +4,7 @@ import './globals.css';
 import { ContainerClientProviderVH } from '@/components/ContainerClientProviderVH';
 import Header2 from '@/components/Header2';
 import { findOrCreatePersonalRanges } from '@/lib/findOrCreatePersonalRanges';
+import { YandexMetricaProvider } from 'next-yandex-metrica';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -37,16 +38,27 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ContainerClientProviderVH
-          session={res.session}
-          personalRangesId={res.personalRangesId}
-          personalRangesName={res.personalRanges.userName}
-          personalRangesIdFromCookie={res.personalRangesIdFromCookie}
-          personalRanges={res.personalRanges}
+        <YandexMetricaProvider
+          tagID={104866653}
+          initParameters={{
+            webvisor: true,
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+          }}
+          router='app'
         >
-          <Header2 session={res.session} />
-          {children}
-        </ContainerClientProviderVH>
+          <ContainerClientProviderVH
+            session={res.session}
+            personalRangesId={res.personalRangesId}
+            personalRangesName={res.personalRanges.userName}
+            personalRangesIdFromCookie={res.personalRangesIdFromCookie}
+            personalRanges={res.personalRanges}
+          >
+            <Header2 session={res.session} />
+            {children}
+          </ContainerClientProviderVH>
+        </YandexMetricaProvider>
       </body>
     </html>
   );
