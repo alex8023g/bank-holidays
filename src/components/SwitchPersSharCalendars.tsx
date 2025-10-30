@@ -4,8 +4,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { twJoin } from 'tailwind-merge';
 
 const tabs = [
-  { name: 'Персональный', href: '/', current: true },
-  { name: 'Общие', href: '/shared', current: false },
+  { name: 'Персональный', href: '/' },
+  { name: 'Общие', href: '/shared' },
 ];
 
 export function SwitchPersSharCalendars() {
@@ -14,8 +14,14 @@ export function SwitchPersSharCalendars() {
   const [page, setPage] = useState(pathname);
 
   useEffect(() => {
+    if (page !== pathname) {
+      setPage(pathname);
+    }
+  }, [pathname]);
+
+  useEffect(() => {
     router.push(page);
-  }, [page]);
+  }, [page, pathname]);
 
   const handleChange = () => {
     setPage(page === '/' ? '/shared' : '/');

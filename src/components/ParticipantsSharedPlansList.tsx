@@ -6,6 +6,7 @@ import { twJoin } from 'tailwind-merge';
 import { RangesUsersBtn } from './ContainerRangesUsers';
 import { SharedPlansListByPersPlanId } from '@/lib/actions';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 export function ParticipantsSharedPlansList({
   activeBtn,
@@ -112,10 +113,18 @@ export function ParticipantsSharedPlansList({
           ))}
         </ul>
       ) : (
-        <div className='flex h-full items-center justify-center pt-1 md:py-2 md:pb-2 md:shadow-sm'>
-          <h2 className='px-10 text-center'>
-            Вы пока не присоединились ни к одному общему графику отпусков
-          </h2>
+        <div className='flex h-full flex-col items-center justify-center pt-1 md:py-2 md:pb-2 md:shadow-sm'>
+          <span className='mb-2 px-10 text-center text-gray-700'>
+            Вы пока не присоединились ни к одному общему графику отпусков.
+          </span>
+          <span className='px-10 text-center text-gray-500'>
+            Вы можете
+            <Link href='/shared' className='text-blue-500 underline'>
+              {' '}
+              создать
+            </Link>{' '}
+            свой общий график отпусков и пригласить других участников.
+          </span>
         </div>
       )}
       {/* </div> */}
