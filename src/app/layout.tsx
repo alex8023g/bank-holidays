@@ -34,7 +34,7 @@ export default async function RootLayout({
   console.log('🚀 ~ RootLayout ~ personalRangesId:', res.personalRangesId);
   console.log('🚀 ~ RootLayout ~ personalRanges:', res.personalRanges);
   return (
-    <html lang='en'>
+    <html lang='ru'>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

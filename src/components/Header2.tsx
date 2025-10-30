@@ -25,11 +25,11 @@ export default function Header2({ session }: { session: Session | null }) {
     <header className='border-b border-gray-200 bg-white'>
       <nav
         aria-label='Global'
-        className='flex items-center justify-between p-3 md:px-8'
+        className='flex items-center justify-start p-3 md:px-8'
       >
-        <div className='flex md:flex-1'>
+        <div className='mr-4 flex md:flex'>
           <Link href='/' className='-m-1.5 p-1.5'>
-            <span className='sr-only'>Your Company</span>
+            <span className='sr-only'>OtpuskPlan.ru</span>
             <img alt='' src='/calendar.svg' className='h-8 w-auto' />
           </Link>
           <h1 className='hidden px-4 text-2xl font-medium md:block'>
@@ -45,26 +45,16 @@ export default function Header2({ session }: { session: Session | null }) {
             <SwitchCalendarView />
           </div>
         </div>
-        <div className='mr-5 flex items-center gap-3 text-sm/6 font-semibold text-gray-900'>
+        <div className='mr-auto flex items-center gap-3 text-sm/6 font-semibold text-gray-900'>
           {(pathname === '/' || pathname === '/shared') && (
             <SwitchPersSharCalendars />
           )}
         </div>
-        {/*         <div className='flex md:hidden'>
-          <button
-            type='button'
-            onClick={() => setMobileMenuOpen(true)}
-            className='-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700'
-          >
-            <span className='sr-only'>Open main menu</span>
-            <Bars3Icon aria-hidden='true' className='size-6' />
-          </button>
-        </div> */}
 
         <div
           className={twJoin(
             'flex items-center gap-3 py-2 transition-transform duration-200 ease-in-out',
-            pathname !== '/' && 'scale-0',
+            // pathname !== '/' && 'scale-0',
           )}
         >
           {session?.user.id ? (
