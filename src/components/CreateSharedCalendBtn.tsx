@@ -64,14 +64,14 @@ export function CreateSharedCalendBtn({
                 />
               </Field>
 
-              <Field className='mb-4 flex items-center gap-2'>
+              {/* <Field className='mb-4 flex items-center gap-2'>
                 <Switch
                   name='allow_embedding'
                   checked={sharePersonalRanges}
                   onChange={setSharePersonalRanges}
                 />
                 <Label>Добавить свой график отпусков в общий график</Label>
-              </Field>
+              </Field> */}
             </DialogBody>
             <DialogActions>
               <Button
