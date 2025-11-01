@@ -46,7 +46,7 @@ export default function Header2({ session }: { session: Session | null }) {
           </div>
         </div>
         <div className='mr-auto flex items-center gap-3 text-sm/6 font-semibold text-gray-900'>
-          {(pathname === '/' || pathname === '/shared') && (
+          {(pathname === '/' || pathname?.includes('/shared')) && (
             <SwitchPersSharCalendars />
           )}
         </div>

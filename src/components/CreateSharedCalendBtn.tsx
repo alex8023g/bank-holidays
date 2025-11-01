@@ -24,10 +24,13 @@ export function CreateSharedCalendBtn({
   userId: string | undefined;
   calendarsAmount: number;
 }) {
+  const ctx = useContext(ThemeContext);
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState('');
-  const [sharePersonalRanges, setSharePersonalRanges] = useState(true);
-  const ctx = useContext(ThemeContext);
+  const [userName, setUserName] = useState(
+    ctx?.personalRangesName || 'Пользователь № 1',
+  );
+  // const [sharePersonalRanges, setSharePersonalRanges] = useState(true);
 
   return (
     <>
@@ -54,13 +57,24 @@ export function CreateSharedCalendBtn({
             </DialogDescription>
             <DialogBody>
               <Field className='mb-4'>
-                <Label>Название</Label>
+                <Label>Название общего графика отпусков</Label>
                 <Input
                   name='name'
                   defaultValue={`Общий график отпусков №${calendarsAmount + 1}`}
                   placeholder={`Общий график отпусков №${calendarsAmount + 1}`}
                   autoFocus
                   onChange={(e) => setName(e.target.value)}
+                />
+              </Field>
+              <Field className='mb-4'>
+                <Label>Ваше имя на общем графике отпусков</Label>
+                <Input
+                  name='userName'
+                  // defaultValue={`Пользователь № 1`}
+                  // placeholder={`Общий график отпусков №${calendarsAmount + 1}`}
+                  // autoFocus
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
                 />
               </Field>
 
@@ -87,11 +101,13 @@ export function CreateSharedCalendBtn({
                   setIsOpen(false);
                   createSharedRanges({
                     userId,
-                    name:
+                    sharedPlanName:
                       name || `Общий график отпусков №${calendarsAmount + 1}`,
-                    personalRangesId: sharePersonalRanges
-                      ? ctx?.personalRangesId
-                      : undefined,
+                    personalRangesId: ctx?.personalRangesId,
+                    userName: userName || 'Пользователь № 1',
+                    // personalRangesId: sharePersonalRanges
+                    //   ? ctx?.personalRangesId
+                    //   : undefined,
                   });
                 }}
               >

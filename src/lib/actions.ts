@@ -347,11 +347,13 @@ export async function getPersonalRangesById2({
 
 export async function createSharedRanges({
   userId,
-  name,
+  sharedPlanName,
+  userName,
   personalRangesId,
 }: {
   userId: string;
-  name: string;
+  sharedPlanName: string;
+  userName: string;
   personalRangesId: string | undefined;
 }) {
   console.log('🚀 ~ createSharedRanges ~ personalRangesId:', personalRangesId);
@@ -364,7 +366,7 @@ export async function createSharedRanges({
   }
   try {
     const sharedRanges = await prisma.sharedRanges.create({
-      data: { ownerUserId: userId, name },
+      data: { ownerUserId: userId, name: sharedPlanName },
     });
     if (personalRangesId) {
       await prisma.personalSharedRanges.create({
@@ -372,6 +374,10 @@ export async function createSharedRanges({
           personalRangesId: personalRangesId,
           sharedRangesId: sharedRanges.id,
         },
+      });
+      await prisma.personalRanges.update({
+        where: { id: personalRangesId },
+        data: { userName },
       });
     }
     revalidatePath('/shared');
