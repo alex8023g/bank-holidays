@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   title: 'Планировщик отпусков',
   description:
     'Планирование отпусков для отдела кадров. График отпусков для всех сотрудников. Умный календарь отпусков.',
+  other: {
+    'yandex-verification': 'ee3745f3e49e6268',
+  },
 };
 
 export default async function RootLayout({
@@ -37,9 +40,6 @@ export default async function RootLayout({
   console.log('🚀 ~ RootLayout ~ personalRanges:', res.personalRanges);
   return (
     <html lang='ru'>
-      <Head>
-        <meta name='yandex-verification' content='ee3745f3e49e6268' />
-      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
