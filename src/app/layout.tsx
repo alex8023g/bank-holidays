@@ -5,6 +5,7 @@ import { ContainerClientProviderVH } from '@/components/ContainerClientProviderV
 import Header2 from '@/components/Header2';
 import { findOrCreatePersonalRanges } from '@/lib/findOrCreatePersonalRanges';
 import { YandexMetricaProvider } from 'next-yandex-metrica';
+import Head from 'next/head';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -17,8 +18,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Отпуск план',
-  description: 'Планирование отпусков для отдела кадров',
+  title: 'Планировщик отпусков',
+  description:
+    'Планирование отпусков для отдела кадров. График отпусков для всех сотрудников. Умный календарь отпусков.',
 };
 
 export default async function RootLayout({
@@ -35,6 +37,9 @@ export default async function RootLayout({
   console.log('🚀 ~ RootLayout ~ personalRanges:', res.personalRanges);
   return (
     <html lang='ru'>
+      <Head>
+        <meta name='yandex-verification' content='ee3745f3e49e6268' />
+      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
