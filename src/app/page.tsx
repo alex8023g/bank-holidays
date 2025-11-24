@@ -14,6 +14,8 @@ import { getServerSession } from 'next-auth';
 import { prisma } from '@/lib/prisma';
 import { cookies } from 'next/headers';
 import { getPersonalRangesId } from '@/lib/getPersonalRangesId';
+import { ContainerClientProviderVH } from '@/components/ContainerClientProviderVH';
+import Header2 from '@/components/Header2';
 
 export default async function HomePage() {
   console.log('🚀 ~ HomePage ~ start');
@@ -61,14 +63,32 @@ export default async function HomePage() {
     }
   }
 
+  const res = await findOrCreatePersonalRanges();
+  if (!res.ok) {
+    return <div>Error: {res.errorMsg}</div>;
+  }
+
+  // await new Promise((resolve) => setTimeout(resolve, 10000));
   return (
-    <ContainerMainAside>
-      <ContainerMain1>
-        <ContainerCalendarsView days={days} sharedPlansList={sharedPlansList} />
-      </ContainerMain1>
-      {/* <ContainerAside> */}
-      <ContainerRangesUsers days={days} sharedPlansList={sharedPlansList} />
-      {/* </ContainerAside> */}
-    </ContainerMainAside>
+    <ContainerClientProviderVH
+      session={res.session}
+      personalRangesId={res.personalRangesId}
+      personalRangesName={res.personalRanges.userName}
+      personalRangesIdFromCookie={res.personalRangesIdFromCookie}
+      personalRanges={res.personalRanges}
+    >
+      {/* <Header2 session={res.session} /> */}
+      <ContainerMainAside>
+        <ContainerMain1>
+          <ContainerCalendarsView
+            days={days}
+            sharedPlansList={sharedPlansList}
+          />
+        </ContainerMain1>
+        {/* <ContainerAside> */}
+        <ContainerRangesUsers days={days} sharedPlansList={sharedPlansList} />
+        {/* </ContainerAside> */}
+      </ContainerMainAside>
+    </ContainerClientProviderVH>
   );
 }

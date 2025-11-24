@@ -24,17 +24,17 @@ export type DateRange = {
 };
 
 export type SelectedDateContext = {
-  selectedYear: number;
-  setSelectedYear: Dispatch<SetStateAction<number>>;
+  // selectedYear: number;
+  // setSelectedYear: Dispatch<SetStateAction<number>>;
   dateRanges: DateRange[];
   setDateRanges: Dispatch<SetStateAction<DateRange[]>>;
 
-  selectedDayOfYear: number | null;
-  setSelectedDayOfYear: Dispatch<SetStateAction<number | null>>;
-  hoverDayOfYear: number | null;
-  setHoverDayOfYear: Dispatch<SetStateAction<number | null>>;
-  selectedRange: DateRange | null;
-  setSelectedRange: Dispatch<SetStateAction<DateRange | null>>;
+  // selectedDayOfYear: number | null;
+  // setSelectedDayOfYear: Dispatch<SetStateAction<number | null>>;
+  // hoverDayOfYear: number | null;
+  // setHoverDayOfYear: Dispatch<SetStateAction<number | null>>;
+  // selectedRange: DateRange | null;
+  // setSelectedRange: Dispatch<SetStateAction<DateRange | null>>;
   sharedRangesData: SharedWithPersonalRangesRes | null;
   setSharedRangesData: Dispatch<
     SetStateAction<SharedWithPersonalRangesRes | null>
@@ -43,10 +43,10 @@ export type SelectedDateContext = {
   setHiddenRangesIds: Dispatch<SetStateAction<string[]>>;
   clickPlace: 'calendarCell' | 'resultBlock';
   setClickPlace: Dispatch<SetStateAction<'calendarCell' | 'resultBlock'>>;
-  calendarView: 'calendar' | 'list';
-  setCalendarView: Dispatch<SetStateAction<'calendar' | 'list'>>;
-  isLoginBlockOpen: boolean;
-  setIsLoginBlockOpen: Dispatch<SetStateAction<boolean>>;
+  // calendarView: 'calendar' | 'list';
+  // setCalendarView: Dispatch<SetStateAction<'calendar' | 'list'>>;
+  // isLoginBlockOpen: boolean;
+  // setIsLoginBlockOpen: Dispatch<SetStateAction<boolean>>;
 
   personalRangesId: string;
   personalRangesName: string;
@@ -77,22 +77,22 @@ export function ContainerClientProviderVH({
       : [],
   );
 
-  const [selectedDayOfYear, setSelectedDayOfYear] = useState<number | null>(
-    null,
-  );
-  const [hoverDayOfYear, setHoverDayOfYear] = useState<number | null>(null);
-  const [selectedYear, setSelectedYear] = useState(dayjs().year());
-  const [selectedRange, setSelectedRange] = useState<DateRange | null>(null);
+  // const [selectedDayOfYear, setSelectedDayOfYear] = useState<number | null>(
+  //   null,
+  // );
+  // const [hoverDayOfYear, setHoverDayOfYear] = useState<number | null>(null);
+  // const [selectedYear, setSelectedYear] = useState(dayjs().year());
+  // const [selectedRange, setSelectedRange] = useState<DateRange | null>(null);
   const [sharedRangesData, setSharedRangesData] =
     useState<SharedWithPersonalRangesRes | null>(null);
   const [hiddenRangesIds, setHiddenRangesIds] = useState<string[]>([]);
   const [clickPlace, setClickPlace] = useState<'calendarCell' | 'resultBlock'>(
     'calendarCell',
   );
-  const [calendarView, setCalendarView] = useState<'calendar' | 'list'>(
-    'calendar',
-  );
-  const [isLoginBlockOpen, setIsLoginBlockOpen] = useState(false);
+  // const [calendarView, setCalendarView] = useState<'calendar' | 'list'>(
+  //   'calendar',
+  // );
+  // const [isLoginBlockOpen, setIsLoginBlockOpen] = useState(false);
   useEffect(() => {
     if (personalRangesIdFromCookie !== personalRangesId) {
       setCookiePersonalRangesId({ personalRangesId });
@@ -103,28 +103,28 @@ export function ContainerClientProviderVH({
     <SessionProvider session={session}>
       <ThemeContext.Provider
         value={{
-          selectedYear,
-          setSelectedYear,
+          // selectedYear,
+          // setSelectedYear,
           dateRanges,
           setDateRanges,
-          selectedDayOfYear,
-          setSelectedDayOfYear,
-          hoverDayOfYear,
-          setHoverDayOfYear,
-          selectedRange,
-          setSelectedRange,
+          // selectedDayOfYear,
+          // setSelectedDayOfYear,
+          // hoverDayOfYear,
+          // setHoverDayOfYear,
+          // selectedRange,
+          // setSelectedRange,
           sharedRangesData,
           setSharedRangesData,
           hiddenRangesIds,
           setHiddenRangesIds,
           clickPlace,
           setClickPlace,
-          calendarView,
-          setCalendarView,
+          // calendarView,
+          // setCalendarView,
           personalRangesId,
           personalRangesName,
-          isLoginBlockOpen,
-          setIsLoginBlockOpen,
+          // isLoginBlockOpen,
+          // setIsLoginBlockOpen,
         }}
       >
         <div className='flex h-dvh flex-col'>{children}</div>

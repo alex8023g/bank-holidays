@@ -11,6 +11,7 @@ import { HoverCountDays } from './HoverCountDays';
 import { SharedPlansListByPersPlanId } from '@/lib/actions';
 import { DeleteXCircle2 } from './DeleteXCircle2';
 import { usePathname } from 'next/navigation';
+import { HeaderContext } from './Header2';
 
 export function CalendarYearVertical3({
   days,
@@ -23,12 +24,12 @@ export function CalendarYearVertical3({
 }) {
   const pathname = usePathname();
   const ctx = useContext(ThemeContext);
-
-  if (!ctx) {
+  const headerCtx = useContext(HeaderContext);
+  if (!ctx || !headerCtx) {
     return <div>no context please reload page</div>;
   }
 
-  const year = ctx.selectedYear;
+  const year = headerCtx.selectedYear;
 
   return (
     <>
@@ -148,33 +149,35 @@ export function CalendarYearVertical3({
                           ? 'red'
                           : '',
                       outline:
-                        ctx.selectedDayOfYear &&
-                        ctx.hoverDayOfYear &&
+                        headerCtx.selectedDayOfYear &&
+                        headerCtx.hoverDayOfYear &&
                         day.dayOfYear
-                          ? ctx.selectedDayOfYear <= day.dayOfYear &&
-                            day.dayOfYear <= ctx.hoverDayOfYear
+                          ? headerCtx.selectedDayOfYear <= day.dayOfYear &&
+                            day.dayOfYear <= headerCtx.hoverDayOfYear
                             ? '1px solid red'
                             : ''
-                          : ctx.selectedRange
-                            ? ctx.selectedRange.start.dayOfYear <=
+                          : headerCtx.selectedRange
+                            ? headerCtx.selectedRange.start.dayOfYear <=
                                 day.dayOfYear &&
-                              day.dayOfYear <= ctx.selectedRange.end.dayOfYear
+                              day.dayOfYear <=
+                                headerCtx.selectedRange.end.dayOfYear
                               ? '1px solid red'
                               : ''
                             : '',
                       outlineOffset: '-1px',
                     }}
                     onClick={() => {
-                      onDateCellClick({ ctx, day, year, days });
+                      onDateCellClick({ ctx, day, year, days, headerCtx });
                     }}
                     onMouseEnter={() => {
                       // if (ctx.selectedDayOfYear) {
-                      ctx.setHoverDayOfYear(day.dayOfYear);
+                      headerCtx.setHoverDayOfYear(day.dayOfYear);
                       // }
                     }}
                   >
-                    {ctx.selectedRange?.start.dayOfYear === day.dayOfYear &&
-                      ctx.selectedRange?.year === year && (
+                    {headerCtx.selectedRange?.start.dayOfYear ===
+                      day.dayOfYear &&
+                      headerCtx.selectedRange?.year === year && (
                         <DeleteXCircle2
                           ctx={ctx}
                           day={day}

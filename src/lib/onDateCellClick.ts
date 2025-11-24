@@ -3,14 +3,17 @@ import { toast } from 'sonner';
 import { updatePersonalRangesById } from './actions';
 import { dayInRanges } from './dayInRanges';
 import { SelectedDateContext } from '@/components/ContainerClientProviderVH';
+import type { HeaderContextT } from '@/components/Header2';
 
 export function onDateCellClick({
   ctx,
   day,
   year,
   days,
+  headerCtx,
 }: {
   ctx: SelectedDateContext;
+  headerCtx: HeaderContextT;
   day: {
     monthDay?: string;
     dayOfYear: number;
@@ -24,7 +27,7 @@ export function onDateCellClick({
 }) {
   console.log('🚀 ~ onClick ~ start');
   ctx.setClickPlace('calendarCell');
-  if (ctx.selectedDayOfYear) {
+  if (headerCtx.selectedDayOfYear) {
     /*  первый день уже выбран */
     if (day.isHoliday) {
       toast.error('Отпуск не может заканчиваться в праздничный день');
@@ -36,24 +39,25 @@ export function onDateCellClick({
             range.start.dayOfYear <= day.dayOfYear &&
             day.dayOfYear <= range.end.dayOfYear) ||
           (range.year === year &&
-            ctx.selectedDayOfYear &&
-            ctx.selectedDayOfYear < range.start.dayOfYear &&
+            headerCtx.selectedDayOfYear &&
+            headerCtx.selectedDayOfYear < range.start.dayOfYear &&
             range.end.dayOfYear < day.dayOfYear),
       )
     ) {
       toast.error('Периоды отпусков не могут пересекаться');
       return;
-    } else if (day.dayOfYear < ctx.selectedDayOfYear) {
-      ctx.setSelectedDayOfYear(day.dayOfYear);
+    } else if (day.dayOfYear < headerCtx.selectedDayOfYear) {
+      headerCtx.setSelectedDayOfYear(day.dayOfYear);
       return;
     }
     const newRange = {
       start: {
-        dayOfYear: ctx.selectedDayOfYear || 0,
+        dayOfYear: headerCtx.selectedDayOfYear || 0,
         dateStr:
           days.find(
             (day2) =>
-              day2.dayOfYear === ctx.selectedDayOfYear && day2.year === year,
+              day2.dayOfYear === headerCtx.selectedDayOfYear &&
+              day2.year === year,
           )?.dateString || '',
       },
       end: {
@@ -76,7 +80,7 @@ export function onDateCellClick({
                 : 0,
       );
     ctx.setDateRanges(updDateRanges);
-    ctx.setSelectedDayOfYear(null);
+    headerCtx.setSelectedDayOfYear(null);
     updatePersonalRangesById({
       id: ctx.personalRangesId,
       rangesJson: JSON.stringify(updDateRanges),
@@ -102,16 +106,16 @@ export function onDateCellClick({
   ) {
     if (
       /* клик в уже выбранный range */
-      ctx.selectedRange?.start.dayOfYear &&
-      ctx.selectedRange?.end.dayOfYear &&
-      ctx.selectedRange?.start.dayOfYear <= day.dayOfYear &&
-      day.dayOfYear <= ctx.selectedRange?.end.dayOfYear /* &&
+      headerCtx.selectedRange?.start.dayOfYear &&
+      headerCtx.selectedRange?.end.dayOfYear &&
+      headerCtx.selectedRange?.start.dayOfYear <= day.dayOfYear &&
+      day.dayOfYear <= headerCtx.selectedRange?.end.dayOfYear /* &&
                             ctx.selectedRange.year === year */
     ) {
-      ctx.setSelectedRange(null);
+      headerCtx.setSelectedRange(null);
     } else {
       /* клик в еще не выбранный range */
-      ctx.setSelectedRange(
+      headerCtx.setSelectedRange(
         ctx.dateRanges.find(
           (range) =>
             range.start.dayOfYear <= day.dayOfYear &&
@@ -126,7 +130,7 @@ export function onDateCellClick({
   } else {
     /* первый день периода не выбран, и клик попал в белое поле */
 
-    ctx.setSelectedDayOfYear(day.dayOfYear);
-    ctx.setSelectedRange(null);
+    headerCtx.setSelectedDayOfYear(day.dayOfYear);
+    headerCtx.setSelectedRange(null);
   }
 }

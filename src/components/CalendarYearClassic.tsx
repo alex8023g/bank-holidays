@@ -9,6 +9,7 @@ import { Day } from '@/lib/createDaysArr';
 import { HoverCountDays } from './HoverCountDays';
 import { CalendarMonth } from './CalendarMonth';
 import { SharedPlansListByPersPlanId } from '@/lib/actions';
+import { HeaderContext } from './Header2';
 
 dayjs.locale('ru');
 dayjs.extend(isoWeek);
@@ -21,16 +22,13 @@ export function CalendarYearClassic({
   days: Day[];
   sharedPlansList: SharedPlansListByPersPlanId[];
 }) {
-  const ctx = useContext(ThemeContext);
-  const year = ctx?.selectedYear || 0;
+  const headerCtx = useContext(HeaderContext);
+  const year = headerCtx?.selectedYear || 0;
+  console.log('🚀 ~ CalendarYearClassic ~ year:', year);
   const monthsSt = useMemo(
     () => createYearCalendar({ year, days }),
     [year, days],
   );
-
-  if (!ctx) {
-    return <div>no context</div>;
-  }
 
   return (
     // <div className='h-2/3 overflow-y-scroll bg-gray-100 xl:h-full xl:flex-1'>
