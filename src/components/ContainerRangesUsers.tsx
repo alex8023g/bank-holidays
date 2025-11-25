@@ -7,7 +7,7 @@ import { SharedPlansListByPersPlanId } from '@/lib/actions';
 import { ParticipantsSharedPlansList } from './ParticipantsSharedPlansList';
 import { twJoin } from 'tailwind-merge';
 import { LoginBtnsGroup } from './LoginBtnsGroup';
-import { ThemeContext } from './ContainerClientProviderVH';
+import { HeaderContext } from './Header2';
 
 export type RangesUsersBtn = 'users' | 'total';
 
@@ -19,7 +19,7 @@ export default function ContainerRangesUsers({
   sharedPlansList: SharedPlansListByPersPlanId[];
 }) {
   const [activeBtn, setActiveBtn] = useState<RangesUsersBtn>('total');
-  const ctx = useContext(ThemeContext);
+  const ctx = useContext(HeaderContext);
   const handleClick = (btn: 'users' | 'total') => {
     setActiveBtn(btn);
   };
