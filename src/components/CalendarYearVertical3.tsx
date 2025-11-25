@@ -25,8 +25,11 @@ export function CalendarYearVertical3({
   const pathname = usePathname();
   const ctx = useContext(ThemeContext);
   const headerCtx = useContext(HeaderContext);
-  if (!ctx || !headerCtx) {
-    return <div>no context please reload page</div>;
+  if (!ctx) {
+    return <div>no context ThemeContext! please reload page!!</div>;
+  }
+  if (!headerCtx) {
+    return <div>no context headerCtx please reload page!!</div>;
   }
 
   const year = headerCtx.selectedYear;

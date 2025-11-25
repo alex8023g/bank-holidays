@@ -1,17 +1,21 @@
 import { CalendarYearVertical2 } from '@/components/CalendarYearVertical2';
 import { CalendarYearVertical3 } from '@/components/CalendarYearVertical3';
 import { ContainerAside } from '@/components/ContainerAside';
+import { ContainerClientProviderVH } from '@/components/ContainerClientProviderVH';
 import { ContainerMain1 } from '@/components/ContainerMain1';
 import { ContainerMainAside } from '@/components/ContainerMainAside';
 import ContainerRangesUsers from '@/components/ContainerRangesUsers';
 import { ParticipantsSharedPlansList } from '@/components/ParticipantsSharedPlansList';
 import {
   getDays,
+  getSharedPlansListByPersPlanId,
   getSharedRanges,
   getSharedRangesById,
   getSharedRangesListByOwnerId,
 } from '@/lib/actions';
 import { authOptions } from '@/lib/auth';
+import { findOrCreatePersonalRanges } from '@/lib/findOrCreatePersonalRanges';
+import { getPersonalRangesId } from '@/lib/getPersonalRangesId';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 
@@ -47,8 +51,42 @@ export default async function SharedPage({
     },
   });
 
+  // *************************************************************
+
+  const sharedRangesByOwnerRes = await getSharedRangesListByOwnerId({
+    userId: session?.user.id || null,
+  });
+
+  const calendarsAmount = sharedRangesByOwnerRes.sharedRanges?.length || 0;
+  console.log('🚀 ~ SharedPage ~ calendarsAmount:', calendarsAmount);
+
+  const personalRangesId = await getPersonalRangesId();
+  const sharedPlansByPersPlanIdListRes = await getSharedPlansListByPersPlanId({
+    personalRangesId,
+  });
+  if (sharedPlansByPersPlanIdListRes.ok) {
+    console.log(
+      '🚀 ~ sharedPlansByPersPlanIdListRes:',
+      sharedPlansByPersPlanIdListRes.sharedRanges,
+    );
+  } else {
+    console.error(sharedPlansByPersPlanIdListRes.error);
+    return <div>Сервис временно недоступен, попробуйте позже</div>;
+  }
+
+  const res = await findOrCreatePersonalRanges();
+  if (!res.ok) {
+    return <div>Error: {res.errorMsg}</div>;
+  }
+
   return (
-    <>
+    <ContainerClientProviderVH
+      session={res.session}
+      personalRangesId={res.personalRangesId}
+      personalRangesName={res.personalRanges.userName}
+      personalRangesIdFromCookie={res.personalRangesIdFromCookie}
+      personalRanges={res.personalRanges}
+    >
       <ContainerMainAside>
         <ContainerMain1>
           <CalendarYearVertical3
@@ -77,6 +115,6 @@ export default async function SharedPage({
           />
         )}
       </div> */}
-    </>
+    </ContainerClientProviderVH>
   );
 }

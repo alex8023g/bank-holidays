@@ -20,15 +20,10 @@ import { getPersonalRangesId } from '@/lib/getPersonalRangesId';
 import { SharedPlanOwnerItem } from '@/components/SharedPlanOwnerItem';
 import { Suspense } from 'react';
 import { ContainerClientProviderVH } from '@/components/ContainerClientProviderVH';
-import Header2 from '@/components/Header2';
 
 export default async function SharedPage() {
   const session = await getServerSession(authOptions);
-  /*   const res = await findOrCreatePersonalRanges();
-  if (!res.ok) {
-    return <div>Error: {res.errorMsg}</div>;
-  }
-  const { personalRangesId } = res; */
+
   const sharedRangesByOwnerRes = await getSharedRangesListByOwnerId({
     userId: session?.user.id || null,
   });
