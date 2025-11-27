@@ -8,9 +8,8 @@ import { twJoin } from 'tailwind-merge';
 import { onDateCellClick } from '@/lib/onDateCellClick';
 import { SharedPlansListByPersPlanId } from '@/lib/actions';
 import { DeleteXCircle2 } from './DeleteXCircle2';
-import { HeaderContext } from './Header2';
 
-export function CalendarMonth({
+export function CalendarMonthTemplate({
   i,
   month,
   days,
@@ -23,12 +22,7 @@ export function CalendarMonth({
   // isActive: boolean;
   sharedPlansList: SharedPlansListByPersPlanId[];
 }) {
-  console.log('🚀 ~ CalendarMonth ~ month:', month);
-  const ctx = useContext(ThemeContext);
-  const headerCtx = useContext(HeaderContext);
-  if (!headerCtx) {
-    return <div>no header context</div>;
-  }
+  // const ctx = useContext(ThemeContext);
   // const activeEl = useRef<HTMLDivElement>(null);
 
   // useEffect(() => {
@@ -40,11 +34,10 @@ export function CalendarMonth({
   //   }
   // }, [isActive, ctx?.clickPlace]);
 
-  if (!ctx) {
-    return <div>no context</div>;
-  }
-  const year = headerCtx.selectedYear;
-  console.log('🚀 ~ CalendarMonth ~ year:', year);
+  // if (!ctx) {
+  //   return <div>no context</div>;
+  // }
+  // const year = ctx.selectedYear;
 
   return (
     <section
@@ -54,7 +47,7 @@ export function CalendarMonth({
       className={twJoin('text-center')}
     >
       <h2 className='mb-2 text-sm font-semibold text-gray-900'>
-        {dayjs().year(year).month(i).format('MMMM')}
+        {dayjs().year(2025).month(i).format('MMMM')}
       </h2>
       <div className='grid grid-cols-7 text-xs/6 text-gray-500'>
         <div>ПН</div>
@@ -74,41 +67,38 @@ export function CalendarMonth({
               // data-is-today={day.isToday ? '' : undefined}
               // data-is-current-month={day ? '' : undefined}
               className={`relative bg-white py-1.5 text-gray-900 first:rounded-tl-lg last:rounded-br-lg hover:bg-gray-100 focus:z-10 nth-36:rounded-bl-lg nth-7:rounded-tr-lg ${day?.isHoliday ? 'font-bold' : ''}`}
-              style={{
-                backgroundColor: ctx.dateRanges.some(
-                  (d) =>
-                    day?.dayOfYear &&
-                    d.year === year &&
-                    d.start.dayOfYear <= day?.dayOfYear &&
-                    d.end.dayOfYear >= day.dayOfYear,
-                )
-                  ? '#51a2ff'
-                  : '',
-                color: day?.isWeekend ? 'red' : day?.isHoliday ? 'red' : '',
-                outline:
-                  headerCtx.selectedDayOfYear &&
-                  headerCtx.hoverDayOfYear &&
-                  day.dayOfYear
-                    ? headerCtx.selectedDayOfYear <= day.dayOfYear &&
-                      day.dayOfYear <= headerCtx.hoverDayOfYear
-                      ? '1px solid red'
-                      : ''
-                    : headerCtx.selectedRange
-                      ? headerCtx.selectedRange.start.dayOfYear <=
-                          day.dayOfYear &&
-                        day.dayOfYear <= headerCtx.selectedRange.end.dayOfYear
-                        ? '1px solid red'
-                        : ''
-                      : '',
-              }}
-              onClick={() => {
-                onDateCellClick({ ctx, day, year, days, headerCtx });
-              }}
-              onMouseEnter={() => {
-                // if (ctx.selectedDayOfYear) {
-                headerCtx.setHoverDayOfYear(day.dayOfYear);
-                // }
-              }}
+              // style={{
+              //   backgroundColor: ctx.dateRanges.some(
+              //     (d) =>
+              //       day?.dayOfYear &&
+              //       d.year === year &&
+              //       d.start.dayOfYear <= day?.dayOfYear &&
+              //       d.end.dayOfYear >= day.dayOfYear,
+              //   )
+              //     ? '#51a2ff'
+              //     : '',
+              //   color: day?.isWeekend ? 'red' : day?.isHoliday ? 'red' : '',
+              //   outline:
+              //     ctx.selectedDayOfYear && ctx.hoverDayOfYear && day.dayOfYear
+              //       ? ctx.selectedDayOfYear <= day.dayOfYear &&
+              //         day.dayOfYear <= ctx.hoverDayOfYear
+              //         ? '1px solid red'
+              //         : ''
+              //       : ctx.selectedRange
+              //         ? ctx.selectedRange.start.dayOfYear <= day.dayOfYear &&
+              //           day.dayOfYear <= ctx.selectedRange.end.dayOfYear
+              //           ? '1px solid red'
+              //           : ''
+              //         : '',
+              // }}
+              // onClick={() => {
+              //   onDateCellClick({ ctx, day, year, days });
+              // }}
+              // onMouseEnter={() => {
+              //   // if (ctx.selectedDayOfYear) {
+              //   ctx.setHoverDayOfYear(day.dayOfYear);
+              //   // }
+              // }}
             >
               <time
                 dateTime={day.monthDay || ''}
@@ -117,15 +107,15 @@ export function CalendarMonth({
                 {dayjs(day?.dateString)?.format('D')}
               </time>
               {/* {day?.dateString} */}
-              {headerCtx.selectedRange?.start.dayOfYear === day.dayOfYear && (
+              {/* {ctx.selectedRange?.start.dayOfYear === day.dayOfYear && (
                 <DeleteXCircle2
                   ctx={ctx}
                   day={day}
                   year={year}
                   position='left'
                 />
-              )}
-              {sharedPlansList.some((sharedPlan) =>
+              )} */}
+              {/* {sharedPlansList.some((sharedPlan) =>
                 sharedPlan.personalRangesList.some((personalRange) =>
                   JSON.parse(
                     (personalRange.personalRanges.rangesJson as string) || '[]',
@@ -145,7 +135,7 @@ export function CalendarMonth({
                 <div className='absolute bottom-1 z-20 flex h-3 w-full font-bold text-red-500'>
                   <span className='mx-auto w-5 border-b-2 border-red-600'></span>
                 </div>
-              )}
+              )} */}
             </button>
           ) : (
             <button

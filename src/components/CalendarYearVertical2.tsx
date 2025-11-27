@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import { HoverCountDays } from './HoverCountDays';
 import { SharedWithPersonalRangesRes } from '@/lib/actions';
 import { useContext } from 'react';
+import { HeaderContext } from './Header2';
 
 export function CalendarYearVertical2({
   days,
@@ -17,10 +18,10 @@ export function CalendarYearVertical2({
   // year: number;
   sharedRangesData: SharedWithPersonalRangesRes;
 }) {
-  const ctx = useContext(ThemeContext);
+  const ctx = useContext(HeaderContext);
 
   if (!ctx) {
-    return <div>no context please reload page</div>;
+    return <div>no context please reload page!</div>;
   }
 
   if (!sharedRangesData) {

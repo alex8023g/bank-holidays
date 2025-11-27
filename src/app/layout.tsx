@@ -6,6 +6,8 @@ import Header2 from '@/components/Header2';
 import { findOrCreatePersonalRanges } from '@/lib/findOrCreatePersonalRanges';
 import { YandexMetricaProvider } from 'next-yandex-metrica';
 import Head from 'next/head';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -32,12 +34,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   console.log('🚀 ~ RootLayout ~ start');
-  const res = await findOrCreatePersonalRanges();
-  if (!res.ok) {
-    return <div>Error: {res.errorMsg}</div>;
-  }
-  console.log('🚀 ~ RootLayout ~ personalRangesId:', res.personalRangesId);
-  console.log('🚀 ~ RootLayout ~ personalRanges:', res.personalRanges);
+  // const res = await findOrCreatePersonalRanges();
+  // if (!res.ok) {
+  //   return <div>Error: {res.errorMsg}</div>;
+  // }
+  // console.log('🚀 ~ RootLayout ~ personalRangesId:', res.personalRangesId);
+  // console.log('🚀 ~ RootLayout ~ personalRanges:', res.personalRanges);
+  const session = await getServerSession(authOptions);
   return (
     <html lang='ru'>
       <body
@@ -53,16 +56,17 @@ export default async function RootLayout({
           }}
           router='app'
         >
-          <ContainerClientProviderVH
+          {/* <ContainerClientProviderVH
             session={res.session}
             personalRangesId={res.personalRangesId}
             personalRangesName={res.personalRanges.userName}
             personalRangesIdFromCookie={res.personalRangesIdFromCookie}
             personalRanges={res.personalRanges}
-          >
-            <Header2 session={res.session} />
-            {children}
-          </ContainerClientProviderVH>
+            > */}
+          <div className='flex h-dvh flex-col'>
+            <Header2 session={session}>{children}</Header2>
+          </div>
+          {/* </ContainerClientProviderVH> */}
         </YandexMetricaProvider>
       </body>
     </html>

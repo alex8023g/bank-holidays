@@ -1,12 +1,12 @@
 'use client';
 import { useContext } from 'react';
-import { ThemeContext } from './ContainerClientProviderVH';
 import { useMouse } from '@react-hooks-library/core';
 import { holidaysCount } from '@/lib/holidaysCount';
 import { Day } from '@/lib/createDaysArr';
+import { HeaderContext } from './Header2';
 
 export function HoverCountDays({ days }: { days: Day[] }) {
-  const ctx = useContext(ThemeContext);
+  const ctx = useContext(HeaderContext);
   const { x, y } = useMouse();
   if (!ctx) {
     return <div>no ctx</div>;

@@ -1,4 +1,4 @@
-import { CalendarMonth } from '@/components/CalendarMonth';
+import { CalendarMonthTemplate } from '@/components/CalendarMonthTemplate';
 import { ContainerAside } from '@/components/ContainerAside';
 import { ContainerMain1 } from '@/components/ContainerMain1';
 import { ContainerMainAside } from '@/components/ContainerMainAside';
@@ -14,9 +14,9 @@ export default async function Loading() {
     <ContainerMainAside>
       <ContainerMain1>
         <div className='mx-auto grid h-dvh max-w-3xl grow grid-cols-1 gap-x-8 gap-y-8 px-4 py-16 sm:grid-cols-2 sm:px-6 xl:max-w-none xl:grid-cols-2 xl:px-8 2xl:grid-cols-3'>
-          {/* {monthsSt.map((_, i) => {
+          {monthsSt.map((_, i) => {
             return (
-              <CalendarMonth
+              <CalendarMonthTemplate
                 key={i}
                 i={i}
                 month={monthsSt[i]}
@@ -24,7 +24,7 @@ export default async function Loading() {
                 sharedPlansList={[]}
               />
             );
-          })} */}
+          })}
         </div>
       </ContainerMain1>
       <ContainerAside>

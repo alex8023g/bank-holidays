@@ -6,6 +6,7 @@ import { CalendarYearClassic } from './CalendarYearClassic';
 import { Day } from '@/lib/createDaysArr';
 import { CalendarYearVertical3 } from './CalendarYearVertical3';
 import { SharedPlansListByPersPlanId } from '@/lib/actions';
+import { HeaderContext } from './Header2';
 
 export function ContainerCalendarsView({
   days,
@@ -14,7 +15,7 @@ export function ContainerCalendarsView({
   days: Day[];
   sharedPlansList: SharedPlansListByPersPlanId[];
 }) {
-  const ctx = useContext(ThemeContext);
+  const ctx = useContext(HeaderContext);
 
   if (!ctx) {
     return <div>no context, please reload page and try again</div>;

@@ -1,8 +1,9 @@
 import { XCircleIcon } from '@heroicons/react/20/solid';
 import { upsertPersonalRangesNoUser } from '@/lib/actions';
 import { SelectedDateContext } from './ContainerClientProviderVH';
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { twJoin } from 'tailwind-merge';
+import { HeaderContext } from './Header2';
 
 export function DeleteXCircle2({
   ctx,
@@ -22,6 +23,7 @@ export function DeleteXCircle2({
   position: 'left' | 'right';
 }) {
   const activeEl = useRef<HTMLDivElement>(null);
+  const headerCtx = useContext(HeaderContext);
 
   useEffect(() => {
     if (ctx?.clickPlace === 'resultBlock') {
@@ -43,7 +45,7 @@ export function DeleteXCircle2({
         );
         console.log('🚀 ~ click on XCircleIcon');
         ctx.setDateRanges(updRanges);
-        ctx.setSelectedRange(null);
+        headerCtx?.setSelectedRange(null);
         (async () => {
           await upsertPersonalRangesNoUser({
             rangesJson: JSON.stringify(updRanges),

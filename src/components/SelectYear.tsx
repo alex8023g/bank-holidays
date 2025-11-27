@@ -2,9 +2,10 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { ThemeContext } from './ContainerClientProviderVH';
 import { useContext } from 'react';
 import dayjs from 'dayjs';
+import { HeaderContext } from './Header2';
 
 export function SelectYear() {
-  const ctx = useContext(ThemeContext);
+  const ctx = useContext(HeaderContext);
   if (!ctx) return;
   <div>no ctx</div>;
 
