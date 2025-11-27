@@ -15,6 +15,7 @@ import { SharedPlanItemMenu } from '@/components/SharedPlanItemMenu';
 import {
   ClipboardDocumentIcon,
   DocumentDuplicateIcon,
+  ViewColumnsIcon,
 } from '@heroicons/react/24/outline';
 import { getPersonalRangesId } from '@/lib/getPersonalRangesId';
 import { SharedPlanOwnerItem } from '@/components/SharedPlanOwnerItem';
@@ -190,6 +191,21 @@ export default async function SharedPage() {
                     userId={session?.user.id}
                     calendarsAmount={calendarsAmount}
                   />
+                  <ol className='list-inside list-decimal p-5'>
+                    <li>Создайте общий график отпусков</li>
+                    <li>Скопируйте ссылку для приглашения участников</li>
+                    <li>Разошлите ссылку сотрудникам</li>
+                    <li>
+                      Сотрудники присоединяются к общему графику отпусков по
+                      ссылке
+                    </li>
+                    <li className=''>
+                      откройте персональный календарь в режиме{' '}
+                      <ViewColumnsIcon className='inline size-6' /> там появятся
+                      все участники общего графика отпусков (возможно
+                      потребуется обновить страницу)
+                    </li>
+                  </ol>
                 </div>
               </div>
             </div>

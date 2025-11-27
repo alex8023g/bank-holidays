@@ -1,15 +1,13 @@
-import { CalendarYearVertical2 } from '@/components/CalendarYearVertical2';
+import { BtnCopyInvitationLink2 } from '@/components/BtnCopyInvitationLink2';
 import { CalendarYearVertical3 } from '@/components/CalendarYearVertical3';
 import { ContainerAside } from '@/components/ContainerAside';
 import { ContainerClientProviderVH } from '@/components/ContainerClientProviderVH';
 import { ContainerMain1 } from '@/components/ContainerMain1';
 import { ContainerMainAside } from '@/components/ContainerMainAside';
-import ContainerRangesUsers from '@/components/ContainerRangesUsers';
 import { ParticipantsSharedPlansList } from '@/components/ParticipantsSharedPlansList';
 import {
   getDays,
   getSharedPlansListByPersPlanId,
-  getSharedRanges,
   getSharedRangesById,
   getSharedRangesListByOwnerId,
 } from '@/lib/actions';
@@ -30,12 +28,7 @@ export default async function SharedPage({
   if (!session?.user.id) {
     return <div>You are not authorized to view this page</div>;
   }
-  const sharedRangesRes = await getSharedRangesListByOwnerId({
-    userId: session?.user.id || null,
-  });
-  const sharedRangesData = sharedRangesRes.sharedRanges?.find(
-    (sharedRange) => sharedRange.id === id,
-  );
+
   // *************************************************************
   const sharedRangesRes2 = await getSharedRangesById({ id });
   if (sharedRangesRes2.status === 'not found') {
@@ -104,6 +97,14 @@ export default async function SharedPage({
             activeBtn={'users'}
             sharedPlansList={[{ sharedRanges, personalRangesList }]}
           />
+          <div className='mb-2 rounded-lg border p-5 text-gray-500'>
+            Пригласите других участников в общий график отпусков по {''}
+            <BtnCopyInvitationLink2
+              link={`${process.env.NEXT_PUBLIC_APP_URL}/invitation?sharedRangesId=${id}`}
+              text='ссылке'
+              className='inline'
+            />
+          </div>
         </ContainerAside>
       </ContainerMainAside>
       {/*       <div className='px-2 py-2'>

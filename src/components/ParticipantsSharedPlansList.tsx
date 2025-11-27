@@ -7,6 +7,7 @@ import { RangesUsersBtn } from './ContainerRangesUsers';
 import { SharedPlansListByPersPlanId } from '@/lib/actions';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { BtnCopyInvitationLink2 } from './BtnCopyInvitationLink2';
 
 export function ParticipantsSharedPlansList({
   activeBtn,
@@ -108,6 +109,14 @@ export function ParticipantsSharedPlansList({
                     </span>
                   </li>
                 ))}
+                <li className='pl-2 text-sm text-gray-500'>
+                  пригласить участников по{' '}
+                  <BtnCopyInvitationLink2
+                    link={`${process.env.NEXT_PUBLIC_APP_URL}/invitation?sharedRangesId=${sharedPlan.sharedRanges.id}`}
+                    text='ссылке'
+                    className='inline'
+                  />
+                </li>
               </ul>
             </li>
           ))}

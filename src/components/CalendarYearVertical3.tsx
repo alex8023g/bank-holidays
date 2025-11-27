@@ -12,6 +12,7 @@ import { SharedPlansListByPersPlanId } from '@/lib/actions';
 import { DeleteXCircle2 } from './DeleteXCircle2';
 import { usePathname } from 'next/navigation';
 import { HeaderContext } from './Header2';
+import { BtnCopyInvitationLink2 } from './BtnCopyInvitationLink2';
 
 export function CalendarYearVertical3({
   days,
@@ -58,17 +59,16 @@ export function CalendarYearVertical3({
               </th>
             )}
             {sharedPlansList
-              .filter(
-                (sharedPlan) =>
-                  sharedPlan.personalRangesList.length > 0 &&
-                  sharedPlan.personalRangesList.length !==
-                    ctx?.hiddenRangesIds.filter((id) =>
-                      sharedPlan.personalRangesList.some(
-                        (personalRange) =>
-                          personalRange.personalRanges.id === id,
-                      ),
-                    ).length,
-              )
+              // .filter(
+              //   (sharedPlan) =>
+              //     sharedPlan.personalRangesList.length > 0 &&
+              //     sharedPlan.personalRangesList.length !==
+              //     ctx?.hiddenRangesIds.filter((id) =>
+              //       sharedPlan.personalRangesList.some(
+              //         (personalRange) => personalRange.personalRanges.id === id,
+              //       ),
+              //     ).length,
+              // )
               .map((sharedPlan) => (
                 <th
                   key={sharedPlan.sharedRanges.id}
@@ -88,12 +88,30 @@ export function CalendarYearVertical3({
           </tr>
           <tr>
             {!pathname.includes('shared') && (
-              <th className='sticky top-0 left-28 z-20 w-32 bg-white px-3 px-5 font-medium'>
+              <th className='sticky top-0 left-28 z-20 w-32 bg-white px-3 font-medium'>
                 {ctx.personalRangesName}
               </th>
             )}
             {sharedPlansList.map((sharedPlan) => {
               const personalRanges = sharedPlan.personalRangesList;
+              if (personalRanges.length === 0) {
+                return (
+                  <th
+                    key={sharedPlan.sharedRanges.id}
+                    className='text-sm font-normal'
+                  >
+                    <div>нет участников</div>
+                    <div className='inline'>
+                      пригласите по{' '}
+                      <BtnCopyInvitationLink2
+                        link={`${process.env.NEXT_PUBLIC_APP_URL}/invitation?sharedRangesId=${sharedPlan.sharedRanges.id}`}
+                        text='ссылке'
+                        className='inline'
+                      />
+                    </div>
+                  </th>
+                );
+              }
               return personalRanges.map((personalRange) => (
                 <th
                   key={personalRange.personalRanges.id}
