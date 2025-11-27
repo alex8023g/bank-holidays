@@ -62,8 +62,10 @@ export default async function RootLayout({
             personalRangesName={res.personalRanges.userName}
             personalRangesIdFromCookie={res.personalRangesIdFromCookie}
             personalRanges={res.personalRanges}
-          > */}
-          <Header2 session={session}>{children}</Header2>
+            > */}
+          <div className='flex h-dvh flex-col'>
+            <Header2 session={session}>{children}</Header2>
+          </div>
           {/* </ContainerClientProviderVH> */}
         </YandexMetricaProvider>
       </body>

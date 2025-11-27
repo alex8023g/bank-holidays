@@ -127,7 +127,9 @@ export function ContainerClientProviderVH({
           // setIsLoginBlockOpen,
         }}
       >
-        <div className='flex h-dvh flex-col'>{children}</div>
+        <div className='/h-dvh flex grow flex-col overflow-y-hidden'>
+          {children}
+        </div>
         <Toaster position='bottom-right' richColors />
       </ThemeContext.Provider>
     </SessionProvider>
