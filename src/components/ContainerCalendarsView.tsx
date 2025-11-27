@@ -1,12 +1,10 @@
 'use client';
 
-import { useContext } from 'react';
-import { ThemeContext } from './ContainerClientProviderVH';
 import { CalendarYearClassic } from './CalendarYearClassic';
 import { Day } from '@/lib/createDaysArr';
 import { CalendarYearVertical3 } from './CalendarYearVertical3';
 import { SharedPlansListByPersPlanId } from '@/lib/actions';
-import { HeaderContext } from './Header2';
+import { useSearchParams } from 'next/navigation';
 
 export function ContainerCalendarsView({
   days,
@@ -15,19 +13,11 @@ export function ContainerCalendarsView({
   days: Day[];
   sharedPlansList: SharedPlansListByPersPlanId[];
 }) {
-  const ctx = useContext(HeaderContext);
+  const searchParamsString = useSearchParams().toString();
 
-  if (!ctx) {
-    return <div>no context, please reload page and try again</div>;
-  }
-
-  return ctx.calendarView === 'calendar' ? (
-    <CalendarYearClassic days={days} sharedPlansList={sharedPlansList} />
+  return searchParamsString.includes('shared') ? (
+    <CalendarYearVertical3 days={days} sharedPlansList={sharedPlansList} />
   ) : (
-    <CalendarYearVertical3
-      days={days}
-      // year={ctx.selectedYear}
-      sharedPlansList={sharedPlansList}
-    />
+    <CalendarYearClassic days={days} sharedPlansList={sharedPlansList} />
   );
 }

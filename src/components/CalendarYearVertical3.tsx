@@ -50,7 +50,7 @@ export function CalendarYearVertical3({
               Дата
             </th>
             {/* <th className='w-20 border'>Holiday</th> */}
-            {!pathname.includes('shared') && (
+            {!pathname.includes('management') && (
               <th
                 // rowSpan={2}
                 className='sticky top-0 left-28 z-20 w-32 bg-white px-5'
@@ -87,7 +87,7 @@ export function CalendarYearVertical3({
               ))}
           </tr>
           <tr>
-            {!pathname.includes('shared') && (
+            {!pathname.includes('management') && (
               <th className='sticky top-0 left-28 z-20 w-32 bg-white px-3 font-medium'>
                 {ctx.personalRangesName}
               </th>
@@ -143,7 +143,7 @@ export function CalendarYearVertical3({
                 >
                   {dayjs(day.dateString).format('DD.MM.YYYY')}
                 </td>
-                {!pathname.includes('shared') && (
+                {!pathname.includes('management') && (
                   <td
                     className={twJoin(
                       'sticky left-28 z-10 w-32 cursor-pointer border border-gray-300 bg-white',

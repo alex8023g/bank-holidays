@@ -87,9 +87,9 @@ export function SharedPlanOwnerItem({
       <Button>Добавить свой график отпусков</Button>
       <Button>Удалить свой график отпусков </Button> */}
       <div>
-        <Link href={`/shared/${sharedPlanItem.id}`}>{'перейти ->'}</Link>
+        <Link href={`/management/${sharedPlanItem.id}`}>{'перейти ->'}</Link>
       </div>
-      {/* <Link href={`/shared/ids=[${sharedPagesItem.id}]`}>
+      {/* <Link href={`/management/ids=[${sharedPagesItem.id}]`}>
                     {'перейти ->'}
                   </Link> */}
     </li>

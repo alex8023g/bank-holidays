@@ -380,7 +380,7 @@ export async function createSharedRanges({
         data: { userName },
       });
     }
-    revalidatePath('/shared');
+    revalidatePath('/management');
     return { ok: true, sharedRanges };
   } catch (error) {
     console.error(error);
@@ -530,7 +530,7 @@ export async function sharePersonalRangesByUserId({
       sharedRangesId: sharedRanges.id,
     },
   });
-  revalidatePath('/shared');
+  revalidatePath('/management');
   return { ok: true, personalSharedRanges };
 }
 
@@ -561,7 +561,7 @@ export async function sharePersonalRangesByPersRangId({
     update: { sharedRangesId },
     create: { personalRangesId, sharedRangesId },
   });
-  // revalidatePath('/shared');
+  // revalidatePath('/management');
   return { ok: true, res };
 }
 
@@ -594,7 +594,7 @@ export async function deletePersSharRangByPersSharRangIds({
         personalRangesId_sharedRangesId: { personalRangesId, sharedRangesId },
       },
     });
-    revalidatePath('/shared');
+    revalidatePath('/management');
     return { ok: true };
   } catch (error) {
     console.error(error);
@@ -608,7 +608,7 @@ export async function deleteSharedRangesById({ id }: { id: string }) {
       where: { sharedRangesId: id },
     });
     await prisma.sharedRanges.delete({ where: { id } });
-    revalidatePath('/shared');
+    revalidatePath('/management');
     return { ok: true };
   } catch (error) {
     console.error(error);
@@ -754,7 +754,7 @@ export async function createPersonalSharedRangesByTwoIds({
       sharedRangesId: sharedRanges.id,
     },
   });
-  // revalidatePath('/shared');
+  // revalidatePath('/management');
   return { ok: true, personalSharedRanges };
 }
 
@@ -767,7 +767,7 @@ export async function updateSharedRangesNameById({
 }) {
   try {
     await prisma.sharedRanges.update({ where: { id }, data: { name } });
-    revalidatePath('/shared');
+    revalidatePath('/management');
     return { ok: true };
   } catch (error) {
     console.error(error);

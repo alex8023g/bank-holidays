@@ -9,7 +9,7 @@ export function LoginBtnsGroup() {
   return (
     <>
       <div className='my-auto flex flex-col items-center space-y-5'>
-        <h2 className='hidden px-5 text-center text-2xl font-bold md:block'>
+        <h2 className='hidden px-5 text-center text-2xl font-bold xl:block'>
           Для создания и редактирования общих графиков отпусков необходимо войти
           в систему с помощью одного из сервисов
         </h2>
