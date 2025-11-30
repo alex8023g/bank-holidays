@@ -85,7 +85,7 @@ export function DateRangesList({
       <div className='/border-2 /border-green-600 hidden h-full flex-col overflow-y-hidden md:flex xl:relative xl:flex xl:h-full'>
         <ul
           // role={'list'}
-          className='/w-1/2 /border /border-violet-500 /divide-gray-100 /divide-y /min-w-[400px] flex grow flex-col overflow-y-scroll pt-0.5 xl:w-auto'
+          className='/w-1/2 /border /border-violet-500 /divide-gray-100 /divide-y /min-w-[400px] flex grow flex-col overflow-y-scroll pt-2 xl:w-auto'
         >
           {ctx?.dateRanges
             .filter((range) => range.year === headerCtx.selectedYear)

@@ -27,7 +27,7 @@ export function ParticipantsSharedPlansList({
          activeBtn === 'users' ? 'flex flex-col' : 'hidden',
        )}
      > */}
-      {!pathname.includes('shared') && (
+      {!pathname.includes('management') && (
         <div className='flex items-center justify-center pt-1 md:py-2 md:pb-2 md:shadow-sm'>
           <h2 className='pl-2 text-center font-semibold'>Общие планы:</h2>
         </div>
@@ -128,7 +128,7 @@ export function ParticipantsSharedPlansList({
           </span>
           <span className='px-10 text-center text-gray-500'>
             Вы можете
-            <Link href='/shared' className='text-blue-500 underline'>
+            <Link href='/management' className='text-blue-500 underline'>
               {' '}
               создать
             </Link>{' '}

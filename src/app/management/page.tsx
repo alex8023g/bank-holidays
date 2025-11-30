@@ -6,17 +6,10 @@ import {
   getSharedRangesListByOwnerId,
   getSharedPlansListByPersPlanId,
 } from '@/lib/actions';
-import Link from 'next/link';
-import { BtnCopyInvitationLink } from '@/components/BtnCopyInvitationLink';
 import { findOrCreatePersonalRanges } from '@/lib/findOrCreatePersonalRanges';
 import { BtnLeaveSharedPlan } from '@/components/BtnLeaveSharedPlan';
 import { Divider } from '@/components/catalist/divider';
-import { SharedPlanItemMenu } from '@/components/SharedPlanItemMenu';
-import {
-  ClipboardDocumentIcon,
-  DocumentDuplicateIcon,
-  ViewColumnsIcon,
-} from '@heroicons/react/24/outline';
+import { ViewColumnsIcon } from '@heroicons/react/24/outline';
 import { getPersonalRangesId } from '@/lib/getPersonalRangesId';
 import { SharedPlanOwnerItem } from '@/components/SharedPlanOwnerItem';
 import { Suspense } from 'react';
@@ -115,36 +108,6 @@ export default async function SharedPage() {
                         sharedPlanItem={sharedPagesItem}
                         personalRangesId={personalRangesId}
                       />
-                      /* 
-                  <li>
-                  <div className='flex gap-2'>
-                  <span className='font-semibold'>
-                  ссылка для приглашения:
-                  </span>
-                  <BtnCopyInvitationLink
-                  link={`${process.env.NEXT_PUBLIC_APP_URL}/invitation?sharedRangesId=${sharedPagesItem.id}`}
-                  />
-                  </div>
-                  <div className='flex gap-2'>
-                  <span className='font-semibold'>
-                  показать мой план отпусков участникам:
-                  </span>
-                  <div className='group relative inline-flex w-11 shrink-0 rounded-full bg-gray-200 p-0.5 inset-ring inset-ring-gray-900/5 outline-offset-2 outline-indigo-600 transition-colors duration-200 ease-in-out has-checked:bg-indigo-600 has-focus-visible:outline-2 dark:bg-white/5 dark:inset-ring-white/10 dark:outline-indigo-500 dark:has-checked:bg-indigo-500'>
-                  <span className='size-5 rounded-full bg-white shadow-xs ring-1 ring-gray-900/5 transition-transform duration-200 ease-in-out group-has-checked:translate-x-5' />
-                  <input
-                  name='setting'
-                  type='checkbox'
-                  aria-label='Use setting'
-                  className='absolute inset-0 appearance-none focus:outline-hidden'
-                  />
-                  </div>
-                  </div>
-                  <div>
-                  <Link href={`/shared/${sharedPagesItem.id}`}>
-                  {'перейти ->'}
-                  </Link>
-                  </div>
-                  </li> */
                     ),
                   )}
                 </ul>
@@ -153,34 +116,14 @@ export default async function SharedPage() {
                   Нет общих графиков отпусков, в которых вы являетесь владельцем
                 </div>
               )}
-              {/* <CreateSharedCalendBtn
-            userId={session?.user.id}
-            currentYear={currentYear}
-            lastYearInDays={lastYearInDays}
-            calendarsAmount={calendarsAmount}
-            /> */}
             </div>
           </Suspense>
-          {/*         ) : (
-          <h2 className='m-auto max-w-lg text-center text-2xl font-semibold'>
-          Для создания и редактирования общих графиков отпусков необходимо
-          войти в систему
-          </h2>
-          )} */}
         </main>
         <aside className='flex h-1/2 flex-col overflow-y-hidden rounded-lg bg-white px-2 shadow-[0_0_20px_rgba(0,0,0,0.2)] md:z-0 md:mx-auto md:min-w-3xl xl:h-auto xl:w-1/3 xl:min-w-0'>
           {!session?.user.id ? (
             <LoginBtnsGroup />
           ) : (
             <div className='/border flex h-full flex-col items-center'>
-              {/* <div className='/border flex h-1/2 items-center justify-center'>
-              <CreateSharedCalendBtn
-              userId={session?.user.id}
-              currentYear={currentYear}
-              lastYearInDays={lastYearInDays}
-              calendarsAmount={calendarsAmount}
-              />
-              </div> */}
               <div className='/border flex h-full px-3 py-5'>
                 <div className='flex flex-col items-center justify-center rounded-lg border border-gray-400 p-5'>
                   <span className='mb-10 text-center'>
@@ -200,10 +143,9 @@ export default async function SharedPage() {
                       ссылке
                     </li>
                     <li className=''>
-                      откройте персональный календарь в режиме{' '}
-                      <ViewColumnsIcon className='inline size-6' /> там появятся
-                      все участники общего графика отпусков (возможно
-                      потребуется обновить страницу)
+                      откройте персональный календарь там появятся все участники
+                      общего графика отпусков (возможно потребуется обновить
+                      страницу)
                     </li>
                   </ol>
                 </div>

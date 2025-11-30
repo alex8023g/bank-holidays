@@ -5,7 +5,7 @@ import { twJoin } from 'tailwind-merge';
 
 const tabs = [
   { name: 'Персональный', href: '/' },
-  { name: 'Общие', href: '/shared' },
+  { name: 'Общие', href: '/management' },
 ];
 
 export function SwitchPersSharCalendars() {
@@ -24,7 +24,7 @@ export function SwitchPersSharCalendars() {
   }, [page, pathname]);
 
   const handleChange = () => {
-    setPage(page === '/' ? '/shared' : '/');
+    setPage(page === '/' ? '/management' : '/');
   };
 
   return (
@@ -76,7 +76,7 @@ export function SwitchPersSharCalendars() {
           type='checkbox'
           aria-label='Use setting'
           className='absolute inset-0 appearance-none focus:outline-hidden'
-          checked={pathname === '/shared'}
+          checked={pathname === '/management'}
           onChange={handleChange}
         />
       </div>
