@@ -75,7 +75,7 @@ export default function Header2({
               <img alt='' src='/calendar.svg' className='h-8 w-auto' />
             </Link>
             <h1 className='hidden px-4 text-2xl font-medium md:block'>
-              OtpuskPlan.ru
+              UrlaubsPlaner.pro
             </h1>
             <div
               className={twJoin(

@@ -24,7 +24,7 @@ export function SelectYear() {
 
   return (
     <div className='flex items-center'>
-      {ctx.selectedYear === 2023 ? (
+      {ctx.selectedYear === 2025 ? (
         <button className=''>
           <ChevronLeftIcon className='size-6 text-gray-300' />
         </button>
