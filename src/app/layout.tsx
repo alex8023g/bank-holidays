@@ -47,7 +47,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <YandexMetricaProvider
-          tagID={104866653}
+          tagID={105578119}
           initParameters={{
             webvisor: true,
             clickmap: true,
