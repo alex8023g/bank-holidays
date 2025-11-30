@@ -29,7 +29,7 @@ export function ParticipantsSharedPlansList({
      > */}
       {!pathname.includes('management') && (
         <div className='flex items-center justify-center pt-1 md:py-2 md:pb-2 md:shadow-sm'>
-          <h2 className='pl-2 text-center font-semibold'>Общие планы:</h2>
+          <h2 className='pl-2 text-center font-semibold'>Gemeinsame Pläne:</h2>
         </div>
       )}
       {sharedPlansList.length > 0 ? (
@@ -110,12 +110,13 @@ export function ParticipantsSharedPlansList({
                   </li>
                 ))}
                 <li className='pl-2 text-sm text-gray-500'>
-                  пригласить участников по{' '}
+                  Teilnehmer per{' '}
                   <BtnCopyInvitationLink2
                     link={`${process.env.NEXT_PUBLIC_APP_URL}/invitation?sharedRangesId=${sharedPlan.sharedRanges.id}`}
-                    text='ссылке'
+                    text='Link'
                     className='inline'
-                  />
+                  />{' '}
+                  einladen
                 </li>
               </ul>
             </li>
@@ -124,15 +125,15 @@ export function ParticipantsSharedPlansList({
       ) : (
         <div className='flex h-full flex-col items-center justify-center pt-1 md:py-2 md:pb-2 md:shadow-sm'>
           <span className='mb-2 px-10 text-center text-gray-700'>
-            Вы пока не присоединились ни к одному общему графику отпусков.
+            Sie sind noch keinem gemeinsamen Urlaubsplan beigetreten.
           </span>
           <span className='px-10 text-center text-gray-500'>
-            Вы можете
+            Sie können
             <Link href='/management' className='text-blue-500 underline'>
               {' '}
-              создать
+              erstellen
             </Link>{' '}
-            свой общий график отпусков и пригласить других участников.
+            Ihren eigenen gemeinsamen Urlaubsplan und andere Teilnehmer einladen.
           </span>
         </div>
       )}

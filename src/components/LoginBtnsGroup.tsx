@@ -10,8 +10,8 @@ export function LoginBtnsGroup() {
     <>
       <div className='my-auto flex flex-col items-center space-y-5'>
         <h2 className='hidden px-5 text-center text-2xl font-bold xl:block'>
-          Для создания и редактирования общих графиков отпусков необходимо войти
-          в систему с помощью одного из сервисов
+          Um gemeinsame Urlaubspläne zu erstellen und zu bearbeiten, müssen Sie sich
+          mit einem der Dienste anmelden
         </h2>
         <button
           className='flex min-w-72 rounded-lg border bg-yellow-400 px-5 py-3 shadow-md'

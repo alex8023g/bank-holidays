@@ -20,9 +20,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Планировщик отпусков',
+  title: 'Urlaubsplaner',
   description:
-    'Планирование отпусков для отдела кадров. График отпусков для всех сотрудников. Умный календарь отпусков.',
+    'Urlaubsplanung für die Personalabteilung. Urlaubsplan für alle Mitarbeiter. Intelligenter Urlaubskalender.',
   other: {
     'yandex-verification': 'ee3745f3e49e6268',
   },
@@ -42,7 +42,7 @@ export default async function RootLayout({
   // console.log('🚀 ~ RootLayout ~ personalRanges:', res.personalRanges);
   const session = await getServerSession(authOptions);
   return (
-    <html lang='ru'>
+    <html lang='de'>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

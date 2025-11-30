@@ -107,7 +107,7 @@ export default function Header2({
                 className='cursor-pointer text-sm/6'
                 onClick={() => setIsLoginBlockOpen(false)}
               >
-                Закрыть
+                Schließen
               </Button>
             ) : (
               <Button
@@ -116,7 +116,7 @@ export default function Header2({
                 onClick={() => setIsLoginBlockOpen(true)}
               >
                 <ArrowRightEndOnRectangleIcon className='size-5' />
-                Войти
+                Anmelden
               </Button>
             )}
           </div>

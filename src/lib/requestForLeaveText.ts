@@ -10,10 +10,10 @@ export function requestForLeaveText({
   range: DateRange;
   days: Day[];
 }) {
-  return `Прошу предоставить основной оплачиваемый отпуск с ${dayjs(range.start.dateStr).format('DD.MM.YYYY')} по ${dayjs(range.end.dateStr).format('DD.MM.YYYY')} сроком ${
+  return `Ich bitte um Gewährung des Haupturlaubs vom ${dayjs(range.start.dateStr).format('DD.MM.YYYY')} bis ${dayjs(range.end.dateStr).format('DD.MM.YYYY')} für ${
     range.end.dayOfYear -
     range.start.dayOfYear +
     1 -
     holidaysCount({ range, days })
-  } к.д.`;
+  } T.`;
 }

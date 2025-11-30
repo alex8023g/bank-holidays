@@ -30,7 +30,7 @@ export function onDateCellClick({
   if (headerCtx.selectedDayOfYear) {
     /*  первый день уже выбран */
     if (day.isHoliday) {
-      toast.error('Отпуск не может заканчиваться в праздничный день');
+      toast.error('Der Urlaub kann nicht an einem Feiertag enden');
       return;
     } else if (
       ctx.dateRanges.some(
@@ -44,7 +44,7 @@ export function onDateCellClick({
             range.end.dayOfYear < day.dayOfYear),
       )
     ) {
-      toast.error('Периоды отпусков не могут пересекаться');
+      toast.error('Urlaubsperioden können sich nicht überschneiden');
       return;
     } else if (day.dayOfYear < headerCtx.selectedDayOfYear) {
       headerCtx.setSelectedDayOfYear(day.dayOfYear);
@@ -126,7 +126,7 @@ export function onDateCellClick({
     }
   } else if (day.isHoliday || day.isWeekend) {
     /* первый день периода не выбран, и клик попал в выходной или праздничный день */
-    toast.error('Отпуск не может начинаться в выходной');
+    toast.error('Der Urlaub kann nicht an einem Wochenende beginnen');
   } else {
     /* первый день периода не выбран, и клик попал в белое поле */
 

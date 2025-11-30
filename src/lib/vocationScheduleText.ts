@@ -14,9 +14,9 @@ export function vocationScheduleText({
     dateRanges
       ?.map(
         (range) =>
-          'c ' +
+          'vom ' +
           dayjs(range.start.dateStr).format('DD.MM.YYYY') +
-          ' по ' +
+          ' bis ' +
           dayjs(range.end.dateStr).format('DD.MM.YYYY') +
           '  ' +
           '(' +
@@ -24,11 +24,11 @@ export function vocationScheduleText({
             range.start.dayOfYear +
             1 -
             holidaysCount({ range, days })) +
-          ' к.д.)',
+          ' T.)',
       )
       .join('\n') +
     '\n' +
-    'Итого: ' +
+    'Gesamt: ' +
     dateRanges.reduce((acc, range) => {
       return (
         acc +
@@ -36,6 +36,6 @@ export function vocationScheduleText({
         holidaysCount({ range, days })
       );
     }, 0) +
-    ' к.д.'
+    ' T.'
   );
 }

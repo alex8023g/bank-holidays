@@ -29,13 +29,13 @@ export function BtnLeaveSharedPlan({
           console.log('🚀 ~ BtnLeaveSharedPlan ~ sharedRange:', sharedRanges);
         }}
       >
-        Покинуть общий график
+        Gemeinsamen Plan verlassen
       </Button>
       <Dialog open={isOpen} onClose={setIsOpen}>
-        <DialogTitle>Покинуть {sharedRanges.name}?</DialogTitle>
+        <DialogTitle>{sharedRanges.name} verlassen?</DialogTitle>
         <DialogDescription>
-          Другие участники не будут видеть ваш план отпусков, вы не будете
-          видеть планы отпусков других участников.
+          Andere Teilnehmer werden Ihren Urlaubsplan nicht mehr sehen, Sie werden
+          die Urlaubspläne anderer Teilnehmer nicht mehr sehen.
         </DialogDescription>
         {/* <DialogBody>
           <Field>
@@ -45,7 +45,7 @@ export function BtnLeaveSharedPlan({
         </DialogBody> */}
         <DialogActions>
           <Button plain onClick={() => setIsOpen(false)}>
-            Отмена
+            Abbrechen
           </Button>
           <Button
             onClick={async () => {
@@ -56,14 +56,14 @@ export function BtnLeaveSharedPlan({
               });
               if (!res.ok) {
                 toast.error(
-                  'Не удалось покинуть общий график. Попробуйте повторить попытку позже',
+                  'Gemeinsamer Plan konnte nicht verlassen werden. Bitte versuchen Sie es später erneut',
                 );
               } else {
-                toast.success('Вы успешно покинули общий график');
+                toast.success('Sie haben den gemeinsamen Plan erfolgreich verlassen');
               }
             }}
           >
-            Да, покинуть
+            Ja, verlassen
           </Button>
         </DialogActions>
       </Dialog>

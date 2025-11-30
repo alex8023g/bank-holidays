@@ -53,7 +53,7 @@ export async function findOrCreatePersonalRanges(): Promise<
     } else if (personalRangesRes.status === 'error') {
       console.log('🚀 ~ 4');
       console.error(personalRangesRes.error);
-      return { ok: false, errorMsg: 'Сервис временно недоступен' };
+      return { ok: false, errorMsg: 'Der Dienst ist vorübergehend nicht verfügbar' };
     }
   }
 
@@ -77,11 +77,11 @@ export async function findOrCreatePersonalRanges(): Promise<
         personalRangesId = res.personalRanges.id;
         personalRanges = res.personalRanges;
       } else {
-        return { ok: false, errorMsg: 'Сервис временно недоступен' };
+        return { ok: false, errorMsg: 'Der Dienst ist vorübergehend nicht verfügbar' };
       }
     } else if (personalRangesRes.status === 'error') {
       console.error(personalRangesRes.error);
-      return { ok: false, errorMsg: 'Сервис временно недоступен' };
+      return { ok: false, errorMsg: 'Der Dienst ist vorübergehend nicht verfügbar' };
     }
   } else {
     console.log('🚀 ~ 10');
@@ -91,7 +91,7 @@ export async function findOrCreatePersonalRanges(): Promise<
       personalRangesId = res.personalRanges.id;
       personalRanges = res.personalRanges;
     } else {
-      return { ok: false, errorMsg: 'Сервис временно недоступен' };
+      return { ok: false, errorMsg: 'Der Dienst ist vorübergehend nicht verfügbar' };
     }
   }
 
@@ -99,7 +99,7 @@ export async function findOrCreatePersonalRanges(): Promise<
     console.log('🚀 ~ 12');
     return {
       ok: false,
-      errorMsg: 'Необработанная ситуация: персональный план не создан',
+      errorMsg: 'Unbehandelte Situation: Persönlicher Plan wurde nicht erstellt',
     };
   }
 

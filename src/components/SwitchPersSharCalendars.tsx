@@ -4,8 +4,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { twJoin } from 'tailwind-merge';
 
 const tabs = [
-  { name: 'Персональный', href: '/' },
-  { name: 'Общие', href: '/management' },
+  { name: 'Persönlich', href: '/' },
+  { name: 'Gemeinsam', href: '/management' },
 ];
 
 export function SwitchPersSharCalendars() {

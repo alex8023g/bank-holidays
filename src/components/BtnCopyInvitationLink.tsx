@@ -12,7 +12,7 @@ export function BtnCopyInvitationLink({ link }: { link: string }) {
           () => {
             console.log('Async: Copying to clipboard was successful!');
             toast.success(
-              'Ссылка скопирована в буфер обмена. Разошлите её другим участникам для приглашения.',
+              'Link in die Zwischenablage kopiert. Senden Sie ihn anderen Teilnehmern zur Einladung.',
               {
                 duration: 20000,
               },
@@ -20,13 +20,13 @@ export function BtnCopyInvitationLink({ link }: { link: string }) {
           },
           (err) => {
             console.error('Async: Could not copy text: ', err);
-            toast.error('Ссылка не скопирована в буфер обмена');
+            toast.error('Link wurde nicht in die Zwischenablage kopiert');
           },
         );
       }}
     >
       <span className='underline transition-colors duration-200 ease-in-out group-hover:text-gray-600'>
-        скопировать ссылку
+        Link kopieren
       </span>
       <DocumentDuplicateIcon className='/stroke-[#6a7282] h-4 w-4 transition-colors duration-200 ease-in-out group-hover:stroke-[#4a5565]' />
     </button>

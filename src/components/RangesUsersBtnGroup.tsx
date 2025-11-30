@@ -19,7 +19,7 @@ export function RangesUsersBtnGroup({
         )}
         onClick={() => handleClick('users')}
       >
-        <span className='mx-auto'>Участники</span>
+        <span className='mx-auto'>Teilnehmer</span>
       </button>
       {/* <button
         type='button'
@@ -37,7 +37,7 @@ export function RangesUsersBtnGroup({
         )}
         onClick={() => handleClick('total')}
       >
-        <span className='mx-auto'>Итого</span>
+        <span className='mx-auto'>Gesamt</span>
       </button>
     </span>
   );

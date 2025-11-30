@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
-import 'dayjs/locale/ru'; // Importing Russian locale for dayjs
+import 'dayjs/locale/de'; // Importing German locale for dayjs
 
-dayjs.locale('ru');
+dayjs.locale('de');
 dayjs.extend(isoWeek);
 
 export type Month = {

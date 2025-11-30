@@ -8,7 +8,7 @@ export function requestForLeaveWord(text: string) {
   a.setAttribute('href', textFile);
   a.setAttribute('download', '');
   a.textContent = 'Click here to download the test for the students';
-  a.download = 'Заявление_на_отпуск.docx';
+  a.download = 'Urlaubsantrag.docx';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);

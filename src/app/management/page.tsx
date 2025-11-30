@@ -36,7 +36,7 @@ export default async function SharedPage() {
     );
   } else {
     console.error(sharedPlansByPersPlanIdListRes.error);
-    return <div>Сервис временно недоступен, попробуйте позже</div>;
+    return <div>Der Dienst ist vorübergehend nicht verfügbar, bitte versuchen Sie es später erneut</div>;
   }
 
   const res = await findOrCreatePersonalRanges();
@@ -58,7 +58,7 @@ export default async function SharedPage() {
           <Suspense>
             <div>
               <h3 className='mb-2 text-xl font-semibold'>
-                Общие графики отпусков, в которых вы участвуете:
+                Gemeinsame Urlaubspläne, an denen Sie teilnehmen:
               </h3>
               {sharedPlansByPersPlanIdListRes.sharedRanges?.length ? (
                 <ul>
@@ -77,7 +77,7 @@ export default async function SharedPage() {
                         <Divider className='my-2' />
                         <div className='flex gap-2'>
                           <span className='font-semibold'>
-                            Количество участников:
+                            Anzahl der Teilnehmer:
                           </span>
                           <span>
                             {sharedRange.personalRangesList.length + 1}
@@ -94,10 +94,10 @@ export default async function SharedPage() {
                   )}
                 </ul>
               ) : (
-                <div>Нет общих графиков отпусков, в которых вы участвуете</div>
+                <div>Keine gemeinsamen Urlaubspläne, an denen Sie teilnehmen</div>
               )}
               <h3 className='mb-2 text-xl font-semibold'>
-                Общие графики отпусков, в которых вы являетесь администратором:
+                Gemeinsame Urlaubspläne, in denen Sie Administrator sind:
               </h3>
               {sharedRangesByOwnerRes.sharedRanges?.length ? (
                 <ul>
@@ -113,7 +113,7 @@ export default async function SharedPage() {
                 </ul>
               ) : (
                 <div>
-                  Нет общих графиков отпусков, в которых вы являетесь владельцем
+                  Keine gemeinsamen Urlaubspläne, in denen Sie der Besitzer sind
                 </div>
               )}
             </div>
@@ -127,25 +127,25 @@ export default async function SharedPage() {
               <div className='/border flex h-full px-3 py-5'>
                 <div className='flex flex-col items-center justify-center rounded-lg border border-gray-400 p-5'>
                   <span className='mb-10 text-center'>
-                    Создавайте общие графики отпусков, делитесь ссылкой для
-                    добавления сотрудников.
+                    Erstellen Sie gemeinsame Urlaubspläne, teilen Sie den Link zum
+                    Hinzufügen von Mitarbeitern.
                   </span>
                   <CreateSharedCalendBtn
                     userId={session?.user.id}
                     calendarsAmount={calendarsAmount}
                   />
                   <ol className='list-inside list-decimal p-5'>
-                    <li>Создайте общий график отпусков</li>
-                    <li>Скопируйте ссылку для приглашения участников</li>
-                    <li>Разошлите ссылку сотрудникам</li>
+                    <li>Erstellen Sie einen gemeinsamen Urlaubsplan</li>
+                    <li>Kopieren Sie den Link zur Einladung von Teilnehmern</li>
+                    <li>Senden Sie den Link an Mitarbeiter</li>
                     <li>
-                      Сотрудники присоединяются к общему графику отпусков по
-                      ссылке
+                      Mitarbeiter treten dem gemeinsamen Urlaubsplan über den
+                      Link bei
                     </li>
                     <li className=''>
-                      откройте персональный календарь там появятся все участники
-                      общего графика отпусков (возможно потребуется обновить
-                      страницу)
+                      öffnen Sie den persönlichen Kalender, dort erscheinen alle Teilnehmer
+                      des gemeinsamen Urlaubsplans (möglicherweise müssen Sie die
+                      Seite aktualisieren)
                     </li>
                   </ol>
                 </div>

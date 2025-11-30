@@ -32,9 +32,9 @@ export default async function SharedPage({
   // *************************************************************
   const sharedRangesRes2 = await getSharedRangesById({ id });
   if (sharedRangesRes2.status === 'not found') {
-    return <div>Общий график не найден</div>;
+    return <div>Gemeinsamer Plan nicht gefunden</div>;
   } else if (sharedRangesRes2.status === 'error') {
-    return <div>Сервис временно недоступен, попробуйте позже</div>;
+    return <div>Der Dienst ist vorübergehend nicht verfügbar, bitte versuchen Sie es später erneut</div>;
   }
   const sharedRanges = sharedRangesRes2.sharedRanges;
   const personalRangesList = await prisma.personalSharedRanges.findMany({
@@ -64,7 +64,7 @@ export default async function SharedPage({
     );
   } else {
     console.error(sharedPlansByPersPlanIdListRes.error);
-    return <div>Сервис временно недоступен, попробуйте позже</div>;
+    return <div>Der Dienst ist vorübergehend nicht verfügbar, bitte versuchen Sie es später erneut</div>;
   }
 
   const res = await findOrCreatePersonalRanges();
@@ -98,12 +98,13 @@ export default async function SharedPage({
             sharedPlansList={[{ sharedRanges, personalRangesList }]}
           />
           <div className='mb-2 rounded-lg border p-5 text-gray-500'>
-            Пригласите других участников в общий график отпусков по {''}
+            Laden Sie andere Teilnehmer zum gemeinsamen Urlaubsplan per {''}
             <BtnCopyInvitationLink2
               link={`${process.env.NEXT_PUBLIC_APP_URL}/invitation?sharedRangesId=${id}`}
-              text='ссылке'
+              text='Link'
               className='inline'
-            />
+            />{' '}
+            ein
           </div>
         </ContainerAside>
       </ContainerMainAside>

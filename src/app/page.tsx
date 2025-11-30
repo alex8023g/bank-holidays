@@ -28,7 +28,7 @@ export default async function HomePage() {
       sharedPlansList.push(...sharedPlansListRes.sharedRanges);
     } else {
       console.error(sharedPlansListRes.error);
-      return <div>Сервис временно недоступен, попробуйте позже</div>;
+      return <div>Der Dienst ist vorübergehend nicht verfügbar, bitte versuchen Sie es später erneut</div>;
     }
   }
 

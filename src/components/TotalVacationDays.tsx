@@ -13,7 +13,7 @@ export function TotalVacationDays({
 }) {
   return (
     <h2 className='font-semibold'>
-      Итого:{' '}
+      Gesamt:{' '}
       {ranges
         .filter((range) => range.year === year)
         .reduce((acc, range) => {
@@ -23,7 +23,7 @@ export function TotalVacationDays({
             holidaysCount({ range, days })
           );
         }, 0)}{' '}
-      к.д.
+      T.
     </h2>
   );
 }

@@ -45,7 +45,7 @@ export function AvatarDropDown({ user }: { user: User }) {
           }}
         >
           <ArrowRightStartOnRectangleIcon className='text-red-700' />
-          <DropdownLabel>Выйти</DropdownLabel>
+          <DropdownLabel>Abmelden</DropdownLabel>
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>

@@ -47,7 +47,7 @@ export function CalendarYearVertical3({
               rowSpan={2}
               className='sticky top-0 left-0 z-30 w-28 border-r border-gray-300 bg-white py-1'
             >
-              Дата
+              Datum
             </th>
             {/* <th className='w-20 border'>Holiday</th> */}
             {!pathname.includes('management') && (
@@ -55,7 +55,7 @@ export function CalendarYearVertical3({
                 // rowSpan={2}
                 className='sticky top-0 left-28 z-20 w-32 bg-white px-5'
               >
-                Мой&nbsp;план
+                Mein&nbsp;Plan
               </th>
             )}
             {sharedPlansList
@@ -100,12 +100,12 @@ export function CalendarYearVertical3({
                     key={sharedPlan.sharedRanges.id}
                     className='text-sm font-normal'
                   >
-                    <div>нет участников</div>
+                    <div>keine Teilnehmer</div>
                     <div className='inline'>
-                      пригласите по{' '}
+                      einladen per{' '}
                       <BtnCopyInvitationLink2
                         link={`${process.env.NEXT_PUBLIC_APP_URL}/invitation?sharedRangesId=${sharedPlan.sharedRanges.id}`}
-                        text='ссылке'
+                        text='Link'
                         className='inline'
                       />
                     </div>

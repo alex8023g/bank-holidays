@@ -28,7 +28,7 @@ export function CreateSharedCalendBtn({
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState('');
   const [userName, setUserName] = useState(
-    ctx?.personalRangesName || 'Пользователь № 1',
+    ctx?.personalRangesName || 'Benutzer Nr. 1',
   );
   // const [sharePersonalRanges, setSharePersonalRanges] = useState(true);
 
@@ -45,29 +45,29 @@ export function CreateSharedCalendBtn({
             <div className='flex items-center gap-2 px-4 py-10'>
               <PlusIcon className='size-10' />
               <span className='text-lg font-semibold'>
-                создать общий график отпусков
+                gemeinsamen Urlaubsplan erstellen
               </span>
             </div>
           </Button>
           <Dialog open={isOpen} onClose={setIsOpen}>
-            <DialogTitle>Создание общего графика отпусков</DialogTitle>
+            <DialogTitle>Gemeinsamen Urlaubsplan erstellen</DialogTitle>
             <DialogDescription>
-              После создания общего графика отпусков,поделитесь ссылкой для
-              добавления сотрудников .
+              Nach der Erstellung des gemeinsamen Urlaubsplans teilen Sie den Link zum
+              Hinzufügen von Mitarbeitern.
             </DialogDescription>
             <DialogBody>
               <Field className='mb-4'>
-                <Label>Название общего графика отпусков</Label>
+                <Label>Name des gemeinsamen Urlaubsplans</Label>
                 <Input
                   name='name'
-                  defaultValue={`Общий график отпусков №${calendarsAmount + 1}`}
-                  placeholder={`Общий график отпусков №${calendarsAmount + 1}`}
+                  defaultValue={`Gemeinsamer Urlaubsplan Nr. ${calendarsAmount + 1}`}
+                  placeholder={`Gemeinsamer Urlaubsplan Nr. ${calendarsAmount + 1}`}
                   autoFocus
                   onChange={(e) => setName(e.target.value)}
                 />
               </Field>
               <Field className='mb-4'>
-                <Label>Ваше имя на общем графике отпусков</Label>
+                <Label>Ihr Name im gemeinsamen Urlaubsplan</Label>
                 <Input
                   name='userName'
                   // defaultValue={`Пользователь № 1`}
@@ -84,7 +84,7 @@ export function CreateSharedCalendBtn({
                   checked={sharePersonalRanges}
                   onChange={setSharePersonalRanges}
                 />
-                <Label>Добавить свой график отпусков в общий график</Label>
+                <Label>Ihren Urlaubsplan zum gemeinsamen Plan hinzufügen</Label>
               </Field> */}
             </DialogBody>
             <DialogActions>
@@ -93,7 +93,7 @@ export function CreateSharedCalendBtn({
                 className='cursor-pointer'
                 onClick={() => setIsOpen(false)}
               >
-                Отмена
+                Abbrechen
               </Button>
               <Button
                 className='cursor-pointer'
@@ -102,22 +102,22 @@ export function CreateSharedCalendBtn({
                   createSharedRanges({
                     userId,
                     sharedPlanName:
-                      name || `Общий график отпусков №${calendarsAmount + 1}`,
+                      name || `Gemeinsamer Urlaubsplan Nr. ${calendarsAmount + 1}`,
                     personalRangesId: ctx?.personalRangesId,
-                    userName: userName || 'Пользователь № 1',
+                    userName: userName || 'Benutzer Nr. 1',
                     // personalRangesId: sharePersonalRanges
                     //   ? ctx?.personalRangesId
                     //   : undefined,
                   });
                 }}
               >
-                Создать
+                Erstellen
               </Button>
             </DialogActions>
           </Dialog>
         </>
       ) : (
-        <Button disabled>Создать общий график отпусков</Button>
+        <Button disabled>Gemeinsamen Urlaubsplan erstellen</Button>
       )}
     </>
   );

@@ -46,41 +46,41 @@ export function PeriodItemMenu({
               copyTextToClipboard(requestForLeaveText({ range, days }))
             }
           >
-            Копировать заявление в буфер обмена
+            Urlaubsantrag in die Zwischenablage kopieren
           </DropdownItem>
           <DropdownItem
             onClick={() => {
               setIsOpen(true);
             }}
           >
-            Показать текст заявления на отпуск
+            Urlaubsantragstext anzeigen
           </DropdownItem>
           {/*           <DropdownItem
             onClick={() => {
               requestForLeaveWord(requestForLeaveText({ range, days }));
             }}
           >
-            Экспортировать в Word
+            In Word exportieren
           </DropdownItem> */}
         </DropdownMenu>
       </Dropdown>
 
       <Dialog open={isOpen} onClose={setIsOpen}>
-        <DialogTitle>Заявление на отпуск</DialogTitle>
+        <DialogTitle>Urlaubsantrag</DialogTitle>
         <DialogDescription>
           {requestForLeaveText({ range, days })}
         </DialogDescription>
 
         <DialogActions>
           <Button plain onClick={() => setIsOpen(false)}>
-            Закрыть
+            Schließen
           </Button>
           <Button
             onClick={() =>
               copyTextToClipboard(requestForLeaveText({ range, days }))
             }
           >
-            Копировать в буфер обмена
+            In die Zwischenablage kopieren
           </Button>
         </DialogActions>
       </Dialog>

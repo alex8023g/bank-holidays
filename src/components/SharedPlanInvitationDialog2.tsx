@@ -45,17 +45,17 @@ export function SharedPlanInvitationDialog2({
         open={state.isOpen}
         onClose={() => setState((st) => ({ ...st, isOpen: false }))}
       >
-        <DialogTitle>Присоединиться к общему графиком отпусков?</DialogTitle>
+        <DialogTitle>Dem gemeinsamen Urlaubsplan beitreten?</DialogTitle>
         <DialogDescription>
-          Все у кого будет ссылка на этот график отпусков смогут видеть ваш
-          график отпусков.
+          Alle, die den Link zu diesem Urlaubsplan haben, können Ihren
+          Urlaubsplan sehen.
         </DialogDescription>
         <DialogBody>
           <Field>
-            <Label>Ваше имя</Label>
+            <Label>Ihr Name</Label>
             <Input
               name='name'
-              placeholder='Введите ваше имя'
+              placeholder='Geben Sie Ihren Namen ein'
               autoFocus
               invalid={state.isError}
               defaultValue={state.name}
@@ -64,7 +64,7 @@ export function SharedPlanInvitationDialog2({
               }
             />
             {state.isError && (
-              <ErrorMessage>Это поле обязательно для заполнения</ErrorMessage>
+              <ErrorMessage>Dieses Feld ist erforderlich</ErrorMessage>
             )}
           </Field>
         </DialogBody>
@@ -76,7 +76,7 @@ export function SharedPlanInvitationDialog2({
               router.push('/');
             }}
           >
-            Отмена
+            Abbrechen
           </Button>
           <Button
             onClick={async () => {
@@ -90,7 +90,7 @@ export function SharedPlanInvitationDialog2({
                 });
                 if (res.ok) {
                   toast.success(
-                    'График отпусков успешно добавлен в общий график',
+                    'Urlaubsplan wurde erfolgreich zum gemeinsamen Plan hinzugefügt',
                   );
                   await updatePersonalRangesUserNameById({
                     id: personalRanges.id,
@@ -98,14 +98,14 @@ export function SharedPlanInvitationDialog2({
                   });
                 } else {
                   toast.error(
-                    'Не удалось добавить график отпусков в общий график',
+                    'Urlaubsplan konnte nicht zum gemeinsamen Plan hinzugefügt werden',
                   );
                 }
                 router.push('/');
               }
             }}
           >
-            Присоединиться
+            Beitreten
           </Button>
         </DialogActions>
       </Dialog>
@@ -119,12 +119,12 @@ export function SharedPlanInvitationDialog2({
         {
           <DialogTitle>
             {errorMsg === 'shared ranges not found'
-              ? 'Ссылка для приглашения устарела, запросите новую у владельца общего графика отпусков'
-              : 'Сервис временно недоступен'}
+              ? 'Der Einladungslink ist abgelaufen, fordern Sie einen neuen beim Besitzer des gemeinsamen Urlaubsplans an'
+              : 'Der Dienst ist vorübergehend nicht verfügbar'}
           </DialogTitle>
         }
         <DialogActions>
-          <Button onClick={() => router.push('/')}>Закрыть</Button>
+          <Button onClick={() => router.push('/')}>Schließen</Button>
         </DialogActions>
       </Dialog>
     );

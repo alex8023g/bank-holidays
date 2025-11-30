@@ -23,7 +23,7 @@ export function BtnCopyInvitationLink2({
           () => {
             console.log('Async: Copying to clipboard was successful!');
             toast.success(
-              'Ссылка скопирована в буфер обмена. Разошлите её другим участникам для приглашения.',
+              'Link in die Zwischenablage kopiert. Senden Sie ihn anderen Teilnehmern zur Einladung.',
               {
                 duration: 20000,
               },
@@ -31,7 +31,7 @@ export function BtnCopyInvitationLink2({
           },
           (err) => {
             console.error('Async: Could not copy text: ', err);
-            toast.error('Ссылка не скопирована в буфер обмена');
+            toast.error('Link wurde nicht in die Zwischenablage kopiert');
           },
         );
       }}

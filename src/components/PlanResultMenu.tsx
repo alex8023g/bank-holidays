@@ -44,35 +44,35 @@ export function PlanResultMenu({
               copyTextToClipboard(vocationScheduleText({ dateRanges, days }))
             }
           >
-            Копировать план отпусков в буфер обмена
+            Urlaubsplan in die Zwischenablage kopieren
           </DropdownItem>
           <DropdownItem
             onClick={() => {
               setIsOpen(true);
             }}
           >
-            Показать план отпусков
+            Urlaubsplan anzeigen
           </DropdownItem>
-          {/* <DropdownItem href='#'>Экспортировать в Excel</DropdownItem> */}
+          {/* <DropdownItem href='#'>In Excel exportieren</DropdownItem> */}
         </DropdownMenu>
       </Dropdown>
 
       <Dialog open={isOpen} onClose={setIsOpen}>
-        <DialogTitle>График отпусков</DialogTitle>
+        <DialogTitle>Urlaubsplan</DialogTitle>
         <DialogDescription className='whitespace-pre-wrap'>
           {vocationScheduleText({ dateRanges, days })}
         </DialogDescription>
 
         <DialogActions>
           <Button plain onClick={() => setIsOpen(false)}>
-            Закрыть
+            Schließen
           </Button>
           <Button
             onClick={() =>
               copyTextToClipboard(vocationScheduleText({ dateRanges, days }))
             }
           >
-            Копировать в буфер обмена
+            In die Zwischenablage kopieren
           </Button>
         </DialogActions>
       </Dialog>

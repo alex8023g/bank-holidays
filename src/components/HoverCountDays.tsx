@@ -36,7 +36,7 @@ export function HoverCountDays({ days }: { days: Day[] }) {
                   },
                   days,
                 }) +
-                ' к.д.'}
+                ' T.'}
           </div>
         )}
     </>

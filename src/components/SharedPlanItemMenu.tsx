@@ -60,18 +60,18 @@ export function SharedPlanItemMenu({
             }}
           >
             <PencilIcon className='h-5 w-5' />
-            <DropdownLabel>Переименовать</DropdownLabel>
+            <DropdownLabel>Umbenennen</DropdownLabel>
           </DropdownItem>
           {/* {isMyPlanShared ? (
             <DropdownItem>
               <UserMinusIcon className='h-5 w-5' />
-              <DropdownLabel>Удалить свой график отпусков</DropdownLabel>
+              <DropdownLabel>Ihren Urlaubsplan löschen</DropdownLabel>
             </DropdownItem>
           ) : (
             <DropdownItem>
               <UserPlusIcon className='h-5 w-5' />
               <DropdownLabel onClick={() => setIsOpenAddMyPlanDialog(true)}>
-                Добавить свой график отпусков
+                Ihren Urlaubsplan hinzufügen
               </DropdownLabel>
             </DropdownItem>
           )} */}
@@ -83,20 +83,20 @@ export function SharedPlanItemMenu({
           >
             {/* <TrashIcon className='h-5 w-5' stroke='#c10007' /> */}
             <TrashIcon className='h-5 w-5 stroke-[#c10007] group-hover:stroke-white' />
-            <DropdownLabel>Удалить общий график</DropdownLabel>
+            <DropdownLabel>Gemeinsamen Plan löschen</DropdownLabel>
           </DropdownItemCustom>
         </DropdownMenu>
       </Dropdown>
       {/* Dialog for delete shared ranges */}
       <Dialog open={isOpenDeleteDialog} onClose={setIsOpenDeleteDialog}>
-        <DialogTitle>Удалить {sharedRanges.name}?</DialogTitle>
+        <DialogTitle>{sharedRanges.name} löschen?</DialogTitle>
         <DialogDescription>
-          Все участники не будут видеть планы отпусков коллег из этого общего
-          графика отпусков.
+          Alle Teilnehmer werden die Urlaubspläne der Kollegen aus diesem gemeinsamen
+          Urlaubsplan nicht mehr sehen.
         </DialogDescription>
         <DialogActions>
           <Button plain onClick={() => setIsOpenDeleteDialog(false)}>
-            Отмена
+            Abbrechen
           </Button>
           <Button
             onClick={async () => {
@@ -106,30 +106,30 @@ export function SharedPlanItemMenu({
               });
               if (!res.ok) {
                 toast.error(
-                  'Не удалось удалить общий график. Попробуйте повторить попытку позже',
+                  'Gemeinsamer Plan konnte nicht gelöscht werden. Bitte versuchen Sie es später erneut',
                 );
               } else {
-                toast.success('Вы успешно удалили общий график');
+                toast.success('Sie haben den gemeinsamen Plan erfolgreich gelöscht');
               }
             }}
           >
-            Да, удалить
+            Ja, löschen
           </Button>
         </DialogActions>
       </Dialog>
       {/* end Dialog for delete shared ranges */}
       {/* Dialog for rename shared ranges */}
       <Dialog open={isOpenRenameDialog} onClose={setIsOpenRenameDialog}>
-        <DialogTitle>Переименовать {sharedRanges.name}?</DialogTitle>
+        <DialogTitle>{sharedRanges.name} umbenennen?</DialogTitle>
         <DialogDescription>
-          Введите новое название для общего графика отпусков.
+          Geben Sie einen neuen Namen für den gemeinsamen Urlaubsplan ein.
         </DialogDescription>
         <DialogBody>
           <Field>
-            <Label>Название</Label>
+            <Label>Name</Label>
             <Input
               name='name'
-              placeholder='Название'
+              placeholder='Name'
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -137,7 +137,7 @@ export function SharedPlanItemMenu({
         </DialogBody>
         <DialogActions>
           <Button plain onClick={() => setIsOpenRenameDialog(false)}>
-            Отмена
+            Abbrechen
           </Button>
           <Button
             onClick={() => {
@@ -148,7 +148,7 @@ export function SharedPlanItemMenu({
               });
             }}
           >
-            Сохранить
+            Speichern
           </Button>
         </DialogActions>
       </Dialog>

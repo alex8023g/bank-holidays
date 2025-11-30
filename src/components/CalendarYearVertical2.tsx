@@ -25,7 +25,7 @@ export function CalendarYearVertical2({
   }
 
   if (!sharedRangesData) {
-    return <div>нет общего графика отпусков</div>;
+    return <div>kein gemeinsamer Urlaubsplan</div>;
   }
 
   return (
@@ -37,7 +37,7 @@ export function CalendarYearVertical2({
         <thead className='rounded-xl bg-white shadow'>
           <tr className='sticky top-0 z-30 bg-white'>
             <th className='/border sticky top-0 left-0 z-30 w-28 bg-white py-1'>
-              Дата
+              Datum
             </th>
             {/* <th className='sticky top-0 left-28 z-20 w-32 bg-white px-5'>
               Мой&nbsp;план
@@ -45,7 +45,7 @@ export function CalendarYearVertical2({
 
             {sharedRangesData.personalRanges.map((range) => (
               <th key={range.personalRangesId} className={twJoin('px-3')}>
-                {range.personalRanges.userName || 'неизвестный пользователь'}
+                {range.personalRanges.userName || 'unbekannter Benutzer'}
               </th>
             ))}
           </tr>

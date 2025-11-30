@@ -4,9 +4,9 @@ import { twJoin } from 'tailwind-merge';
 import Link from 'next/link';
 
 const tabs = [
-  { name: 'Персональный', href: '/', url: '/' },
-  { name: 'Общие', href: '/?shared', url: '/shared=' },
-  { name: 'Управление', href: '/management', url: '/management' },
+  { name: 'Persönlich', href: '/', url: '/' },
+  { name: 'Gemeinsame', href: '/?shared', url: '/shared=' },
+  { name: 'Verwaltung', href: '/management', url: '/management' },
 ];
 
 export function NavBar() {

@@ -27,7 +27,7 @@ export function DateRangesList({
   const isLogin = searchParams.has('login');
 
   if (!ctx || !headerCtx) {
-    return <div>no ctx перезагрузите страницу</div>;
+    return <div>no ctx Bitte laden Sie die Seite neu</div>;
   }
 
   if (isLogin) {
@@ -46,7 +46,7 @@ export function DateRangesList({
     return (
       <div className='flex h-full overflow-y-auto px-2 xl:h-auto xl:w-1/3'>
         <h2 className='m-auto text-center font-semibold'>
-          Производственный календарь на {headerCtx?.selectedYear} еще не принят
+          Der Arbeitskalender für {headerCtx?.selectedYear} wurde noch nicht erstellt
         </h2>
       </div>
     );
@@ -66,7 +66,7 @@ export function DateRangesList({
         )}
       >
         <h2 className='text-center font-semibold'>
-          План на {headerCtx?.selectedYear} год
+          Plan für {headerCtx?.selectedYear}
         </h2>
         <div className='my-auto flex justify-between'>
           <TotalVacationDays
@@ -113,11 +113,11 @@ export function DateRangesList({
                     }
                   }}
                 >
-                  <span>с&nbsp;</span>
+                  <span>vom&nbsp;</span>
                   <span className='font-semibold'>
                     {dayjs(range.start.dateStr).format('DD.MM.YYYY')}
                   </span>
-                  <span>&nbsp;по&nbsp;</span>
+                  <span>&nbsp;bis&nbsp;</span>
                   <span className='font-semibold'>
                     {dayjs(range.end.dateStr).format('DD.MM.YYYY')}
                   </span>
@@ -127,7 +127,7 @@ export function DateRangesList({
                       range.start.dayOfYear +
                       1 -
                       holidaysCount({ range, days })}{' '}
-                    к.д. {/* {')'} */}
+                    T. {/* {')'} */}
                   </span>
                   <PeriodItemMenu
                     anchor='left start'
@@ -140,7 +140,7 @@ export function DateRangesList({
           {!ctx?.dateRanges.some(
             (range) => range.year === headerCtx.selectedYear,
           ) && (
-            <li className='m-auto'>Выберите периоды отпусков на календаре</li>
+            <li className='m-auto'>Wählen Sie Urlaubsperioden im Kalender aus</li>
           )}
         </ul>
       </div>

@@ -57,13 +57,13 @@ export function CalendarMonth({
         {dayjs().year(year).month(i).format('MMMM')}
       </h2>
       <div className='grid grid-cols-7 text-xs/6 text-gray-500'>
-        <div>ПН</div>
-        <div>ВТ</div>
-        <div>СР</div>
-        <div>ЧТ</div>
-        <div>ПТ</div>
-        <div>СБ</div>
-        <div>ВС</div>
+        <div>MO</div>
+        <div>DI</div>
+        <div>MI</div>
+        <div>DO</div>
+        <div>FR</div>
+        <div>SA</div>
+        <div>SO</div>
       </div>
       <div className='isolate mt-2 grid grid-cols-7 gap-px rounded-lg bg-gray-200 text-sm shadow-sm ring-1 ring-gray-200'>
         {month.days.map((day, di) =>

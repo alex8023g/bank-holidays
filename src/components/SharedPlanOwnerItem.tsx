@@ -62,12 +62,12 @@ export function SharedPlanOwnerItem({
       </div>
       <Divider className='my-2' />
       <div className='mb-2 flex gap-2'>
-        <span className='font-semibold'>количество участников:</span>
+        <span className='font-semibold'>Anzahl der Teilnehmer:</span>
         <span>{sharedPlanItem.personalRanges.length}</span>
       </div>
 
       <div className='mb-2 flex gap-2'>
-        <span className='font-semibold'>ссылка для приглашения:</span>
+        <span className='font-semibold'>Einladungslink:</span>
         <BtnCopyInvitationLink
           link={`${process.env.NEXT_PUBLIC_APP_URL}/invitation?sharedRangesId=${sharedPlanItem.id}`}
         />
@@ -87,7 +87,7 @@ export function SharedPlanOwnerItem({
       <Button>Добавить свой график отпусков</Button>
       <Button>Удалить свой график отпусков </Button> */}
       <div>
-        <Link href={`/management/${sharedPlanItem.id}`}>{'перейти ->'}</Link>
+        <Link href={`/management/${sharedPlanItem.id}`}>{'gehen ->'}</Link>
       </div>
       {/* <Link href={`/management/ids=[${sharedPagesItem.id}]`}>
                     {'перейти ->'}
