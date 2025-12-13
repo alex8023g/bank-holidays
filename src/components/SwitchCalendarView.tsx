@@ -3,9 +3,10 @@ import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from './ContainerClientProviderVH';
 import { usePathname } from 'next/navigation';
 import { twJoin } from 'tailwind-merge';
+import { HeaderContext } from './Header2';
 
 export function SwitchCalendarView() {
-  const ctx = useContext(ThemeContext);
+  const ctx = useContext(HeaderContext);
 
   const [calendarView, setCalendarView] = useState<'calendar' | 'list'>(
     'calendar',

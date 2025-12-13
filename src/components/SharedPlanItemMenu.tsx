@@ -62,7 +62,7 @@ export function SharedPlanItemMenu({
             <PencilIcon className='h-5 w-5' />
             <DropdownLabel>Переименовать</DropdownLabel>
           </DropdownItem>
-          {isMyPlanShared ? (
+          {/* {isMyPlanShared ? (
             <DropdownItem>
               <UserMinusIcon className='h-5 w-5' />
               <DropdownLabel>Удалить свой график отпусков</DropdownLabel>
@@ -74,7 +74,7 @@ export function SharedPlanItemMenu({
                 Добавить свой график отпусков
               </DropdownLabel>
             </DropdownItem>
-          )}
+          )} */}
           <DropdownItemCustom
             className='text-red-700 data-focus:bg-red-700'
             onClick={() => {
@@ -155,7 +155,7 @@ export function SharedPlanItemMenu({
       {/* end Dialog for rename shared ranges */}
 
       {/* Dialog for add my plan to shared ranges */}
-      {isOpenAddMyPlanDialog && (
+      {/*  {isOpenAddMyPlanDialog && (
         <SharedPlanInvitationDialog2
           sharedRangesId={sharedRanges.id}
           sharedRangesName={sharedRanges.name}
@@ -163,7 +163,7 @@ export function SharedPlanItemMenu({
           personalRangesUserName={null}
           errorMsg={null}
         />
-      )}
+      )} */}
       {/* end Dialog for add my plan to shared ranges */}
     </>
   );

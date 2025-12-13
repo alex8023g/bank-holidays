@@ -1,12 +1,23 @@
 'use client';
 
-import { DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 import { toast } from 'sonner';
+import { twMerge } from 'tailwind-merge';
 
-export function BtnCopyInvitationLink({ link }: { link: string }) {
+export function BtnCopyInvitationLink2({
+  link,
+  text,
+  className,
+}: {
+  link: string;
+  text: string;
+  className?: string;
+}) {
   return (
     <button
-      className='group flex cursor-pointer items-center gap-2'
+      className={twMerge(
+        'group flex cursor-pointer items-center gap-2',
+        className,
+      )}
       onClick={() => {
         navigator.clipboard.writeText(link).then(
           () => {
@@ -26,9 +37,8 @@ export function BtnCopyInvitationLink({ link }: { link: string }) {
       }}
     >
       <span className='underline transition-colors duration-200 ease-in-out group-hover:text-gray-600'>
-        скопировать ссылку
+        {text}
       </span>
-      <DocumentDuplicateIcon className='/stroke-[#6a7282] h-4 w-4 transition-colors duration-200 ease-in-out group-hover:stroke-[#4a5565]' />
     </button>
   );
 }

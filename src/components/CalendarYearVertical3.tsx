@@ -11,6 +11,8 @@ import { HoverCountDays } from './HoverCountDays';
 import { SharedPlansListByPersPlanId } from '@/lib/actions';
 import { DeleteXCircle2 } from './DeleteXCircle2';
 import { usePathname } from 'next/navigation';
+import { HeaderContext } from './Header2';
+import { BtnCopyInvitationLink2 } from './BtnCopyInvitationLink2';
 
 export function CalendarYearVertical3({
   days,
@@ -23,12 +25,15 @@ export function CalendarYearVertical3({
 }) {
   const pathname = usePathname();
   const ctx = useContext(ThemeContext);
-
+  const headerCtx = useContext(HeaderContext);
   if (!ctx) {
-    return <div>no context please reload page</div>;
+    return <div>no context ThemeContext! please reload page!!</div>;
+  }
+  if (!headerCtx) {
+    return <div>no context headerCtx please reload page!!</div>;
   }
 
-  const year = ctx.selectedYear;
+  const year = headerCtx.selectedYear;
 
   return (
     <>
@@ -45,7 +50,7 @@ export function CalendarYearVertical3({
               Дата
             </th>
             {/* <th className='w-20 border'>Holiday</th> */}
-            {!pathname.includes('shared') && (
+            {!pathname.includes('management') && (
               <th
                 // rowSpan={2}
                 className='sticky top-0 left-28 z-20 w-32 bg-white px-5'
@@ -54,17 +59,16 @@ export function CalendarYearVertical3({
               </th>
             )}
             {sharedPlansList
-              .filter(
-                (sharedPlan) =>
-                  sharedPlan.personalRangesList.length > 0 &&
-                  sharedPlan.personalRangesList.length !==
-                    ctx?.hiddenRangesIds.filter((id) =>
-                      sharedPlan.personalRangesList.some(
-                        (personalRange) =>
-                          personalRange.personalRanges.id === id,
-                      ),
-                    ).length,
-              )
+              // .filter(
+              //   (sharedPlan) =>
+              //     sharedPlan.personalRangesList.length > 0 &&
+              //     sharedPlan.personalRangesList.length !==
+              //     ctx?.hiddenRangesIds.filter((id) =>
+              //       sharedPlan.personalRangesList.some(
+              //         (personalRange) => personalRange.personalRanges.id === id,
+              //       ),
+              //     ).length,
+              // )
               .map((sharedPlan) => (
                 <th
                   key={sharedPlan.sharedRanges.id}
@@ -83,13 +87,31 @@ export function CalendarYearVertical3({
               ))}
           </tr>
           <tr>
-            {!pathname.includes('shared') && (
-              <th className='sticky top-0 left-28 z-20 w-32 bg-white px-3 px-5 font-medium'>
+            {!pathname.includes('management') && (
+              <th className='sticky top-0 left-28 z-20 w-32 bg-white px-3 font-medium'>
                 {ctx.personalRangesName}
               </th>
             )}
             {sharedPlansList.map((sharedPlan) => {
               const personalRanges = sharedPlan.personalRangesList;
+              if (personalRanges.length === 0) {
+                return (
+                  <th
+                    key={sharedPlan.sharedRanges.id}
+                    className='text-sm font-normal'
+                  >
+                    <div>нет участников</div>
+                    <div className='inline'>
+                      пригласите по{' '}
+                      <BtnCopyInvitationLink2
+                        link={`${process.env.NEXT_PUBLIC_APP_URL}/invitation?sharedRangesId=${sharedPlan.sharedRanges.id}`}
+                        text='ссылке'
+                        className='inline'
+                      />
+                    </div>
+                  </th>
+                );
+              }
               return personalRanges.map((personalRange) => (
                 <th
                   key={personalRange.personalRanges.id}
@@ -121,7 +143,7 @@ export function CalendarYearVertical3({
                 >
                   {dayjs(day.dateString).format('DD.MM.YYYY')}
                 </td>
-                {!pathname.includes('shared') && (
+                {!pathname.includes('management') && (
                   <td
                     className={twJoin(
                       'sticky left-28 z-10 w-32 cursor-pointer border border-gray-300 bg-white',
@@ -148,33 +170,35 @@ export function CalendarYearVertical3({
                           ? 'red'
                           : '',
                       outline:
-                        ctx.selectedDayOfYear &&
-                        ctx.hoverDayOfYear &&
+                        headerCtx.selectedDayOfYear &&
+                        headerCtx.hoverDayOfYear &&
                         day.dayOfYear
-                          ? ctx.selectedDayOfYear <= day.dayOfYear &&
-                            day.dayOfYear <= ctx.hoverDayOfYear
+                          ? headerCtx.selectedDayOfYear <= day.dayOfYear &&
+                            day.dayOfYear <= headerCtx.hoverDayOfYear
                             ? '1px solid red'
                             : ''
-                          : ctx.selectedRange
-                            ? ctx.selectedRange.start.dayOfYear <=
+                          : headerCtx.selectedRange
+                            ? headerCtx.selectedRange.start.dayOfYear <=
                                 day.dayOfYear &&
-                              day.dayOfYear <= ctx.selectedRange.end.dayOfYear
+                              day.dayOfYear <=
+                                headerCtx.selectedRange.end.dayOfYear
                               ? '1px solid red'
                               : ''
                             : '',
                       outlineOffset: '-1px',
                     }}
                     onClick={() => {
-                      onDateCellClick({ ctx, day, year, days });
+                      onDateCellClick({ ctx, day, year, days, headerCtx });
                     }}
                     onMouseEnter={() => {
                       // if (ctx.selectedDayOfYear) {
-                      ctx.setHoverDayOfYear(day.dayOfYear);
+                      headerCtx.setHoverDayOfYear(day.dayOfYear);
                       // }
                     }}
                   >
-                    {ctx.selectedRange?.start.dayOfYear === day.dayOfYear &&
-                      ctx.selectedRange?.year === year && (
+                    {headerCtx.selectedRange?.start.dayOfYear ===
+                      day.dayOfYear &&
+                      headerCtx.selectedRange?.year === year && (
                         <DeleteXCircle2
                           ctx={ctx}
                           day={day}

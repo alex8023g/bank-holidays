@@ -12,6 +12,7 @@ import { PlanResultMenu } from './PlanResultMenu';
 import { useSearchParams } from 'next/navigation';
 import { LoginBtnsGroup } from './LoginBtnsGroup';
 import { RangesUsersBtn } from './ContainerRangesUsers';
+import { HeaderContext } from './Header2';
 
 export function DateRangesList({
   days,
@@ -22,9 +23,10 @@ export function DateRangesList({
 }) {
   const searchParams = useSearchParams();
   const ctx = useContext(ThemeContext);
+  const headerCtx = useContext(HeaderContext);
   const isLogin = searchParams.has('login');
 
-  if (!ctx) {
+  if (!ctx || !headerCtx) {
     return <div>no ctx перезагрузите страницу</div>;
   }
 
@@ -37,14 +39,14 @@ export function DateRangesList({
   }
 
   const weekends = days.filter(
-    (day) => day.year === ctx?.selectedYear && day.isWeekend === true,
+    (day) => day.year === headerCtx?.selectedYear && day.isWeekend === true,
   );
 
   if (!weekends.length) {
     return (
       <div className='flex h-full overflow-y-auto px-2 xl:h-auto xl:w-1/3'>
         <h2 className='m-auto text-center font-semibold'>
-          Производственный календарь на {ctx?.selectedYear} еще не принят
+          Производственный календарь на {headerCtx?.selectedYear} еще не принят
         </h2>
       </div>
     );
@@ -64,17 +66,17 @@ export function DateRangesList({
         )}
       >
         <h2 className='text-center font-semibold'>
-          План на {ctx?.selectedYear} год
+          План на {headerCtx?.selectedYear} год
         </h2>
         <div className='my-auto flex justify-between'>
           <TotalVacationDays
             ranges={ctx.dateRanges}
             days={days}
-            year={ctx.selectedYear}
+            year={headerCtx.selectedYear}
           />
           <PlanResultMenu
             dateRanges={ctx.dateRanges.filter(
-              (range) => range.year === ctx.selectedYear,
+              (range) => range.year === headerCtx.selectedYear,
             )}
             days={days}
           />
@@ -83,29 +85,30 @@ export function DateRangesList({
       <div className='/border-2 /border-green-600 hidden h-full flex-col overflow-y-hidden md:flex xl:relative xl:flex xl:h-full'>
         <ul
           // role={'list'}
-          className='/w-1/2 /border /border-violet-500 /divide-gray-100 /divide-y /min-w-[400px] flex grow flex-col overflow-y-scroll pt-0.5 xl:w-auto'
+          className='/w-1/2 /border /border-violet-500 /divide-gray-100 /divide-y /min-w-[400px] flex grow flex-col overflow-y-scroll pt-2 xl:w-auto'
         >
           {ctx?.dateRanges
-            .filter((range) => range.year === ctx.selectedYear)
+            .filter((range) => range.year === headerCtx.selectedYear)
             .map((range) => {
               return (
                 <li
                   key={range.start.dateStr + range.year}
                   className={twJoin(
                     '/rounded-md /shadow-sm /mb-2 /items-start mx-1 mb-2 flex rounded-lg border border-gray-100 bg-gray-100 py-2 pr-1 pl-3 shadow-sm',
-                    ctx.selectedRange &&
-                      ctx.selectedRange?.start.dayOfYear ===
+                    headerCtx.selectedRange &&
+                      headerCtx.selectedRange?.start.dayOfYear ===
                         range.start.dayOfYear &&
                       '/outline-red-600 /outline /shadow border-red-200 shadow-red-200',
                   )}
                   onClick={() => {
                     if (
-                      ctx.selectedRange &&
-                      ctx.selectedRange.start.dateStr === range.start.dateStr
+                      headerCtx.selectedRange &&
+                      headerCtx.selectedRange.start.dateStr ===
+                        range.start.dateStr
                     ) {
-                      ctx.setSelectedRange(null);
+                      headerCtx.setSelectedRange(null);
                     } else {
-                      ctx.setSelectedRange(range);
+                      headerCtx.setSelectedRange(range);
                       ctx.setClickPlace('resultBlock');
                     }
                   }}
@@ -135,7 +138,7 @@ export function DateRangesList({
               );
             })}
           {!ctx?.dateRanges.some(
-            (range) => range.year === ctx.selectedYear,
+            (range) => range.year === headerCtx.selectedYear,
           ) && (
             <li className='m-auto'>Выберите периоды отпусков на календаре</li>
           )}
