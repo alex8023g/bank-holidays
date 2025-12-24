@@ -5,6 +5,7 @@ import {
 } from '@/lib/actions';
 import { redirect } from 'next/navigation';
 import { findOrCreatePersonalRanges } from '@/lib/findOrCreatePersonalRanges';
+import { ContainerClientProviderVH } from '@/components/ContainerClientProviderVH';
 
 export default async function InvitationPage({
   searchParams,
@@ -44,7 +45,13 @@ export default async function InvitationPage({
     redirect('/');
   }
   return (
-    <div className='flex h-full flex-col overflow-y-hidden bg-gray-100 xl:flex-row'>
+    <ContainerClientProviderVH
+      session={res.session}
+      personalRangesId={res.personalRangesId}
+      personalRangesName={res.personalRanges.userName}
+      personalRangesIdFromCookie={res.personalRangesIdFromCookie}
+      personalRanges={res.personalRanges}
+    >
       <main className='h-2/3 overflow-y-scroll bg-gray-100 p-5 xl:flex xl:h-full xl:flex-1'>
         <div>InvitationPage</div>
         {sharedRangesId && (
@@ -55,6 +62,6 @@ export default async function InvitationPage({
           />
         )}
       </main>
-    </div>
+    </ContainerClientProviderVH>
   );
 }
