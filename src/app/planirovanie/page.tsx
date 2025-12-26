@@ -13,13 +13,12 @@ import { ContainerClientProviderVH } from '@/components/ContainerClientProviderV
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Календарь отпусков',
-  description: 'Онлайн календарь для расчета отпусков всех сотрудников.',
+  title: 'Планирование отпуска',
+  description:
+    'Планировщик отпуска работников онлайн. Программа для планирования отпусков сотрудников.',
 };
 
-export default async function HomePage() {
-  console.log('🚀 ~ HomePage ~ start');
-
+export default async function PlanirovaniePage() {
   const days = await getDays();
 
   const personalRangesId = await getPersonalRangesId();
@@ -59,8 +58,8 @@ export default async function HomePage() {
           />
           <div className='glass bg-opacity-10 sticky bottom-2 z-30 mx-8 hidden justify-center rounded-xl border border-gray-200 p-4 shadow-md backdrop-blur-sm backdrop-filter xl:flex'>
             <div className=''>
-              Календарь отпусков для сотрудников компании. Создавайте общие
-              календари отпусков.
+              Сервис для планирования отпусков сотрудников. Создавайте графики
+              отпусков на календаре бесплатно онлайн.
             </div>
           </div>
         </ContainerMain1>

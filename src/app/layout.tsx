@@ -19,15 +19,6 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-export const metadata: Metadata = {
-  title: 'Планировщик отпусков',
-  description:
-    'Планирование отпусков для отдела кадров. График отпусков для всех сотрудников. Умный календарь отпусков.',
-  other: {
-    'yandex-verification': 'ee3745f3e49e6268',
-  },
-};
-
 export default async function RootLayout({
   children,
 }: Readonly<{
