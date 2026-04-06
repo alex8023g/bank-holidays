@@ -107,7 +107,8 @@ export default async function SharedPage() {
       <div className='flex h-full flex-col overflow-y-hidden bg-gray-100 xl:flex-row'>
         <main className='h-2/3 overflow-y-scroll bg-gray-100 p-5 xl:flex xl:h-full xl:flex-1'>
           <Suspense>
-            {session?.user.id ? (
+            {sharedPlansByPersPlanIdListRes.sharedRanges?.length ||
+            sharedRangesByOwnerRes.sharedRanges?.length ? (
               <div>
                 <h3 className='mb-2 text-xl font-semibold'>
                   Общие графики отпусков, в которых вы участвуете:
@@ -172,8 +173,11 @@ export default async function SharedPage() {
                     владельцем
                   </div>
                 )}
+              </div>
+            ) : session?.user.name ? (
+              <div className='m-auto'>
                 <CreateSharedCalendBtn
-                  userId={session.user.id}
+                  userId={session?.user.id}
                   calendarsAmount={calendarsAmount}
                 />
               </div>
@@ -183,9 +187,13 @@ export default async function SharedPage() {
           </Suspense>
         </main>
         <aside className='flex h-1/2 flex-col overflow-y-hidden rounded-lg bg-white p-5 shadow-[0_0_20px_rgba(0,0,0,0.2)] md:z-0 md:mx-auto md:min-w-3xl xl:h-auto xl:w-1/3 xl:min-w-0'>
-          {/* {!session?.user.id ? (
-            <LoginBtnsGroup />
-          ) : (
+          {/* {!session?.user.id ? ( */}
+          {sharedPlansByPersPlanIdListRes.sharedRanges?.some(
+            (item) => item.personalRangesList.length > 0,
+          ) ||
+          sharedRangesByOwnerRes.sharedRanges?.some(
+            (item) => item.personalRanges.length > 1,
+          ) ? (
             <div className='/border flex h-full flex-col items-center'>
               <div className='/border flex h-full px-3 py-5'>
                 <div className='flex flex-col items-center justify-center rounded-lg border border-gray-400 p-5'>
@@ -214,18 +222,20 @@ export default async function SharedPage() {
                 </div>
               </div>
             </div>
-          )} */}
-          <div className='flex h-full flex-col items-center justify-center rounded-lg border border-gray-400 p-5'>
-            <h3 className='/font-medium mb-10 text-center'>
-              Создавайте общие графики отпусков, делитесь ссылкой для добавления
-              сотрудников.
-            </h3>
-            <Stepper
-              session={session}
-              steps={steps}
-              isSharedPlansExists={calendarsAmount > 0}
-            />
-          </div>
+          ) : (
+            // <LoginBtnsGroup />
+            <div className='flex h-full flex-col items-center justify-center rounded-lg border border-gray-400 p-5'>
+              <h3 className='/font-medium mb-10 text-center'>
+                Создавайте общие графики отпусков, делитесь ссылкой для
+                добавления сотрудников.
+              </h3>
+              <Stepper
+                session={session}
+                steps={steps}
+                isSharedPlansExists={calendarsAmount > 0}
+              />
+            </div>
+          )}
         </aside>
       </div>
     </ContainerClientProviderVH>
