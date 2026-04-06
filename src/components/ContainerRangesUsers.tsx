@@ -39,7 +39,7 @@ export default function ContainerRangesUsers({
               <DateRangesList days={days} activeBtn={activeBtn} />
               <div
                 className={twJoin(
-                  '/border-gray-400 /md:border w-full overflow-y-hidden rounded-lg md:flex md:w-1/2 md:flex-col xl:h-1/2 xl:w-full',
+                  '/border-gray-400 /md:border w-full overflow-y-hidden rounded-lg md:flex md:w-1/2 md:flex-col xl:h-2/3 xl:w-full',
                   activeBtn === 'users' ? 'flex flex-col' : 'hidden',
                 )}
               >

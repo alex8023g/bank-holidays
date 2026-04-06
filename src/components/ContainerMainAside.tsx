@@ -4,7 +4,7 @@ export function ContainerMainAside({
   children: React.ReactNode;
 }) {
   return (
-    <div className='flex flex-col overflow-y-hidden bg-gray-100 xl:flex-row'>
+    <div className='flex h-full flex-col overflow-y-hidden bg-gray-100 xl:flex-row'>
       {children}
     </div>
   );

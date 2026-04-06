@@ -1,10 +1,9 @@
 # todo
 
-[-] add possibility to copy plan to clipboard
-[-] add possibility to open certain vocation in ms word
-[-] add possibility to sync data between own devices (need authorization)
-[-] add possibility to share calendar with other users
 [-] add periodic task for create next year calendar
+[-] добавить возможность отмечать отгулянный отпуск
+[-] при успешном создании общего графика отпусков редиректить пользователя на этот общий график
+[-] добавить подсказки
 
 приложение должно решать следующие задачи:
 

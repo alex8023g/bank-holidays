@@ -50,6 +50,8 @@ export type SelectedDateContext = {
 
   personalRangesId: string;
   personalRangesName: string;
+  linkCopied: boolean;
+  setLinkCopied: Dispatch<SetStateAction<boolean>>;
 };
 
 export const ThemeContext = createContext<SelectedDateContext | null>(null);
@@ -89,6 +91,7 @@ export function ContainerClientProviderVH({
   const [clickPlace, setClickPlace] = useState<'calendarCell' | 'resultBlock'>(
     'calendarCell',
   );
+  const [linkCopied, setLinkCopied] = useState(false);
   // const [calendarView, setCalendarView] = useState<'calendar' | 'list'>(
   //   'calendar',
   // );
@@ -125,6 +128,8 @@ export function ContainerClientProviderVH({
           personalRangesName,
           // isLoginBlockOpen,
           // setIsLoginBlockOpen,
+          linkCopied,
+          setLinkCopied,
         }}
       >
         <div className='/h-dvh flex grow flex-col overflow-y-hidden'>

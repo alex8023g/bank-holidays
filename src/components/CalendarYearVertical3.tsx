@@ -13,6 +13,7 @@ import { DeleteXCircle2 } from './DeleteXCircle2';
 import { usePathname } from 'next/navigation';
 import { HeaderContext } from './Header2';
 import { BtnCopyInvitationLink2 } from './BtnCopyInvitationLink2';
+import { Link } from './catalist/link';
 
 export function CalendarYearVertical3({
   days,
@@ -259,6 +260,16 @@ export function CalendarYearVertical3({
         </tbody>
       </table>
       <HoverCountDays days={days} />
+      <div className='fixed top-1/3 left-1/4 max-w-100 rounded-2xl bg-white p-4 text-center shadow-lg'>
+        <p>У вас пока нет общих графиков отпусков.</p>
+        <p>
+          Создайте новый общий график отпусков в разделе
+          <Link href='/management' className='px-2 text-blue-500 underline'>
+            Управление
+          </Link>
+          и пригласите в него коллег.
+        </p>
+      </div>
     </>
   );
 }

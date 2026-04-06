@@ -8,6 +8,7 @@ import { SharedPlansListByPersPlanId } from '@/lib/actions';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { BtnCopyInvitationLink2 } from './BtnCopyInvitationLink2';
+import { Stepper } from './Stepper';
 
 export function ParticipantsSharedPlansList({
   activeBtn,
@@ -29,7 +30,9 @@ export function ParticipantsSharedPlansList({
      > */}
       {!pathname.includes('management') && (
         <div className='flex items-center justify-center pt-1 md:py-2 md:pb-2 md:shadow-sm'>
-          <h2 className='pl-2 text-center font-semibold'>Общие планы:</h2>
+          <h2 className='pl-2 text-center font-semibold'>
+            Общие графики отпусков:
+          </h2>
         </div>
       )}
       {sharedPlansList.length > 0 ? (
@@ -122,18 +125,28 @@ export function ParticipantsSharedPlansList({
           ))}
         </ul>
       ) : (
-        <div className='flex h-full flex-col items-center justify-center pt-1 md:py-2 md:pb-2 md:shadow-sm'>
-          <span className='mb-2 px-10 text-center text-gray-700'>
-            Вы пока не присоединились ни к одному общему графику отпусков.
-          </span>
-          <span className='px-10 text-center text-gray-500'>
-            Вы можете
-            <Link href='/management' className='text-blue-500 underline'>
-              {' '}
-              создать
-            </Link>{' '}
-            свой общий график отпусков и пригласить других участников.
-          </span>
+        // <div className='flex h-full flex-col items-center justify-center pt-1 md:py-2 md:pb-2 md:shadow-sm'>
+        //   <span className='mb-2 px-10 text-center text-gray-700'>
+        //     Вы пока не присоединились ни к одному общему графику отпусков.
+        //   </span>
+        //   <span className='px-10 text-center text-gray-500'>
+        //     Вы можете
+        //     <Link href='/management' className='text-blue-500 underline'>
+        //       {' '}
+        //       создать
+        //     </Link>{' '}
+        //     свой общий график отпусков и пригласить других участников.
+        //   </span>
+        // </div>
+        // <Stepper />
+        <div className='flex h-full flex-col items-center justify-center gap-5 pt-1 md:py-2 md:pb-2'>
+          <p className='text-lg'>У вас пока нет общих графиков отпусков.</p>
+          <Link
+            href='/management'
+            className='/my-auto /m-5 inline-block rounded-xl bg-black p-8 text-center text-xl font-medium text-white shadow-xl backdrop-blur-sm backdrop-filter'
+          >
+            Создать общий график отпусков
+          </Link>
         </div>
       )}
       {/* </div> */}
